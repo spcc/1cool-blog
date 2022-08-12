@@ -5,6 +5,8 @@ module.exports = {
   title: "1cool",
   // 介绍
   description: "- . -",
+  // 主题
+  theme: '@qingui/v1',
   // 主题配置
   themeConfig: {
     nav: [
@@ -26,10 +28,10 @@ module.exports = {
     sidebar: {
       "/problem/": [
         {
-          title: "/problem/element-ui/", // 必要的
+          title: "Element UI", // 必要的
           path: "/problem/element-ui/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 1, // 可选的, 默认值是 1
+          sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/problem/element-ui/1", "/problem/element-ui/2"],
         },
       ],
@@ -38,7 +40,7 @@ module.exports = {
           title: "/book/web-es6/", // 必要的
           path: "/book/web-es6/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 1, // 可选的, 默认值是 1
+          sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/book/web-es6/1", "/book/web-es6/2"],
         },
       ],
