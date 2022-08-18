@@ -17,7 +17,7 @@ module.exports = {
           {
             text: "技术",
             items: [
-              /*  */
+              { text: "JS", link: "/skill/web/js/math" }
             ],
           },
           {
@@ -28,12 +28,21 @@ module.exports = {
       },
       {
         text: "疑难杂症",
-        items: [{ text: "element-ui", link: "/problem/element-ui/1" }],
+        items: [{ text: "element-ui", link: "/problem/element-ui/components/" }],
       },
       { text: "书籍", link: "/book/web-es6/1" },
       { text: "External", link: "https://google.com" },
     ],
     sidebar: {
+      "/skill/web/js": [
+        {
+          title: "JS", // 必要的
+          path: "/skill/web/js/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/skill/web/js/math"],
+        },
+      ],
       "/skill/tool/git": [
         {
           title: "Git", // 必要的
@@ -43,14 +52,14 @@ module.exports = {
           children: ["/skill/tool/git/common"],
         },
       ],
-      "/problem/": [
+      "/problem/element-ui": [
         {
-          title: "Element UI", // 必要的
-          path: "/problem/element-ui/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          title: "组件", // 必要的
+          path: "/problem/element-ui/components", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/problem/element-ui/1", "/problem/element-ui/2"],
-        },
+          children: ["/problem/element-ui/components/el-table"],
+        }
       ],
       "/book/": [
         {
