@@ -9,6 +9,7 @@ module.exports = {
   theme: "@qingui/v1",
   // 主题配置
   themeConfig: {
+    lastUpdated: '最后更新时间',
     nav: [
       { text: "首页", link: "/" },
       {
@@ -31,6 +32,7 @@ module.exports = {
         items: [{ text: "element-ui", link: "/problem/element-ui/components/" }],
       },
       { text: "书籍", link: "/book/web-es6/1" },
+      { text: "面试", link: "/interview/" },
       { text: "External", link: "https://google.com" },
     ],
     sidebar: {
@@ -41,6 +43,15 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/skill/web/js/math"],
+        },
+      ],
+      "/interview": [
+        {
+          title: "面试", // 必要的
+          path: "/interview/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/interview/reverse-interview"],
         },
       ],
       "/skill/tool/git": [
