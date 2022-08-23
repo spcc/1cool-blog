@@ -11,12 +11,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@qingui/vuepress-theme-v1": "0.0.2",
     "@vuepress/plugin-back-to-top": "^1.9.7",
     "sass": "^1.54.4",
     "sass-loader": "^8.0.2",
     "vuepress": "^1.9.7"
   },
-  "dependencies": {
-    "@qingui/vuepress-theme-v1": "0.0.1"
-  }
+  "dependencies": {}
 }

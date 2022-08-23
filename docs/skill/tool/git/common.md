@@ -1,5 +1,11 @@
 # 常用操作
 
+## 修改源
+
+```sh
+git remote set-url origin 新源地址
+```
+
 ## 删除分支
 
 ```sh
