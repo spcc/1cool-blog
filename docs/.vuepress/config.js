@@ -7,6 +7,7 @@ module.exports = {
   description: "- . -",
   // 主题
   theme: "@qingui/v1",
+  plugins: ['@vuepress/back-to-top'],
   // 主题配置
   themeConfig: {
     lastUpdated: '最后更新时间',
