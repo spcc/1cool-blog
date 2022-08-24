@@ -7,10 +7,10 @@ module.exports = {
   description: "- . -",
   // 主题
   theme: "@qingui/v1",
-  plugins: ['@vuepress/back-to-top'],
+  plugins: ["@vuepress/back-to-top"],
   // 主题配置
   themeConfig: {
-    lastUpdated: '最后更新时间',
+    lastUpdated: "最后更新时间",
     nav: [
       { text: "首页", link: "/" },
       {
@@ -18,9 +18,7 @@ module.exports = {
         items: [
           {
             text: "技术",
-            items: [
-              { text: "JS", link: "/skill/web/js/math" }
-            ],
+            items: [{ text: "JS", link: "/skill/web/js/math" }],
           },
           {
             text: "工具",
@@ -30,13 +28,36 @@ module.exports = {
       },
       {
         text: "疑难杂症",
-        items: [{ text: "element-ui", link: "/problem/element-ui/components/" }],
+        items: [
+          { text: "element-ui", link: "/problem/element-ui/components/" },
+        ],
       },
       { text: "书籍", link: "/book/web-es6/1" },
       { text: "面试", link: "/interview/" },
-      { text: "External", link: "https://google.com" },
+      { text: "时间痕迹", link: "/life/" },
+      // { text: "External", link: "https://google.com" },
     ],
     sidebar: {
+      /**
+       * 时间痕迹
+       */
+      "/life/": [
+        {
+          title: "心情", // 必要的
+          path: "/life/mood/2022-8/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/life/mood/2022-8", "/life/mood/2022-9"],
+        },
+        {
+          title: "看过", // 必要的
+          path: "/life/read/2022/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/life/read/2022", "/life/read/2023"],
+        }
+      ],
+
       "/skill/web/js": [
         {
           title: "JS", // 必要的
@@ -71,7 +92,7 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/problem/element-ui/components/el-table"],
-        }
+        },
       ],
       "/book/": [
         {
