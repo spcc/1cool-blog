@@ -55,7 +55,7 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/life/read/2022", "/life/read/2023"],
-        }
+        },
       ],
 
       "/skill/web/js": [
@@ -64,7 +64,7 @@ module.exports = {
           path: "/skill/web/js/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/js/math"],
+          children: ["/skill/web/js/array", "/skill/web/js/math"],
         },
       ],
       "/interview": [
