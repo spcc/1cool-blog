@@ -25,7 +25,7 @@
 
 ```js
 // 从第二个index删除一个元素，并增加两个元素
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 
 let returnValue = fruits.splice(2, 1, "Lemon", "Kiwi");
 // returnValue：["Apple"]
@@ -115,4 +115,38 @@ let result = fruits.pop();
 
 // fruits：["Banana", "Orange", "Apple"]
 // result：["Mango"]
+```
+
+## 查找类
+
+### find() - 返回符合传入测试条件的第一个数组元素
+
+- 简介：  
+  返回符合传入测试条件的第一个数组元素
+- 语法：array.find((currentValue, index, arr) => {},thisValue)
+- 参数：
+  - 参数 1：**function(currentValue, index,arr)**  
+    必需。数组每个元素需要执行的函数。  
+    函数参数:
+    - currentValue：必需。当前元素
+    - index：可选。当前元素的索引值
+    - arr：可选。当前元素所属的数组对象
+  - 参数 2：**thisValue**  
+    可选。 传递给函数的值一般用 "this" 值。
+    如果这个参数为空， "undefined" 会传递给 "this" 值
+- 返回值
+  - 返回符合测试条件的第一个数组元素值，如果没有符合条件的则返回 undefined。
+- 注意：
+  1. 不会改变原数组
+  2. 对于空数组，函数是不会执行的
+  3. 当数组中的元素在测试条件时返回 true 时，之后的值不会再调用执行函数。
+- JavaScript 版本: ECMAScript 6
+
+```js
+// 从第二个index删除一个元素，并增加两个元素
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+let returnValue = fruits.find((item, index) => item === "Apple");
+// returnValue：["Apple"]
+// fruits：["Banana", "Orange", "Apple","Mango"]
 ```
