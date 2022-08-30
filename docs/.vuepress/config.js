@@ -18,7 +18,10 @@ module.exports = {
         items: [
           {
             text: "技术",
-            items: [{ text: "JS", link: "/skill/web/js/math" }],
+            items: [
+              { text: "JS", link: "/skill/web/js/math" },
+              { text: "Vue3", link: "/skill/web/vue3/common" },
+            ],
           },
           {
             text: "工具",
@@ -38,6 +41,19 @@ module.exports = {
       // { text: "External", link: "https://google.com" },
     ],
     sidebar: {
+      /**
+       * vue3
+       */
+      "/skill/web/vue3": [
+        {
+          title: "vue3", // 必要的
+          path: "/skill/web/vue3/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/skill/web/vue3/common"],
+        },
+      ],
+
       /**
        * 时间痕迹
        */
