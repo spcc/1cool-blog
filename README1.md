@@ -33,3 +33,12 @@ mkdir docs && echo '# Hello VuePress' > docs/README.md
 ```sh
 yarn docs:dev # npm run docs:dev
 ```
+
+https://blog.csdn.net/Amber_1/article/details/125899796
+
+watch监听多个值
+// watch(()=> [unref(xTable)?.getCheckboxRecords().length, unref(xTable)?.isAllCheckboxChecked()], (newVal)=>{
+//   checked.value = !!newVal[0] && newVal[1]
+//   console.log(checked.value, '123123')
+// })
+https://blog.51cto.com/u_14866376/4860327
