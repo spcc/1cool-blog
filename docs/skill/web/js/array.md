@@ -693,3 +693,76 @@ b[1] = "cc";
 // a [1, 2, 3]
 // b [1, 'cc', 3]
 ```
+
+### fill() 使用一个固定值来填充数组
+
+- 简介：  
+  用于将一个固定值替换数组的元素
+- 语法：array.fill(value, start, end)
+- 参数：
+  - 参数 1：**value**  
+    必需。填充的值。
+  - 参数 2：**start**  
+    可选。开始填充位置。
+  - 参数 3：**end**  
+    可选。停止填充位置 (默认为 array.length)
+- 返回值
+  - **Array**
+- 注意：
+  1. IE 11 及更早版本不支持 fill() 方法
+- JavaScript 版本: ECMAScript 6
+
+```js
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.fill("Runoob");
+// fruits：Runoob,Runoob,Runoob,Runoob
+
+let fruits = ["Banana", "Orange", "Apple", "Mango", "Banana"];
+// fruits：Banana,Orange,Runoob,Runoob,Banana
+```
+
+### copyWithin() 从数组的指定位置拷贝元素到数组的另一个指定位置中
+
+- 简介：  
+  从数组的指定位置拷贝元素到数组的另一个指定位置中
+- 语法：array.copyWithin(target, start, end)
+- 参数：
+  - 参数 1：**target**  
+    必需。复制到指定目标索引位置。
+  - 参数 2：**start**  
+    可选。元素复制的起始位置。
+  - 参数 3：**end**  
+    可选。停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数
+- 返回值
+  - **Array**
+- 注意：
+- JavaScript 版本: ECMAScript 6
+
+```js
+// 复制数组的前面两个元素到第三和第四个位置上：
+let fruits = ["Banana", "Orange", "Apple", "Mango", "Kiwi", "Papaya"];
+fruits.copyWithin(2, 0, 2);
+// Banana,Orange,Banana,Orange,Kiwi,Papaya
+```
+
+### concat() 连接两个或更多的数组，并返回结果
+
+- 简介：  
+  连接两个或更多的数组，并返回结果  
+  该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+- 语法：array1.concat(array2,array3,...,arrayX)
+- 参数：
+  - 参数 1：**array2, array3, ..., arrayX**  
+    必需。该参数可以是具体的值，也可以是数组对象。可以是任意多个。
+- 返回值
+  - **Array**
+    返回一个新的数组。该数组是通过把所有 arrayX 参数添加到 arrayObject 中生成的。如果要进行 concat() 操作的参数是数组，那么添加的是数组中的元素，而不是数组。
+- 注意：
+- JavaScript 版本: 1.2
+
+```js
+let hege = ["Cecilie", "Lone"];
+let stale = ["Emil", "Tobias", "Linus"];
+let children = hege.concat(stale);
+// children： Cecilie,Lone,Emil,Tobias,Linus
+```
