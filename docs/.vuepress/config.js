@@ -19,7 +19,7 @@ module.exports = {
           {
             text: "技术",
             items: [
-              { text: "JS", link: "/skill/web/js/math" },
+              { text: "JS", link: "/skill/web/js/array" },
               { text: "Vue3", link: "/skill/web/vue3/common" },
             ],
           },
