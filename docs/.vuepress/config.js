@@ -31,9 +31,7 @@ module.exports = {
       },
       {
         text: "疑难杂症",
-        items: [
-          { text: "element-ui", link: "/problem/element-ui/components/" },
-        ],
+        link: "/problem/Vue2/base",
       },
       { text: "书籍", link: "/book/web-es6/1" },
       { text: "面试", link: "/interview/" },
@@ -80,7 +78,11 @@ module.exports = {
           path: "/skill/web/js/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/js/array", "/skill/web/js/math"],
+          children: [
+            "/skill/web/js/array",
+            "/skill/web/js/object",
+            "/skill/web/js/math",
+          ],
         },
       ],
       "/interview": [
@@ -101,22 +103,71 @@ module.exports = {
           children: ["/skill/tool/git/common"],
         },
       ],
-      "/problem/element-ui": [
+
+      /**
+       * 疑难杂症
+       */
+      "/problem/": [
         {
-          title: "组件", // 必要的
-          path: "/problem/element-ui/components", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
+          title: "Vue2", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/problem/element-ui/components/el-table"],
+          children: ["/problem/vue2/base"],
+        },
+        {
+          title: "JS", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "数组",
+              collapsable: false,
+              sidebarDepth: 0,
+              children: ["/problem/js/array"],
+            },
+            {
+              title: "对象",
+              collapsable: false,
+              sidebarDepth: 0,
+              children: ["/problem/js/object"],
+            },
+          ],
+        },
+        {
+          title: "ElementUI", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "组件",
+              collapsable: false,
+              sidebarDepth: 0,
+              path: "/problem/element-ui/components",
+              children: ["/problem/element-ui/components/el-table"],
+            },
+          ],
         },
       ],
+
+      // "/problem/element-ui": [
+      //   {
+      //     title: "组件", // 必要的
+      //     path: "/problem/element-ui/components", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+      //     collapsable: false, // 可选的, 默认值是 true,
+      //     sidebarDepth: 0, // 可选的, 默认值是 1
+      //     children: ["/problem/element-ui/components/el-table"],
+      //   },
+      // ],
       "/book/": [
         {
           title: "从 0 到 1 落地前端工程化", // 必要的
           path: "/book/web-engineering/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/book/web-engineering/introduction", "/book/web-engineering/2"],
+          children: [
+            "/book/web-engineering/introduction",
+            "/book/web-engineering/2",
+          ],
         },
         {
           title: "/book/web-es6/", // 必要的
