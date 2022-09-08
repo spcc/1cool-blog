@@ -112,6 +112,13 @@ module.exports = {
       ],
       "/book/": [
         {
+          title: "从 0 到 1 落地前端工程化", // 必要的
+          path: "/book/web-engineering/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/book/web-engineering/introduction", "/book/web-engineering/2"],
+        },
+        {
           title: "/book/web-es6/", // 必要的
           path: "/book/web-es6/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
