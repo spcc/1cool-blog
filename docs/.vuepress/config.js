@@ -118,20 +118,7 @@ module.exports = {
           title: "JS", // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: [
-            {
-              title: "数组",
-              collapsable: false,
-              sidebarDepth: 0,
-              children: ["/problem/js/array"],
-            },
-            {
-              title: "对象",
-              collapsable: false,
-              sidebarDepth: 0,
-              children: ["/problem/js/object"],
-            },
-          ],
+          children: ["/problem/js/array", "/problem/js/object"],
         },
         {
           title: "ElementUI", // 必要的
