@@ -130,7 +130,10 @@ module.exports = {
               collapsable: false,
               sidebarDepth: 0,
               path: "/problem/element-ui/components",
-              children: ["/problem/element-ui/components/el-table"],
+              children: [
+                "/problem/element-ui/components/el-table",
+                "/problem/element-ui/components/el-dropdown",
+              ],
             },
           ],
         },

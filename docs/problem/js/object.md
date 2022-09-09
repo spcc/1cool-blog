@@ -1,5 +1,69 @@
 # 对象 常见问题
 
+## 对象操作
+
+### 批量置空对象所有属性
+
+```js
+let person = {
+  name: "张三",
+  age: 18,
+};
+
+Object.values(person).forEach((item, index) => {
+  person[Object.keys(person)[index]] = null;
+});
+```
+
+### 批量置空对象所有属性，不改变原对象
+
+```js
+let person = {
+  name: "张三",
+  age: 18,
+};
+
+// 新对象，不对原对象处理
+let dataObj = {};
+
+Object.values(person).forEach((item, index) => {
+  dataObj[Object.keys(person)[index]] = null;
+});
+```
+
+### 批量去除对象里的所有假值
+
+```js
+let tempData = {
+  address: "aa",
+  afternoon_inspection: "dd",
+  alert: "sdd",
+  apply_back_comment: null,
+  apply_back_time: "单独",
+  audit_comment: "sdd",
+  audit_time: "sss",
+  back_audit_time: "ff",
+  back_comment: "",
+  back_time: null,
+  build_area: "",
+  build_type: null,
+  charge_man: "",
+  child_insurance: null,
+  child_num: "",
+};
+//目的是将对象里的null全部替换成''，并返回改变之后的对象
+
+let dataObj = {}; //用心对象去接收原来对象里的值
+Object.values(tempData).filter((item, index) => {
+  if (typeof item == "string" && item.indexOf("null") != -1) {
+    item = item.replace("null", "");
+    dataObj[Object.keys(tempData)[index]] = item;
+  } else {
+    dataObj[Object.keys(tempData)[index]] = item;
+  }
+});
+```
+
 ## 黑名单（忽略传入属性的对象）
 
 - 参数
