@@ -1,4 +1,4 @@
-# 数组
+# 数组对象
 
 [数组对象方法](https://www.runoob.com/jsref/jsref-obj-array.html)
 

@@ -80,6 +80,7 @@ module.exports = {
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
             "/skill/web/js/array",
+            "/skill/web/js/string",
             "/skill/web/js/object",
             "/skill/web/js/math",
           ],
@@ -132,6 +133,7 @@ module.exports = {
               path: "/problem/element-ui/components",
               children: [
                 "/problem/element-ui/components/el-table",
+                "/problem/element-ui/components/el-tooltip",
                 "/problem/element-ui/components/el-dropdown",
               ],
             },
