@@ -92,6 +92,37 @@ let n = str1.concat(str2, str3);
 // Hello world! Have a nice day!
 ```
 
+### startsWith() 查看字符串是否以指定的子字符串开头
+
+- 简介：  
+  检测字符串是否以指定的子字符串开始  
+  如果是以指定的子字符串开头返回 true，否则 false  
+  startsWith() 方法对大小写敏感
+- 语法：string.startsWith(searchvalue, start)
+- 参数：
+  - 参数 1：**searchvalue**  
+    必需，要查找的字符串
+  - 参数 2：**start**  
+    可选，查找的开始位置，默认为 0
+- 返回值
+  - **Boolean**  
+    如果字符串是以指定的子字符串开头返回 true，否则 false。
+- 注意：  
+  区分大小写
+- JavaScript 版本: ECMAScript 6
+
+```js
+// 查看字符串是否为 "Hello" 开头:
+let str = "Hello world, welcome to the Runoob.";
+let n = str.startsWith("Hello");
+// true
+
+// 查看从第 6 个索引位置是否以 "world" 开头
+let str = "Hello world, welcome to the Runoob.";
+let n = str.startsWith("world", 6);
+// true
+```
+
 ### endsWith() 判断当前字符串是否是以指定的子字符串结尾的（区分大小写）
 
 - 简介：  
@@ -100,6 +131,8 @@ let n = str1.concat(str2, str3);
 - 参数：
   - 参数 1：**searchvalue**  
     必需，要搜索的子字符串。
+  - 参数 2：**length**  
+    设置字符串的长度。默认值为原始字符串长度 string.length。
 - 返回值
   - **Boolean**  
     如果字符串以指定的值结尾返回 true，否则返回 false。
@@ -335,4 +368,166 @@ let n = str.replaceAll("Microsoft", "Runoob");
 let str = "Mr Blue has a blue house and a blue car";
 let n = str.replaceAll(/blue/gi, "red");
 // Mr red has a red house and a red car.
+```
+
+### search() 查找与正则表达式相匹配的值
+
+- 简介：  
+  用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。  
+  如果没有找到任何匹配的子串，则返回 -1。
+- 语法：string.search(searchvalue)
+- 参数：
+  - 参数 1：**searchvalue**  
+    必须。查找的字符串或者正则表达式。
+- 返回值
+
+  - **Number**  
+    与指定查找的字符串或者正则表达式相匹配的 String 对象起始位置。
+
+- 注意：
+- JavaScript 版本: 1.2
+
+```js
+// 执行一次对大小写敏感的查找
+let str = "Mr. Blue has a blue house";
+document.write(str.search("blue"));
+// 15
+
+// 执行一次忽略大小写的检索
+let str = "Mr. Blue has a blue house";
+document.write(str.search(/blue/i));
+// 4
+```
+
+### slice() 提取字符串的片断，并在新的字符串中返回被提取的部分
+
+- 简介：  
+  slice(start, end) 方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。  
+  使用 start（包含） 和 end（不包含） 参数来指定字符串提取的部分。  
+  start 参数字符串中第一个字符位置为 0, 第二个字符位置为 1, 以此类推，如果是负数表示从尾部截取多少个字符串，slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。  
+  end 参数如果为负数，-1 指字符串的最后一个字符的位置，-2 指倒数第二个字符，以此类推。
+- 语法：string.slice(start,end)
+- 参数：
+  - 参数 1：**start**  
+    必须。 要抽取的片断的起始下标，第一个字符位置为 0。如果为负数，则从尾部开始截取。
+  - 参数 2：**end**  
+    可选。 紧接着要截取的片段结尾的下标。若未指定此参数，则要提取的子串包括 start 到原字符串结尾的字符串。如果该参数是负数，那么它规定的是从字符串的尾部开始算起的位置。slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。
+- 返回值
+
+  - **String**  
+    提取的字符串
+
+- 注意：
+- JavaScript 版本: 1.0
+
+```js
+// 提取字符串的片断
+let str = "Hello world!";
+let n = str.slice(1, 5);
+// ello
+
+// 第3个位置提取字符串片段
+let str = "Hello world!";
+let n = str.slice(3);
+// lo world!
+
+// 提取最后一个字符和最后两个字符
+let str = "Hello world!";
+let n = str.slice(-1);
+let n2 = str.slice(-2);
+// !
+// d!
+```
+
+### split() 把字符串分割为字符串数组
+
+- 简介：  
+  把一个字符串分割成字符串数组  
+   如果把空字符串 ("") 用作 separator，那么 stringObject 中的每个字符之间都会被分割
+- 语法：string.split(separator,limit)
+- 参数：
+  - 参数 1：**separator**  
+    可选。字符串或正则表达式，从该参数指定的地方分割 string Object。
+  - 参数 2：**limit**  
+    可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。
+- 返回值
+
+  - **Array**  
+    一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。
+
+- 注意：
+- JavaScript 版本: 1.1
+
+```js
+// 省略分割参数
+let str = "How are you doing today?";
+let n = str.split();
+// ['How are you doing today?']
+
+let str = "How,are,you,doing,today?";
+let n = str.split(",", 3);
+// ['How', 'are', 'you']
+```
+
+### split() 把字符串分割为字符串数组
+
+- 简介：  
+  把一个字符串分割成字符串数组  
+   如果把空字符串 ("") 用作 separator，那么 stringObject 中的每个字符之间都会被分割
+- 语法：string.split(separator,limit)
+- 参数：
+  - 参数 1：**separator**  
+    可选。字符串或正则表达式，从该参数指定的地方分割 string Object。
+  - 参数 2：**limit**  
+    可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。
+- 返回值
+
+  - **Array**  
+    一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。
+
+- 注意：
+- JavaScript 版本: 1.1
+
+```js
+// 省略分割参数
+let str = "How are you doing today?";
+let n = str.split();
+// ['How are you doing today?']
+
+let str = "How,are,you,doing,today?";
+let n = str.split(",", 3);
+// ['How', 'are', 'you']
+```
+
+### substr() 从起始索引号提取字符串中指定数目的字符
+
+- 简介：  
+  从起始索引号提取字符串中指定数目的字符  
+  substr() 的参数指定的是子串的开始位置和长度，因此它可以替代 substring() 和 slice() 来使用  
+  ECMAscript 没有对该方法进行标准化，因此反对使用它
+- 语法：string.substr(start,length)
+- 参数：
+
+  - 参数 1：**start**  
+    必需。要抽取的子串的起始下标。必须是数值。如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。
+  - 参数 2：**length**  
+    可选。子串中的字符数。必须是数值。如果省略了该参数，那么返回从 stringObject 的开始位置到结尾的字串。
+
+- 返回值
+
+  - **String**  
+    一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。
+
+- 注意：substr() 方法不会改变源字符串
+- JavaScript 版本: 1.1
+
+```js
+// 省略分割参数
+let str = "How are you doing today?";
+let n = str.split();
+// ['How are you doing today?']
+
+let str = "How,are,you,doing,today?";
+let n = str.split(",", 3);
+// ['How', 'are', 'you']
 ```
