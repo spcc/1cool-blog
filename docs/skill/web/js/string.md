@@ -1,5 +1,84 @@
 # 字符串对象
 
+查找类
+
+<table>
+  <tr>
+    <th>方法</th>
+    <th>描述</th>
+    <th>版本</th>
+  </tr>
+
+  <tr>
+    <td><a href="#startsWith() 判断当前字符串是否以指定的字符串开头">startsWith()</a></th>
+    <td>判断当前字符串是否以指定的字符串开头</td>
+    <td>ECMAScript 6</td>
+  </tr>
+  <tr>
+    <td><a href="#endsWith-判断当前字符串是否是以指定的字符串结尾">endsWith()</a></th>
+    <td>查看字符串是否以指定的子字符串开头</td>
+    <td>ECMAScript 6</td>
+  </tr>
+</table>
+
+## 查找类
+
+### startsWith() 判断当前字符串是否以指定的字符串开头
+
+- 简介：  
+  检测字符串是否以指定的子字符串开始  
+  如果是以指定的子字符串开头返回 true，否则 false  
+  startsWith() 方法对大小写敏感
+- 语法：string.startsWith(searchvalue, start)
+- 参数：
+  - 参数 1：**searchvalue**  
+    必需，要查找的字符串
+  - 参数 2：**start**  
+    可选，查找的开始位置，默认为 0
+- 返回值
+  - **Boolean**  
+    如果字符串是以指定的子字符串开头返回 true，否则 false。
+- 注意：  
+  区分大小写
+- JavaScript 版本: ECMAScript 6
+
+```js
+// 查看字符串是否为 "Hello" 开头:
+let str = "Hello world, welcome to the Runoob.";
+let n = str.startsWith("Hello");
+// true
+
+// 查看从第 6 个索引位置是否以 "world" 开头
+let str = "Hello world, welcome to the Runoob.";
+let n = str.startsWith("world", 6);
+// true
+```
+
+### endsWith() 判断当前字符串是否是以指定的字符串结尾
+
+- 简介：  
+  判断当前字符串是否是以指定的子字符串结尾的（区分大小写）
+- 语法：string.endsWith(searchvalue, length)
+- 参数：
+  - 参数 1：**searchvalue**  
+    必需，要搜索的子字符串。
+  - 参数 2：**length**  
+    设置字符串的长度。默认值为原始字符串长度 string.length。
+- 返回值
+  - **Boolean**  
+    如果字符串以指定的值结尾返回 true，否则返回 false。
+- 注意：  
+  区分大小写
+- JavaScript 版本: ECMAScript 6
+
+```js
+// 设置不同字符串长度来判断
+let str = "To be, or not to be, that is the question.";
+str.endsWith("question."); // true
+str.endsWith("to be"); // false
+str.endsWith("to be", 19); // true
+```
+
 ## 通用
 
 ### chatAt() 返回指定位置的字符
@@ -90,62 +169,6 @@ let str3 = " Have a nice day!";
 let n = str1.concat(str2, str3);
 
 // Hello world! Have a nice day!
-```
-
-### startsWith() 查看字符串是否以指定的子字符串开头
-
-- 简介：  
-  检测字符串是否以指定的子字符串开始  
-  如果是以指定的子字符串开头返回 true，否则 false  
-  startsWith() 方法对大小写敏感
-- 语法：string.startsWith(searchvalue, start)
-- 参数：
-  - 参数 1：**searchvalue**  
-    必需，要查找的字符串
-  - 参数 2：**start**  
-    可选，查找的开始位置，默认为 0
-- 返回值
-  - **Boolean**  
-    如果字符串是以指定的子字符串开头返回 true，否则 false。
-- 注意：  
-  区分大小写
-- JavaScript 版本: ECMAScript 6
-
-```js
-// 查看字符串是否为 "Hello" 开头:
-let str = "Hello world, welcome to the Runoob.";
-let n = str.startsWith("Hello");
-// true
-
-// 查看从第 6 个索引位置是否以 "world" 开头
-let str = "Hello world, welcome to the Runoob.";
-let n = str.startsWith("world", 6);
-// true
-```
-
-### endsWith() 判断当前字符串是否是以指定的子字符串结尾的（区分大小写）
-
-- 简介：  
-  判断当前字符串是否是以指定的子字符串结尾的（区分大小写）
-- 语法：string.endsWith(searchvalue, length)
-- 参数：
-  - 参数 1：**searchvalue**  
-    必需，要搜索的子字符串。
-  - 参数 2：**length**  
-    设置字符串的长度。默认值为原始字符串长度 string.length。
-- 返回值
-  - **Boolean**  
-    如果字符串以指定的值结尾返回 true，否则返回 false。
-- 注意：  
-  区分大小写
-- JavaScript 版本: ECMAScript 6
-
-```js
-// 设置不同字符串长度来判断
-let str = "To be, or not to be, that is the question.";
-str.endsWith("question."); // true
-str.endsWith("to be"); // false
-str.endsWith("to be", 19); // true
 ```
 
 ### indexOf() 返回某个指定的字符串值在字符串中首次出现的位置
@@ -531,3 +554,156 @@ let str = "How,are,you,doing,today?";
 let n = str.split(",", 3);
 // ['How', 'are', 'you']
 ```
+
+### substring() 提取字符串中两个指定的索引号之间的字符
+
+- 简介：  
+  用于提取字符串中介于两个指定下标之间的字符  
+  返回的子串包括 开始 处的字符，但不包括 结束 处的字符
+- 语法：string.substring(from, to)
+- 参数：
+
+  - 参数 1：**from**  
+    必需。一个非负的整数，规定要提取的子串的第一个字符在 string Object 中的位置
+  - 参数 2：**to**  
+     可选。一个非负的整数，比要提取的子串的最后一个字符在 string Object 中的位置多 1。  
+     如果省略该参数，那么返回的子串会一直到字符串的结尾
+
+- 返回值
+
+  - **String**
+
+- 注意：substr() 方法不会改变源字符串
+- JavaScript 版本:
+
+```js
+let str = "Hello world!";
+
+let n = str.substring(3);
+// lo world!
+let n1 = str.substring(3, 7);
+// lo w
+```
+
+### toLowerCase() 把字符串转换为小写
+
+- 简介：  
+  把字符串转换为小写
+- 语法：string.toLowerCase()
+- 返回值
+
+  - **String**
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本:
+
+```js
+let str = "NIKE";
+let n = str.toLowerCase();
+// nike
+```
+
+### toUpperCase() 把字符串转换为大写
+
+- 简介：  
+  把字符串转换为大写
+- 语法：string.toUpperCase()
+- 返回值
+
+  - **String**
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本:
+
+```js
+let str = "nike";
+let n = str.toUpperCase();
+// NIKE
+```
+
+### toLocaleLowerCase() 根据本地主机的语言环境把字符串转换为小写
+
+- 简介：  
+  根据本地主机的语言环境把字符串转换为小写  
+  本地是根据浏览器的语言设置来判断的  
+  通常，该方法与 toLowerCase() 方法返回的结果相同，只有几种语言（如土耳其语）具有地方特有的大小写映射
+- 语法：string.toLocaleLowerCase()
+- 返回值
+
+  - **String**
+    根据本地语言转换为小写。
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本: ECMAScript 1
+
+### toLocaleUpperCase() 根据本地主机的语言环境把字符串转换为大写
+
+- 简介：  
+  根据本地主机的语言环境把字符串转换为大写  
+  本地是根据浏览器的语言设置来判断的  
+  通常，该方法与 toLowerCase() 方法返回的结果相同，只有几种语言（如土耳其语）具有地方特有的大小写映射
+- 语法：string.toLocaleUpperCase()
+- 返回值
+
+  - **String**
+    根据本地语言转换为大写
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本: ECMAScript 1
+
+### trim() 去除字符串两边的空白
+
+- 简介：  
+  删除字符串的头尾空白符，空白符包括：空格、制表符 tab、换行符等其他空白符等  
+  不会改变原始字符串  
+  不适用于 null, undefined, Number 类型
+- 语法：string.trim()
+- 返回值
+
+  - **String**
+    返回移除头尾空格的字符串
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本:  
+  ECMAScript 5
+
+```js
+let str = " nike      ";
+let n = str.trim();
+// nike
+```
+
+### toString() 返回一个字符串
+
+- 简介：  
+  返回一个表示 String 对象的值
+- 语法：string.toString()
+- 返回值
+
+  - **String**
+    一个字符串
+
+- 注意：  
+  不会改变原字符串
+- JavaScript 版本:  
+  ECMAScript 1
+
+```js
+let str = "Runoob";
+let res = str.toString();
+// Runoob
+```
+
+### valueOf() 返回某个字符串对象的原始值
+
+- 简介：  
+  返回 String 对象的原始值
+  通常由 JavaScript 在后台自动进行调用，而不是显式地处于代码中
+- 语法：string.valueOf()
+- 注意：  
+  通常由 JavaScript 在后台自动进行调用，而不是显式地处于代码中
