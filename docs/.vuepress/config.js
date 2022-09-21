@@ -25,7 +25,10 @@ module.exports = {
           },
           {
             text: "工具",
-            items: [{ text: "Git", link: "/skill/tool/git/common" }],
+            items: [
+              { text: "Git", link: "/skill/tool/git/common" },
+              { text: "VsCode", link: "/skill/tool/vscode/fun" },
+            ],
           },
         ],
       },
