@@ -21,6 +21,8 @@ module.exports = {
             items: [
               { text: "JS", link: "/skill/web/js/array" },
               { text: "Vue3", link: "/skill/web/vue3/common" },
+              { text: "Css3", link: "/skill/web/css3/bem" },
+              { text: "http", link: "/skill/web/http/base" },
             ],
           },
           {
@@ -116,7 +118,13 @@ module.exports = {
           title: "Vue2", // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/problem/vue2/base"],
+          children: [
+            "/problem/vue2/base",
+            "/problem/vue2/npm",
+            "/problem/vue2/config",
+            "/problem/vue2/experience",
+            "/problem/vue2/other",
+          ],
         },
         {
           title: "JS", // 必要的
@@ -142,6 +150,12 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          title: "Html", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/problem/html/base"],
         },
       ],
 
