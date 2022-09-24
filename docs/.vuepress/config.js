@@ -30,6 +30,7 @@ module.exports = {
             items: [
               { text: "Git", link: "/skill/tool/git/common" },
               { text: "VsCode", link: "/skill/tool/vscode/fun" },
+              { text: "Github/Gitee", link: "/skill/tool/warehouse/base" },
             ],
           },
         ],
