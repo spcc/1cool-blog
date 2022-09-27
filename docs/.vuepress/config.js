@@ -1,6 +1,6 @@
 module.exports = {
   // 打包路径
-  base: "",
+  base: "/1cool-blog",
   // 标题
   title: "1cool",
   // 介绍
