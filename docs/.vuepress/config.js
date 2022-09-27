@@ -56,6 +56,27 @@ module.exports = {
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/skill/web/vue3/common"],
         },
+        {
+          title: "实战搭建", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "搭建",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/game/base"],
+            },
+            {
+              title: "配置",
+              collapsable: false,
+              sidebarDepth: 0,
+              path: "/problem/element-ui/components",
+              children: ["/problem/element-ui/components/el-table"],
+            },
+          ],
+        },
       ],
 
       /**

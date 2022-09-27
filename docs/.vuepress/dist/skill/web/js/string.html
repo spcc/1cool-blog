@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>字符串对象 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/assets/css/0.styles.30678d60.css" as="style"><link rel="preload" href="/assets/js/app.f5985fb4.js" as="script"><link rel="preload" href="/assets/js/2.d4db1458.js" as="script"><link rel="preload" href="/assets/js/44.c2f33e0e.js" as="script"><link rel="prefetch" href="/assets/js/10.985bda11.js"><link rel="prefetch" href="/assets/js/11.9ac118a0.js"><link rel="prefetch" href="/assets/js/12.a0d51338.js"><link rel="prefetch" href="/assets/js/13.931d21fe.js"><link rel="prefetch" href="/assets/js/14.f7c5b714.js"><link rel="prefetch" href="/assets/js/15.8658ad58.js"><link rel="prefetch" href="/assets/js/16.a494fba1.js"><link rel="prefetch" href="/assets/js/17.74594019.js"><link rel="prefetch" href="/assets/js/18.0a71e1a4.js"><link rel="prefetch" href="/assets/js/19.7da3c173.js"><link rel="prefetch" href="/assets/js/20.e26a246b.js"><link rel="prefetch" href="/assets/js/21.ba614ce8.js"><link rel="prefetch" href="/assets/js/22.c0b41ef0.js"><link rel="prefetch" href="/assets/js/23.c6a7ea4d.js"><link rel="prefetch" href="/assets/js/24.e1490e89.js"><link rel="prefetch" href="/assets/js/25.a22b06f2.js"><link rel="prefetch" href="/assets/js/26.a590d2d5.js"><link rel="prefetch" href="/assets/js/27.2d122977.js"><link rel="prefetch" href="/assets/js/28.50dd5a87.js"><link rel="prefetch" href="/assets/js/29.2a105752.js"><link rel="prefetch" href="/assets/js/3.dcf1cf17.js"><link rel="prefetch" href="/assets/js/30.aa348fde.js"><link rel="prefetch" href="/assets/js/31.3baed837.js"><link rel="prefetch" href="/assets/js/32.ca992c36.js"><link rel="prefetch" href="/assets/js/33.ca927451.js"><link rel="prefetch" href="/assets/js/34.ead63131.js"><link rel="prefetch" href="/assets/js/35.250c0095.js"><link rel="prefetch" href="/assets/js/36.3bc21c39.js"><link rel="prefetch" href="/assets/js/37.37cf45ca.js"><link rel="prefetch" href="/assets/js/38.22e73ea3.js"><link rel="prefetch" href="/assets/js/39.ceddc0fa.js"><link rel="prefetch" href="/assets/js/4.efcf0bae.js"><link rel="prefetch" href="/assets/js/40.f881f470.js"><link rel="prefetch" href="/assets/js/41.aa8634d5.js"><link rel="prefetch" href="/assets/js/42.84ee9023.js"><link rel="prefetch" href="/assets/js/43.d8c9cfde.js"><link rel="prefetch" href="/assets/js/45.e0254943.js"><link rel="prefetch" href="/assets/js/46.c20e1411.js"><link rel="prefetch" href="/assets/js/5.147cdc18.js"><link rel="prefetch" href="/assets/js/6.82924391.js"><link rel="prefetch" href="/assets/js/7.89636745.js"><link rel="prefetch" href="/assets/js/8.86d27f31.js"><link rel="prefetch" href="/assets/js/9.bd701efe.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.30678d60.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/book/web-es6/1.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/life/" class="nav-link">
+  时间痕迹
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/book/web-es6/1.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/life/" class="nav-link">
+  时间痕迹
+</a></div> <!----></nav> <div class="layout__search"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/skill/web/js/" class="sidebar-heading clickable router-link-active open"><span>JS</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/skill/web/js/array.html" class="sidebar-link">数组对象</a></li><li><a href="/skill/web/js/string.html" aria-current="page" class="active sidebar-link">字符串对象</a></li><li><a href="/skill/web/js/object.html" class="sidebar-link">Object</a></li><li><a href="/skill/web/js/math.html" class="sidebar-link">计算</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#查找类" class="anchor-item__link" style="margin-left:0;">
+        查找类
+      </a></li><li class="anchor-item"><a href="#startswith-判断当前字符串是否以指定的字符串开头" class="anchor-item__link" style="margin-left:20px;">
+        startsWith() 判断当前字符串是否以指定的字符串开头
+      </a></li><li class="anchor-item"><a href="#endswith-判断当前字符串是否是以指定的字符串结尾" class="anchor-item__link" style="margin-left:20px;">
+        endsWith() 判断当前字符串是否是以指定的字符串结尾
+      </a></li><li class="anchor-item"><a href="#通用" class="anchor-item__link" style="margin-left:0;">
+        通用
+      </a></li><li class="anchor-item"><a href="#chatat-返回指定位置的字符" class="anchor-item__link" style="margin-left:20px;">
+        chatAt() 返回指定位置的字符
+      </a></li><li class="anchor-item"><a href="#charcodeat-返回指定的位置的字符的-unicode-编码" class="anchor-item__link" style="margin-left:20px;">
+        charCodeAt() 返回指定的位置的字符的 Unicode 编码
+      </a></li><li class="anchor-item"><a href="#fromcharcode-将-unicode-编码转为字符" class="anchor-item__link" style="margin-left:20px;">
+        fromCharCode() 将 Unicode 编码转为字符
+      </a></li><li class="anchor-item"><a href="#concat-连接两个或多个字符串" class="anchor-item__link" style="margin-left:20px;">
+        concat() 连接两个或多个字符串
+      </a></li><li class="anchor-item"><a href="#indexof-返回某个指定的字符串值在字符串中首次出现的位置" class="anchor-item__link" style="margin-left:20px;">
+        indexOf() 返回某个指定的字符串值在字符串中首次出现的位置
+      </a></li><li class="anchor-item"><a href="#lastindexof-从后向前搜索字符串-并从起始位置-0-开始计算返回字符串最后出现的位置。" class="anchor-item__link" style="margin-left:20px;">
+        lastIndexOf() 从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。
+      </a></li><li class="anchor-item"><a href="#includes-查找字符串中是否包含指定的子字符串。" class="anchor-item__link" style="margin-left:20px;">
+        includes() 查找字符串中是否包含指定的子字符串。
+      </a></li><li class="anchor-item"><a href="#match-查找找到一个或多个正则表达式的匹配" class="anchor-item__link" style="margin-left:20px;">
+        match() 查找找到一个或多个正则表达式的匹配
+      </a></li><li class="anchor-item"><a href="#repeat-复制字符串指定次数-并将它们连接在一起返回" class="anchor-item__link" style="margin-left:20px;">
+        repeat() 复制字符串指定次数，并将它们连接在一起返回
+      </a></li><li class="anchor-item"><a href="#replace-在字符串中查找匹配的子串-并替换与正则表达式匹配的子串" class="anchor-item__link" style="margin-left:20px;">
+        replace() 在字符串中查找匹配的子串，并替换与正则表达式匹配的子串
+      </a></li><li class="anchor-item"><a href="#replaceall-在字符串中查找匹配的子串-并替换与正则表达式匹配的所有子串" class="anchor-item__link" style="margin-left:20px;">
+        replaceAll() 在字符串中查找匹配的子串，并替换与正则表达式匹配的所有子串
+      </a></li><li class="anchor-item"><a href="#search-查找与正则表达式相匹配的值" class="anchor-item__link" style="margin-left:20px;">
+        search() 查找与正则表达式相匹配的值
+      </a></li><li class="anchor-item"><a href="#slice-提取字符串的片断-并在新的字符串中返回被提取的部分" class="anchor-item__link" style="margin-left:20px;">
+        slice() 提取字符串的片断，并在新的字符串中返回被提取的部分
+      </a></li><li class="anchor-item"><a href="#split-把字符串分割为字符串数组" class="anchor-item__link" style="margin-left:20px;">
+        split() 把字符串分割为字符串数组
+      </a></li><li class="anchor-item"><a href="#split-把字符串分割为字符串数组-2" class="anchor-item__link" style="margin-left:20px;">
+        split() 把字符串分割为字符串数组
+      </a></li><li class="anchor-item"><a href="#substr-从起始索引号提取字符串中指定数目的字符" class="anchor-item__link" style="margin-left:20px;">
+        substr() 从起始索引号提取字符串中指定数目的字符
+      </a></li><li class="anchor-item"><a href="#substring-提取字符串中两个指定的索引号之间的字符" class="anchor-item__link" style="margin-left:20px;">
+        substring() 提取字符串中两个指定的索引号之间的字符
+      </a></li><li class="anchor-item"><a href="#tolowercase-把字符串转换为小写" class="anchor-item__link" style="margin-left:20px;">
+        toLowerCase() 把字符串转换为小写
+      </a></li><li class="anchor-item"><a href="#touppercase-把字符串转换为大写" class="anchor-item__link" style="margin-left:20px;">
+        toUpperCase() 把字符串转换为大写
+      </a></li><li class="anchor-item"><a href="#tolocalelowercase-根据本地主机的语言环境把字符串转换为小写" class="anchor-item__link" style="margin-left:20px;">
+        toLocaleLowerCase() 根据本地主机的语言环境把字符串转换为小写
+      </a></li><li class="anchor-item"><a href="#tolocaleuppercase-根据本地主机的语言环境把字符串转换为大写" class="anchor-item__link" style="margin-left:20px;">
+        toLocaleUpperCase() 根据本地主机的语言环境把字符串转换为大写
+      </a></li><li class="anchor-item"><a href="#trim-去除字符串两边的空白" class="anchor-item__link" style="margin-left:20px;">
+        trim() 去除字符串两边的空白
+      </a></li><li class="anchor-item"><a href="#tostring-返回一个字符串" class="anchor-item__link" style="margin-left:20px;">
+        toString() 返回一个字符串
+      </a></li><li class="anchor-item"><a href="#valueof-返回某个字符串对象的原始值" class="anchor-item__link" style="margin-left:20px;">
+        valueOf() 返回某个字符串对象的原始值
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="字符串对象"><a href="#字符串对象" class="header-anchor">#</a> 字符串对象</h1> <p>查找类</p> <table><tr><th>方法</th> <th>描述</th> <th>版本</th></tr> <tr><td><a href="#startsWith() 判断当前字符串是否以指定的字符串开头">startsWith()</a></td><td>判断当前字符串是否以指定的字符串开头</td> <td>ECMAScript 6</td></tr> <tr><td><a href="#endsWith-判断当前字符串是否是以指定的字符串结尾">endsWith()</a></td><td>查看字符串是否以指定的子字符串开头</td> <td>ECMAScript 6</td></tr></table> <h2 id="查找类"><a href="#查找类" class="header-anchor">#</a> 查找类</h2> <h3 id="startswith-判断当前字符串是否以指定的字符串开头"><a href="#startswith-判断当前字符串是否以指定的字符串开头" class="header-anchor">#</a> startsWith() 判断当前字符串是否以指定的字符串开头</h3> <ul><li>简介：<br>
+检测字符串是否以指定的子字符串开始<br>
+如果是以指定的子字符串开头返回 true，否则 false<br>
+startsWith() 方法对大小写敏感</li> <li>语法：string.startsWith(searchvalue, start)</li> <li>参数：
+<ul><li>参数 1：<strong>searchvalue</strong><br>
+必需，要查找的字符串</li> <li>参数 2：<strong>start</strong><br>
+可选，查找的开始位置，默认为 0</li></ul></li> <li>返回值
+<ul><li><strong>Boolean</strong><br>
+如果字符串是以指定的子字符串开头返回 true，否则 false。</li></ul></li> <li>注意：<br>
+区分大小写</li> <li>JavaScript 版本: ECMAScript 6</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 查看字符串是否为 &quot;Hello&quot; 开头:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world, welcome to the Runoob.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">&quot;Hello&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// true</span>
+
+<span class="token comment">// 查看从第 6 个索引位置是否以 &quot;world&quot; 开头</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world, welcome to the Runoob.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">&quot;world&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// true</span>
+</code></pre></div><h3 id="endswith-判断当前字符串是否是以指定的字符串结尾"><a href="#endswith-判断当前字符串是否是以指定的字符串结尾" class="header-anchor">#</a> endsWith() 判断当前字符串是否是以指定的字符串结尾</h3> <ul><li>简介：<br>
+判断当前字符串是否是以指定的子字符串结尾的（区分大小写）</li> <li>语法：string.endsWith(searchvalue, length)</li> <li>参数：
+<ul><li>参数 1：<strong>searchvalue</strong><br>
+必需，要搜索的子字符串。</li> <li>参数 2：<strong>length</strong><br>
+设置字符串的长度。默认值为原始字符串长度 string.length。</li></ul></li> <li>返回值
+<ul><li><strong>Boolean</strong><br>
+如果字符串以指定的值结尾返回 true，否则返回 false。</li></ul></li> <li>注意：<br>
+区分大小写</li> <li>JavaScript 版本: ECMAScript 6</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 设置不同字符串长度来判断</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;To be, or not to be, that is the question.&quot;</span><span class="token punctuation">;</span>
+str<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;question.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
+str<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;to be&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span>
+str<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;to be&quot;</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
+</code></pre></div><h2 id="通用"><a href="#通用" class="header-anchor">#</a> 通用</h2> <h3 id="chatat-返回指定位置的字符"><a href="#chatat-返回指定位置的字符" class="header-anchor">#</a> chatAt() 返回指定位置的字符</h3> <ul><li>简介：<br>
+返回指定位置的字符</li> <li>语法：string.charAt(index)</li> <li>参数：
+<ul><li>参数 1：<strong>index</strong><br>
+必需。字符在字符串中的下标</li></ul></li> <li>返回值
+<ul><li><strong>String</strong><br>
+返回指定位置的字符</li></ul></li> <li>注意：</li> <li>JavaScript 版本: 1.0</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 返回字符串中的最后一个字符</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;HELLO WORLD&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// D</span>
+</code></pre></div><h3 id="charcodeat-返回指定的位置的字符的-unicode-编码"><a href="#charcodeat-返回指定的位置的字符的-unicode-编码" class="header-anchor">#</a> charCodeAt() 返回指定的位置的字符的 Unicode 编码</h3> <ul><li>简介：<br>
+charCodeAt() 方法可返回指定位置的字符的 Unicode 编码，返回值是 0 - 65535 之间的整数，表示给定索引处的 UTF-16 代码单元。</li> <li>语法：string.charCodeAt(index)</li> <li>参数：
+<ul><li>参数 1：<strong>index</strong><br>
+必需。字符在字符串中的下标</li></ul></li> <li>返回值
+<ul><li><strong>Number</strong><br>
+返回指定的位置的字符的 Unicode 编码</li></ul></li> <li>注意：</li> <li>JavaScript 版本: 1.2</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 返回字符串中的最后一个字符</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;HELLO WORLD&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 68</span>
+</code></pre></div><h3 id="fromcharcode-将-unicode-编码转为字符"><a href="#fromcharcode-将-unicode-编码转为字符" class="header-anchor">#</a> fromCharCode() 将 Unicode 编码转为字符</h3> <ul><li>简介：<br>
+将 Unicode 编码转为字符。</li> <li>语法：String.fromCharCode(n1, n2, ..., nX)</li> <li>参数：
+<ul><li>参数 1：<strong>n1, n2, ..., nX</strong><br>
+必需。一个或多个 Unicode 值，即要创建的字符串中的字符的 Unicode 编码。</li></ul></li> <li>返回值
+<ul><li><strong>String</strong><br>
+返回代表 Unicode 编码的字符</li></ul></li> <li>注意：</li> <li>JavaScript 版本: 1.2</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 将 Unicode 编码转换为一个字符串:</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">(</span><span class="token number">72</span><span class="token punctuation">,</span> <span class="token number">69</span><span class="token punctuation">,</span> <span class="token number">76</span><span class="token punctuation">,</span> <span class="token number">76</span><span class="token punctuation">,</span> <span class="token number">79</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// HELLO</span>
+</code></pre></div><h3 id="concat-连接两个或多个字符串"><a href="#concat-连接两个或多个字符串" class="header-anchor">#</a> concat() 连接两个或多个字符串</h3> <ul><li>简介：<br>
+连接两个或更多字符串，并返回新的字符串。该方法没有改变原有字符串。</li> <li>语法：string.concat(string1, string2, ..., stringX)</li> <li>参数：
+<ul><li>参数 1：<strong>string1, string2, ..., stringX</strong><br>
+必需。将被连接为一个字符串的一个或多个字符串</li></ul></li> <li>返回值
+<ul><li><strong>String</strong><br>
+两个或多个字符串连接后生成的新字符串</li></ul></li> <li>注意：<br>
+不改变原有字符串</li> <li>JavaScript 版本: 1.2</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 连接3个字符串:</span>
+<span class="token keyword">let</span> str1 <span class="token operator">=</span> <span class="token string">&quot;Hello &quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> str2 <span class="token operator">=</span> <span class="token string">&quot;world!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> str3 <span class="token operator">=</span> <span class="token string">&quot; Have a nice day!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str1<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>str2<span class="token punctuation">,</span> str3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Hello world! Have a nice day!</span>
+</code></pre></div><h3 id="indexof-返回某个指定的字符串值在字符串中首次出现的位置"><a href="#indexof-返回某个指定的字符串值在字符串中首次出现的位置" class="header-anchor">#</a> indexOf() 返回某个指定的字符串值在字符串中首次出现的位置</h3> <ul><li>简介：<br>
+返回某个指定的字符串值在字符串中首次出现的位置。<br>
+如果没有找到匹配的字符串则返回 -1。</li> <li>语法：string.indexOf(searchvalue,start)</li> <li>参数：
+<ul><li>参数 1：<strong>searchvalue</strong><br>
+必需。规定需检索的字符串值。</li> <li>参数 2：<strong>start</strong><br>
+可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 string Object.length - 1。如省略该参数，则将从字符串的首字符开始检索。</li></ul></li> <li>返回值
+<ul><li><strong>Number</strong><br>
+查找指定字符串第一次出现的位置，如果没找到匹配的字符串则返回 -1。</li></ul></li> <li>注意：<br>
+区分大小写</li> <li>JavaScript 版本: 1.0</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 在字符串查找字符 &quot;e&quot; 第一次出现的位置:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world, welcome to the universe.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;e&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 1</span>
+</code></pre></div><h3 id="lastindexof-从后向前搜索字符串-并从起始位置-0-开始计算返回字符串最后出现的位置。"><a href="#lastindexof-从后向前搜索字符串-并从起始位置-0-开始计算返回字符串最后出现的位置。" class="header-anchor">#</a> lastIndexOf() 从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。</h3> <ul><li><p>简介：<br>
+返回一个指定的字符串值最后出现的位置，如果指定第二个参数 start，则在一个字符串中的指定位置从后向前搜索。
+如果没有找到匹配的字符串则返回 -1。</p></li> <li><p>语法：string.lastIndexOf(searchvalue,start)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>searchvalue</strong><br>
+必需。规定需检索的字符串值。</li> <li>参数 2：<strong>start</strong><br>
+可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 string Object.length - 1。如省略该参数，则将从字符串的首字符开始检索。</li></ul></li> <li><p>返回值</p> <ul><li><strong>Number</strong><br>
+查找指定字符串第一次出现的位置，如果没找到匹配的字符串则返回 -1。</li></ul></li> <li><p>注意：</p> <ul><li>区分大小写</li> <li>该方法将从后向前检索字符串，但返回是从起始位置 (0) 开始计算子字符串最后出现的位置。 看它是否含有字符串。开始检索的位置在字符串的 start 处或字符串的结尾（没有指定 start 时）。</li></ul></li> <li><p>JavaScript 版本: 1.0</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 查找字符串 &quot;runoob&quot; 最后出现的位置:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;I am from runoob，welcome to runoob site.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">&quot;runoob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 28</span>
+
+<span class="token comment">// 从第 20 个字符开始查找字符串 &quot;runoob&quot; 最后出现的位置,：</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;I am from runoob，welcome to runoob site.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">&quot;runoob&quot;</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 10</span>
+
+<span class="token comment">// 从第 10 个字符开始从后向前查找字符串 &quot;runoob&quot; 最后出现的位置：</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;I am from runoob，welcome to runoob site.&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">&quot;runoob&quot;</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// -1</span>
+</code></pre></div><h3 id="includes-查找字符串中是否包含指定的子字符串。"><a href="#includes-查找字符串中是否包含指定的子字符串。" class="header-anchor">#</a> includes() 查找字符串中是否包含指定的子字符串。</h3> <ul><li>简介：<br>
+判断字符串是否包含指定的子字符串<br>
+如果找到匹配的字符串则返回 true，否则返回 false</li> <li>语法：string.includes(searchvalue, start)</li> <li>参数：
+<ul><li>参数 1：<strong>searchvalue</strong><br>
+必需，要查找的字符串。</li> <li>参数 2：<strong>start</strong><br>
+可选，设置从那个位置开始查找，默认为 0。</li></ul></li> <li>返回值
+<ul><li><strong>Boolean</strong><br>
+如果找到匹配的字符串返回 true，否则返回 false。</li></ul></li> <li>注意：<br>
+字符串 和 数组 通用这个方法</li> <li>JavaScript 版本: ECMAScript 6</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world, welcome to the Runoob。&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> n1 <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;Runoob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// true</span>
+<span class="token keyword">let</span> n2 <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;world&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// false</span>
+</code></pre></div><h3 id="match-查找找到一个或多个正则表达式的匹配"><a href="#match-查找找到一个或多个正则表达式的匹配" class="header-anchor">#</a> match() 查找找到一个或多个正则表达式的匹配</h3> <ul><li>简介：<br>
+在字符串内检索指定的值，或找到一个或多个正则表达式的匹配<br>
+如果想了解更多正则表达式教程请查看： <a href="https://www.runoob.com/js/js-obj-regexp.html" target="_blank" rel="noopener noreferrer">RegExp<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 教程 和 <a href="https://www.runoob.com/jsref/jsref-obj-regexp.html" target="_blank" rel="noopener noreferrer">RegExp<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 对象参考手册。</li> <li>语法：string.match(regexp)</li> <li>参数：
+<ul><li>参数 1：<strong>regexp</strong><br>
+必需。规定要匹配的模式的 RegExp 对象。如果该参数不是 RegExp 对象，则需要首先把它传递给 RegExp 构造函数，将其转换为 RegExp 对象。</li></ul></li> <li>返回值
+<ul><li><strong>Array</strong><br>
+存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。 如果没找到匹配结果返回 null 。</li></ul></li> <li>注意：<br>
+match() 方法将检索字符串 String Object，以找到一个或多个与 regexp 匹配的文本。这个方法的行为在很大程度上有赖于 regexp 是否具有标志 g。如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。如果没有找到任何匹配的文本， match() 将返回 null。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。</li> <li>JavaScript 版本: 1.2</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 在字符串中查找 &quot;ain&quot;:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;The rain in SPAIN stays mainly in the plain&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">ain</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 数组：ain,ain,ain</span>
+
+<span class="token comment">// 全局查找字符串 &quot;ain&quot;，且不区分大小写:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;The rain in SPAIN stays mainly in the plain&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">ain</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 数组：ain,AIN,ain,ain</span>
+
+<span class="token comment">// 判断是否微信浏览器:</span>
+<span class="token keyword">function</span> <span class="token function">is_weixn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> ua <span class="token operator">=</span> navigator<span class="token punctuation">.</span>userAgent<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ua<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">MicroMessenger</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;micromessenger&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="repeat-复制字符串指定次数-并将它们连接在一起返回"><a href="#repeat-复制字符串指定次数-并将它们连接在一起返回" class="header-anchor">#</a> repeat() 复制字符串指定次数，并将它们连接在一起返回</h3> <ul><li><p>简介：<br>
+字符串复制指定次数</p></li> <li><p>语法：string.repeat(count)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>count</strong><br>
+必需，设置要复制的次数。</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong><br>
+返回复制指定次数并连接在一起的字符串。</li></ul></li> <li><p>注意：不会改变原字符串</p></li> <li><p>JavaScript 版本: ECMAScript 6</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 复制字符串 &quot;Runoob&quot; 两次:</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Runoob&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// n：RunoobRunoob</span>
+</code></pre></div><h3 id="replace-在字符串中查找匹配的子串-并替换与正则表达式匹配的子串"><a href="#replace-在字符串中查找匹配的子串-并替换与正则表达式匹配的子串" class="header-anchor">#</a> replace() 在字符串中查找匹配的子串，并替换与正则表达式匹配的子串</h3> <ul><li><p>简介：<br>
+在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串<br>
+该方法不会改变原始字符串</p></li> <li><p>语法：string.replace(searchvalue,newvalue)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>searchvalue</strong><br>
+必须。规定子字符串或要替换的模式的 RegExp 对象。
+请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</li> <li>参数 2：<strong>newvalue</strong>
+必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong><br>
+一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的</li></ul></li> <li><p>注意：不会改变原字符串</p></li> <li><p>JavaScript 版本: 1.2</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 默认只替换首次出现的</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Visit Microsoft! Visit Microsoft!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">&quot;Microsoft&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Runoob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Visit Runoob!Visit Microsoft!</span>
+
+<span class="token comment">// 全局替换</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Mr Blue has a blue house and a blue car&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blue</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">&quot;red&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Mr Blue has a red house and a red car</span>
+
+<span class="token comment">// 全局替换, 忽略大小写</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Mr Blue has a blue house and a blue car&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blue</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">&quot;red&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Mr red has a red house and a red car</span>
+</code></pre></div><h3 id="replaceall-在字符串中查找匹配的子串-并替换与正则表达式匹配的所有子串"><a href="#replaceall-在字符串中查找匹配的子串-并替换与正则表达式匹配的所有子串" class="header-anchor">#</a> replaceAll() 在字符串中查找匹配的子串，并替换与正则表达式匹配的所有子串</h3> <ul><li><p>简介：<br>
+replaceAll() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串，该函数会替换所有匹配到的子字符串<br>
+该方法不会改变原始字符串</p></li> <li><p>语法：const newStr = str.replaceAll(regexp|substr, newSubstr|function)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>regexp|substr</strong><br>
+请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。当使用一个 regex 时，您必须设置全局（&quot;g&quot;）标志， 否则，它将引发 TypeError：&quot;必须使用全局 RegExp 调用 replaceAll&quot;。</li> <li>参数 2：<strong>newvalue</strong>
+必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong><br>
+一个新的字符串，是用 newSubstr 替换了 regexp 的所有匹配之后得到的</li></ul></li> <li><p>注意：</p> <ol><li>不会改变原字符串</li> <li>不支持 IE 浏览器</li></ol></li> <li><p>JavaScript 版本: 1.2</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 将所有 &quot;Microsoft&quot; 替换为 &quot;Runoob&quot;</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Visit Microsoft! Visit Microsoft!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">&quot;Microsoft&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Runoob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Visit Runoob!Visit Runoob!</span>
+
+<span class="token comment">// 全局替换</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Mr Blue has a blue house and a blue car&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blue</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">&quot;red&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Mr red has a red house and a red car.</span>
+</code></pre></div><h3 id="search-查找与正则表达式相匹配的值"><a href="#search-查找与正则表达式相匹配的值" class="header-anchor">#</a> search() 查找与正则表达式相匹配的值</h3> <ul><li><p>简介：<br>
+用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。<br>
+如果没有找到任何匹配的子串，则返回 -1。</p></li> <li><p>语法：string.search(searchvalue)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>searchvalue</strong><br>
+必须。查找的字符串或者正则表达式。</li></ul></li> <li><p>返回值</p> <ul><li><strong>Number</strong><br>
+与指定查找的字符串或者正则表达式相匹配的 String 对象起始位置。</li></ul></li> <li><p>注意：</p></li> <li><p>JavaScript 版本: 1.2</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 执行一次对大小写敏感的查找</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Mr. Blue has a blue house&quot;</span><span class="token punctuation">;</span>
+document<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">search</span><span class="token punctuation">(</span><span class="token string">&quot;blue&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 15</span>
+
+<span class="token comment">// 执行一次忽略大小写的检索</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Mr. Blue has a blue house&quot;</span><span class="token punctuation">;</span>
+document<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">search</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blue</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 4</span>
+</code></pre></div><h3 id="slice-提取字符串的片断-并在新的字符串中返回被提取的部分"><a href="#slice-提取字符串的片断-并在新的字符串中返回被提取的部分" class="header-anchor">#</a> slice() 提取字符串的片断，并在新的字符串中返回被提取的部分</h3> <ul><li><p>简介：<br>
+slice(start, end) 方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。<br>
+使用 start（包含） 和 end（不包含） 参数来指定字符串提取的部分。<br>
+start 参数字符串中第一个字符位置为 0, 第二个字符位置为 1, 以此类推，如果是负数表示从尾部截取多少个字符串，slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。<br>
+end 参数如果为负数，-1 指字符串的最后一个字符的位置，-2 指倒数第二个字符，以此类推。</p></li> <li><p>语法：string.slice(start,end)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>start</strong><br>
+必须。 要抽取的片断的起始下标，第一个字符位置为 0。如果为负数，则从尾部开始截取。</li> <li>参数 2：<strong>end</strong><br>
+可选。 紧接着要截取的片段结尾的下标。若未指定此参数，则要提取的子串包括 start 到原字符串结尾的字符串。如果该参数是负数，那么它规定的是从字符串的尾部开始算起的位置。slice(-2) 表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong><br>
+提取的字符串</li></ul></li> <li><p>注意：</p></li> <li><p>JavaScript 版本: 1.0</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 提取字符串的片断</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ello</span>
+
+<span class="token comment">// 第3个位置提取字符串片段</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// lo world!</span>
+
+<span class="token comment">// 提取最后一个字符和最后两个字符</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world!&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n2 <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// !</span>
+<span class="token comment">// d!</span>
+</code></pre></div><h3 id="split-把字符串分割为字符串数组"><a href="#split-把字符串分割为字符串数组" class="header-anchor">#</a> split() 把字符串分割为字符串数组</h3> <ul><li><p>简介：<br>
+把一个字符串分割成字符串数组<br>
+如果把空字符串 (&quot;&quot;) 用作 separator，那么 stringObject 中的每个字符之间都会被分割</p></li> <li><p>语法：string.split(separator,limit)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>separator</strong><br>
+可选。字符串或正则表达式，从该参数指定的地方分割 string Object。</li> <li>参数 2：<strong>limit</strong><br>
+可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。</li></ul></li> <li><p>返回值</p> <ul><li><strong>Array</strong><br>
+一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。</li></ul></li> <li><p>注意：</p></li> <li><p>JavaScript 版本: 1.1</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 省略分割参数</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How are you doing today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How are you doing today?']</span>
+
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How,are,you,doing,today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How', 'are', 'you']</span>
+</code></pre></div><h3 id="split-把字符串分割为字符串数组-2"><a href="#split-把字符串分割为字符串数组-2" class="header-anchor">#</a> split() 把字符串分割为字符串数组</h3> <ul><li><p>简介：<br>
+把一个字符串分割成字符串数组<br>
+如果把空字符串 (&quot;&quot;) 用作 separator，那么 stringObject 中的每个字符之间都会被分割</p></li> <li><p>语法：string.split(separator,limit)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>separator</strong><br>
+可选。字符串或正则表达式，从该参数指定的地方分割 string Object。</li> <li>参数 2：<strong>limit</strong><br>
+可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。</li></ul></li> <li><p>返回值</p> <ul><li><strong>Array</strong><br>
+一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。</li></ul></li> <li><p>注意：</p></li> <li><p>JavaScript 版本: 1.1</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 省略分割参数</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How are you doing today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How are you doing today?']</span>
+
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How,are,you,doing,today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How', 'are', 'you']</span>
+</code></pre></div><h3 id="substr-从起始索引号提取字符串中指定数目的字符"><a href="#substr-从起始索引号提取字符串中指定数目的字符" class="header-anchor">#</a> substr() 从起始索引号提取字符串中指定数目的字符</h3> <ul><li><p>简介：<br>
+从起始索引号提取字符串中指定数目的字符<br>
+substr() 的参数指定的是子串的开始位置和长度，因此它可以替代 substring() 和 slice() 来使用<br>
+ECMAscript 没有对该方法进行标准化，因此反对使用它</p></li> <li><p>语法：string.substr(start,length)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>start</strong><br>
+必需。要抽取的子串的起始下标。必须是数值。如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。</li> <li>参数 2：<strong>length</strong><br>
+可选。子串中的字符数。必须是数值。如果省略了该参数，那么返回从 stringObject 的开始位置到结尾的字串。</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong><br>
+一个字符串数组。该数组是通过在 separator 指定的边界处将字符串 string Object 分割成子串创建的。返回的数组中的字串不包括 separator 自身。</li></ul></li> <li><p>注意：substr() 方法不会改变源字符串</p></li> <li><p>JavaScript 版本: 1.1</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 省略分割参数</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How are you doing today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How are you doing today?']</span>
+
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;How,are,you,doing,today?&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ['How', 'are', 'you']</span>
+</code></pre></div><h3 id="substring-提取字符串中两个指定的索引号之间的字符"><a href="#substring-提取字符串中两个指定的索引号之间的字符" class="header-anchor">#</a> substring() 提取字符串中两个指定的索引号之间的字符</h3> <ul><li><p>简介：<br>
+用于提取字符串中介于两个指定下标之间的字符<br>
+返回的子串包括 开始 处的字符，但不包括 结束 处的字符</p></li> <li><p>语法：string.substring(from, to)</p></li> <li><p>参数：</p> <ul><li>参数 1：<strong>from</strong><br>
+必需。一个非负的整数，规定要提取的子串的第一个字符在 string Object 中的位置</li> <li>参数 2：<strong>to</strong><br>
+可选。一个非负的整数，比要提取的子串的最后一个字符在 string Object 中的位置多 1。<br>
+如果省略该参数，那么返回的子串会一直到字符串的结尾</li></ul></li> <li><p>返回值</p> <ul><li><strong>String</strong></li></ul></li> <li><p>注意：substr() 方法不会改变源字符串</p></li> <li><p>JavaScript 版本:</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Hello world!&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// lo world!</span>
+<span class="token keyword">let</span> n1 <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// lo w</span>
+</code></pre></div><h3 id="tolowercase-把字符串转换为小写"><a href="#tolowercase-把字符串转换为小写" class="header-anchor">#</a> toLowerCase() 把字符串转换为小写</h3> <ul><li><p>简介：<br>
+把字符串转换为小写</p></li> <li><p>语法：string.toLowerCase()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong></li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本:</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;NIKE&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// nike</span>
+</code></pre></div><h3 id="touppercase-把字符串转换为大写"><a href="#touppercase-把字符串转换为大写" class="header-anchor">#</a> toUpperCase() 把字符串转换为大写</h3> <ul><li><p>简介：<br>
+把字符串转换为大写</p></li> <li><p>语法：string.toUpperCase()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong></li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本:</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;nike&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// NIKE</span>
+</code></pre></div><h3 id="tolocalelowercase-根据本地主机的语言环境把字符串转换为小写"><a href="#tolocalelowercase-根据本地主机的语言环境把字符串转换为小写" class="header-anchor">#</a> toLocaleLowerCase() 根据本地主机的语言环境把字符串转换为小写</h3> <ul><li><p>简介：<br>
+根据本地主机的语言环境把字符串转换为小写<br>
+本地是根据浏览器的语言设置来判断的<br>
+通常，该方法与 toLowerCase() 方法返回的结果相同，只有几种语言（如土耳其语）具有地方特有的大小写映射</p></li> <li><p>语法：string.toLocaleLowerCase()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong>
+根据本地语言转换为小写。</li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本: ECMAScript 1</p></li></ul> <h3 id="tolocaleuppercase-根据本地主机的语言环境把字符串转换为大写"><a href="#tolocaleuppercase-根据本地主机的语言环境把字符串转换为大写" class="header-anchor">#</a> toLocaleUpperCase() 根据本地主机的语言环境把字符串转换为大写</h3> <ul><li><p>简介：<br>
+根据本地主机的语言环境把字符串转换为大写<br>
+本地是根据浏览器的语言设置来判断的<br>
+通常，该方法与 toLowerCase() 方法返回的结果相同，只有几种语言（如土耳其语）具有地方特有的大小写映射</p></li> <li><p>语法：string.toLocaleUpperCase()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong>
+根据本地语言转换为大写</li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本: ECMAScript 1</p></li></ul> <h3 id="trim-去除字符串两边的空白"><a href="#trim-去除字符串两边的空白" class="header-anchor">#</a> trim() 去除字符串两边的空白</h3> <ul><li><p>简介：<br>
+删除字符串的头尾空白符，空白符包括：空格、制表符 tab、换行符等其他空白符等<br>
+不会改变原始字符串<br>
+不适用于 null, undefined, Number 类型</p></li> <li><p>语法：string.trim()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong>
+返回移除头尾空格的字符串</li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本:<br>
+ECMAScript 5</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot; nike      &quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> n <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// nike</span>
+</code></pre></div><h3 id="tostring-返回一个字符串"><a href="#tostring-返回一个字符串" class="header-anchor">#</a> toString() 返回一个字符串</h3> <ul><li><p>简介：<br>
+返回一个表示 String 对象的值</p></li> <li><p>语法：string.toString()</p></li> <li><p>返回值</p> <ul><li><strong>String</strong>
+一个字符串</li></ul></li> <li><p>注意：<br>
+不会改变原字符串</p></li> <li><p>JavaScript 版本:<br>
+ECMAScript 1</p></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">&quot;Runoob&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> res <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Runoob</span>
+</code></pre></div><h3 id="valueof-返回某个字符串对象的原始值"><a href="#valueof-返回某个字符串对象的原始值" class="header-anchor">#</a> valueOf() 返回某个字符串对象的原始值</h3> <ul><li>简介：<br>
+返回 String 对象的原始值
+通常由 JavaScript 在后台自动进行调用，而不是显式地处于代码中</li> <li>语法：string.valueOf()</li> <li>注意：<br>
+通常由 JavaScript 在后台自动进行调用，而不是显式地处于代码中</li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">9/19/2022, 6:15:44 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/skill/web/js/array.html" class="prev">
+        数组对象
+      </a></span> <span class="next"><a href="/skill/web/js/object.html">
+        Object
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.f5985fb4.js" defer></script><script src="/assets/js/2.d4db1458.js" defer></script><script src="/assets/js/44.c2f33e0e.js" defer></script>
+  </body>
+</html>
