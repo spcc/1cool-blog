@@ -2,6 +2,22 @@
 
 [数组对象方法](https://www.runoob.com/jsref/jsref-obj-array.html)
 
+查找类
+
+<table>
+  <tr>
+    <th>方法</th>
+    <th>描述</th>
+    <th>版本</th>
+  </tr>
+
+  <tr>
+    <td><a href="#startsWith() 判断当前字符串是否以指定的字符串开头">startsWith()</a></th>
+    <td>判断当前字符串是否以指定的字符串开头</td>
+    <td>ECMAScript 6</td>
+  </tr>
+</table>
+
 ## 操作类
 
 ### splice() - 从数组中添加或删除元素
@@ -652,6 +668,13 @@ let fruitsString = fruits.join(" and ");
 - 简介：  
   用于通过拥有 length 属性的对象或可迭代的对象来返回一个数组
 - 语法：Array.from(object, mapFunction, thisValue)
+- 参数：
+  - 参数 1：**object**  
+    必需，要转换为数组的对象。
+  - 参数 2：**mapFunction**  
+    可选，数组中每个元素要调用的函数。
+  - 参数 3：**thisValue**  
+    可选，映射函数(mapFunction)中的 this 对象。
 - 返回值
   - **Array**
 - JavaScript 版本: ECMAScript 6
@@ -681,6 +704,8 @@ let nullObject = Array.from({ length: 3 }, () => ({}));
 // [{},{},{}]
 let nullNumber = Array.from({ length: 3 }, () => 1);
 // [1,1,1]
+const data = Array.from({ length: 1000 }, (item, index) => ({name: `name${index + 1}`}));
+// 批量制造一组假数据
 
 // 生成数字范围
 let numberRange = Array.from({ length: 3 }, (_, index) => index);
@@ -710,15 +735,17 @@ b[1] = "cc";
   - **Array**
 - 注意：
   1. IE 11 及更早版本不支持 fill() 方法
+  2. 会改变原数组
 - JavaScript 版本: ECMAScript 6
 
 ```js
 let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.fill("Runoob");
-// fruits：Runoob,Runoob,Runoob,Runoob
+// fruits：['Runoob', 'Runoob', 'Runoob', 'Runoob']
 
-let fruits = ["Banana", "Orange", "Apple", "Mango", "Banana"];
-// fruits：Banana,Orange,Runoob,Runoob,Banana
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.fill("Runoob", 2, 4);
+// fruits：['Banana', 'Orange', 'Runoob', 'Runoob']
 ```
 
 ### copyWithin() 从数组的指定位置拷贝元素到数组的另一个指定位置中

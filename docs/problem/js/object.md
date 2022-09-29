@@ -1,5 +1,14 @@
 # 对象 常见问题
 
+## 判断对象是否是空
+
+对象判空小技巧，使用 `Object.keys({})`
+
+```js
+Object.keys({}).length; // 0
+Object.keys({ key: 1 }).length; // 1
+```
+
 ## 对象操作
 
 ### 批量置空对象所有属性

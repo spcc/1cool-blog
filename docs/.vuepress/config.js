@@ -112,6 +112,14 @@ module.exports = {
             "/skill/web/js/math",
           ],
         },
+        {
+          title: "代码整洁", // 必要的
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            "/skill/web/js/clean",
+          ],
+        },
       ],
       "/interview": [
         {
@@ -152,7 +160,7 @@ module.exports = {
           title: "JS", // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/problem/js/array", "/problem/js/object"],
+          children: ["/problem/js/base", "/problem/js/array", "/problem/js/object"],
         },
         {
           title: "ElementUI", // 必要的

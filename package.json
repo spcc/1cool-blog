@@ -17,5 +17,8 @@
     "sass-loader": "^8.0.2",
     "vuepress": "^1.9.7"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "volta": {
+    "node": "16.17.1"
+  }
 }
