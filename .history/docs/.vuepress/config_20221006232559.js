@@ -31,7 +31,7 @@ module.exports = {
               { text: "Git", link: "/skill/tool/git/common" },
               { text: "VsCode", link: "/skill/tool/vscode/fun" },
               { text: "Github/Gitee", link: "/skill/tool/warehouse/base" },
-              { text: "装机必备", link: "/skill/tool/windows/base" },
+              { text: "装机必备", link: "/skill/tool/warehouse/base" },
             ],
           },
         ],
