@@ -47,7 +47,7 @@ module.exports = {
         items: [
           {
             text: "关于我",
-            link: "/about/",
+            link: "/about",
           },
           { text: "时间痕迹", link: "/life/" },
         ],
