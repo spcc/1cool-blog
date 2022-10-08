@@ -1,4 +1,4 @@
-# 数组对象
+# Array 对象
 
 [数组对象方法](https://www.runoob.com/jsref/jsref-obj-array.html)
 
@@ -704,7 +704,9 @@ let nullObject = Array.from({ length: 3 }, () => ({}));
 // [{},{},{}]
 let nullNumber = Array.from({ length: 3 }, () => 1);
 // [1,1,1]
-const data = Array.from({ length: 1000 }, (item, index) => ({name: `name${index + 1}`}));
+const data = Array.from({ length: 1000 }, (item, index) => ({
+  name: `name${index + 1}`,
+}));
 // 批量制造一组假数据
 
 // 生成数字范围

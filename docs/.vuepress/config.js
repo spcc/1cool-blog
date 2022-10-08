@@ -96,6 +96,52 @@ module.exports = {
       ],
 
       /**
+       * CSS3
+       */
+      "/skill/web/css3": [
+        {
+          title: "基础",
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          path: "/skill/web/css3/bem",
+        },
+        {
+          title: "动效", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "有用",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/css3/game/base"],
+            },
+            {
+              title: "无用",
+              collapsable: false,
+              sidebarDepth: 0,
+              children: ["/skill/web/css3/move/bg"],
+            },
+          ],
+        },
+      ],
+
+      /**
+       * VSCODE
+       */
+       "/skill/tool/vscode": [
+        {
+          title: "快捷键", // 必要的
+          path: "/skill/tool/vscode/key", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        },
+        {
+          title: "娱乐类", // 必要的
+          path: "/skill/tool/vscode/fun", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        },
+      ],
+
+      /**
        * 时间痕迹
        */
       "/life/": [
@@ -122,9 +168,9 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
+            "/skill/web/js/base",
             "/skill/web/js/array",
             "/skill/web/js/string",
-            "/skill/web/js/object",
             "/skill/web/js/math",
           ],
         },
