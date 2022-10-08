@@ -43,6 +43,7 @@ module.exports = {
       { text: "书籍", link: "/book/web-es6/1" },
       { text: "面试", link: "/interview/" },
       { text: "时间痕迹", link: "/life/" },
+      { text: "关于我", link: "/my/" },
       // { text: "External", link: "https://google.com" },
     ],
     sidebar: {
