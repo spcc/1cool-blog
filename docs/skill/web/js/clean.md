@@ -2,6 +2,91 @@
 
 以下技巧可能在示例中看起来不值一提，但是在实际的项目中，当业务逻辑复杂起来、当代码量变得很大的时候，这些小技巧一定能给出正面的作用、帮助，甚至超乎想象。
 
+## 移除对象属性（简写）
+
+```js
+let obj = { x: 45, y: 72, z: 68, p: 98 };
+
+// Longhand
+delete obj.x;
+delete obj.p;
+console.log(obj); // {y: 72, z: 68}
+
+// Shorthand
+let { x, p, ...newObj } = obj;
+console.log(newObj); // {y: 72, z: 68}
+```
+
+## 用 for in 和 for of 来简化普通 for 循环
+
+```js
+let arr = [10, 20, 30, 40];
+
+// Longhand
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+
+// Shorthand
+// for of loop
+for (const val of arr) {
+  console.log(val);
+}
+
+// for in loop
+for (const index in arr) {
+  console.log(arr[index]);
+}
+```
+
+## 多值匹配，可将所有值放在数组中，通过数组方法来简写
+
+```js
+// bad
+if (value === 1 || value === "one" || value === 2 || value === "two") {
+  // Execute some code
+}
+
+// good 1
+if ([1, "one", 2, "two"].indexOf(value) > -1) {
+  // Execute some code
+}
+
+// good 2
+if ([1, "one", 2, "two"].includes(value)) {
+  // Execute some code
+}
+```
+
+## 解构，可为多个变量同时赋值
+
+```js
+// bad
+let a, b, c;
+a = 5;
+b = 8;
+c = 12;
+
+// good
+let [a, b, c] = [5, 8, 12];
+```
+
+## 使用&&运算符简化 if 语句
+
+例如某个函数在某个条件为真时才调用，可简写
+
+```js
+if (isLoggedin) {
+  goToHomepage();
+}
+```
+
+可以改成
+
+```js
+isLoggedin && goToHomepage();
+```
+
 ## 用对象传参
 
 把参数包装成一个对象再传，否则谁能读懂这种没头没尾的且要求顺序的参数的意义？
@@ -51,7 +136,6 @@ const isOldEnough = (person) => {
 或者直接作为形参
 
 ```js
-const AGE = 100;
 const isOldEnough = (person, AGE = 100) => {
   return person.getAge() >= AGE;
 };
