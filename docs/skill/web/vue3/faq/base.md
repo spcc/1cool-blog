@@ -2,6 +2,8 @@
 
 ## setup
 
+- `setup` 函数会在 `beforeCreate` 、`created` 之前执行, vue3 也是取消了这两个钩子，统一用 setup 代替
+
 ::: danger 注意
 props  是响应式的，你不能使用 ES6 解构，它会消除 prop 的响应性。
 content 是一个普通的对象,context 中就提供了中三个属性：attrs、slot  和 emit，分别对应 Vue2.x 中的  $attr属性、slot插槽 和$emit 发射事件。
