@@ -138,7 +138,7 @@ module.exports = {
               collapsable: false,
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
-              children: ["/skill/web/css3/game/base"],
+              children: ["/skill/web/vue3/game/base"],
             },
             {
               title: "无用",

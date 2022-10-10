@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>语法分析 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/1cool/assets/css/0.styles.a010b4d2.css" as="style"><link rel="preload" href="/1cool/assets/js/app.ecb23706.js" as="script"><link rel="preload" href="/1cool/assets/js/2.d4db1458.js" as="script"><link rel="preload" href="/1cool/assets/js/54.5570dcd7.js" as="script"><link rel="prefetch" href="/1cool/assets/js/10.ee7c29f3.js"><link rel="prefetch" href="/1cool/assets/js/11.5394bc3d.js"><link rel="prefetch" href="/1cool/assets/js/12.67593f75.js"><link rel="prefetch" href="/1cool/assets/js/13.69bedebd.js"><link rel="prefetch" href="/1cool/assets/js/14.1e84a88b.js"><link rel="prefetch" href="/1cool/assets/js/15.4ec7333e.js"><link rel="prefetch" href="/1cool/assets/js/16.bae3b2e0.js"><link rel="prefetch" href="/1cool/assets/js/17.74594019.js"><link rel="prefetch" href="/1cool/assets/js/18.39d9be1a.js"><link rel="prefetch" href="/1cool/assets/js/19.7da3c173.js"><link rel="prefetch" href="/1cool/assets/js/20.622997f2.js"><link rel="prefetch" href="/1cool/assets/js/21.db3904a5.js"><link rel="prefetch" href="/1cool/assets/js/22.6302d2d1.js"><link rel="prefetch" href="/1cool/assets/js/23.fac0ecc5.js"><link rel="prefetch" href="/1cool/assets/js/24.fecdf51b.js"><link rel="prefetch" href="/1cool/assets/js/25.18d3f529.js"><link rel="prefetch" href="/1cool/assets/js/26.49febc2e.js"><link rel="prefetch" href="/1cool/assets/js/27.ff23df48.js"><link rel="prefetch" href="/1cool/assets/js/28.842db2f2.js"><link rel="prefetch" href="/1cool/assets/js/29.1e405076.js"><link rel="prefetch" href="/1cool/assets/js/3.a6a614f4.js"><link rel="prefetch" href="/1cool/assets/js/30.71773e36.js"><link rel="prefetch" href="/1cool/assets/js/31.a8cd65bd.js"><link rel="prefetch" href="/1cool/assets/js/32.77986ec0.js"><link rel="prefetch" href="/1cool/assets/js/33.daf5c03a.js"><link rel="prefetch" href="/1cool/assets/js/34.5580e6d1.js"><link rel="prefetch" href="/1cool/assets/js/35.c861a140.js"><link rel="prefetch" href="/1cool/assets/js/36.0b6a9b74.js"><link rel="prefetch" href="/1cool/assets/js/37.a88d690a.js"><link rel="prefetch" href="/1cool/assets/js/38.a65212f7.js"><link rel="prefetch" href="/1cool/assets/js/39.5d9171f9.js"><link rel="prefetch" href="/1cool/assets/js/4.11e4350f.js"><link rel="prefetch" href="/1cool/assets/js/40.49654a0a.js"><link rel="prefetch" href="/1cool/assets/js/41.6e58156e.js"><link rel="prefetch" href="/1cool/assets/js/42.54bf4631.js"><link rel="prefetch" href="/1cool/assets/js/43.ef2b00da.js"><link rel="prefetch" href="/1cool/assets/js/44.01ffb908.js"><link rel="prefetch" href="/1cool/assets/js/45.b644e6ac.js"><link rel="prefetch" href="/1cool/assets/js/46.b3be0936.js"><link rel="prefetch" href="/1cool/assets/js/47.74137cc4.js"><link rel="prefetch" href="/1cool/assets/js/48.49f74b12.js"><link rel="prefetch" href="/1cool/assets/js/49.b6b7f81e.js"><link rel="prefetch" href="/1cool/assets/js/5.42195b66.js"><link rel="prefetch" href="/1cool/assets/js/50.87444d79.js"><link rel="prefetch" href="/1cool/assets/js/51.844fc08d.js"><link rel="prefetch" href="/1cool/assets/js/52.e57d6f4a.js"><link rel="prefetch" href="/1cool/assets/js/53.d9777f0c.js"><link rel="prefetch" href="/1cool/assets/js/55.e4d2358e.js"><link rel="prefetch" href="/1cool/assets/js/56.8aa0380d.js"><link rel="prefetch" href="/1cool/assets/js/57.bfebffae.js"><link rel="prefetch" href="/1cool/assets/js/6.82924391.js"><link rel="prefetch" href="/1cool/assets/js/7.e73bd6ef.js"><link rel="prefetch" href="/1cool/assets/js/8.bc9effe2.js"><link rel="prefetch" href="/1cool/assets/js/9.d818f5c8.js">
+    <link rel="stylesheet" href="/1cool/assets/css/0.styles.a010b4d2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/1cool/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/web-es6/1.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/1cool/life/" class="nav-link">
+  时间痕迹
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/web-es6/1.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li><li class="dropdown-item"><!----> <a href="/1cool/life/" class="nav-link">
+  时间痕迹
+</a></li></ul></div></div> <!----></nav> <div class="layout__search"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div></div> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/1cool/skill/web/vue3/" class="sidebar-heading clickable router-link-active open"><span>vue3</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading open"><span>知识点分析</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/vue3/faq/base.html" aria-current="page" class="active sidebar-link">语法分析</a></li><li><a href="/1cool/skill/web/vue3/faq/faq.html" class="sidebar-link">常见问题</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading"><span>语法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/vue3/game/base.html" class="sidebar-link">开始</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/vue3/common.html" class="sidebar-link">常用API</a></li></ul></section></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>实战搭建</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#setup" class="anchor-item__link" style="margin-left:0;">
+        setup
+      </a></li><li class="anchor-item"><a href="#reactive-ref-toref-与-torefs" class="anchor-item__link" style="margin-left:0;">
+        reactive, ref, toRef 与 toRefs
+      </a></li><li class="anchor-item"><a href="#ref" class="anchor-item__link" style="margin-left:20px;">
+        ref
+      </a></li><li class="anchor-item"><a href="#reactive" class="anchor-item__link" style="margin-left:20px;">
+        reactive
+      </a></li><li class="anchor-item"><a href="#toref" class="anchor-item__link" style="margin-left:20px;">
+        toRef
+      </a></li><li class="anchor-item"><a href="#torefs" class="anchor-item__link" style="margin-left:20px;">
+        toRefs
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="语法分析"><a href="#语法分析" class="header-anchor">#</a> 语法分析</h1> <h2 id="setup"><a href="#setup" class="header-anchor">#</a> setup</h2> <div class="custom-block danger"><p class="custom-block-title">注意</p> <p>props  是响应式的，你不能使用 ES6 解构，它会消除 prop 的响应性。
+content 是一个普通的对象,context 中就提供了中三个属性：attrs、slot  和 emit，分别对应 Vue2.x 中的  $attr属性、slot插槽 和$emit 发射事件。</p></div> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;HelloWorld&quot;</span><span class="token punctuation">,</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token parameter">props<span class="token punctuation">,</span> content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><h2 id="reactive-ref-toref-与-torefs"><a href="#reactive-ref-toref-与-torefs" class="header-anchor">#</a> reactive, ref, toRef 与 toRefs</h2> <h3 id="ref"><a href="#ref" class="header-anchor">#</a> ref</h3> <p>只创建基础数据类型<code>String、Number、Boolean、Symbol、Undefined、Null</code></p> <h3 id="reactive"><a href="#reactive" class="header-anchor">#</a> reactive</h3> <p>reactive 相当于 Vue2.x 的 Vue.observable () API，经过 reactive 处理后的函数能变成响应式的数据。注意：只能返回对象的响应式数据，不能创建基本类型。 语法</p> <p><code>const 代理对象 = reactive(源对象);接收一个引用类型的对象（或数组），返回一个代理对象（proxy 对象）</code></p> <p>const counter = reactive({count: 0})</p> <h3 id="toref"><a href="#toref" class="header-anchor">#</a> toRef</h3> <p>官网是这么解释的,可以用来为源响应式对象上的某个 property 新创建一个 ref。然后，ref 可以被传递，它会保持对其源 property 的响应式连接。就是要将响应式对象中的某个属性单独给外部使用时候。</p> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8e7b1d8da5d41e3ae79808c9769409b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"> <p>toRef()函数用来把一个响应式对象的某个 key 值转换成 ref,是这么实现的。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">toRef</span><span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> key</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">isRef</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token keyword">get</span> <span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> target<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">set</span> <span class="token function">value</span><span class="token punctuation">(</span><span class="token parameter">newVal</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> newVal<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="torefs"><a href="#torefs" class="header-anchor">#</a> toRefs</h3> <p>toRefs 和 toRef 功能是一致的，但是可以批量创建多个 ref 对象。</p> <p>语法：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">useFeatureX</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// ...基于状态的操作逻辑</span>
+
+  <span class="token comment">// 在返回时都转为 ref</span>
+  <span class="token keyword">return</span> <span class="token function">toRefs</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 可以解构而不会失去响应性</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useFeatureX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>toRefs()的实现</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">toRefs</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> ret <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ret<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">toRef</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">10/10/2022, 10:03:57 AM</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/1cool/skill/web/vue3/faq/faq.html">
+        常见问题
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/1cool/assets/js/app.ecb23706.js" defer></script><script src="/1cool/assets/js/2.d4db1458.js" defer></script><script src="/1cool/assets/js/54.5570dcd7.js" defer></script>
+  </body>
+</html>
