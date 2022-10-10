@@ -78,7 +78,7 @@ module.exports = {
               collapsable: false,
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
-              children: ["/skill/web/vue3/game/base"],
+              children: ["/skill/web/vue3/api/base"],
             },
             {
               title: "其他",
