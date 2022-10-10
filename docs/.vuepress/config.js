@@ -1,6 +1,6 @@
 module.exports = {
   // 打包路径
-  base: "/1cool-blog/",
+  base: "/1cool/",
   // 标题
   title: "1cool",
   // 介绍
@@ -62,9 +62,31 @@ module.exports = {
         {
           title: "vue3", // 必要的
           path: "/skill/web/vue3/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
+          collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/vue3/common"],
+          children: [
+            {
+              title: "知识点分析",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/faq/base", "/skill/web/vue3/faq/faq"],
+            },
+            {
+              title: "语法",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/game/base"],
+            },
+            {
+              title: "其他",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/common"],
+            },
+          ],
         },
         {
           title: "实战搭建", // 必要的
@@ -130,7 +152,7 @@ module.exports = {
       /**
        * VSCODE
        */
-       "/skill/tool/vscode": [
+      "/skill/tool/vscode": [
         {
           title: "快捷键", // 必要的
           path: "/skill/tool/vscode/key", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
