@@ -2,25 +2,57 @@
 
 ## setup
 
-- `setup` 函数会在 `beforeCreate` 、`created` 之前执行, vue3 也是取消了这两个钩子，统一用 setup 代替
+`setup` 函数会在 `beforeCreate` 、`created` 之前执行, vue3 也是取消了这两个钩子，统一用 `setup` 代替
+
+```js
+setup(props, context) {
+  // Attribute (非响应式对象，等同于 $attrs)
+  context.attrs
+  // 插槽 (非响应式对象，等同于 $slots)
+  context.slots
+  // 触发事件 (方法，等同于 $emit)
+  context.emit
+  // 暴露公共 property (函数)
+  context.expose
+
+  return {}
+}
+```
+
+- `props`: 用来接收 props 数据, props  是响应式的，当传入新的 props 时，它将被更新。
+- `context` 用来定义上下文, 上下文对象中包含了一些有用的属性，这些属性在 vue 2.x 中需要通过 this 才能访问到, 在 setup() 函数中无法访问到 this，是个 undefined
+- `context`  是一个普通的 JavaScript 对象，也就是说，它不是响应式的，这意味着你可以安全地对  context  使用 ES6 解构。
+- `返回值`: return {}, 返回响应式数据, 模版中需要使用的函数
 
 ::: danger 注意
-props  是响应式的，你不能使用 ES6 解构，它会消除 prop 的响应性。
-content 是一个普通的对象,context 中就提供了中三个属性：attrs、slot  和 emit，分别对应 Vue2.x 中的  $attr属性、slot插槽 和$emit 发射事件。
+props  是响应式的，你不能使用 ES6 解构，它会消除 prop 的响应性。不过你可以使用如下的方式去处理
 :::
 
 ```js
-<script>
+<script lang="ts">
 export default {
-  name: "HelloWorld",
-  setup(props, content) {
-
+  setup(props) {
+    const { title } = toRefs(props)
+    console.log(title.value)
   }
 };
 </script>
 ```
 
-## reactive, ref, toRef 与 toRefs
+如果 `title` 是可选的 `prop`，则传入的 `props` 中可能没有 `title` 。在这种情况下，`toRefs` 将不会为 `title` 创建一个 `ref` 。你需要使用 `toRef` 替代它：
+
+```js
+<script lang="ts">
+export default {
+  setup(props) {
+    const { title } = toRef(props, 'title')
+    console.log(title.value)
+  }
+};
+</script>
+```
+
+## ref, reactive, shallowReactive, toRef 与 toRefs
 
 ### ref
 
@@ -33,6 +65,30 @@ reactive 相当于 Vue2.x 的 Vue.observable () API，经过 reactive 处理后�
 `const 代理对象 = reactive(源对象);接收一个引用类型的对象（或数组），返回一个代理对象（proxy 对象）`
 
 const counter = reactive({count: 0})
+
+## shallowReactive
+
+创建一个响应式代理，它跟踪其自身属性的响应性 `shallowReactive` 生成非递归响应数据，只监听第一层数据的变化，但不执行嵌套对象的深层响应式转换 (暴露原始值)。
+
+````js
+
+<script lang="ts">
+import { shallowReactive } from "vue";
+export default defineComponent({
+  setup() {
+    const test = shallowReactive({ num: 1, creator: { name: "撒点了儿" } });
+    console.log(test);
+
+    test.creator.name = "掘金";
+
+    return {
+      test
+    };
+  }
+});
+</script>
+
+```
 
 ### toRef
 
@@ -54,7 +110,7 @@ function toRef(target, key) {
     },
   };
 }
-```
+````
 
 ### toRefs
 
