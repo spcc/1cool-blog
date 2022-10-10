@@ -13,7 +13,7 @@ module.exports = {
     lastUpdated: "最后更新时间",
     nav: [
       { text: "首页", link: "/" },
-      { text: "11", link: "/2" },
+      { text: "常用链接", link: "/link" },
       {
         text: "知识点",
         items: [
