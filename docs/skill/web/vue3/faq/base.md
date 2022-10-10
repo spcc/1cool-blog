@@ -58,6 +58,25 @@ function toRef(target, key) {
 
 toRefs 和 toRef 功能是一致的，但是可以批量创建多个 ref 对象。
 
+语法：
+
+```js
+function useFeatureX() {
+  const state = reactive({
+    foo: 1,
+    bar: 2,
+  });
+
+  // ...基于状态的操作逻辑
+
+  // 在返回时都转为 ref
+  return toRefs(state);
+}
+
+// 可以解构而不会失去响应性
+const { foo, bar } = useFeatureX();
+```
+
 toRefs()的实现
 
 ```js
