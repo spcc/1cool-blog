@@ -66,11 +66,91 @@ reactive 相当于 Vue2.x 的 Vue.observable () API，经过 reactive 处理后�
 
 const counter = reactive({count: 0})
 
+## readonly()、isReadonly()、shallowReadonly()
+
+### readonly()、isReadonly()
+
+- `readonly`: 传入 ref 或 reactive 对象,并返回一个原始对象的只读代理,对象内部任何嵌套的属性也都是只读的、 并且是递归只读。
+
+- `isReadonly`: 检查对象是否是由 readonly 创建的只读对象
+
+```js
+<script lang="ts">
+import { readonly, reactive } from "vue";
+export default defineComponent({
+  setup() {
+    const test = reactive({ num: 1 });
+
+    const testOnly = readonly(test);
+
+    console.log(test);
+    console.log(testOnly);
+
+    test.num = 110;
+
+    // 此时运行会提示 Set operation on key "num" failed: target is readonly.
+    // 而num 依然是原来的值，将无法修改成功
+    testOnly.num = 120;
+
+    // 使用isReadonly() 检查对象是否是只读对象
+    console.log(isReadonly(testOnly)); // true
+    console.log(isReadonly(test)); // false
+
+    // 需要注意的是： testOnly 值会随着 test 值变化
+
+    return {
+      test,
+      testOnly,
+    };
+  },
+});
+</script>
+
+```
+
+`const`定义的变量也是不能改的，那`readonly`和`const`有什么区别？
+
+- `const`是赋值保护，使用`const`定义的变量，该变量不能重新赋值。但如果`const`赋值的是对象，那么对象里面的东西是可以改的。原因是`const`定义的变量不能改说的是，对象对应的那个地址不能改变
+- 而`readonly`是属性保护，不能给属性重新赋值
+
+### shallowReadonly()
+
+`shallowReadonly` 作用只处理对象最外层属性的响应式（浅响应式）的只读，但不执行嵌套对象的深度只读转换 (暴露原始值)
+
+::: details 点击查看代码
+
+```js
+
+<script lang="ts">
+import { readonly, reactive } from "vue";
+export default defineComponent({
+ setup() {
+
+   const test = shallowReadonly({ num: 1, creator: { name: "撒点了儿" } });
+   console.log(test);
+
+   // 依然会提示： Set operation on key "num" failed: target is readonly.
+   // 而num 依然是原来的值，将无法修改成功
+   test.num = 3;
+   // 但是对于深层次的属性，依然可以修改
+   test.creator.name = "掘金";
+
+   return {
+     test
+   };
+ },
+});
+</script>
+
+```
+
+:::
+
 ## shallowReactive
 
 创建一个响应式代理，它跟踪其自身属性的响应性 `shallowReactive` 生成非递归响应数据，只监听第一层数据的变化，但不执行嵌套对象的深层响应式转换 (暴露原始值)。
 
-````js
+```js
 
 <script lang="ts">
 import { shallowReactive } from "vue";
@@ -110,7 +190,7 @@ function toRef(target, key) {
     },
   };
 }
-````
+```
 
 ### toRefs
 
