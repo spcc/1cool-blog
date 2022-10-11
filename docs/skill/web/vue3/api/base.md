@@ -413,7 +413,7 @@ export default defineComponent({
   setup (props, context) {
     console.log(props.name)
     console.log(props.list)
-
+1
 
     const state = reactive<IState>({
       name: 'vue 3.0 组件',
