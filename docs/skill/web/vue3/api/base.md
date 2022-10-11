@@ -154,3 +154,210 @@ export default {
   },
 };
 ```
+
+## refs 获取 dom
+
+1. 在 `html` 中写入 `ref` 的名称
+2. 在 `setup` 中定义一个 `ref`
+3. 在 `setup` 中返回 `ref` 的实例
+4. `onMounted` 中得到 `ref` 的 `RefImpl` 的对象, 通过 `.value` 获取真实 `dom`
+
+::: details 点击查看代码
+
+```vue
+<template>
+  <!-- 1. 在 html 中写入 ref 的名称 -->
+  <div ref="elmRefs" />
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, onMounted } from "vue";
+export default defineComponent({
+  setup(props, context) {
+    // 2. 在 setup 中定义一个 `ref`
+    const elmRefs = ref<null | HTMLElement>(null);
+
+    // 4. onMounted 中得到 ref 的 RefImpl 的对象, 通过 .value 访问到数据
+    onMounted(() => {
+      console.log(elmRefs.value);
+    });
+
+    return {
+      // 3. 在 setup 中返回 ref 的实例
+      elmRefs,
+    };
+  },
+});
+</script>
+```
+
+:::
+
+## 全局配置
+
+通过 `vue` 实例上 `config` 来配置
+
+### 配置全局属性
+
+::: details 点击查看代码
+
+main.js 声明
+
+```js
+const app = Vue.createApp({});
+app.config.globalProperties.$http = "xxxxxxxxs";
+```
+
+在组件用通过 `getCurrentInstance()` 来获取全局 `globalProperties` 中配置的信息,`getCurrentInstance` 方法获取当前组件的实例，然后通过 `ctx` 属性获得当前上下文，这样我们就能在 `setup` 中使用 `router` 和 `vuex`, 通过这个属性我们就可以操作变量、全局属性、组件属性等等
+
+```js
+setup( ) {
+  const { ctx } = getCurrentInstance();
+  ctx.$http
+}
+```
+
+:::
+
+## 生命周期
+
+新版的生命周期函数，可以按需导入到组件中，且只能在 `setup()` 函数中使用, 但是也可以在 `setup` 外定义, 在 `setup` 中使用
+
+::: details 点击查看代码
+
+```js
+<script lang="ts">
+import { set } from 'lodash';
+import { defineComponent, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onErrorCaptured, onMounted, onUnmounted, onUpdated } from 'vue';
+export default defineComponent({
+  setup(props, context) {
+    onBeforeMount(()=> {
+      console.log('beformounted!')
+    })
+    onMounted(() => {
+      console.log('mounted!')
+    })
+
+    onBeforeUpdate(()=> {
+      console.log('beforupdated!')
+    })
+    onUpdated(() => {
+      console.log('updated!')
+    })
+
+    onBeforeUnmount(()=> {
+      console.log('beforunmounted!')
+    })
+    onUnmounted(() => {
+      console.log('unmounted!')
+    })
+
+    onErrorCaptured(()=> {
+      console.log('errorCaptured!')
+    })
+
+    return {}
+  }
+});
+</script>
+```
+
+:::
+
+## Provide / Inject
+
+### 基础使用
+
+:::details 点击查看代码
+
+父组件
+
+```js
+import { defineComponent } from "vue";
+export default defineComponent({
+  provide: {
+    provideData: { name: "撒点了儿" },
+  },
+});
+```
+
+子组件
+
+```js
+import { defineComponent } from "vue";
+export default defineComponent({
+  inject: ["provideData"],
+});
+```
+
+:::
+
+### setup()中使用
+
+在 `setup()` 中使用, 需要从 `vue` 显式导入 `provide`、`inject` 方法
+
+:::details 点击查看代码
+
+父组件
+
+```js
+import { provide } from "vue";
+export default {
+  setup() {
+    provide("provideData", { name: "撒点了儿" });
+  },
+};
+```
+
+子组件
+
+```js
+import { inject } from "vue";
+export default {
+  setup() {
+    const provideData = inject("provideData");
+    console.log(provideData); // { name: "撒点了儿"  }
+  },
+};
+```
+
+:::
+
+### 传递响应数据
+
+为了增加 `provide` 值和 `inject` 值之间的响应性，我们可以在 `provide` 值时使用 `ref` 或 `reactive`
+
+::: warning 警告
+如果要确保通过 provide 传递的数据不会被 inject 的组件更改，我们建议对提供者的 property 使用 `readonly`。
+:::
+
+::: details 点击查看代码
+父组件
+
+```js
+import { provide, ref, reactive } from "vue";
+export default {
+  setup() {
+    const age = ref(18);
+
+    provide("provideData", {
+      age,
+      name: "撒点了儿",
+    });
+  },
+};
+```
+
+子组件
+
+```js
+import { inject } from "vue";
+export default {
+  setup() {
+    const provideData = inject("provideData");
+    console.log(provideData);
+  },
+};
+```
+
+:::
