@@ -12,6 +12,11 @@
   </tr>
 
   <tr>
+    <td><a href="#includes">includes()</a></th>
+    <td>判断一个数组是否包含一个指定的值</td>
+    <td>ES2016（ES7）</td>
+  </tr>
+  <tr>
     <td><a href="#startsWith() 判断当前字符串是否以指定的字符串开头">startsWith()</a></th>
     <td>判断当前字符串是否以指定的字符串开头</td>
     <td>ECMAScript 6</td>
@@ -462,10 +467,11 @@ var a = fruits.lastIndexOf("Apple", 4);
 // 3
 ```
 
-### includes() - 判断一个数组是否包含一个指定的值
+### includes()
 
 - 简介：  
-  判断一个数组是否包含一个指定的值
+  判断一个数组是否包含一个指定的值  
+  只想知道某个值是否在数组中存在，而并不关心它的索引位置，使用 `includes()`,如果想获取一个值在数组中的位置，那么使用 `indexOf` 方法。
 - 语法：arr.includes(searchElement, fromIndex)
 - 参数：
   - 参数 1：**searchElement**  
@@ -475,6 +481,19 @@ var a = fruits.lastIndexOf("Apple", 4);
 - 返回值
   - **Boolean**  
     如果找到指定值返回 true，否则返回 false。
+- 注意：
+  - 能判断简单数据类型，对于复杂类型的数据，比如对象类型的数组，二维数组，这些是无法判断的.
+    ```js
+    const arr = ["es6", ["es7", "es8"], "es9", { name: "jimmy" }];
+    console.log(arr.includes(["es7", "es8"])); // false
+    console.log(arr.includes({ name: "jimmy" })); // false
+    ```
+  - 能识别 `NaN`，`indexOf` 是不能识别 `NaN` 的
+    ```js
+    const arr = ["es6", "es7", NaN, "es8"];
+    console.log(arr.includes(NaN)); // true
+    console.log(arr.indexOf(NaN)); // -1
+    ```
 - JavaScript 版本: ECMAScript 6
 
 ```js
