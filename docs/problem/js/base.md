@@ -66,3 +66,94 @@ Array.prototype.slice.call(arguments);
 ```js
 [...arguments];
 ```
+
+## 全局方法
+
+### 判断设备(ipad,mobile,pc)
+
+::: details 点击查看代码
+
+```js
+export const judgeDevice = (function () {
+  const ua = navigator.userAgent.toLowerCase();
+  if (/ipad|ipod/.test(ua)) {
+    return "ipad";
+  } else if (/android|iphone/.test(ua)) {
+    return "mobile";
+  }
+  return "pc";
+})();
+```
+
+:::
+
+### 判断是否是微信环境
+
+::: details 点击查看代码
+
+```js
+// 判断是否是微信浏览器的函数
+export const isWeiXin = () => {
+  if (isClient) {
+    // window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+    const ua = window.navigator.userAgent.toLowerCase();
+    // alert(ua)
+    // 通过正则表达式匹配ua中是否含有MicroMessenger字符串
+    return ua.includes("micromessenger");
+  }
+};
+```
+
+:::
+
+### 判断是否是移动端
+
+::: details 点击查看代码
+
+```js
+/**
+ * 是否是移动端
+ */
+export const isMobile = () => {
+  const ua = window.navigator.userAgent;
+  if (/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(ua)) {
+    return true;
+  }
+  return false;
+};
+```
+
+:::
+
+### 对象转 queryString
+
+:::details 点击查看代码
+
+```js
+function querystring(data = {}) {
+  if (typeof data !== "object") {
+    throw new TypeError("param must be object");
+  }
+  return Object.entries(data)
+    .reduce(
+      (searchParams, [name, value]) =>
+        value === undefined || value === null
+          ? (searchParams, searchParams)
+          : (searchParams.append(
+              decodeURIComponent(name),
+              decodeURIComponent(value)
+            ),
+            searchParams),
+      new URLSearchParams()
+    )
+    .toString();
+}
+querystring({
+  a: 1,
+  b: 2,
+  c: 3,
+});
+// 'a=1&b=2&c=3'
+```
+
+:::

@@ -269,6 +269,12 @@ module.exports = {
           ],
         },
         {
+          title: "Css", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ["/problem/css/base"],
+        },
+        {
           title: "Html", // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1

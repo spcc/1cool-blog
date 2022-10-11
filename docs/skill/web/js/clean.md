@@ -253,3 +253,14 @@ if (isCreatureHuman(creature)) {
 ## 避免大量 if...else...
 
 [责任链](https://juejin.cn/post/6996811608756322334)
+
+## 数字分隔符
+
+有时候数字有很多位，例如 `const money = 9999999999999`
+
+一眼看上去，自己都不知道这是几位，这个时候我们可以这样操作：
+
+```js
+const money = 9_999_999_999_999;
+console.log(money); // 9999999999999
+```
