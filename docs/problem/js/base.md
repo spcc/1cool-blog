@@ -1,5 +1,17 @@
 # 常用方法
 
+## 浮点数计算
+
+::: details 点击查看代码
+
+```js
+import NP from "number-precision";
+NP.plus(0.1, 0.2); // 0.3
+NP.minus(1, 0.9); // 0.1
+```
+
+:::
+
 ## 获取链接参数
 
 `window.location.search` 可以获取 url 中 ““?” 问号后面的参数：
