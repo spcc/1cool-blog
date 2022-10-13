@@ -11,7 +11,8 @@
 - [Ant Design Vue](https://www.antdv.com/components/overview-cn/)
 
 ## VUE2
-
+- [Vue2 文档](https://v2.cn.vuejs.org/)
+- [Vue Router 3](https://v3.router.vuejs.org/zh/)
 - [Vuepress](https://vuepress.vuejs.org/zh/)
 - [Vuepress Markdown 扩展](https://vuepress.vuejs.org/zh/guide/markdown.html)
 

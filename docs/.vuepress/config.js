@@ -21,6 +21,7 @@ module.exports = {
             text: "技术",
             items: [
               { text: "JS", link: "/skill/web/js/array" },
+              { text: "Vue2", link: "/skill/web/vue2/router/base" },
               { text: "Vue3", link: "/skill/web/vue3/common" },
               { text: "Css3", link: "/skill/web/css3/bem" },
               { text: "http", link: "/skill/web/http/base" },
@@ -56,6 +57,16 @@ module.exports = {
       // { text: "External", link: "https://google.com" },
     ],
     sidebar: {
+      /**
+       * vue2
+       */
+      "/skill/web/vue2": [
+        {
+          title: "路由", // 必要的
+          path: "/skill/web/vue2/router/base", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        },
+      ],
+
       /**
        * vue3
        */
