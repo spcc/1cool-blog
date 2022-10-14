@@ -15,7 +15,7 @@ router.afterEach((to, from) => {});
 ### 独享守卫
 
 ```js
-beforeRouteEnter(to, from, next){
+beforeEnter(to, from, next){
 
 }
 ```

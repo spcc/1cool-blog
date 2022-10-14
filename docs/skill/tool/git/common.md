@@ -49,3 +49,19 @@ git branch --set-upstream-to origin/新分支名称
 ```sh
 git branch -m 原始名称 新名称
 ```
+
+## stash 缓存
+
+```sh
+// 缓存
+git stash
+
+// 查看本地缓存列表 !: 同时不会删除恢复的缓存条目
+git stash list
+
+// 恢复指定ID的stash内容
+git stash apply stash@{id}
+
+// 恢复最近的缓存文件 !:同时删除恢复的缓存条目
+git stash pop
+```
