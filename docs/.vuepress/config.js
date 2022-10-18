@@ -42,7 +42,7 @@ module.exports = {
         text: "疑难杂症",
         link: "/problem/Vue2/base",
       },
-      { text: "书籍", link: "/book/web-es6/1" },
+      { text: "书籍", link: "/book/es6/intro" },
       { text: "面试", link: "/interview/" },
       {
         text: "关于我",
@@ -308,7 +308,7 @@ module.exports = {
           path: "/book/es6/",
           collapsable: false,
           sidebarDepth: 0,
-          children: ["/book/es6/intro"],
+          children: ["/book/es6/intro", "/book/es6/let"],
         },
         {
           title: "从 0 到 1 落地前端工程化", // 必要的
