@@ -308,7 +308,11 @@ module.exports = {
           path: "/book/es6/",
           collapsable: false,
           sidebarDepth: 0,
-          children: ["/book/es6/intro", "/book/es6/let"],
+          children: [
+            "/book/es6/intro",
+            "/book/es6/let",
+            "/book/es6/destructuring",
+          ],
         },
         {
           title: "从 0 到 1 落地前端工程化", // 必要的
