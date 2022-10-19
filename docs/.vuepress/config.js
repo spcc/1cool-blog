@@ -306,12 +306,14 @@ module.exports = {
         {
           title: "ES6 标准入门",
           path: "/book/es6/",
-          collapsable: false,
+          collapsable: true,
           sidebarDepth: 0,
           children: [
             "/book/es6/intro",
             "/book/es6/let",
             "/book/es6/destructuring",
+            "/book/es6/string",
+            "/book/es6/string-methods",
           ],
         },
         {
