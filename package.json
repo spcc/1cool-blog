@@ -15,9 +15,9 @@
     "@vuepress/plugin-back-to-top": "^1.9.7",
     "sass": "^1.54.4",
     "sass-loader": "^8.0.2",
-    "vuepress": "^1.9.7"
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-reading-progress": "^1.0.10"
   },
-  "dependencies": {},
   "volta": {
     "node": "16.17.1"
   }

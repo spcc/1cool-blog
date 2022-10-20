@@ -7,7 +7,7 @@ module.exports = {
   description: "- . -",
   // 主题
   theme: "@qingui/v1",
-  plugins: ["@vuepress/back-to-top"],
+  plugins: ["@vuepress/back-to-top", "reading-progress"],
   // 主题配置
   themeConfig: {
     lastUpdated: "最后更新时间",
@@ -314,6 +314,7 @@ module.exports = {
             "/book/es6/destructuring",
             "/book/es6/string",
             "/book/es6/string-methods",
+            "/book/es6/number",
           ],
         },
         {
