@@ -315,6 +315,7 @@ module.exports = {
             "/book/es6/string",
             "/book/es6/string-methods",
             "/book/es6/number",
+            "/book/es6/function",
           ],
         },
         {
