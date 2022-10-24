@@ -353,3 +353,103 @@ headAndTail(1, 2, 3, 4, 5);
 ```
 
 ### 使用注意点
+
+- 1. 箭头函数没有自己的 `this` 对象
+
+  - 箭头函数的 `this` 就是定义时上层作用域中的 `this`
+  - 普通函数的 `this` 指向是可变的  
+     ::: details 点击查看代码
+    ```js
+    // 箭头函数this总是指向函数定义生效时所在的对象（本例是{id: 42}），所以打印出来的是42。
+    function foo() {
+      setTimeout(() => {
+        console.log("id:", this.id);
+      }, 100);
+    }
+    var id = 21;
+    foo.call({ id: 42 });
+    // id: 42
+    ```
+    :::
+
+- 2. 不可以当作构造函数，也就是说，不可以对箭头函数使用 `new` 命令，否则会抛出一个错误
+- 3. 不可以使用 `arguments` 对象，该对象在函数体内不存在。如果要用，可以用 `rest` 参数代替。
+- 4. 不可以使用 `yield` 命令，因此箭头函数不能用作 `Generator` 函数。
+
+### 不适用场合
+
+1. 定义对象的方法，且该方法内部包括 `this`
+
+对象不构成单独的作用域，导致 `jumps` 箭头函数定义时的作用域就是`全局作用域`.
+
+如果是普通函数，该方法内部的 `this` 指向 `cat`
+
+```js
+const cat = {
+  lives: 9,
+  jumps: () => {
+    this.lives--;
+  },
+};
+
+// 对象里的箭头函数，this指向的是全局作用域
+globalThis.s = 21;
+const obj = {
+  s: 42,
+  m: () => console.log(this.s),
+};
+obj.m(); // 21
+```
+
+2. 需要动态 this 的时候，也不应使用箭头函数
+
+击按钮会报错，因为 `button` 的监听函数是一个箭头函数，导致里面的 `this` 就是全局对象。如果改成普通函数，`this` 就会动态指向被点击的按钮对象。
+
+```js
+var button = document.getElementById("press");
+button.addEventListener("click", () => {
+  this.classList.toggle("on");
+});
+```
+
+## 4. 尾递归
+
+## 5. Function.prototype.toString()
+
+ES2019 对函数实例的 `toString()` 方法做出了修改。
+
+`toString()` 方法返回函数代码本身，以前会省略注释和空格。
+
+```js
+function /* foo comment */ foo() {}
+
+// es5
+foo.toString();
+// function foo() {}
+
+// es2019
+foo.toString();
+// "function /* foo comment */ foo () {}"
+```
+
+## 6. catch 命令的参数省略
+
+ES2019 做出了改变，允许 `catch` 语句省略参数。
+
+但是，为了保证语法正确，还是必须要写 `catch`。
+
+```js
+// es5
+try {
+  // ...
+} catch (err) {
+  // 处理错误
+}
+
+// es2019 可省略catch参数
+try {
+  // ...
+} catch {
+  // ...
+}
+```

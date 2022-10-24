@@ -230,7 +230,7 @@ module.exports = {
           path: "/skill/tool/git/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/tool/git/common"],
+          children: ["/skill/tool/git/common", "/skill/tool/git/reset"],
         },
       ],
 
