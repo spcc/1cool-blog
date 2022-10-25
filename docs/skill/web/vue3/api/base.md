@@ -1,5 +1,18 @@
 # 语法
 
+## 深度选择器:deep()
+
+```scss
+.bill-tabs {
+  :deep(.arco-tabs-nav) {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+}
+```
+
 ## computed()
 
 该函数用来创造计算属性，和过去一样，它返回的值是一个 ref 对象。 里面可以传方法，或者一个对象，对象中包含 `set()`、`get()`方法
