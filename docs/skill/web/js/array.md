@@ -2,7 +2,29 @@
 
 [数组对象方法](https://www.runoob.com/jsref/jsref-obj-array.html)
 
-查找类
+## 总结
+
+### 增加
+
+<table>
+  <tr>
+    <th>方法</th>
+    <th>描述</th>
+    <th>是否改变原数组</th>
+    <th>版本</th>
+    <th>备注</th>
+  </tr>
+
+  <tr>
+    <td><a href="#push">push()</a></th>
+    <td>向数组的末尾添加一个或多个元素，并返回新的长度</td>
+    <td>是</td>
+    <td>1.2</td>
+    <td>--</td>
+  </tr>
+</table>
+
+### 查找类
 
 <table>
   <tr>
@@ -103,7 +125,7 @@ let fruitsLength = fruits.push("Kiwi", "Mike");
 // fruitsLength：6
 ```
 
-### push() - 向数组的末尾添加一个或多个元素，并返回新的长度
+### push()
 
 - 简介：  
   向数组的末尾添加一个或多个元素，并返回新的长度

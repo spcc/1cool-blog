@@ -319,6 +319,8 @@ module.exports = {
             "/book/es6/array",
             "/book/es6/object",
             "/book/es6/object-methods",
+            "/book/es6/operator",
+            "/book/es6/symbol",
           ],
         },
         {
