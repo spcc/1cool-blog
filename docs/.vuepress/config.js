@@ -305,7 +305,6 @@ module.exports = {
       "/book/": [
         {
           title: "ES6 标准入门",
-          path: "/book/es6/",
           collapsable: true,
           sidebarDepth: 0,
           children: [
@@ -321,6 +320,7 @@ module.exports = {
             "/book/es6/object-methods",
             "/book/es6/operator",
             "/book/es6/symbol",
+            "/book/es6/async",
           ],
         },
         {
