@@ -184,7 +184,7 @@ module.exports = {
           path: "/life/mood/2022-8/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/life/mood/2022-8", "/life/mood/2022-9"],
+          children: ["/life/mood/2022"],
         },
         {
           title: "看过", // 必要的
@@ -320,7 +320,7 @@ module.exports = {
             "/book/es6/object-methods",
             "/book/es6/operator",
             "/book/es6/symbol",
-            "/book/es6/async",
+            // "/book/es6/async",
           ],
         },
         {
