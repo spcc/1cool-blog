@@ -1,5 +1,54 @@
 # 语法
 
+## v-model
+
+### 语法糖默认值
+
+:::details 点击查看代码
+
+父组件
+
+```vue
+<template>
+  <h1 @click="showModal">打开弹窗</h1>
+  <Modal v-model="visible"></Modal>
+</template>
+<script setup>
+import Modal from "./modal.vue";
+
+defineProps({ msg: string });
+const visible = ref(false);
+const showModal = () => {
+  visible.value = true;
+};
+</script>
+```
+
+子组件
+
+```vue
+<template>
+  <teleport to="#app">
+    <div v-show="visible" @click="hideModal">modal</div>
+  </teleport>
+</template>
+<script setup>
+const props = defineProps({ modelValue: Boolean });
+const emit = defineEmits(["update:modelValue"]);
+const visible = computed({
+  get: () => props.modelValue,
+  set: (val) => {
+    emit("update:modelValue", val);
+  },
+});
+const hideModal = () => {
+  visible.value = false;
+};
+</script>
+```
+
+:::
+
 ## 深度选择器:deep()
 
 ```scss

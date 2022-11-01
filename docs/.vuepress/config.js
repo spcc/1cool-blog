@@ -212,7 +212,7 @@ module.exports = {
           title: "代码整洁", // 必要的
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/js/clean"],
+          children: ["/skill/web/js/clean", "/skill/web/js/clean-name"],
         },
       ],
       "/interview": [
