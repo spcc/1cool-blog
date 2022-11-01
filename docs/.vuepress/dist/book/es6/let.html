@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>let 和 const 命令 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/1cool/assets/css/0.styles.3cb60085.css" as="style"><link rel="preload" href="/1cool/assets/js/app.d7e7ec9f.js" as="script"><link rel="preload" href="/1cool/assets/js/2.f7aad505.js" as="script"><link rel="preload" href="/1cool/assets/js/13.e793c981.js" as="script"><link rel="prefetch" href="/1cool/assets/js/10.22e3dccd.js"><link rel="prefetch" href="/1cool/assets/js/11.3d66ca8b.js"><link rel="prefetch" href="/1cool/assets/js/12.1bc661a2.js"><link rel="prefetch" href="/1cool/assets/js/14.75a49f12.js"><link rel="prefetch" href="/1cool/assets/js/15.8bb58ca2.js"><link rel="prefetch" href="/1cool/assets/js/16.d332bd9b.js"><link rel="prefetch" href="/1cool/assets/js/17.0be022e7.js"><link rel="prefetch" href="/1cool/assets/js/18.1a548b52.js"><link rel="prefetch" href="/1cool/assets/js/19.022956ee.js"><link rel="prefetch" href="/1cool/assets/js/20.ec2a868e.js"><link rel="prefetch" href="/1cool/assets/js/21.3487b71e.js"><link rel="prefetch" href="/1cool/assets/js/22.d630131e.js"><link rel="prefetch" href="/1cool/assets/js/23.449e850e.js"><link rel="prefetch" href="/1cool/assets/js/24.8d60fbf3.js"><link rel="prefetch" href="/1cool/assets/js/25.74d040a9.js"><link rel="prefetch" href="/1cool/assets/js/26.a39f48bb.js"><link rel="prefetch" href="/1cool/assets/js/27.9c1979d5.js"><link rel="prefetch" href="/1cool/assets/js/28.a0f5f58e.js"><link rel="prefetch" href="/1cool/assets/js/29.9f430325.js"><link rel="prefetch" href="/1cool/assets/js/3.e0954e73.js"><link rel="prefetch" href="/1cool/assets/js/30.ae9d7836.js"><link rel="prefetch" href="/1cool/assets/js/31.bd1d4fc7.js"><link rel="prefetch" href="/1cool/assets/js/32.0dc6727c.js"><link rel="prefetch" href="/1cool/assets/js/33.76addf19.js"><link rel="prefetch" href="/1cool/assets/js/34.915173c8.js"><link rel="prefetch" href="/1cool/assets/js/35.a289d45d.js"><link rel="prefetch" href="/1cool/assets/js/36.948d5725.js"><link rel="prefetch" href="/1cool/assets/js/37.b1da1a25.js"><link rel="prefetch" href="/1cool/assets/js/38.40b89302.js"><link rel="prefetch" href="/1cool/assets/js/39.f1db5901.js"><link rel="prefetch" href="/1cool/assets/js/4.335db8d6.js"><link rel="prefetch" href="/1cool/assets/js/40.21248677.js"><link rel="prefetch" href="/1cool/assets/js/41.9a8b7e9a.js"><link rel="prefetch" href="/1cool/assets/js/42.3f37370a.js"><link rel="prefetch" href="/1cool/assets/js/43.61460a5b.js"><link rel="prefetch" href="/1cool/assets/js/44.6f3440ef.js"><link rel="prefetch" href="/1cool/assets/js/45.1b0da56c.js"><link rel="prefetch" href="/1cool/assets/js/46.850ea7e4.js"><link rel="prefetch" href="/1cool/assets/js/47.e1b78063.js"><link rel="prefetch" href="/1cool/assets/js/48.7aea3047.js"><link rel="prefetch" href="/1cool/assets/js/49.faff9129.js"><link rel="prefetch" href="/1cool/assets/js/5.73e8ce28.js"><link rel="prefetch" href="/1cool/assets/js/50.16e1f559.js"><link rel="prefetch" href="/1cool/assets/js/51.bd3bd787.js"><link rel="prefetch" href="/1cool/assets/js/52.6bf7796e.js"><link rel="prefetch" href="/1cool/assets/js/53.5b076445.js"><link rel="prefetch" href="/1cool/assets/js/54.993bb6cd.js"><link rel="prefetch" href="/1cool/assets/js/55.6fa8fa52.js"><link rel="prefetch" href="/1cool/assets/js/56.f5472ae6.js"><link rel="prefetch" href="/1cool/assets/js/57.c6bd473b.js"><link rel="prefetch" href="/1cool/assets/js/58.f1e4af8c.js"><link rel="prefetch" href="/1cool/assets/js/59.61613587.js"><link rel="prefetch" href="/1cool/assets/js/6.daab4654.js"><link rel="prefetch" href="/1cool/assets/js/60.3fedcfa9.js"><link rel="prefetch" href="/1cool/assets/js/61.dc936058.js"><link rel="prefetch" href="/1cool/assets/js/62.5a5c8f72.js"><link rel="prefetch" href="/1cool/assets/js/63.fbee6aca.js"><link rel="prefetch" href="/1cool/assets/js/64.0557223e.js"><link rel="prefetch" href="/1cool/assets/js/65.f2159139.js"><link rel="prefetch" href="/1cool/assets/js/66.565cadc0.js"><link rel="prefetch" href="/1cool/assets/js/67.2788682a.js"><link rel="prefetch" href="/1cool/assets/js/68.20670de1.js"><link rel="prefetch" href="/1cool/assets/js/69.4009abd1.js"><link rel="prefetch" href="/1cool/assets/js/7.d80a65d2.js"><link rel="prefetch" href="/1cool/assets/js/70.4ef25877.js"><link rel="prefetch" href="/1cool/assets/js/71.4be92fc9.js"><link rel="prefetch" href="/1cool/assets/js/72.b16a2104.js"><link rel="prefetch" href="/1cool/assets/js/73.02faa595.js"><link rel="prefetch" href="/1cool/assets/js/74.453b809b.js"><link rel="prefetch" href="/1cool/assets/js/75.6dc27710.js"><link rel="prefetch" href="/1cool/assets/js/8.f46f8e83.js"><link rel="prefetch" href="/1cool/assets/js/9.6146de61.js">
+    <link rel="stylesheet" href="/1cool/assets/css/0.styles.3cb60085.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/1cool/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav> <div class="layout__search"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div></div> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>ES6 标准入门</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/book/es6/intro.html" class="sidebar-link">ECMAScript 6 简介</a></li><li><a href="/1cool/book/es6/let.html" aria-current="page" class="active sidebar-link">let 和 const 命令</a></li><li><a href="/1cool/book/es6/destructuring.html" class="sidebar-link">变量的解构赋值</a></li><li><a href="/1cool/book/es6/string.html" class="sidebar-link">字符串的扩展</a></li><li><a href="/1cool/book/es6/string-methods.html" class="sidebar-link">字符串的新增方法</a></li><li><a href="/1cool/book/es6/number.html" class="sidebar-link">数值的扩展</a></li><li><a href="/1cool/book/es6/function.html" class="sidebar-link">函数的扩展</a></li><li><a href="/1cool/book/es6/array.html" class="sidebar-link">数组的扩展</a></li><li><a href="/1cool/book/es6/object.html" class="sidebar-link">对象的扩展</a></li><li><a href="/1cool/book/es6/object-methods.html" class="sidebar-link">对象的新增方法</a></li><li><a href="/1cool/book/es6/operator.html" class="sidebar-link">运算符的扩展</a></li><li><a href="/1cool/book/es6/symbol.html" class="sidebar-link">symbol</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/1cool/book/web-engineering/" class="sidebar-heading clickable"><span>从 0 到 1 落地前端工程化</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/book/web-engineering/introduction.html" class="sidebar-link">简介</a></li><li><a href="/1cool/book/web-engineering/2.html" class="sidebar-link">asd</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#_0-let-和-const" class="anchor-item__link" style="margin-left:0;">
+        0. let 和 const
+      </a></li><li class="anchor-item"><a href="#_1-let-命令" class="anchor-item__link" style="margin-left:0;">
+        1. let 命令
+      </a></li><li class="anchor-item"><a href="#基本用法" class="anchor-item__link" style="margin-left:20px;">
+        基本用法
+      </a></li><li class="anchor-item"><a href="#特性" class="anchor-item__link" style="margin-left:20px;">
+        特性
+      </a></li><li class="anchor-item"><a href="#_2-块级作用域" class="anchor-item__link" style="margin-left:0;">
+        2. 块级作用域
+      </a></li><li class="anchor-item"><a href="#为什么需要块级作用域" class="anchor-item__link" style="margin-left:20px;">
+        为什么需要块级作用域？
+      </a></li><li class="anchor-item"><a href="#块级作用域使匿名函数不在必要了" class="anchor-item__link" style="margin-left:20px;">
+        块级作用域使匿名函数不在必要了
+      </a></li><li class="anchor-item"><a href="#块级作用域与函数声明" class="anchor-item__link" style="margin-left:20px;">
+        块级作用域与函数声明
+      </a></li><li class="anchor-item"><a href="#_3-const-命令" class="anchor-item__link" style="margin-left:0;">
+        3. const 命令
+      </a></li><li class="anchor-item"><a href="#本质" class="anchor-item__link" style="margin-left:20px;">
+        本质
+      </a></li><li class="anchor-item"><a href="#_4-es6-声明变量-6-种方法" class="anchor-item__link" style="margin-left:0;">
+        4. ES6 声明变量 6 种方法
+      </a></li><li class="anchor-item"><a href="#_5-顶层对象的属性" class="anchor-item__link" style="margin-left:0;">
+        5. 顶层对象的属性
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="let-和-const-命令"><a href="#let-和-const-命令" class="header-anchor">#</a> let 和 const 命令</h1> <h2 id="_0-let-和-const"><a href="#_0-let-和-const" class="header-anchor">#</a> 0. let 和 const</h2> <p>不同点</p> <ul><li>const 声明只读常量</li> <li>const 声明变量必须初始化赋值</li></ul> <p>相同点</p> <ul><li>都不存在变量提升</li> <li>都存在暂时性死区</li> <li>都不可重复声明</li> <li>声明的变量不属于顶层对象</li></ul> <h2 id="_1-let-命令"><a href="#_1-let-命令" class="header-anchor">#</a> 1. let 命令</h2> <h3 id="基本用法"><a href="#基本用法" class="header-anchor">#</a> 基本用法</h3> <h4 id="声明的变量只在当前代码块内有用"><a href="#声明的变量只在当前代码块内有用" class="header-anchor">#</a> 声明的变量只在当前代码块内有用</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ReferenceError: i is not defined</span>
+
+a<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 10</span>
+</code></pre></div><h4 id="注意-for循环有一个特别之处-就是设置循环变量的那部分是一个父作用域-而循环体内部是一个单独的子作用域"><a href="#注意-for循环有一个特别之处-就是设置循环变量的那部分是一个父作用域-而循环体内部是一个单独的子作用域" class="header-anchor">#</a> <mark>注意：</mark><code>for</code>循环有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token string">&quot;abc&quot;</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// abc</span>
+<span class="token comment">// abc</span>
+<span class="token comment">// abc</span>
+</code></pre></div><p>上面代码正确运行，输出了 3 次 <code>abc</code>。这表明函数内部的变量 i 与循环变量 i 不在同一个作用域，有各自单独的作用域（同一个作用域不可使用 let 重复声明同一个变量）。</p> <h3 id="特性"><a href="#特性" class="header-anchor">#</a> 特性</h3> <h4 id="不存在变量提升"><a href="#不存在变量提升" class="header-anchor">#</a> 不存在变量提升</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// var 的情况</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出undefined</span>
+<span class="token keyword">var</span> foo <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+<span class="token comment">// let 的情况</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 报错ReferenceError</span>
+<span class="token keyword">let</span> bar <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+</code></pre></div><h4 id="暂时性死区"><a href="#暂时性死区" class="header-anchor">#</a> 暂时性死区</h4> <blockquote><p><code>暂时性死区</code>的本质就是，只要一进入当前作用域，所要使用的变量就已经存在</p></blockquote> <ul><li>块级作用域内存在<code>let</code>命令,声明的变量就“绑定”这个区域,不受外部的影响</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  tmp <span class="token operator">=</span> <span class="token string">&quot;abc&quot;</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
+  <span class="token keyword">let</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li><code>ES6</code> 明确规定，如果区块中存在 <code>let</code> 和 <code>const</code> 命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。<br>
+总之，在代码块内，使用 <code>let</code> 命令声明变量之前，该变量都是不可用的。这在语法上，称为<code>“暂时性死区”</code>（temporal dead zone，简称 TDZ）。</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TDZ开始</span>
+  tmp <span class="token operator">=</span> <span class="token string">&quot;abc&quot;</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
+
+  <span class="token keyword">let</span> tmp<span class="token punctuation">;</span> <span class="token comment">// TDZ结束</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+
+  tmp <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 123</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="不允许重复声明"><a href="#不允许重复声明" class="header-anchor">#</a> 不允许重复声明</h4> <p><code>let</code> 不允许在相同作用域内，重复声明同一个变量</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 报错</span>
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 报错</span>
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>因此，不能在函数内部重新声明参数。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> arg<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 报错</span>
+
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> arg<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 不报错</span>
+</code></pre></div><h2 id="_2-块级作用域"><a href="#_2-块级作用域" class="header-anchor">#</a> 2. 块级作用域</h2> <h3 id="为什么需要块级作用域"><a href="#为什么需要块级作用域" class="header-anchor">#</a> 为什么需要块级作用域？</h3> <ol><li>内层变量可能会覆盖外层变量</li> <li>用来计数的循环变量泄露为全局变量</li></ol> <h3 id="块级作用域使匿名函数不在必要了"><a href="#块级作用域使匿名函数不在必要了" class="header-anchor">#</a> 块级作用域使匿名函数不在必要了</h3> <p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再必要了。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// IIFE 写法</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token operator">...</span><span class="token punctuation">;</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 块级作用域写法</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">let</span> tmp <span class="token operator">=</span> <span class="token operator">...</span><span class="token punctuation">;</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="块级作用域与函数声明"><a href="#块级作用域与函数声明" class="header-anchor">#</a> 块级作用域与函数声明</h3> <p><code>let</code> 和 <code>函数声明</code> 只能声明在当前作用域顶层</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 第一种写法，报错</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 第二种写法，不报错</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 不报错</span>
+<span class="token string">'use strict'</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 报错</span>
+<span class="token string">'use strict'</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+  <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><h2 id="_3-const-命令"><a href="#_3-const-命令" class="header-anchor">#</a> 3. const 命令</h2> <p>声明一个只读的常量，且必须初始化值</p> <h3 id="本质"><a href="#本质" class="header-anchor">#</a> 本质</h3> <p><code>const</code> 实际上保证的，并不是变量的值不得改动，而是变量指向的那个<code>内存地址</code>所保存的数据不得改动。<br>
+对于简单类型的数据（<code>数值</code>、<code>字符串</code>、<code>布尔值</code>），值就保存在变量指向的那个<code>内存地址</code>，因此等同于<code>常量</code>。<br>
+对于<code>复合类型</code>的数据（主要是对象和数组），变量指向的<code>内存地址</code>，保存的只是一个<code>指向实际数据的指针</code>，const 只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 为 foo 添加一个属性，可以成功</span>
+foo<span class="token punctuation">.</span>prop <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+foo<span class="token punctuation">.</span>prop<span class="token punctuation">;</span> <span class="token comment">// 123</span>
+
+<span class="token comment">// 将 foo 指向另一个对象，就会报错</span>
+foo <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// TypeError: &quot;foo&quot; is read-only</span>
+</code></pre></div><p>如果真的想将对象冻结，应该使用 <code>Object.freeze</code> 方法。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> foo <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">freeze</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 常规模式时，下面一行不起作用；</span>
+<span class="token comment">// 严格模式时，该行会报错</span>
+foo<span class="token punctuation">.</span>prop <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+</code></pre></div><p>上面代码中，常量 foo 指向一个冻结的对象，所以添加新属性不起作用，严格模式时还会报错。</p> <p>除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> <span class="token function-variable function">constantize</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  Object<span class="token punctuation">.</span><span class="token function">freeze</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">constantize</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="_4-es6-声明变量-6-种方法"><a href="#_4-es6-声明变量-6-种方法" class="header-anchor">#</a> 4. ES6 声明变量 6 种方法</h2> <p>ES5: <code>var</code> 和 <code>function</code><br>
+ES6: <code>let</code>、<code>const</code>、<code>import</code>、<code>class</code></p> <h2 id="_5-顶层对象的属性"><a href="#_5-顶层对象的属性" class="header-anchor">#</a> 5. 顶层对象的属性</h2> <p>let 命令、const 命令、class 命令声明的全局变量，不属于顶层对象的属性</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>a<span class="token punctuation">;</span> <span class="token comment">// 1</span>
+
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>b<span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">10/18/2022, 5:39:47 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/1cool/book/es6/intro.html" class="prev">
+        ECMAScript 6 简介
+      </a></span> <span class="next"><a href="/1cool/book/es6/destructuring.html">
+        变量的解构赋值
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/1cool/assets/js/app.d7e7ec9f.js" defer></script><script src="/1cool/assets/js/2.f7aad505.js" defer></script><script src="/1cool/assets/js/13.e793c981.js" defer></script>
+  </body>
+</html>

@@ -51,7 +51,7 @@ module.exports = {
             text: "关于我",
             link: "/my/",
           },
-          { text: "时间痕迹", link: "/life/" },
+          // { text: "时间痕迹", link: "/life/" },
         ],
       },
       // { text: "External", link: "https://google.com" },
@@ -212,7 +212,11 @@ module.exports = {
           title: "代码整洁", // 必要的
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/js/clean", "/skill/web/js/clean-name"],
+          children: [
+            "/skill/web/js/clean",
+            "/skill/web/js/clean-name",
+            "/skill/web/js/clean-function",
+          ],
         },
       ],
       "/interview": [
