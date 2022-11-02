@@ -216,6 +216,8 @@ module.exports = {
             "/skill/web/js/clean",
             "/skill/web/js/clean-name",
             "/skill/web/js/clean-function",
+            "/skill/web/js/clean-function-reset",
+            "/skill/web/js/clean-notes",
           ],
         },
       ],
@@ -280,6 +282,20 @@ module.exports = {
                 "/problem/element-ui/components/el-tooltip",
                 "/problem/element-ui/components/el-dropdown",
               ],
+            },
+          ],
+        },
+        {
+          title: "ElementPlus", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "组件",
+              collapsable: false,
+              sidebarDepth: 0,
+              path: "/problem/element-plus/components",
+              children: ["/problem/element-plus/components/el-scrollbar"],
             },
           ],
         },
