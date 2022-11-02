@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>代码整洁之道 - 注释篇 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/1cool/assets/css/0.styles.3cb60085.css" as="style"><link rel="preload" href="/1cool/assets/js/app.51889b98.js" as="script"><link rel="preload" href="/1cool/assets/js/2.f7aad505.js" as="script"><link rel="preload" href="/1cool/assets/js/68.fe184ee3.js" as="script"><link rel="prefetch" href="/1cool/assets/js/10.f291d6af.js"><link rel="prefetch" href="/1cool/assets/js/11.66c49d23.js"><link rel="prefetch" href="/1cool/assets/js/12.1bc661a2.js"><link rel="prefetch" href="/1cool/assets/js/13.3914e19b.js"><link rel="prefetch" href="/1cool/assets/js/14.75a49f12.js"><link rel="prefetch" href="/1cool/assets/js/15.2fd165f1.js"><link rel="prefetch" href="/1cool/assets/js/16.e0df71a5.js"><link rel="prefetch" href="/1cool/assets/js/17.9f2e274e.js"><link rel="prefetch" href="/1cool/assets/js/18.50585ddc.js"><link rel="prefetch" href="/1cool/assets/js/19.c2567174.js"><link rel="prefetch" href="/1cool/assets/js/20.ed3f8426.js"><link rel="prefetch" href="/1cool/assets/js/21.68283413.js"><link rel="prefetch" href="/1cool/assets/js/22.c0525346.js"><link rel="prefetch" href="/1cool/assets/js/23.0cebec25.js"><link rel="prefetch" href="/1cool/assets/js/24.f4ff6c6f.js"><link rel="prefetch" href="/1cool/assets/js/25.1e8be704.js"><link rel="prefetch" href="/1cool/assets/js/26.5ab1ccd3.js"><link rel="prefetch" href="/1cool/assets/js/27.6914b374.js"><link rel="prefetch" href="/1cool/assets/js/28.d3a4b74f.js"><link rel="prefetch" href="/1cool/assets/js/29.ba154d06.js"><link rel="prefetch" href="/1cool/assets/js/3.f0927093.js"><link rel="prefetch" href="/1cool/assets/js/30.9db9ba78.js"><link rel="prefetch" href="/1cool/assets/js/31.bd1d4fc7.js"><link rel="prefetch" href="/1cool/assets/js/32.0dc6727c.js"><link rel="prefetch" href="/1cool/assets/js/33.76addf19.js"><link rel="prefetch" href="/1cool/assets/js/34.932df048.js"><link rel="prefetch" href="/1cool/assets/js/35.99c9b535.js"><link rel="prefetch" href="/1cool/assets/js/36.683f10d5.js"><link rel="prefetch" href="/1cool/assets/js/37.d1a5a0a3.js"><link rel="prefetch" href="/1cool/assets/js/38.d3435f25.js"><link rel="prefetch" href="/1cool/assets/js/39.495d8579.js"><link rel="prefetch" href="/1cool/assets/js/4.335db8d6.js"><link rel="prefetch" href="/1cool/assets/js/40.3b591ff1.js"><link rel="prefetch" href="/1cool/assets/js/41.7cdcc177.js"><link rel="prefetch" href="/1cool/assets/js/42.195bafd9.js"><link rel="prefetch" href="/1cool/assets/js/43.9f7a7bea.js"><link rel="prefetch" href="/1cool/assets/js/44.42dd8ceb.js"><link rel="prefetch" href="/1cool/assets/js/45.3c537f84.js"><link rel="prefetch" href="/1cool/assets/js/46.267c8f4a.js"><link rel="prefetch" href="/1cool/assets/js/47.67d3257c.js"><link rel="prefetch" href="/1cool/assets/js/48.fa0c041a.js"><link rel="prefetch" href="/1cool/assets/js/49.9c9c4a68.js"><link rel="prefetch" href="/1cool/assets/js/5.73e8ce28.js"><link rel="prefetch" href="/1cool/assets/js/50.fb897d09.js"><link rel="prefetch" href="/1cool/assets/js/51.b1859bc3.js"><link rel="prefetch" href="/1cool/assets/js/52.046993a3.js"><link rel="prefetch" href="/1cool/assets/js/53.34b339f5.js"><link rel="prefetch" href="/1cool/assets/js/54.f0e07b0b.js"><link rel="prefetch" href="/1cool/assets/js/55.321e3578.js"><link rel="prefetch" href="/1cool/assets/js/56.61f6d07c.js"><link rel="prefetch" href="/1cool/assets/js/57.094e25d6.js"><link rel="prefetch" href="/1cool/assets/js/58.c8d03df9.js"><link rel="prefetch" href="/1cool/assets/js/59.229c4354.js"><link rel="prefetch" href="/1cool/assets/js/6.daab4654.js"><link rel="prefetch" href="/1cool/assets/js/60.3df41999.js"><link rel="prefetch" href="/1cool/assets/js/61.4495308a.js"><link rel="prefetch" href="/1cool/assets/js/62.32e353fe.js"><link rel="prefetch" href="/1cool/assets/js/63.5dd867fd.js"><link rel="prefetch" href="/1cool/assets/js/64.9ad8916b.js"><link rel="prefetch" href="/1cool/assets/js/65.4bf100e2.js"><link rel="prefetch" href="/1cool/assets/js/66.f18c3d01.js"><link rel="prefetch" href="/1cool/assets/js/67.20cd3547.js"><link rel="prefetch" href="/1cool/assets/js/69.2d58c81e.js"><link rel="prefetch" href="/1cool/assets/js/7.44cd4691.js"><link rel="prefetch" href="/1cool/assets/js/70.4cd7fe0c.js"><link rel="prefetch" href="/1cool/assets/js/71.aa582a3f.js"><link rel="prefetch" href="/1cool/assets/js/72.5aa27670.js"><link rel="prefetch" href="/1cool/assets/js/73.1c106c6b.js"><link rel="prefetch" href="/1cool/assets/js/74.106139f4.js"><link rel="prefetch" href="/1cool/assets/js/75.2ac7abb0.js"><link rel="prefetch" href="/1cool/assets/js/76.642864bb.js"><link rel="prefetch" href="/1cool/assets/js/77.794aad3a.js"><link rel="prefetch" href="/1cool/assets/js/78.70e354e4.js"><link rel="prefetch" href="/1cool/assets/js/79.0dbd7f5c.js"><link rel="prefetch" href="/1cool/assets/js/8.cdead440.js"><link rel="prefetch" href="/1cool/assets/js/9.63f73c1c.js">
+    <link rel="stylesheet" href="/1cool/assets/css/0.styles.3cb60085.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/1cool/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/git/common.html" class="nav-link">
+  Git
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav> <div class="layout__search"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/1cool/skill/web/js/" class="sidebar-heading clickable router-link-active"><span>JS</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/base.html" class="sidebar-link">基础</a></li><li><a href="/1cool/skill/web/js/array.html" class="sidebar-link">Array 对象</a></li><li><a href="/1cool/skill/web/js/string.html" class="sidebar-link">String 对象</a></li><li><a href="/1cool/skill/web/js/math.html" class="sidebar-link">Math 对象</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>代码整洁</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/clean.html" class="sidebar-link">代码整洁</a></li><li><a href="/1cool/skill/web/js/clean-name.html" class="sidebar-link">代码整洁之道 - 命名篇</a></li><li><a href="/1cool/skill/web/js/clean-function.html" class="sidebar-link">代码整洁之道 - 函数篇</a></li><li><a href="/1cool/skill/web/js/clean-function-reset.html" class="sidebar-link">代码整洁之道 - 重构函数</a></li><li><a href="/1cool/skill/web/js/clean-notes.html" aria-current="page" class="active sidebar-link">代码整洁之道 - 注释篇</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#理论篇" class="anchor-item__link" style="margin-left:0;">
+        理论篇
+      </a></li><li class="anchor-item"><a href="#实战" class="anchor-item__link" style="margin-left:0;">
+        实战
+      </a></li><li class="anchor-item"><a href="#公共-api-注释" class="anchor-item__link" style="margin-left:20px;">
+        公共 API 注释
+      </a></li><li class="anchor-item"><a href="#todo-注释" class="anchor-item__link" style="margin-left:20px;">
+        TODO 注释
+      </a></li><li class="anchor-item"><a href="#警示作用" class="anchor-item__link" style="margin-left:20px;">
+        警示作用
+      </a></li><li class="anchor-item"><a href="#逻辑复杂的也要加上注释" class="anchor-item__link" style="margin-left:20px;">
+        逻辑复杂的也要加上注释
+      </a></li><li class="anchor-item"><a href="#坏习惯" class="anchor-item__link" style="margin-left:0;">
+        坏习惯
+      </a></li><li class="anchor-item"><a href="#注释不认真对待" class="anchor-item__link" style="margin-left:20px;">
+        注释不认真对待
+      </a></li><li class="anchor-item"><a href="#哪里都加注释" class="anchor-item__link" style="margin-left:20px;">
+        哪里都加注释
+      </a></li><li class="anchor-item"><a href="#注释掉的代码" class="anchor-item__link" style="margin-left:20px;">
+        注释掉的代码
+      </a></li><li class="anchor-item"><a href="#注释信息过多" class="anchor-item__link" style="margin-left:20px;">
+        注释信息过多
+      </a></li><li class="anchor-item"><a href="#vscode-插件推荐" class="anchor-item__link" style="margin-left:0;">
+        vscode 插件推荐
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="代码整洁之道-注释篇"><a href="#代码整洁之道-注释篇" class="header-anchor">#</a> 代码整洁之道 - 注释篇</h1> <h2 id="理论篇"><a href="#理论篇" class="header-anchor">#</a> 理论篇</h2> <p><strong><code>注释，不能美化糟糕的代码</code></strong></p> <ul><li>注释本质上是为了弥补<code>代码表达的不明确性</code> <ul><li>如果能用优雅的代码清晰的表达含义的时候，就没必要再使用注释</li> <li>尽可能做到用简洁清晰的代码逻辑，而不是用大量的注释来弥补糟糕的代码</li></ul></li> <li>注释<code>也需要专门去维护</code> <ul><li>随着需求的不断迭代，注释很可能也是需要不断去更新的，如果不去维护，时间越久，注释的含义与最新代码的含义差的越远，反而引起歧义</li></ul></li></ul> <h2 id="实战"><a href="#实战" class="header-anchor">#</a> 实战</h2> <h3 id="公共-api-注释"><a href="#公共-api-注释" class="header-anchor">#</a> 公共 API 注释</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * @private
+ * @param {Function} func The function to invoke
+ * @param {Array} args The arguments to invoke `func` with
+ * @returns {*} Returns the result of `func`
+ */</span>
+<span class="token keyword">function</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">func<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="todo-注释"><a href="#todo-注释" class="header-anchor">#</a> TODO 注释</h3> <p>通过 TODO 注释，可以在项目中，把一些暂未实现的功能列表等通过 TODO 注释的形式来记录一下。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// good case</span>
+<span class="token keyword">function</span> <span class="token function">getNumber</span><span class="token punctuation">(</span><span class="token parameter">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TODO: 这里的状态需要单独维护起来，不应该使用魔术数字。</span>
+  <span class="token keyword">const</span> status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="警示作用"><a href="#警示作用" class="header-anchor">#</a> 警示作用</h3> <ul><li>开发中，可能有些代码逻辑可能会导致某种后果</li> <li>代码逻辑已经足够好，但是依然需要去说明一下情况</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// good case</span>
+<span class="token keyword">function</span> <span class="token function">getNumber</span><span class="token punctuation">(</span><span class="token parameter">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// FIXME: 这里不应该使用全局变量num</span>
+  num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="逻辑复杂的也要加上注释"><a href="#逻辑复杂的也要加上注释" class="header-anchor">#</a> 逻辑复杂的也要加上注释</h3> <ul><li>逻辑很复杂</li> <li>代码逻辑比较重要，或者需要强调一下，这个时候，也可以通过添加注释的形式去强调。</li></ul> <h2 id="坏习惯"><a href="#坏习惯" class="header-anchor">#</a> 坏习惯</h2> <p><code>能用优雅的代码表达，就不要用注释，如果必须加注释，一定要认真去维护和书写注释。</code></p> <h3 id="注释不认真对待"><a href="#注释不认真对待" class="header-anchor">#</a> 注释不认真对待</h3> <p>一定要认真对待，避免起到反作用，注释也需要花时间阅读。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token comment">// 获取列表</span>
+<span class="token keyword">function</span> <span class="token function">getTastList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol><li>多余的注释：已经能够通过方法名比较清晰的明白该方法的作用。<code>注释的作用是为了弥补代码表达的不足，不是每段代码都要加注释</code></li> <li>误导性注释：既然选择加注释，那就认真对待注释。不要把注释写的模棱两可，或者可有可无，假如文件中还有一个获取其他列表的方法，那是不是就有歧义了。</li></ol> <h3 id="哪里都加注释"><a href="#哪里都加注释" class="header-anchor">#</a> 哪里都加注释</h3> <ol><li>注释阅读需要时间</li> <li>注释需要维护成本</li></ol> <h3 id="注释掉的代码"><a href="#注释掉的代码" class="header-anchor">#</a> 注释掉的代码</h3> <p>对别人会产生疑问</p> <ul><li>这段代码是否还有作用，能不能删?</li> <li>注释越多，整体代码质量就会越差</li></ul> <h3 id="注释信息过多"><a href="#注释信息过多" class="header-anchor">#</a> 注释信息过多</h3> <p>注释的信息过多，也没人愿意看，不仅代码，注释也要简洁，能够说明问题即可。</p> <h2 id="vscode-插件推荐"><a href="#vscode-插件推荐" class="header-anchor">#</a> vscode 插件推荐</h2> <ul><li>Better Comments：特点是可以改变注释的颜色，通过不同颜色来表示不同情况</li> <li>koroFileHeader：特点是可以在文件头部快捷添加注释和函数注释。</li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">11/2/2022, 7:35:59 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/1cool/skill/web/js/clean-function-reset.html" class="prev">
+        代码整洁之道 - 重构函数
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/1cool/assets/js/app.51889b98.js" defer></script><script src="/1cool/assets/js/2.f7aad505.js" defer></script><script src="/1cool/assets/js/68.fe184ee3.js" defer></script>
+  </body>
+</html>
