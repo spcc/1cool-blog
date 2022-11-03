@@ -14,7 +14,7 @@ module.exports = {
       "dynamic-title",
       {
         showIcon: "/favicon.ico",
-        showText: "1cool",
+        showText: "",
         hideIcon: "/failure.ico",
         hideText: "燕子没有你我怎么活啊",
         recoverTime: 2000,
@@ -57,7 +57,7 @@ module.exports = {
               { text: "Vue2", link: "/skill/web/vue2/router/base" },
               { text: "Vue3", link: "/skill/web/vue3/common" },
               { text: "Css3", link: "/skill/web/css3/bem" },
-              { text: "其他", link: "/skill/web/other/nrm" },
+              { text: "其他", link: "/skill/web/other/git/common" },
               { text: "http", link: "/skill/web/http/base" },
               { text: "npm", link: "/skill/web/npm/base" },
             ],
@@ -65,7 +65,6 @@ module.exports = {
           {
             text: "工具",
             items: [
-              { text: "Git", link: "/skill/tool/git/common" },
               { text: "VsCode", link: "/skill/tool/vscode/fun" },
               { text: "Github/Gitee", link: "/skill/tool/warehouse/base" },
               { text: "装机必备", link: "/skill/tool/windows/base" },
@@ -245,20 +244,21 @@ module.exports = {
           children: ["/interview/reverse-interview"],
         },
       ],
-      "/skill/tool/git": [
-        {
-          title: "Git", // 必要的
-          path: "/skill/tool/git/", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/tool/git/common", "/skill/tool/git/reset"],
-        },
-      ],
 
       /**
        * 其他
        */
       "/skill/web/other": [
+        {
+          title: "Git", // 必要的
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            "/skill/web/other/git/common",
+            "/skill/web/other/git/reset",
+            "/skill/web/other/git/config",
+          ],
+        },
         {
           title: "nrm",
           collapsable: false,
@@ -276,6 +276,12 @@ module.exports = {
           collapsable: false,
           sidebarDepth: -1,
           path: "/skill/web/other/gitlab",
+        },
+        {
+          title: "SwitchHosts",
+          collapsable: false,
+          sidebarDepth: -1,
+          path: "/skill/web/other/switch-hosts",
         },
       ],
 

@@ -1,5 +1,9 @@
 # Tree 树形控件
 
+## 获取当前点击的所有父节点
+
+[网址](https://blog.csdn.net/weixin_44640323/article/details/124734171)
+
 ## 全选/反选 和 默认全选
 
 ### 全选/反选
