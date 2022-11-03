@@ -16,6 +16,7 @@
     "sass": "^1.54.4",
     "sass-loader": "^8.0.2",
     "vuepress": "^1.9.7",
+    "vuepress-plugin-dynamic-title": "^1.0.0",
     "vuepress-plugin-reading-progress": "^1.0.10"
   },
   "volta": {

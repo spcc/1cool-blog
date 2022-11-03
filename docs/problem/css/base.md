@@ -1,5 +1,25 @@
 # 常用
 
+## 扩大点击区域
+
+::: details 点击查看代码
+
+```scss
+.btn {
+  position: relative;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
+}
+```
+
+:::
+
 ## Input 的 placeholder
 
 ### 修改 input 的 placeholder 样式

@@ -7,12 +7,45 @@ module.exports = {
   description: "- . -",
   // 主题
   theme: "@qingui/v1",
-  plugins: ["@vuepress/back-to-top", "reading-progress"],
+  plugins: [
+    "@vuepress/back-to-top",
+    "reading-progress",
+    [
+      "dynamic-title",
+      {
+        showIcon: "/favicon.ico",
+        showText: "1cool",
+        hideIcon: "/failure.ico",
+        hideText: "燕子没有你我怎么活啊",
+        recoverTime: 2000,
+      },
+    ],
+  ],
+  head: [
+    [
+      "script",
+      {
+        language: "javascript",
+        type: "text/javascript",
+        src: "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js",
+      },
+    ],
+    // 引入鼠标点击脚本
+    [
+      "script",
+      {
+        language: "javascript",
+        type: "text/javascript",
+        src: "/js/MouseClickEffect.js",
+      },
+    ],
+  ],
   // 主题配置
   themeConfig: {
     lastUpdated: "最后更新时间",
     nav: [
       { text: "首页", link: "/" },
+      { text: "富通天下", link: "/fuTong" },
       { text: "常用链接", link: "/link" },
       {
         text: "知识点",
@@ -24,6 +57,7 @@ module.exports = {
               { text: "Vue2", link: "/skill/web/vue2/router/base" },
               { text: "Vue3", link: "/skill/web/vue3/common" },
               { text: "Css3", link: "/skill/web/css3/bem" },
+              { text: "其他", link: "/skill/web/other/nrm" },
               { text: "http", link: "/skill/web/http/base" },
               { text: "npm", link: "/skill/web/npm/base" },
             ],
@@ -138,7 +172,7 @@ module.exports = {
           title: "基础", // 必要的
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ["/skill/web/css3/bem", "/skill/web/css3/base"],
+          children: ["/skill/web/css3/bem", "/skill/web/css3/scss-mixin"],
         },
       ],
 
@@ -218,6 +252,24 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/skill/tool/git/common", "/skill/tool/git/reset"],
+        },
+      ],
+
+      /**
+       * 其他
+       */
+      "/skill/web/other": [
+        {
+          title: "nrm",
+          collapsable: false,
+          sidebarDepth: 0,
+          path: "/skill/web/other/nrm",
+        },
+        {
+          title: "Vuepress1",
+          collapsable: false,
+          sidebarDepth: -1,
+          path: "/skill/web/other/vuepress1",
         },
       ],
 
