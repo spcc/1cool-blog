@@ -271,6 +271,12 @@ module.exports = {
           sidebarDepth: -1,
           path: "/skill/web/other/vuepress1",
         },
+        {
+          title: "gitlab",
+          collapsable: false,
+          sidebarDepth: -1,
+          path: "/skill/web/other/gitlab",
+        },
       ],
 
       /**
