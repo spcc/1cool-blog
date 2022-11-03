@@ -25,6 +25,7 @@ module.exports = {
               { text: "Vue3", link: "/skill/web/vue3/common" },
               { text: "Css3", link: "/skill/web/css3/bem" },
               { text: "http", link: "/skill/web/http/base" },
+              { text: "npm", link: "/skill/web/npm/base" },
             ],
           },
           {
@@ -134,30 +135,10 @@ module.exports = {
        */
       "/skill/web/css3": [
         {
-          title: "基础",
-          collapsable: true, // 可选的, 默认值是 true,
+          title: "基础", // 必要的
+          collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          path: "/skill/web/css3/bem",
-        },
-        {
-          title: "动效", // 必要的
-          collapsable: true, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: [
-            {
-              title: "有用",
-              collapsable: false,
-              sidebarDepth: 0,
-              // path: "/skill/web/vue3/game",
-              children: ["/skill/web/vue3/game/base"],
-            },
-            {
-              title: "无用",
-              collapsable: false,
-              sidebarDepth: 0,
-              children: ["/skill/web/css3/move/bg"],
-            },
-          ],
+          children: ["/skill/web/css3/bem", "/skill/web/css3/base"],
         },
       ],
 
