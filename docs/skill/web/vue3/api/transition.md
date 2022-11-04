@@ -2,7 +2,7 @@
 
 学的是零碎的知识点，缺少真实的使用场景
 
-## 场景一：父子组件数据传递
+## 父子组件数据传递
 
 注意：`defineProps` 、`defineEmits` 、 `defineExpose` 和 `withDefaults` 这四个宏函数只能在 &lt;script setup&gt; 中使用。他们不需要导入，会随着 &lt;script setup&gt; 的处理过程中一起被编译。
 
@@ -151,7 +151,7 @@ const newValue = computed({
 
 :::
 
-## 场景三：路由跳转，获取路由参数
+## 路由跳转，获取路由参数
 
 router 需要使用 `useRouter` 方法来进行路由跳转
 
@@ -182,7 +182,7 @@ console.log(route.query.msg); // hello vue3!
 </script>
 ```
 
-## 场景四：获取上下文对象
+## 获取上下文对象
 
 通过 `getCurrentInstance` 方法获取上下文对象  
 虽然不推荐这样使用
@@ -391,3 +391,236 @@ const { x, y } = useMouse();
 
 `加载中`、`加载成功`和`加载失败`。  
 获取这些状态的逻辑是通用的，我们可以把它提取出来：
+
+:::details 点击查看代码
+
+request.js
+
+```js
+import { ref } from "vue";
+
+export function useRequest(url) {
+  const data = ref(null);
+  const error = ref(null);
+
+  axios
+    .get(url)
+    .then((res) => (data.value = res.data))
+    .catch((err) => (error.value = err));
+
+  return { data, error };
+}
+```
+
+现在我们在组件中只需要：
+
+```vue
+<script setup>
+import { useRequest } from "./request.js";
+
+const { data, error } = useRequest("http://...");
+</script>
+
+<template>
+  <div v-if="data">Data is: {{ data }}</div>
+  <div v-else-if="error">Error message is: {{ error.message }}</div>
+  <div v-else>Loading...</div>
+</template>
+```
+
+任何组件都可以使用上面这个逻辑，这就是逻辑复用。是不是可以节省很多重复的代码
+:::
+
+### 生命周期
+
+Vue3 的生命周期和 Vue2 相比，有以下改动：
+
+1. Vue3 生命周期钩子都以 `on` 开头，并且需要在组件中手动导入。
+
+```vue
+<script setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  console.log("onMounted");
+});
+</script>
+```
+
+2. Vue3 取消了  `beforeCreate`  和  `created`  钩子。如果需要在组件创建前注入逻辑，直接在 `<script setup>` 中编写同步代码就可以了。如果这几个钩子同时存在，setup 的执行顺序要优先于 beforeCreate  和  created。
+3. Vue3 中组件卸载的钩子名称有变化，`beforeDestroy` 改为 `onBeforeUnmount`，`destroyed` 改为 `onUnmounted`。
+
+## 全局 API
+
+`Vue2` 中的全局属性或全局方法，是在构造函数 `Vue` 的原型对象上进行添加，如：`Vue.prototype.$axios = axios`。但在 Vue3 中，需要在 app 实例上添加：
+
+```js
+// main.js
+app.config.globalProperties.$axios = axios;
+```
+
+在组件中使用：
+
+```vue
+<script setup>
+import { getCurrentInstance } from "vue";
+
+const { proxy } = getCurrentInstance();
+proxy.$axios.get("http://...");
+</script>
+```
+
+Vue3 中其他的全局 `API`，如 `directive` 、`component` 等，跟 Vue2 的用法都差不多，只不过一个是在 Vue 上调用，一个是在 app 实例上调用：
+
+```js
+// main.js
+// 全局自定义指令
+app.directive("focus", {
+  mounted(el) {
+    el.focus();
+  },
+});
+
+// 全局自定义组件
+import CustomComp from "./components/CustomComp.vue";
+
+app.component("CustomComp", CustomComp);
+```
+
+## 与 TypeScript 结合使用
+
+下面是一些和 `TypeScript` 结合使用的例子。
+
+### 为 props 标注类型
+
+- 运行时声明。当使用 `<script setup>` 时，`defineProps()` 宏函数支持从它的参数中推导类型：
+
+:::details 点击查看代码
+
+```ts
+<script setup lang="ts">
+const props = defineProps({
+  foo: { type: String, required: true },
+  bar: Number
+})
+
+props.foo // string
+props.bar // number | undefined
+</script>
+
+```
+
+这被称为 `运行时声明` ，因为传递给 `defineProps()` 的参数会作为运行时的 `props` 选项使用。
+
+:::
+
+- 基于类型的声明。我们还可以通过泛型参数来定义 `props` 的类型，这种方式更加常用：
+
+:::details 点击查看代码
+
+```ts
+<script setup lang="ts">
+interface Props {
+  foo: string
+  bar?: number
+}
+
+const props = defineProps<Props>()
+</script>
+
+```
+
+这被称为 `基于类型的声明` ，编译器会尽可能地尝试根据类型参数推导出等价的运行时选项。这种方式的不足之处在于，失去了定义 props 默认值的能力。为了解决这个问题，我们可以使用 `withDefaults` 宏函数：
+
+```ts
+<script setup lang="ts">
+interface Props {
+  msg?: string
+  labels?: string[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  msg: 'hello vue3!',
+  labels: () => ['one', 'two']
+})
+</script>
+```
+
+:::
+
+### 为 ref() 标注类型
+
+- 默认推导类型。ref 会根据初始化时的值自动推导其类型：
+
+:::details 点击查看代码
+
+```ts
+import { ref } from "vue";
+
+const year = ref(2022);
+year.value = "2022"; // TS Error: 不能将类型 string 分配给类型 number
+```
+
+:::
+
+- 通过接口指定类型。有时我们可能想为 ref 内的值指定一个更复杂的类型，可以使用 `Ref` 这个接口：
+
+:::details 点击查看代码
+
+```ts
+import { ref } from "vue";
+import type { Ref } from "vue";
+
+const year: Ref<string | number> = ref("2022");
+year.value = 2022; // 成功！
+```
+
+:::
+
+- 通过泛型指定类型。我们也可以在调用 `ref()` 时传入一个泛型参数，来覆盖默认的推导行为：
+
+:::details 点击查看代码
+
+```ts
+const year = ref<string | number>("2022");
+year.value = 2022; // 成功！
+```
+
+:::
+
+### 为 reactive() 标注类型
+
+- 默认推导类型。`reactive()` 也会隐式地从它的参数中推导类型：
+
+:::details 点击查看代码
+
+```ts
+import { reactive } from "vue";
+
+const book = reactive({ title: "Vue 3 指引" });
+book.year = 2022; // TS Error: 类型 { title: string; } 上不存在属性 year
+```
+
+:::
+
+- 通过接口指定类型。要显式地指定一个 `reactive` 变量的类型，我们可以使用接口：
+
+:::details 点击查看代码
+
+```ts
+import { reactive } from "vue";
+
+interface Book {
+  title: string;
+  year?: number;
+}
+
+const book: Book = reactive({ title: "Vue 3 指引" });
+book.year = 2022; // 成功！
+```
+
+:::
+
+其他 API 与 `TypeScript` 结合使用的方法和上面大同小异
+
+具体文章可以参考[如何为 Vue3 组件标注 TS 类型，看这个就够了！](https://juejin.cn/post/7129130323148800031)
