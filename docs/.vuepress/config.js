@@ -92,16 +92,6 @@ module.exports = {
     ],
     sidebar: {
       /**
-       * vue2
-       */
-      "/skill/web/vue2": [
-        {
-          title: "路由", // 必要的
-          path: "/skill/web/vue2/router/base", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        },
-      ],
-
-      /**
        * vue3
        */
       "/skill/web/vue3": [
@@ -111,19 +101,29 @@ module.exports = {
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
             {
-              title: "知识点分析",
-              collapsable: false,
-              sidebarDepth: 0,
-              // path: "/skill/web/vue3/game",
-              children: ["/skill/web/vue3/faq/base", "/skill/web/vue3/faq/faq"],
-            },
-            {
-              title: "语法",
+              title: "理论",
               collapsable: false,
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
               children: [
-                "/skill/web/vue3/api/base",
+                "/skill/web/vue3/faq/base1",
+                "/skill/web/vue3/faq/base",
+                "/skill/web/vue3/faq/faq",
+              ],
+            },
+            {
+              title: "规范",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/api/base"],
+            },
+            {
+              title: "实战",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: [
                 "/skill/web/vue3/api/difference",
                 "/skill/web/vue3/api/transition",
               ],
@@ -163,6 +163,16 @@ module.exports = {
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ["/skill/web/vue3/other/package"],
+        },
+      ],
+
+      /**
+       * vue2
+       */
+      "/skill/web/vue2": [
+        {
+          title: "路由", // 必要的
+          path: "/skill/web/vue2/router/base", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
         },
       ],
 
