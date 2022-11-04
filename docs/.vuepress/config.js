@@ -125,6 +125,7 @@ module.exports = {
               children: [
                 "/skill/web/vue3/api/base",
                 "/skill/web/vue3/api/difference",
+                "/skill/web/vue3/api/transition",
               ],
             },
             {
