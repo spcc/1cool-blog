@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>代码整洁之道 - 重构函数 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/1cool/js/MouseClickEffect.js"></script>
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/1cool/assets/css/0.styles.777e77cf.css" as="style"><link rel="preload" href="/1cool/assets/js/app.e2260cf4.js" as="script"><link rel="preload" href="/1cool/assets/js/2.1f85ea53.js" as="script"><link rel="preload" href="/1cool/assets/js/66.229cc715.js" as="script"><link rel="prefetch" href="/1cool/assets/js/10.e0649c7e.js"><link rel="prefetch" href="/1cool/assets/js/11.b2ba3b31.js"><link rel="prefetch" href="/1cool/assets/js/12.fe173b0e.js"><link rel="prefetch" href="/1cool/assets/js/13.095b69b1.js"><link rel="prefetch" href="/1cool/assets/js/14.8e46c639.js"><link rel="prefetch" href="/1cool/assets/js/15.79a67f48.js"><link rel="prefetch" href="/1cool/assets/js/16.105b1fce.js"><link rel="prefetch" href="/1cool/assets/js/17.0ff34e4d.js"><link rel="prefetch" href="/1cool/assets/js/18.de30ad69.js"><link rel="prefetch" href="/1cool/assets/js/19.13e59e99.js"><link rel="prefetch" href="/1cool/assets/js/20.35ca8e71.js"><link rel="prefetch" href="/1cool/assets/js/21.1ca98632.js"><link rel="prefetch" href="/1cool/assets/js/22.13bf826a.js"><link rel="prefetch" href="/1cool/assets/js/23.96186cd4.js"><link rel="prefetch" href="/1cool/assets/js/24.d2309ac1.js"><link rel="prefetch" href="/1cool/assets/js/25.fd3ca791.js"><link rel="prefetch" href="/1cool/assets/js/26.946a8b6e.js"><link rel="prefetch" href="/1cool/assets/js/27.ef4c7f7d.js"><link rel="prefetch" href="/1cool/assets/js/28.449e7260.js"><link rel="prefetch" href="/1cool/assets/js/29.1991db0d.js"><link rel="prefetch" href="/1cool/assets/js/3.f420eed6.js"><link rel="prefetch" href="/1cool/assets/js/30.8bf7b27a.js"><link rel="prefetch" href="/1cool/assets/js/31.9ce1178d.js"><link rel="prefetch" href="/1cool/assets/js/32.aa6ac5c9.js"><link rel="prefetch" href="/1cool/assets/js/33.b1995e45.js"><link rel="prefetch" href="/1cool/assets/js/34.0e12e04f.js"><link rel="prefetch" href="/1cool/assets/js/35.dd36b50a.js"><link rel="prefetch" href="/1cool/assets/js/36.2ad5fb94.js"><link rel="prefetch" href="/1cool/assets/js/37.6bd5a31d.js"><link rel="prefetch" href="/1cool/assets/js/38.ce4ae6a2.js"><link rel="prefetch" href="/1cool/assets/js/39.2175a648.js"><link rel="prefetch" href="/1cool/assets/js/4.a185d924.js"><link rel="prefetch" href="/1cool/assets/js/40.733b4a6a.js"><link rel="prefetch" href="/1cool/assets/js/41.f2ee3e2e.js"><link rel="prefetch" href="/1cool/assets/js/42.9c0f8bb3.js"><link rel="prefetch" href="/1cool/assets/js/43.a79ce3ab.js"><link rel="prefetch" href="/1cool/assets/js/44.336cc352.js"><link rel="prefetch" href="/1cool/assets/js/45.6a3addb8.js"><link rel="prefetch" href="/1cool/assets/js/46.66fbba7e.js"><link rel="prefetch" href="/1cool/assets/js/47.db003efa.js"><link rel="prefetch" href="/1cool/assets/js/48.fe2e287a.js"><link rel="prefetch" href="/1cool/assets/js/49.6e8f5930.js"><link rel="prefetch" href="/1cool/assets/js/5.987e1949.js"><link rel="prefetch" href="/1cool/assets/js/50.c03c3cea.js"><link rel="prefetch" href="/1cool/assets/js/51.e07efc2d.js"><link rel="prefetch" href="/1cool/assets/js/52.3f1b413d.js"><link rel="prefetch" href="/1cool/assets/js/53.2d5abb09.js"><link rel="prefetch" href="/1cool/assets/js/54.31790189.js"><link rel="prefetch" href="/1cool/assets/js/55.6dbd6c31.js"><link rel="prefetch" href="/1cool/assets/js/56.3a65dd12.js"><link rel="prefetch" href="/1cool/assets/js/57.71daf71c.js"><link rel="prefetch" href="/1cool/assets/js/58.f9f9d473.js"><link rel="prefetch" href="/1cool/assets/js/59.2d6201f1.js"><link rel="prefetch" href="/1cool/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/1cool/assets/js/60.0ded0749.js"><link rel="prefetch" href="/1cool/assets/js/61.320a7556.js"><link rel="prefetch" href="/1cool/assets/js/62.2a69aa76.js"><link rel="prefetch" href="/1cool/assets/js/63.0eacc7d4.js"><link rel="prefetch" href="/1cool/assets/js/64.82b49ba0.js"><link rel="prefetch" href="/1cool/assets/js/65.184a9ae8.js"><link rel="prefetch" href="/1cool/assets/js/67.0fc0663c.js"><link rel="prefetch" href="/1cool/assets/js/68.7eaf841c.js"><link rel="prefetch" href="/1cool/assets/js/69.b5d78b8d.js"><link rel="prefetch" href="/1cool/assets/js/7.175c0715.js"><link rel="prefetch" href="/1cool/assets/js/70.904fbd6c.js"><link rel="prefetch" href="/1cool/assets/js/71.01dfb3b3.js"><link rel="prefetch" href="/1cool/assets/js/72.38b656c2.js"><link rel="prefetch" href="/1cool/assets/js/73.80bc575f.js"><link rel="prefetch" href="/1cool/assets/js/74.6d3445e7.js"><link rel="prefetch" href="/1cool/assets/js/75.79b55eb7.js"><link rel="prefetch" href="/1cool/assets/js/76.7d294ff0.js"><link rel="prefetch" href="/1cool/assets/js/77.d460f364.js"><link rel="prefetch" href="/1cool/assets/js/78.7b3dc178.js"><link rel="prefetch" href="/1cool/assets/js/79.9c696f5a.js"><link rel="prefetch" href="/1cool/assets/js/8.1e851244.js"><link rel="prefetch" href="/1cool/assets/js/80.2677639a.js"><link rel="prefetch" href="/1cool/assets/js/81.cb82ad09.js"><link rel="prefetch" href="/1cool/assets/js/82.3ebef646.js"><link rel="prefetch" href="/1cool/assets/js/83.bee176a9.js"><link rel="prefetch" href="/1cool/assets/js/84.7a20af9f.js"><link rel="prefetch" href="/1cool/assets/js/85.09e62e23.js"><link rel="prefetch" href="/1cool/assets/js/86.04ac97b2.js"><link rel="prefetch" href="/1cool/assets/js/87.c62d0e8c.js"><link rel="prefetch" href="/1cool/assets/js/88.64e1b9a8.js"><link rel="prefetch" href="/1cool/assets/js/89.ac19715f.js"><link rel="prefetch" href="/1cool/assets/js/9.11579874.js"><link rel="prefetch" href="/1cool/assets/js/90.9d4ba2aa.js"><link rel="prefetch" href="/1cool/assets/js/91.0441d4fb.js"><link rel="prefetch" href="/1cool/assets/js/92.7a18dc94.js">
+    <link rel="stylesheet" href="/1cool/assets/css/0.styles.777e77cf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/1cool/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/npm/base.html" class="nav-link">
+  npm
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/npm/base.html" class="nav-link">
+  npm
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/1cool/skill/web/js/" class="sidebar-heading clickable router-link-active"><span>JS</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/base.html" class="sidebar-link">基础</a></li><li><a href="/1cool/skill/web/js/array.html" class="sidebar-link">Array 对象</a></li><li><a href="/1cool/skill/web/js/string.html" class="sidebar-link">String 对象</a></li><li><a href="/1cool/skill/web/js/math.html" class="sidebar-link">Math 对象</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>代码整洁</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/clean.html" class="sidebar-link">代码整洁</a></li><li><a href="/1cool/skill/web/js/clean-name.html" class="sidebar-link">代码整洁之道 - 命名篇</a></li><li><a href="/1cool/skill/web/js/clean-function.html" class="sidebar-link">代码整洁之道 - 函数篇</a></li><li><a href="/1cool/skill/web/js/clean-function-reset.html" aria-current="page" class="active sidebar-link">代码整洁之道 - 重构函数</a></li><li><a href="/1cool/skill/web/js/clean-notes.html" class="sidebar-link">代码整洁之道 - 注释篇</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#提炼函数" class="anchor-item__link" style="margin-left:0;">
+        提炼函数
+      </a></li><li class="anchor-item"><a href="#动机" class="anchor-item__link" style="margin-left:20px;">
+        动机
+      </a></li><li class="anchor-item"><a href="#如何做" class="anchor-item__link" style="margin-left:20px;">
+        如何做？
+      </a></li><li class="anchor-item"><a href="#实践案例" class="anchor-item__link" style="margin-left:20px;">
+        实践案例
+      </a></li><li class="anchor-item"><a href="#内联函数" class="anchor-item__link" style="margin-left:0;">
+        内联函数
+      </a></li><li class="anchor-item"><a href="#内联临时变量" class="anchor-item__link" style="margin-left:0;">
+        内联临时变量
+      </a></li><li class="anchor-item"><a href="#引入解释性变量" class="anchor-item__link" style="margin-left:0;">
+        引入解释性变量
+      </a></li><li class="anchor-item"><a href="#分解临时变量" class="anchor-item__link" style="margin-left:0;">
+        分解临时变量
+      </a></li><li class="anchor-item"><a href="#移除对参数的赋值" class="anchor-item__link" style="margin-left:0;">
+        移除对参数的赋值
+      </a></li><li class="anchor-item"><a href="#总结" class="anchor-item__link" style="margin-left:0;">
+        总结
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="代码整洁之道-重构函数"><a href="#代码整洁之道-重构函数" class="header-anchor">#</a> 代码整洁之道 - 重构函数</h1> <p>代码中的很多问题都是由函数引起的，那如何对函数进行重新组织？或者叫函数重构呢？</p> <p>其实大方向就两点：</p> <ol><li>提炼函数（Extract Method）：也可以叫拆函数，即如何将一个大的函数合理的拆分或者提炼成多个子函数</li> <li>内联函数（Inline Method）：这里的合并函数的定义不一定是最准确的，总之就是与拆函数相反，因为有时候有些代码其实没必要拆成一个独立的函数，拆完之后反而不合理，这时就需要我们把这部分代码合到原来的函数体里。</li></ol> <p>那具体如何做呢，其实也是总结出了很多的技巧，可以帮助我们更好的组织函数。</p> <h2 id="提炼函数"><a href="#提炼函数" class="header-anchor">#</a> 提炼函数</h2> <p>开始之前，我们先知道下文中一直提到两个名词：</p> <ul><li>源函数：即将要被提炼的函数</li> <li>目标函数：即提炼出来的函数，叫目标函数。</li></ul> <h3 id="动机"><a href="#动机" class="header-anchor">#</a> 动机</h3> <p>首先，我们通过一个例子直观感受一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 打印欠款数据</span>
+<span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token parameter">amount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// print details</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;name:&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;amount:&quot;</span><span class="token punctuation">,</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>很明显，例子中 print details 这部分代码，可以单独提炼中一个函数。如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token parameter">amount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printDetails</span><span class="token punctuation">(</span>ammount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">printDetails</span><span class="token punctuation">(</span><span class="token parameter">amount</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;name:&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;amount:&quot;</span><span class="token punctuation">,</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>很明显，优化之后，我们的代码更加优雅，而且更加清晰易懂。小型函数粒度小，而且容易复用，这是我们推荐的。</p> <p>但是，但是，一个大型函数并不是拆成的小型函数粒度越小越好，这里面涉及到一个非常重要的点：<strong>需要给小型函数有很好的命名，才能够让小型函数真正起作用，否则不如不拆。</strong> 如何命名可以参考之前的文章</p> <h3 id="如何做"><a href="#如何做" class="header-anchor">#</a> 如何做？</h3> <p>接下来，我们就手把手一步一步的来看如何去提炼函数？</p> <ol><li>创建一个新的函数，并且根据函数的用途来命名（即以这个函数做什么来命名），这里要注意，即使你要提炼的代码非常简单，只有一行，只要我们可以用一个明确的命名去描述它的意图，我们就可以拆成一个独立的函数，但是如果你想不出一个合适的命名，那就别动。</li> <li>将提炼出的代码复制到新建的目标函数。</li> <li>仔细检测被提炼出的代码，看看其中是否引用了 “作用域限与源函数&quot; 的变量（包含源函数中的局部变量和参数）</li> <li>检测是否有 &quot;仅用于被提炼代码片段&quot;的变量，如果有，则在目标函数中将他们声明为临时变量。</li> <li>将被提炼代码中需要读取的局部变量，当作参数传给目标函数。</li> <li>处理完所有的变量引用之后，在源函数中完成对目标函数的调用。</li> <li>运行，测试。</li></ol> <p>以上步骤，初步有个印象即可，不需要记忆！</p> <h3 id="实践案例"><a href="#实践案例" class="header-anchor">#</a> 实践案例</h3> <p>接下来，我们再结合上面讲的步骤，对 printOwing 这个例子的代码复杂化一点，看又改如何去提炼函数。</p> <p>首先，我们给出一段函数代码，看看到底如何一步步对其进行提炼：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 打印账单数据</span>
+<span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> orders <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 订单列表</span>
+  <span class="token keyword">const</span> outstanding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 余额</span>
+
+  <span class="token comment">// print banner</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;print banner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// calculate outstanding</span>
+  orders<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">order</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    outstanding <span class="token operator">+=</span> order<span class="token punctuation">.</span>amount<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// print details</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;outstanding：&quot;</span><span class="token punctuation">,</span> outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>代码说明：其实就是一个打印账单数据的一个函数，内部有两个局部变量：orders 和 outstanding，同时还包含三部分代码，很明显，三部分代码相当于是实现了不同的子功能，因此，我们可以把这三部分都提炼成单独的函数。</p> <p>同时，其实每部分被提炼的代码，复杂度又各不一样，这里，我们从以下几方面去分析：</p> <h4 id="场景-1-无局部变量"><a href="#场景-1-无局部变量" class="header-anchor">#</a> 场景 1：无局部变量</h4> <p>例如：上面的代码中，print banner 这部分代码只有简单的打印代码，没有任何对 printOwing 函数中局部变量的引用，因此提炼函数也会非常简单，直接提取即可。提炼之后的代码如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> orders <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 订单列表</span>
+  <span class="token keyword">const</span> outstanding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 余额</span>
+
+  <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// calculate outstanding</span>
+  orders<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">order</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    outstanding <span class="token operator">+=</span> order<span class="token punctuation">.</span>amount<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// print details</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;outstanding：&quot;</span><span class="token punctuation">,</span> outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 打印横幅</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;print banner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以上 case 是最简单的啦，没有任何局部变量之前的相互引用，直接提取即可，但是实际开发中，肯定不会这么简单，会涉及到很多局部变量的相互引用？具体怎么做，我们继续往下看。</p> <h4 id="场景-2-有局部变量"><a href="#场景-2-有局部变量" class="header-anchor">#</a> 场景 2：有局部变量</h4> <p>对函数进行提炼的时候，最困难的点在哪儿？就是包含局部变量。这里的局部变量包含传入源函数的参数，以及在源函数内部所声明的临时变量（例如此处的 orders 和 outstanding）。由于局部变量的作用域一般仅限源函数内部，所以当我们提炼目标函数，同时又涉及到源函数中局部变量的引用时，就需要额外谨慎处理。</p> <p>局部变量最简单的情况是：<strong>被提炼代码只是读取这些局部变量的值，并不修改它们，这种情况下，我们可以简单的将这些局部变量当作参数传给目标函数即可。</strong></p> <p>例如当前 case 中 print details 这部分代码，只是简单的引用了局部变量 outstanding，因此，我们提炼的时候，也相对简单，只需要把它当作参数传给目标函数即可。代码如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> orders <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 订单列表</span>
+  <span class="token keyword">const</span> outstanding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 余额</span>
+
+  <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// calculate outstanding</span>
+  orders<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">order</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    outstanding <span class="token operator">+=</span> order<span class="token punctuation">.</span>amount<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// print details</span>
+  <span class="token function">printDetails</span><span class="token punctuation">(</span>outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 打印横幅</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;print banner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">printDetails</span><span class="token punctuation">(</span><span class="token parameter">outstanding</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;outstanding：&quot;</span><span class="token punctuation">,</span> outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>当然，如果被提炼代码引用了多个局部变量，或者引用了一个对象，我们都可以采用这种方式，把其当作参数传给目标函数即可。</p> <h4 id="场景-3-对局部变量再赋值"><a href="#场景-3-对局部变量再赋值" class="header-anchor">#</a> 场景 3：对局部变量再赋值</h4> <p>如果被提炼代码还要对局部变量进行赋值，那情况就更复杂啦。这里在具体分为两种情况：</p> <ol><li>这个局部变量只在被提炼代码中使用。如果是这种情况，直接把这个局部变量直接移到被提炼代码中，一块提炼到目标函数中。</li> <li>被提炼代码之外的代码也使用了这个局部变量，
+<ol><li>如果这个局部变量在被提炼代码之后未被使用，那只需要在目标函数中修改它即可。</li> <li>如果这个局部变量在被提炼代码之后还被使用，那就需要让目标函数返回该局部变量返回之后的值。</li></ol></li></ol> <p>看完上面的结论，我们再来看之前的这个 case，我们会发现，outstanding 这个局部变量不仅在第二部分代码中被修改，同时在第三部分代码中也被使用，因此 很明显属于我们上面提到的 2 - 2 这个结论，因此，我们采用如下的方式去提炼第二部分的代码：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">printOwing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> outstanding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 余额</span>
+
+  <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  outstanding <span class="token operator">=</span> <span class="token function">getOutstanding</span><span class="token punctuation">(</span>outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printDetails</span><span class="token punctuation">(</span>outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printBanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 打印横幅</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;print banner&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getOutstanding</span><span class="token punctuation">(</span><span class="token parameter">initValue</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> orders <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 注意点：由于orders 只在被提炼代码中使用了，所以也符合1-1的结论，直接一块被提炼到目标函数中</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> initValue<span class="token punctuation">;</span>
+  orders<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">order</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    outstanding <span class="token operator">+=</span> order<span class="token punctuation">.</span>amount<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printDetails</span><span class="token punctuation">(</span><span class="token parameter">outstanding</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;outstanding：&quot;</span><span class="token punctuation">,</span> outstanding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>至此，我们就从 printOwing 这个源函数提炼出了三个目标函数，很显然，提炼之后的代码逻辑更加清晰，也更加优雅。</p> <p>再次强调一下：<strong>提炼函数的困难点在于如何处理对于源函数局部变量的引用，那具体如何处理，我们上面已经做出了解答，大家一定要实际去写代码体会体会，才会有更深刻的理解。</strong></p> <h2 id="内联函数"><a href="#内联函数" class="header-anchor">#</a> 内联函数</h2> <p>前面我们提到了如何去提炼函数，但是实际开发中，并不是提炼的越多越好，因为每提炼一个函数，就会增加一层源函数和目标函数的调用关系，这样的调用关系并不是越多越好，相反，有些时候没有必要进行提炼，将代码直接写在源函数就已经非常清晰易懂了，这个时候就没有必要再提炼函数啦，我们把这种处理方式叫做：<strong>内联函数</strong>。</p> <p>我们通过一个例子来体会一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">getLevel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">isMoreThanFive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">isMoreThanFive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> count <span class="token operator">&gt;</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>看完以上代码，很显然，count &gt; 5 这段代码，其实没有必要再单独提炼成一个函数，而是直接写在 getResult 函数体中反而更清晰，因此我们就可以通过 <strong>内联函数</strong> 的方法去进行代码优化。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">getResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> count <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在实际开发中，这种<strong>过度提炼函数</strong>的问题其实也是经常会发现的，我们要学会用内联函数的方法去对代码进行优化。</p> <h2 id="内联临时变量"><a href="#内联临时变量" class="header-anchor">#</a> 内联临时变量</h2> <p>和内联函数类似，如果一个临时变量，只被一个<strong>简单的表达式</strong>赋值了<strong>一次</strong>，那其实我们就没有必要创建这个临时变量啦，直接使用这个简单表达式即可。</p> <p>我们通过一个例子体会一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> temp <span class="token operator">=</span> order<span class="token punctuation">.</span><span class="token function">basePrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> temp <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这时，我们就可以采用<strong>内联临时变量</strong>的手法去进行优化。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> order<span class="token punctuation">.</span><span class="token function">basePrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>当然，我们也注意到了，采用这种手法的有两个前提：</p> <ul><li>只被赋值了一次：也就是说如果某个表达式被使用了多次，很显然我们可以使用一个临时变量记录下表达式的结果，从而减少计算。</li> <li>简单的表达式：也就是说如果表达式比较复杂，按我们最好还是用一个临时变量存储一下。而不是直接耦合到其他表达式中。</li></ul> <h2 id="引入解释性变量"><a href="#引入解释性变量" class="header-anchor">#</a> 引入解释性变量</h2> <p>当表达式比较复杂，难以阅读时，我们就可以考虑将这个复杂表达式的结果用一个临时变量存储起来，并且用这个临时变量来解释表达式的含义或者用途。</p> <p>我们通过一个例子实际体会一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">if</span> <span class="token punctuation">(</span>
+  platform<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;MAC&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span>
+  brower<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;IE&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>很显然，if 条件中的表达式有点长啦，那么我们这个时候，就需要考虑用一个临时变量来存储这些复杂表达式的值。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> isMacOs <span class="token operator">=</span> platform<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;MAC&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> isIEBrowser <span class="token operator">=</span> brower<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;IE&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isMacOs <span class="token operator">&amp;&amp;</span> isIEBrowser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ....</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这里有一个细节要注意：<strong>我们声明临时变量时，最好是使用 const，因为这个临时变量仅仅是为了存储当前这个复杂表达式的结果，是不可以修改的</strong>，如果实际开发中，如果有修改，那我们就要考虑是否适合用临时变量去处理对应的代码逻辑啦</p> <p>写到这儿，难道上面的代码就是最优的代码方案了吗？不是，因为**临时变量本身就有自己的作用域限制，也就是说它是临时的，而且临时变量过多时，又回带来新的问题，**那如何进一步优化呢？答案就是 提炼函数。代码如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">isMacOs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> platform<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;MAC&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">isIEBrowser</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> brower<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;IE&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>isMacOs <span class="token operator">&amp;&amp;</span> isIEBrowser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ....</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>相对于临时变量，通过提炼函数的方式有什么好处呢？<strong>函数本身，不像临时变量那样是有作用域限制的，在其他模块或者函数中依然可以使用。</strong></p> <p><code>那在实际开发中，如何去权衡到底是使用临时变量还是使用提炼函数呢？主要看其是否可以复用，例如我们例子中提到的isMacOs等方法，很显然是可以全局复用的，那我们这时就可以使用提炼函数，但是如果确实只是某个函数内部临时的逻辑，那我们就用临时变量来存储即可，</code></p> <h2 id="分解临时变量"><a href="#分解临时变量" class="header-anchor">#</a> 分解临时变量</h2> <p><strong>如果一个函数中一个临时变量被不同的表达式赋值超过了一次（不包含循环变量），那说明这个临时变量大概率承担了一个以上的责任，那么这时，我们就需要将其分解成多个临时变量，保证每个变量只承担一个责任，同一个临时变量承担多个责任，会让代码阅读者糊涂。</strong></p> <p>我们通过一个例子体会一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> temp <span class="token operator">=</span> <span class="token punctuation">(</span>height <span class="token operator">+</span> width<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+temp <span class="token operator">=</span> height <span class="token operator">*</span> width<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>很显然，上面这种代码我们平时开发中也是经常看得到的，不管是出于没找到合适的变量名，还是本身就觉得这样写也没啥问题，确实运行上不会有问题，但是从代码整洁性的角度来考虑，或者从变量命名的角度来考虑，这都是不合格的，我们要尽可能使用有明确意义的命名。</p> <p>基于此，我们进一步优化一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> premitter <span class="token operator">=</span> <span class="token punctuation">(</span>height <span class="token operator">+</span> width<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>premitter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> area <span class="token operator">=</span> height <span class="token operator">*</span> width<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>area<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>因此，如果遇到了临时变量被赋值了多次的代码，我们就需要考虑是否要分解该临时变量。</p> <h2 id="移除对参数的赋值"><a href="#移除对参数的赋值" class="header-anchor">#</a> 移除对参数的赋值</h2> <p>首先，这里要明确一下<strong>对参数赋值</strong>的含义：</p> <ol><li>如果传入的参数是基本数据类型，那我们对其进行任何修改，也不会对调用端造成影响。</li> <li>如果传入的参数是引用数据类型，比如一个对象 foo，并且对 foo 的某些属性进行了修改，这是 OK 的。</li> <li>但是如果传入的参数是引用数据类型，比如一个对象 foo，我们直接在函数内部修改了 foo 的引用，也就是说把它指向了一个新的对象，那么这就出问题啦，因为这样很可能对 foo 其他调用端造成影响，比如：foo 刚开始指向 a 对象，其他调用的地方都是针对 a 对象中的属性来处理的，现在你直接把 foo 指向了对象 b，很明显这样会出问题。</li></ol> <p>因此，我们这里所说的不要对参数赋值，主要指的是第三点，因为它不仅会使代码出问题，而且降低了代码的可读性，而且相当于混用了按值传递和按引用传递。这是不合理的。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">foo</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  foo<span class="token punctuation">.</span><span class="token function">modifyInSomeWay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 没问题</span>
+  foo <span class="token operator">=</span> anthorObject<span class="token punctuation">;</span> <span class="token comment">// 有问题</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以上是从代码是否能够正常运行，是否能够避免一些意想不到的错误的角度来考虑的，在实际开发中，第二种情况经常需要的。</p> <p>另外一方面，从代码可读性的角度来考虑，不管是参数是值类型，还是引用类型，我们都要避免对参数进行修改，如果遇到这种情况，该怎么办呢？<strong>将参数的值赋值临时变量，之后统一对临时变量进行操作</strong>。</p> <p>接下来，我们结合一个实际例子体会一下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">calculate</span><span class="token punctuation">(</span><span class="token parameter">val<span class="token punctuation">,</span> level</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>level <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> val <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>level <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">)</span> val <span class="token operator">-=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> val<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以上代码，我们直接对参数 val 进行了修改，虽然 val 是一个值类型，直接修改以后也不会报错，但是从代码可读性的角度来说，我们更推荐使用下面的方式进行实现。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">calculate</span><span class="token punctuation">(</span><span class="token parameter">val<span class="token punctuation">,</span> level</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> val<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>level <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> result <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>level <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">)</span> result <span class="token operator">-=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>如何去重新组织函数，我们本文提到了很多的方法，其实总结下来也比较简单：</p> <ol><li>我们要学会什么时候可以提炼函数，什么时候内联函数函数。</li> <li>在提炼或者内联函数的过程中，最重要的就是对局部变量的处理，那具体有又分为很多情况
+<ol><li>是否有局部变量，如果没有最简单，如果有，这时就要考虑是否可以通过参数传给子函数。</li> <li>是否对局部变量进行了赋值。如果有，那我们就需要考虑是否要在子函数中返回修改之后的值。</li> <li>是否局部临时变量过多，这时可以考虑内联局部变量，以及分解临时变量</li> <li>是否局部变量过少，这时应考虑是否需要引入解释性临时变量。</li></ol></li></ol> <p>以上这些方法，不需要大家去背诵，理解其场景即可，然后在实际开发中，写完一个函数的时候，我们要养成习惯去对其进行重构，重构无时无刻进行着，从而保证我们的代码处于一个比较好的状态。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">11/2/2022, 7:35:59 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/1cool/skill/web/js/clean-function.html" class="prev">
+        代码整洁之道 - 函数篇
+      </a></span> <span class="next"><a href="/1cool/skill/web/js/clean-notes.html">
+        代码整洁之道 - 注释篇
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/1cool/assets/js/app.e2260cf4.js" defer></script><script src="/1cool/assets/js/2.1f85ea53.js" defer></script><script src="/1cool/assets/js/66.229cc715.js" defer></script>
+  </body>
+</html>

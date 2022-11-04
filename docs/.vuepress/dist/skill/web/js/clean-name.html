@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>代码整洁之道 - 命名篇 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/1cool/js/MouseClickEffect.js"></script>
+    <meta name="description" content="- . -">
+    
+    <link rel="preload" href="/1cool/assets/css/0.styles.777e77cf.css" as="style"><link rel="preload" href="/1cool/assets/js/app.e2260cf4.js" as="script"><link rel="preload" href="/1cool/assets/js/2.1f85ea53.js" as="script"><link rel="preload" href="/1cool/assets/js/68.7eaf841c.js" as="script"><link rel="prefetch" href="/1cool/assets/js/10.e0649c7e.js"><link rel="prefetch" href="/1cool/assets/js/11.b2ba3b31.js"><link rel="prefetch" href="/1cool/assets/js/12.fe173b0e.js"><link rel="prefetch" href="/1cool/assets/js/13.095b69b1.js"><link rel="prefetch" href="/1cool/assets/js/14.8e46c639.js"><link rel="prefetch" href="/1cool/assets/js/15.79a67f48.js"><link rel="prefetch" href="/1cool/assets/js/16.105b1fce.js"><link rel="prefetch" href="/1cool/assets/js/17.0ff34e4d.js"><link rel="prefetch" href="/1cool/assets/js/18.de30ad69.js"><link rel="prefetch" href="/1cool/assets/js/19.13e59e99.js"><link rel="prefetch" href="/1cool/assets/js/20.35ca8e71.js"><link rel="prefetch" href="/1cool/assets/js/21.1ca98632.js"><link rel="prefetch" href="/1cool/assets/js/22.13bf826a.js"><link rel="prefetch" href="/1cool/assets/js/23.96186cd4.js"><link rel="prefetch" href="/1cool/assets/js/24.d2309ac1.js"><link rel="prefetch" href="/1cool/assets/js/25.fd3ca791.js"><link rel="prefetch" href="/1cool/assets/js/26.946a8b6e.js"><link rel="prefetch" href="/1cool/assets/js/27.ef4c7f7d.js"><link rel="prefetch" href="/1cool/assets/js/28.449e7260.js"><link rel="prefetch" href="/1cool/assets/js/29.1991db0d.js"><link rel="prefetch" href="/1cool/assets/js/3.f420eed6.js"><link rel="prefetch" href="/1cool/assets/js/30.8bf7b27a.js"><link rel="prefetch" href="/1cool/assets/js/31.9ce1178d.js"><link rel="prefetch" href="/1cool/assets/js/32.aa6ac5c9.js"><link rel="prefetch" href="/1cool/assets/js/33.b1995e45.js"><link rel="prefetch" href="/1cool/assets/js/34.0e12e04f.js"><link rel="prefetch" href="/1cool/assets/js/35.dd36b50a.js"><link rel="prefetch" href="/1cool/assets/js/36.2ad5fb94.js"><link rel="prefetch" href="/1cool/assets/js/37.6bd5a31d.js"><link rel="prefetch" href="/1cool/assets/js/38.ce4ae6a2.js"><link rel="prefetch" href="/1cool/assets/js/39.2175a648.js"><link rel="prefetch" href="/1cool/assets/js/4.a185d924.js"><link rel="prefetch" href="/1cool/assets/js/40.733b4a6a.js"><link rel="prefetch" href="/1cool/assets/js/41.f2ee3e2e.js"><link rel="prefetch" href="/1cool/assets/js/42.9c0f8bb3.js"><link rel="prefetch" href="/1cool/assets/js/43.a79ce3ab.js"><link rel="prefetch" href="/1cool/assets/js/44.336cc352.js"><link rel="prefetch" href="/1cool/assets/js/45.6a3addb8.js"><link rel="prefetch" href="/1cool/assets/js/46.66fbba7e.js"><link rel="prefetch" href="/1cool/assets/js/47.db003efa.js"><link rel="prefetch" href="/1cool/assets/js/48.fe2e287a.js"><link rel="prefetch" href="/1cool/assets/js/49.6e8f5930.js"><link rel="prefetch" href="/1cool/assets/js/5.987e1949.js"><link rel="prefetch" href="/1cool/assets/js/50.c03c3cea.js"><link rel="prefetch" href="/1cool/assets/js/51.e07efc2d.js"><link rel="prefetch" href="/1cool/assets/js/52.3f1b413d.js"><link rel="prefetch" href="/1cool/assets/js/53.2d5abb09.js"><link rel="prefetch" href="/1cool/assets/js/54.31790189.js"><link rel="prefetch" href="/1cool/assets/js/55.6dbd6c31.js"><link rel="prefetch" href="/1cool/assets/js/56.3a65dd12.js"><link rel="prefetch" href="/1cool/assets/js/57.71daf71c.js"><link rel="prefetch" href="/1cool/assets/js/58.f9f9d473.js"><link rel="prefetch" href="/1cool/assets/js/59.2d6201f1.js"><link rel="prefetch" href="/1cool/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/1cool/assets/js/60.0ded0749.js"><link rel="prefetch" href="/1cool/assets/js/61.320a7556.js"><link rel="prefetch" href="/1cool/assets/js/62.2a69aa76.js"><link rel="prefetch" href="/1cool/assets/js/63.0eacc7d4.js"><link rel="prefetch" href="/1cool/assets/js/64.82b49ba0.js"><link rel="prefetch" href="/1cool/assets/js/65.184a9ae8.js"><link rel="prefetch" href="/1cool/assets/js/66.229cc715.js"><link rel="prefetch" href="/1cool/assets/js/67.0fc0663c.js"><link rel="prefetch" href="/1cool/assets/js/69.b5d78b8d.js"><link rel="prefetch" href="/1cool/assets/js/7.175c0715.js"><link rel="prefetch" href="/1cool/assets/js/70.904fbd6c.js"><link rel="prefetch" href="/1cool/assets/js/71.01dfb3b3.js"><link rel="prefetch" href="/1cool/assets/js/72.38b656c2.js"><link rel="prefetch" href="/1cool/assets/js/73.80bc575f.js"><link rel="prefetch" href="/1cool/assets/js/74.6d3445e7.js"><link rel="prefetch" href="/1cool/assets/js/75.79b55eb7.js"><link rel="prefetch" href="/1cool/assets/js/76.7d294ff0.js"><link rel="prefetch" href="/1cool/assets/js/77.d460f364.js"><link rel="prefetch" href="/1cool/assets/js/78.7b3dc178.js"><link rel="prefetch" href="/1cool/assets/js/79.9c696f5a.js"><link rel="prefetch" href="/1cool/assets/js/8.1e851244.js"><link rel="prefetch" href="/1cool/assets/js/80.2677639a.js"><link rel="prefetch" href="/1cool/assets/js/81.cb82ad09.js"><link rel="prefetch" href="/1cool/assets/js/82.3ebef646.js"><link rel="prefetch" href="/1cool/assets/js/83.bee176a9.js"><link rel="prefetch" href="/1cool/assets/js/84.7a20af9f.js"><link rel="prefetch" href="/1cool/assets/js/85.09e62e23.js"><link rel="prefetch" href="/1cool/assets/js/86.04ac97b2.js"><link rel="prefetch" href="/1cool/assets/js/87.c62d0e8c.js"><link rel="prefetch" href="/1cool/assets/js/88.64e1b9a8.js"><link rel="prefetch" href="/1cool/assets/js/89.ac19715f.js"><link rel="prefetch" href="/1cool/assets/js/9.11579874.js"><link rel="prefetch" href="/1cool/assets/js/90.9d4ba2aa.js"><link rel="prefetch" href="/1cool/assets/js/91.0441d4fb.js"><link rel="prefetch" href="/1cool/assets/js/92.7a18dc94.js">
+    <link rel="stylesheet" href="/1cool/assets/css/0.styles.777e77cf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/1cool/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/npm/base.html" class="nav-link">
+  npm
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/1cool/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/1cool/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/1cool/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/http/base.html" class="nav-link">
+  http
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/web/npm/base.html" class="nav-link">
+  npm
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/1cool/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/1cool/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/1cool/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/1cool/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/1cool/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/1cool/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/1cool/skill/web/js/" class="sidebar-heading clickable router-link-active"><span>JS</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/base.html" class="sidebar-link">基础</a></li><li><a href="/1cool/skill/web/js/array.html" class="sidebar-link">Array 对象</a></li><li><a href="/1cool/skill/web/js/string.html" class="sidebar-link">String 对象</a></li><li><a href="/1cool/skill/web/js/math.html" class="sidebar-link">Math 对象</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>代码整洁</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/1cool/skill/web/js/clean.html" class="sidebar-link">代码整洁</a></li><li><a href="/1cool/skill/web/js/clean-name.html" aria-current="page" class="active sidebar-link">代码整洁之道 - 命名篇</a></li><li><a href="/1cool/skill/web/js/clean-function.html" class="sidebar-link">代码整洁之道 - 函数篇</a></li><li><a href="/1cool/skill/web/js/clean-function-reset.html" class="sidebar-link">代码整洁之道 - 重构函数</a></li><li><a href="/1cool/skill/web/js/clean-notes.html" class="sidebar-link">代码整洁之道 - 注释篇</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#理论篇" class="anchor-item__link" style="margin-left:0;">
+        理论篇
+      </a></li><li class="anchor-item"><a href="#一-使用具有明确含义的单词" class="anchor-item__link" style="margin-left:20px;">
+        一. 使用具有明确含义的单词
+      </a></li><li class="anchor-item"><a href="#二-做有意义的区分" class="anchor-item__link" style="margin-left:20px;">
+        二. 做有意义的区分
+      </a></li><li class="anchor-item"><a href="#三-使用可以读得出来的单词" class="anchor-item__link" style="margin-left:20px;">
+        三. 使用可以读得出来的单词
+      </a></li><li class="anchor-item"><a href="#四-避免使用编码" class="anchor-item__link" style="margin-left:20px;">
+        四. 避免使用编码
+      </a></li><li class="anchor-item"><a href="#五-使用常见的单词命名" class="anchor-item__link" style="margin-left:20px;">
+        五. 使用常见的单词命名
+      </a></li><li class="anchor-item"><a href="#六-每个场景对应一个词" class="anchor-item__link" style="margin-left:20px;">
+        六. 每个场景对应一个词
+      </a></li><li class="anchor-item"><a href="#七-使用解决领域方案名词" class="anchor-item__link" style="margin-left:20px;">
+        七. 使用解决领域方案名词
+      </a></li><li class="anchor-item"><a href="#命名规范" class="anchor-item__link" style="margin-left:0;">
+        命名规范
+      </a></li><li class="anchor-item"><a href="#【必须】使用小驼峰命名" class="anchor-item__link" style="margin-left:20px;">
+        【必须】使用小驼峰命名
+      </a></li><li class="anchor-item"><a href="#【必须】-只有命名类或者构造器函数时-才使用大驼峰命名" class="anchor-item__link" style="margin-left:20px;">
+        【必须】 只有命名类或者构造器函数时，才使用大驼峰命名
+      </a></li><li class="anchor-item"><a href="#【必须】当导出类-构造器-函数库-对象时-使用大驼峰" class="anchor-item__link" style="margin-left:20px;">
+        【必须】当导出类/构造器/函数库/对象时，使用大驼峰
+      </a></li><li class="anchor-item"><a href="#【必须】当导出默认函数时-必须使用驼峰命名法。" class="anchor-item__link" style="margin-left:20px;">
+        【必须】当导出默认函数时，必须使用驼峰命名法。
+      </a></li><li class="anchor-item"><a href="#【推荐】不要以下划线开头或者结尾命名变量" class="anchor-item__link" style="margin-left:20px;">
+        【推荐】不要以下划线开头或者结尾命名变量
+      </a></li><li class="anchor-item"><a href="#【推荐】不要保存-this-的引用-推荐使用箭头函数" class="anchor-item__link" style="margin-left:20px;">
+        【推荐】不要保存 this 的引用，推荐使用箭头函数
+      </a></li><li class="anchor-item"><a href="#【推荐】文件名推荐使用-kebab-case-即用-隔开" class="anchor-item__link" style="margin-left:20px;">
+        【推荐】文件名推荐使用 kebab-case，即用-隔开
+      </a></li><li class="anchor-item"><a href="#【推荐】缩略词和缩写都必须全部大写或者全部小写" class="anchor-item__link" style="margin-left:20px;">
+        【推荐】缩略词和缩写都必须全部大写或者全部小写
+      </a></li><li class="anchor-item"><a href="#【推荐】export-导出的常量-统一全部大写命名-多个单词用-隔开。" class="anchor-item__link" style="margin-left:20px;">
+        【推荐】export 导出的常量，统一全部大写命名，多个单词用_隔开。
+      </a></li><li class="anchor-item"><a href="#命名实战" class="anchor-item__link" style="margin-left:0;">
+        命名实战
+      </a></li><li class="anchor-item"><a href="#多个单词如何组合" class="anchor-item__link" style="margin-left:20px;">
+        多个单词如何组合？
+      </a></li><li class="anchor-item"><a href="#项目命名" class="anchor-item__link" style="margin-left:20px;">
+        项目命名
+      </a></li><li class="anchor-item"><a href="#模块命名" class="anchor-item__link" style="margin-left:20px;">
+        模块命名
+      </a></li><li class="anchor-item"><a href="#变量命名" class="anchor-item__link" style="margin-left:20px;">
+        变量命名
+      </a></li><li class="anchor-item"><a href="#常量命名" class="anchor-item__link" style="margin-left:20px;">
+        常量命名
+      </a></li><li class="anchor-item"><a href="#方法命名" class="anchor-item__link" style="margin-left:20px;">
+        方法命名
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="代码整洁之道-命名篇"><a href="#代码整洁之道-命名篇" class="header-anchor">#</a> 代码整洁之道 - 命名篇</h1> <p>命名确实是我们写代码的第一步，<strong>直接关系到整个代码的可读性以及后期的可维护性</strong></p> <ul><li>理论篇： 主要结合了【代码整洁之道】这本书里所讲到的命名思想（推荐大家可以完整的看一下）</li> <li>命名规范：主要是结合了目前市场常见的第三方代码规范库，以及公司的代码规范。</li> <li>命名实战：主要是根据实际开发经验，以及各种不同场景下的命名分别进行了总结。</li></ul> <h2 id="理论篇"><a href="#理论篇" class="header-anchor">#</a> 理论篇</h2> <h3 id="一-使用具有明确含义的单词"><a href="#一-使用具有明确含义的单词" class="header-anchor">#</a> 一. 使用具有明确含义的单词</h3> <p><code>我们使用的名称要有其实际含义，其他程序员看了能够大概知道这个变量表示的是什么意思，而不是看了一脸懵逼。</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad</span>
+<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;user1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user4&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good</span>
+<span class="token keyword">let</span> userList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;user1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user4&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 用户模块用user命名</span>
+<span class="token keyword">let</span> permissionList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;user1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;user4&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 权限模块用permission命名</span>
+</code></pre></div><h3 id="二-做有意义的区分"><a href="#二-做有意义的区分" class="header-anchor">#</a> 二. 做有意义的区分</h3> <p>一个用户模块就可以细分为：获取用户基本信息，获取用户列表等，相信我们在不同的项目下经常会看到下面这些命名：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">getUserData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">getUserList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">getUsers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>其他程序员一看用户模块代码，有这么多个方法，但是能分辨清楚各个函数有什么区别吗？<br>
+很显然不能，比如：getUser()和 getUserData()，光从命名上看其实并没有区别，但是我们却用它们写了不同的逻辑，这样就很容造成歧义。</p> <p>这就是 要说的：<code>要做有意义的区分：即需要我们去区分两个子模块或者场景的时候，我们一定要采用两个有明确不同含义的命名去区分它们，而不是使用意思相近，很容易混淆在一起的</code>。</p> <p>类似的常见错误还有:<br>
+account 与 accountData, customer 与 customerInfo, money 与 moneyAmount 等都其实没有什么区别，在实际项目开发中，我们使用其中一种命名方式即可.<br>
+一定要在整个项目中一以贯之，比如：获取用户信息，我们决定使用 getUserInfo()，那么其他地方统一用以 info 结尾的</p> <h3 id="三-使用可以读得出来的单词"><a href="#三-使用可以读得出来的单词" class="header-anchor">#</a> 三. 使用可以读得出来的单词</h3> <p>实际开发中尽量少使用缩写，如果使用，也是那些经常常见的一些缩写，例如：value 可以缩写为 val, document 可以缩写为 doc.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">addArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bad case</span>
+<span class="token function">addArticle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 推荐</span>
+</code></pre></div><h3 id="四-避免使用编码"><a href="#四-避免使用编码" class="header-anchor">#</a> 四. 避免使用编码</h3> <p>我们要不要把一些关键字，类型 加到变量的命名中</p> <p>因为在 js 中，类型之间可以随意赋值，即使我们定义了 phoneString，依然可能被赋值一个 number，所以也很容易一起歧义。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> phoneString <span class="token operator">=</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">;</span> <span class="token comment">// 后面的String没必要</span>
+<span class="token keyword">const</span> phoneNumber <span class="token operator">=</span> <span class="token number">123132</span><span class="token punctuation">;</span> <span class="token comment">// 这个还可以，因为电话号码本身就是phoneNumber</span>
+</code></pre></div><h3 id="五-使用常见的单词命名"><a href="#五-使用常见的单词命名" class="header-anchor">#</a> 五. 使用常见的单词命名</h3> <p>尽可能用大家都熟知的一些单词或者语法去命名，不要去用那些不常见的，或者俗语，俚语的写法。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">kill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 别用 whack()，不知道什么意思的，可以理解为另外一种不常见的写法</span>
+<span class="token function">abort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 别用 eatMyShorts(), 它是一种俚语的写法。</span>
+</code></pre></div><h3 id="六-每个场景对应一个词"><a href="#六-每个场景对应一个词" class="header-anchor">#</a> 六. 每个场景对应一个词</h3> <p>平时开发中，可能固定也就那几种场景，获取数据，更新数据，删除数据等<br>
+每个场景我们要给其约定一个固定的词，从而在整个项目中一以贯之<br>
+而不是在项目中，此处添加用的是 add, 其他地方用的又是 create 等其他单词</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取</span>
+<span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更新</span>
+<span class="token function">deleteUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 删除</span>
+<span class="token function">addUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加</span>
+</code></pre></div><p>注意：用词一定要适合，例如：添加，别什么地方都用 add, 很可能其他场景用的 insert，append 等，我们也要随机应变，不能为了保持一致，而忽略其并不适合当前场景。</p> <h3 id="七-使用解决领域方案名词"><a href="#七-使用解决领域方案名词" class="header-anchor">#</a> 七. 使用解决领域方案名词</h3> <p>程序员本身这个职业，可能会有其自身的一些专有名词，比如：队列用 queue, 栈用 stack， 我们在实际项目中，要尽可能多使用这些名词。</p> <div class="language-js extra-class"><pre class="language-js"><code>jobQueue<span class="token punctuation">;</span> <span class="token comment">// 任务队列</span>
+observer<span class="token punctuation">;</span> <span class="token comment">// 观察者模式</span>
+</code></pre></div><p>这里要强调一点，<code>设计模式中有很多特有的名词，我们如果实际开发中有相关的场景，我们要尽可能去使用这些设计模式定义的名词</code>。例如：访问者模式中的 visitor， 发布订阅模式中的：publisher, subscriber 等。</p> <h2 id="命名规范"><a href="#命名规范" class="header-anchor">#</a> 命名规范</h2> <p>上面讲到的都是我们平时命名的一些理论知识，总结起来就是：<code>命名一定要明确的意义，其他程序员看了能看懂！</code> ，接下来，我们看一下具体有哪些明确的命名规范。</p> <p>命名规范也很不同的等级，这里我们分为：<code>【必须】【推荐】【可选】</code>三个等级。</p> <h3 id="【必须】使用小驼峰命名"><a href="#【必须】使用小驼峰命名" class="header-anchor">#</a> 【必须】使用小驼峰命名</h3> <p>说明：<code>实际开发中，所有的变量命名，函数命名等全部遵循小驼峰的写法</code>。对应 eslint 规则是：camelcase</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">const</span> user_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> userlist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+​
+<span class="token comment">// good</span>
+<span class="token keyword">const</span> userList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="【必须】-只有命名类或者构造器函数时-才使用大驼峰命名"><a href="#【必须】-只有命名类或者构造器函数时-才使用大驼峰命名" class="header-anchor">#</a> 【必须】 只有命名类或者构造器函数时，才使用大驼峰命名</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">function</span> <span class="token function">user</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> u <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">user</span><span class="token punctuation">(</span><span class="token string">'kobe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+​
+<span class="token comment">// good case</span>
+<span class="token keyword">function</span> <span class="token function">User</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> u <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token string">'kobe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="【必须】当导出类-构造器-函数库-对象时-使用大驼峰"><a href="#【必须】当导出类-构造器-函数库-对象时-使用大驼峰" class="header-anchor">#</a> 【必须】当导出类/构造器/函数库/对象时，使用大驼峰</h3> <p><code>首先，类和构造器函数，不管是单独命名还是导出的时候，都统一大驼峰即可，这里要注意的是当导出一个对象的时候，我们也要使用大驼峰。</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> User <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;kobe&quot;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">41</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> User<span class="token punctuation">;</span>
+</code></pre></div><h3 id="【必须】当导出默认函数时-必须使用驼峰命名法。"><a href="#【必须】当导出默认函数时-必须使用驼峰命名法。" class="header-anchor">#</a> 【必须】当导出默认函数时，必须使用驼峰命名法。</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">formatNumber</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+​
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> formatNumber<span class="token punctuation">;</span>
+</code></pre></div><p><strong>注意：推荐文件名尽量和默认导出的名称保持一致，当然文件名建议是 kebab-case</strong>，例如：上面这个 case，文件名应该为 format-number.js 。</p> <h3 id="【推荐】不要以下划线开头或者结尾命名变量"><a href="#【推荐】不要以下划线开头或者结尾命名变量" class="header-anchor">#</a> 【推荐】不要以下划线开头或者结尾命名变量</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">const</span> _username <span class="token operator">=</span> <span class="token string">&quot;kobe&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> user_name <span class="token operator">=</span> <span class="token string">&quot;kobe&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> username_ <span class="token operator">=</span> <span class="token string">&quot;kobe&quot;</span><span class="token punctuation">;</span>
+</code></pre></div><p>注意：<br>
+在 js 中，可能会以下划线开头来命名私有属性<br>
+但其实这个变量依然是公开的，调用方依然可以调用到<br>
+所以，反而可能会引起歧义</p> <h3 id="【推荐】不要保存-this-的引用-推荐使用箭头函数"><a href="#【推荐】不要保存-this-的引用-推荐使用箭头函数" class="header-anchor">#</a> 【推荐】不要保存 this 的引用，推荐使用箭头函数</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+​
+<span class="token comment">// bad case</span>
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> that <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>that<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+​
+<span class="token comment">// good case</span>
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="【推荐】文件名推荐使用-kebab-case-即用-隔开"><a href="#【推荐】文件名推荐使用-kebab-case-即用-隔开" class="header-anchor">#</a> 【推荐】文件名推荐使用 kebab-case，即用-隔开</h3> <p>命名文件的时候，推荐使用 短横线 隔开来命名。</p> <div class="language-sh extra-class"><pre class="language-sh"><code>// good <span class="token keyword">case</span>
+task-list.vue
+task-detail.vue
+</code></pre></div><p>当然，实际项目开发中，也经常会遇到小驼峰命名，这个大家随时切换，尽量可以保证一个项目中所有文件的命名规范是统一的。</p> <h3 id="【推荐】缩略词和缩写都必须全部大写或者全部小写"><a href="#【推荐】缩略词和缩写都必须全部大写或者全部小写" class="header-anchor">#</a> 【推荐】缩略词和缩写都必须全部大写或者全部小写</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">const</span> HttpRequests <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+​
+<span class="token comment">// good case</span>
+<span class="token keyword">const</span> httpRequests <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HTTPRequests <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="【推荐】export-导出的常量-统一全部大写命名-多个单词用-隔开。"><a href="#【推荐】export-导出的常量-统一全部大写命名-多个单词用-隔开。" class="header-anchor">#</a> 【推荐】export 导出的常量，统一全部大写命名，多个单词用_隔开。</h3> <p>这块，有几点要注意：</p> <ol><li>export 导出的常量，推荐用大写命名，但是模块内部的常量不需要全大写，正常按照小驼峰即可。</li> <li>export 导出的常量，推荐大写命名，但是其内部属性不必大写。</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad case</span>
+<span class="token keyword">const</span> <span class="token constant">NAME</span> <span class="token operator">=</span> <span class="token string">'kobe'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> userConfig <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// good case</span>
+<span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">'kobe'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">USER_CONFIG</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+​
+<span class="token comment">// bad case</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">MAPPING</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token constant">KEY</span><span class="token operator">:</span> <span class="token string">'value'</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// good case</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">MAPPING</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">key</span><span class="token operator">:</span> <span class="token string">'value'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="命名实战"><a href="#命名实战" class="header-anchor">#</a> 命名实战</h2> <p>面对各种不同的业务场景的命名，如何去使用准确的单词，并且如何把这些单词组合起来，以及单词谁前谁后等问题，都需要我们有一个比较清晰的认知和命名习惯。</p> <h3 id="多个单词如何组合"><a href="#多个单词如何组合" class="header-anchor">#</a> 多个单词如何组合？</h3> <p>在实际的业务场景中，如果是单个单词的模块，那我们直接使用该单词即可.</p> <p>多个单词之间的顺序是什么样呢？如何去组合呢？这里面其实也有很多细节的。</p> <ol><li>我们首先想到是根据文件去拆分不同的子模块</li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code>
+<span class="token operator">|</span> - user
+  <span class="token operator">|</span> - list.js
+  <span class="token operator">|</span> - detail.js
+
+</code></pre></div><ol start="2"><li>如果在实际项目中，目录嵌套结构已经比较深，不想再嵌套一层，这时可以直接根据文件名进行区分。</li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code>userList // 用户列表
+userDetail // 用户详情
+</code></pre></div><ol start="3"><li>以上这些都是比较简单的，除此之外，我们主要是想说一下，同一个模块下，不同的子模块，或者类似的模块在一起的时候，如何去更好的命名，从而区分它们。</li></ol> <p>例如：任务模块，可能包含以下内容：</p> <ul><li>任务 A 列表</li> <li>任务 B 列表</li> <li>任务详情</li> <li>添加任务 A - 弹框</li> <li>天际任务 B - 弹框</li></ul> <p>此时，我们很可能会写出下面这样的命名:</p> <div class="language-sh extra-class"><pre class="language-sh"><code>taskListA
+taskBList
+taskModalA
+taskBModal
+taskDetail
+</code></pre></div><p>尤其是当我们没有明确自己的习惯的时候，可能这个模块 形容词（如这里的 A,B）放在了中间，另外一个模块又放到了结尾， 导致整个项目的代码看着很乱，因此，我们需要尽量整个项目都保持一致的命名习惯。</p> <p>这里，<strong>我个人推荐使用：前缀 + 形容词或名词 + 后缀 的模式</strong>。当然，这里只是我个人的命名习惯，不是标准。</p> <p>我们来具体解释一下：</p> <ul><li>前缀：一般是公共的模块名称：例如：上面讲到的 task</li> <li>形容词或名词：一般模块的两个不同的子模块，或者子内容。例如：上面讲到的 A，B</li> <li>后缀：一般是表示这个模块具体是哪种类型，例如：List 一般表示一个列表或者表格。Detail 表示详情，Modal 表示弹框等。</li></ul> <p>我们来实际用一个例子体会一下，例如：一个任务模块，包含：任务列表，任务列表筛选栏目，创建单任务，创建多任务，任务详情等模块，我们使用 vue 或者 react 开发的时候，一般都会把它们拆分成独立的文件。</p> <div class="language-sh extra-class"><pre class="language-sh"><code>taskFilter.vue
+taskList.vue
+taskDetail.vue
+taskSingleModal.vue
+taskMultipleModal.vue
+</code></pre></div><p>说明：这里说这一点，主要看到很多代码，其实是因为开发者并没有一个自己的一套习惯，导致不同模块之间的命名都不一致。很随机。因此，我们要培养属于自己的一套命名习惯。</p> <h3 id="项目命名"><a href="#项目命名" class="header-anchor">#</a> 项目命名</h3> <p><code>推荐：统一采用小写，多个单词之间用短斜杠-隔开即可。</code> 例如：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>shop-demo
+cms-platform
+</code></pre></div><h3 id="模块命名"><a href="#模块命名" class="header-anchor">#</a> 模块命名</h3> <p>不同的模块主要体现在两方面：</p> <ol><li>根据实际业务场景拆分的模块</li> <li>项目架构本身拆分的模块</li></ol> <p>根据实际业务场景拆分的模块，命名很简单，直接根据其实际业务含义翻译一下即可，实在不知道用啥单词，直接用词典翻译一下。</p> <p>这里，我们主要说一下前端项目架构本身拆分的模块，其实也就是项目目录结构的划分：</p> <p>这里把常见的一些功能模块的命名罗列一下：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>views // 存放所有页面，子目录按具体业务模块划分即可
+assets // 存放所有资源，例如：图片等
+components // 公共组件
+router // 路由
+store // 状态
+utils // 各种自定义工具函数
+services // 存放ajax请求相关
+</code></pre></div><p><code>注意：模块命名，本质上也是文件命名，其实推荐的是统一小写，多个单词之间使用短斜杠隔开。</code></p> <h3 id="变量命名"><a href="#变量命名" class="header-anchor">#</a> 变量命名</h3> <p><code>推荐：采用小驼峰去命名变量</code>， 实际开发过程中，根据具体变量的含义，采用有明确意义的单词去命名即可，多个单词组合时，采用我们第一点提到的技巧即可。</p> <h3 id="常量命名"><a href="#常量命名" class="header-anchor">#</a> 常量命名</h3> <p>常量命名主要分为两种：</p> <ol><li><strong>需要导出的常量：统一全部采用大写，多个词之间用下划线隔开。</strong></li> <li><strong>不需要导出，只在文件模块内部使用的常量： 统一小驼峰命名</strong></li></ol> <h3 id="方法命名"><a href="#方法命名" class="header-anchor">#</a> 方法命名</h3> <h4 id="返回布尔类型的方法"><a href="#返回布尔类型的方法" class="header-anchor">#</a> 返回布尔类型的方法</h4> <table><tr><td>前缀-prefix</td> <td>含义</td> <td>例如</td></tr> <tr><td>is</td> <td>表示是否符合某种状态</td> <td>isValid() isLoaded()</td></tr> <tr><td>can</td> <td>表示是否可以执行某种操作</td> <td>canRemove()</td></tr> <tr><td>has</td> <td>表示是否持有某种特性</td> <td>hasOwnProperty()</td></tr> <tr><td>needs</td> <td>表示是否需要进行某种操作</td> <td>needsUpdate()</td></tr></table> <h4 id="回调方法"><a href="#回调方法" class="header-anchor">#</a> 回调方法</h4> <table><tr><td>前缀-prefix</td> <td>含义</td> <td>例如</td></tr> <tr><td>on</td> <td>表示当事件发生时</td> <td>onCompleted() onFinished()</td></tr> <tr><td>before/after</td> <td>表示事件发生前后</td> <td>beforeUpdate() afterUpdate()</td></tr> <tr><td>pre/post</td> <td>同上</td> <td>preUpdate() postUpdate()</td></tr> <tr><td>Did/will</td> <td>同上</td> <td>didUpdate() willUpdate()</td></tr></table> <h4 id="与操作相关-即增删改查"><a href="#与操作相关-即增删改查" class="header-anchor">#</a> 与操作相关，即增删改查</h4> <table><tr><td>单词</td> <td>意义</td> <td>例如</td></tr> <tr><td>初始化：init/reset/clear	</td> <td>Init: 初始化数据 reset: 重置数据，恢复到初始化状态 clear: 清除数据，恢复到初始化状态</td> <td>initData() resetData(); clearData();</td></tr> <tr><td>读取：get/fetch/load</td> <td>get: 获取某数据，可以是本地数据，也可以是远程数据 fetch: 获取远程数据 load: 加载某数据</td> <td>getUserList(); fetchUserList(); loadUserList();</td></tr> <tr><td>添加：add/append/insert/create</td> <td>add/create: 在一个list添加一个子项 append/insert: 常见于dom操作</td> <td>addUser() appendChild() removeChild()</td></tr> <tr><td>删除：delete/remove/destroy</td> <td>delete: 在一个list删除某个子项 remove: 常见于dom操作</td> <td>deleteUser()</td></tr> <tr><td>更新：update</td> <td>update: 更新数据</td> <td>updateUser()</td></tr> <tr><td>保存：save/apply/commit</td> <td>save: 保存数据 apply: 应用 commit: 提交</td> <td>saveData() applyChange() commitData();</td></tr> <tr><td>队列相关：enqueue/dequeue</td> <td>enqueue: 对尾添加一个元素 dequeue: 对首移除一个元素	</td> <td></td></tr> <tr><td>栈/数组相关：push/pop/peek/find等</td> <td>即数组的常见操作</td> <td></td></tr></table> <h4 id="成对出现的动词"><a href="#成对出现的动词" class="header-anchor">#</a> 成对出现的动词</h4> <table><tr><td>单词</td> <td>与之对应的</td></tr> <tr><td>get ：获取</td> <td>set ：设置</td></tr> <tr><td>add: 添加</td> <td>delete：删除</td></tr> <tr><td>create: 创建</td> <td>destroy：销毁</td></tr> <tr><td>start 启动</td> <td>stop 停止</td></tr> <tr><td>open 打开</td> <td>close 关闭</td></tr> <tr><td>read 读取</td> <td>write 写入</td></tr> <tr><td>load 载入</td> <td>save 保存</td></tr> <tr><td>backup 备份</td> <td>restore 恢复</td></tr> <tr><td>import 导入</td> <td>export 导出</td></tr> <tr><td>split 分割</td> <td>merge 合并</td></tr> <tr><td>inject 注入</td> <td>extract 提取</td></tr> <tr><td>attach 附着</td> <td>detach 脱离</td></tr> <tr><td>bind 绑定</td> <td>separate 分离</td></tr> <tr><td>view 查看</td> <td>browse 浏览</td></tr> <tr><td>edit 编辑</td> <td>modify 修改</td></tr> <tr><td>select 选取</td> <td>mark 标记</td></tr> <tr><td>copy 复制</td> <td>paste 粘贴</td></tr> <tr><td>undo 撤销</td> <td>redo 重做</td></tr> <tr><td>insert 插入</td> <td>delete 移除</td></tr> <tr><td>add 加入</td> <td>append 添加</td></tr> <tr><td>clean 清理</td> <td>clear 清除</td></tr> <tr><td>index 索引</td> <td>sort 排序</td></tr> <tr><td>find 查找</td> <td>search 搜索</td></tr> <tr><td>increase 增加</td> <td>decrease 减少</td></tr> <tr><td>play 播放</td> <td>pause 暂停</td></tr> <tr><td>launch 启动</td> <td>run 运行</td></tr> <tr><td>compile 编译</td> <td>execute 执行</td></tr> <tr><td>debug 调试</td> <td>trace 跟踪</td></tr> <tr><td>observe 观察</td> <td>listen 监听</td></tr> <tr><td>build 构建</td> <td>publish 发布</td></tr> <tr><td>input 输入</td> <td>output 输出</td></tr> <tr><td>encode 编码</td> <td>decode 解码</td></tr> <tr><td>encrypt 加密</td> <td>decrypt 解密</td></tr> <tr><td>compress 压缩</td> <td>decompress 解压缩</td></tr> <tr><td>pack 打包</td> <td>unpack 解包</td></tr> <tr><td>parse 解析</td> <td>emit 生成</td></tr> <tr><td>connect 连接</td> <td>disconnect 断开</td></tr> <tr><td>send 发送</td> <td>receive 接收</td></tr> <tr><td>download 下载</td> <td>upload 上传</td></tr> <tr><td>refresh 刷新</td> <td>synchronize 同步</td></tr> <tr><td>update 更新</td> <td>revert 复原</td></tr> <tr><td>lock 锁定</td> <td>unlock 解锁</td></tr> <tr><td>check out 签出</td> <td>check in 签入</td></tr> <tr><td>submit 提交</td> <td>commit 交付</td></tr> <tr><td>push 推</td> <td>pull 拉</td></tr> <tr><td>expand 展开</td> <td>collapse 折叠</td></tr> <tr><td>begin 起始</td> <td>end 结束</td></tr> <tr><td>start 开始</td> <td>finish 完成</td></tr> <tr><td>enter 进入</td> <td>exit 退出</td></tr> <tr><td>abort 放弃</td> <td>quit 离开</td></tr> <tr><td>obsolete 废弃</td> <td>depreciate 废旧</td></tr> <tr><td>collect 收集</td> <td>aggregate 聚集</td></tr></table> <h4 id="路由相关"><a href="#路由相关" class="header-anchor">#</a> 路由相关</h4> <table><tr><td>前缀</td> <td>后缀</td> <td>例如</td></tr> <tr><td>to</td> <td>page</td> <td>toUserPage()</td></tr> <tr><td>go</td> <td>page</td> <td>goUserPage()</td></tr> <tr><td>redirect</td> <td>page</td> <td>redirectUserPage()</td></tr> <tr><td>back</td> <td>page</td> <td>backHomePage() backUserPage()</td></tr></table> <p><code>推荐：toXxxPage 或者 goXxxPage 或者 backXxxPage 格式。</code></p> <p>跳转到指定页面：toXxxPage()
+重定向到指定页面：redirectXxxPage()
+返回上一页： backPrePage();
+返回首页：backHomePage();</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">11/1/2022, 8:19:06 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/1cool/skill/web/js/clean.html" class="prev">
+        代码整洁
+      </a></span> <span class="next"><a href="/1cool/skill/web/js/clean-function.html">
+        代码整洁之道 - 函数篇
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/1cool/assets/js/app.e2260cf4.js" defer></script><script src="/1cool/assets/js/2.1f85ea53.js" defer></script><script src="/1cool/assets/js/68.7eaf841c.js" defer></script>
+  </body>
+</html>
