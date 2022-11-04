@@ -1,5 +1,24 @@
 # 常用
 
+## 选中文字样式
+
+::: details 点击查看代码
+
+```scss
+/* webkit, opera, IE9 （谷歌浏览器）*/
+::selection {
+  background: yellow;
+  color: red;
+}
+/* mozilla firefox（火狐浏览器） */
+::-moz-selection {
+  background: yellow;
+  color: red;
+}
+```
+
+:::
+
 ## 扩大点击区域
 
 ::: details 点击查看代码
