@@ -343,7 +343,10 @@ module.exports = {
               collapsable: false,
               sidebarDepth: 0,
               path: "/problem/element-plus/components",
-              children: ["/problem/element-plus/components/el-scrollbar"],
+              children: [
+                "/problem/element-plus/components/el-scrollbar",
+                "/problem/element-plus/components/el-date-time-picker",
+              ],
             },
           ],
         },
