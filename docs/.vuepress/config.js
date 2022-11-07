@@ -263,6 +263,12 @@ module.exports = {
        */
       "/skill/web/other": [
         {
+          title: "npm",
+          collapsable: false,
+          sidebarDepth: 0,
+          path: "/skill/web/other/npm",
+        },
+        {
           title: "Git", // 必要的
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1

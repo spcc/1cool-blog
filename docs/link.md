@@ -6,6 +6,8 @@
 
 - [Vue3 文档](https://cn.vuejs.org/)
 - [Vue Router 4](https://router.vuejs.org/zh/index.html)
+- [VueUse](https://vueuse.org/)
+- [VueUse 中文 api](https://blog.csdn.net/qq_28550263/article/details/122138846)
 - [Element Plus](https://element-plus.org/zh-CN/#/zh-CN)
 - [Vant 4](https://vant-contrib.gitee.io/vant/v4/#/zh-CN)
 - [Ant Design Vue](https://www.antdv.com/components/overview-cn/)
@@ -74,7 +76,6 @@
 
 - [这是一份保姆级 Vue3+Vite 实战教程](https://juejin.cn/post/7147353734912147470)
 - [01.Vben Admin 源码学习:项目初始化](https://juejin.cn/post/7102052860388442120)
-- [十三.2022 年了，你还不会 vue3 吗？](https://juejin.cn/post/7144890139548844046)
 - [2022 年值得推荐的 Vue 库！](https://juejin.cn/post/7124128574029692959)
 - [Vue3 + setup + ts 使用总结](https://juejin.cn/post/7127668333565968421)
 - [vite + vue3 + setup + pinia + ts 项目实战](https://juejin.cn/post/7041188884864040991)
