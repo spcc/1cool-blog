@@ -35,6 +35,7 @@
 ## 架构(重)
 
 - [vue3 基于 element-plus 封装一套完整的 table + 分页 + 查询](https://juejin.cn/post/7132755214108459015)
+- [01.Vben Admin 源码学习:项目初始化](https://juejin.cn/post/7102052860388442120)
 - [解放劳动力，玩转自定义 Hook](https://juejin.cn/post/7137177180915646471)
 - [阿里 P7，如何才能达到该水平 ？](https://juejin.cn/post/7132268525112000525)
 - [中后台系统提升质量和效率的一个思路](https://juejin.cn/post/7158947795087409183)
@@ -75,10 +76,6 @@
 
 ## vue3 上手(重)
 
-- [这是一份保姆级 Vue3+Vite 实战教程](https://juejin.cn/post/7147353734912147470)
-- [01.Vben Admin 源码学习:项目初始化](https://juejin.cn/post/7102052860388442120)
-- [Vue3 + setup + ts 使用总结](https://juejin.cn/post/7127668333565968421)
-- [vite + vue3 + setup + pinia + ts 项目实战](https://juejin.cn/post/7041188884864040991)
 - [vue3 实现国际化](https://juejin.cn/post/7094916084838432781)
 
 ## pinia
