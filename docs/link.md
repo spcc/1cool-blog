@@ -5,8 +5,11 @@
 ### 官方
 
 - [Vue3 文档](https://cn.vuejs.org/)
-- [Vite](https://cn.vitejs.dev/)
 - [Vue Router 4](https://router.vuejs.org/zh/index.html)
+- [Pinia](https://pinia.vuejs.org/zh/index.html)
+- [pinia-plugin-persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/)
+- [vite-plugin-mock](https://github.com/vbenjs/vite-plugin-mock/blob/HEAD/README.zh_CN.md)
+- [Vite](https://cn.vitejs.dev/)
 - [VueUse](https://vueuse.org/)
 - [VueUse 中文 api](https://blog.csdn.net/qq_28550263/article/details/122138846)
 - [Element Plus](https://element-plus.org/zh-CN/#/zh-CN)
@@ -80,7 +83,6 @@
 
 ## pinia
 
-- [国庆“浅尝”了一下大菠萝 🍍（Vuex 和 Pinia 的对比使用）](https://juejin.cn/post/7149553176227053605)
 - [一个登录案例包学会 Pinia](https://juejin.cn/post/7154579554034515982)
 - [🍍 Pinia 的 Setup Stores 语法太香了](https://juejin.cn/post/7143504636496855077)
 - [2k 字轻松入门 Pinia，猴子都可以看懂的教程](https://juejin.cn/post/7139724486625984543)

@@ -104,6 +104,7 @@ module.exports = {
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
               children: [
+                '/skill/web/vue3/faq/pinia',
                 '/skill/web/vue3/faq/base1',
                 '/skill/web/vue3/faq/base',
                 '/skill/web/vue3/faq/faq'
