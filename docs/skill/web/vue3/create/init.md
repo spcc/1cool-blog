@@ -15,7 +15,7 @@ yarn create vite
 pnpm create vite
 ```
 
-### 2. 默认配置（默认安装: VueRouter 丶 Pinia 丶 ESLint 丶 Prettier）
+### 默认配置（默认安装: VueRouter 丶 Pinia 丶 ESLint 丶 Prettier）
 
 ```sh
 ✔ Project name（项目名）: project-vue3
@@ -497,4 +497,253 @@ module.exports = {
 
 `Prettier` 配置就比较简单，按照文档和喜好在 `.prettierrc.json` 文件中配置就可以，注意配置的时候一定要和 `ESLint` 的 `rules` 比较一下，这里是会发生冲突的地方，检测和格式化规则一定要一致。
 
-###
+### Styles 公共样式管理、初始化样式
+
+#### 公共样式处理
+
+`src` 目录下新增一个 `styles` 文件夹，此文件夹我们后期可以放一些公共的样式文件。
+
+大家都知道，`HTML` 标签是有默认样式的，一般我们在写项目时都会直接清除掉这个默认样式，也就是做个重置。
+
+那相较于 [Eric Merer](https://meyerweb.com/eric/tools/css/reset/) 原版的清楚样式文件，`Normalize.css` 它在默认的 `HTML` 元素样式上提供了跨浏览器的高度一致性，是一种现代的、为 `HTML5` 准备的优质替代方案，所以我们直接使用它就好了。
+
+下载 [Normalize.css](https://necolas.github.io/normalize.css/latest/normalize.css) 到 `styles` 文件夹下，当然你也可以直接 `npm` 安装它，不过我比较喜欢直接下载下来这个文件。
+
+下载下来之后直接在 `main.js` 最上面引入一下就行了，如下
+
+其他的公共 `css` 文件我们用到的时候也可以这样引入一下就可以了。
+
+### Utils、Hooks、API 管理
+
+在项目 `src` 目录下添加一个 `utils` 文件夹，此文件夹用于存放我们项目中用到的一些公共方法文件。
+
+在项目 `src` 目录下添加一个 `hooks` 文件夹，此文件夹用于存放我们项目中用到的一些 `hooks` 文件，因为我们用 `Vue3` 的 `CompsitionAPI`，后面用多了自然会有很多 `hooks` 文件，针对一些公用的，我们统一管理在此文件夹下
+
+平常我们做项目，一般和请求相关的文件都统一放在一个文件夹下，所以我们在项目 src 目录下添加一个 api 文件夹，用于存放和请求相关的文件，因为项目性质，所以我们应该暂时用不到请求后端接口，那这边 api 文件的一些配置以及 axios 的封装甚至 API Mock 配置这里都先不展开说了，回头我会写好这块代码提交到 GitHub ，后面有需要的话会写一篇 axios 封装相关的文章来单独介绍这块。
+
+### 其他 Vite 配置
+
+先来说环境的配置，先放个官方文档压压惊
+
+- [Vite env 配置文档](https://cn.vitejs.dev/guide/env-and-mode.html#env-files)
+
+OK，我们在 `env` 目录下新建下面 3 个文件
+
+- `.env` 所有模式下都会加载
+- `.env.development` 只在开发模式下加载
+- `.env.production` 只在生产模式下加载
+
+`.env` 文件在所有模式下都会加载，所以这里我们可以写一些所有环境都通用的环境变量，如下：
+
+```sh
+# 所有环境都会加载
+
+# 项目标识代码
+VITE_APP_CODE="TOOLSDOG"
+
+# 项目名
+VITE_APP_NAME="工具狗"
+
+# 项目描述
+VITE_APP_DESCRIPTION="你用的到的工具，这里都有！"
+```
+
+注意，我们在 `Vite` 中配置的环境变量默认只有以 `VITE_` 开头的配置，才会暴露给客户端，我们才能在项目中获取到。
+
+开发模式 `.env.development` 配置
+
+```sh
+# 开发环境加载
+
+# 环境标识
+VITE_APP_ENV="development"
+
+# 公共基础路径
+VITE_BASE="/"
+
+# 代理URL路径
+VITE_BASE_URL ="/api"
+
+# 模拟数据接口路径
+VITE_BASE_MOCK_URL ="/mock-api"
+
+# 服务端接口路径
+VITE_BASE_SERVER_URL = "..."
+
+# 打包是否使用Mock
+VITE_APP_PRODMOCK=false
+```
+
+那生产环境除了环境标识 `VITE_APP_ENV` 和开发模式标识不同，其他配置项应尽量保持一致，只是配置项的内容不同而已，不一一的展示了。
+
+接下来修改下 `package.json` 脚本命令如下
+
+```json
+{
+  "scripts": {
+    "serve": "vite --mode development",
+    "build": "vite build --mode production",
+    "preview": "vite preview --port 8081",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  }
+}
+```
+
+上面脚本中我们给启动命令搞成了
+
+在 `dev` 脚本命令配置中，我们还传了一个 `mode`，其实这个 `mode` 就是对应我们的环境文件 `.env.[mode]`
+
+开发环境默认 `mode` 就是 `development`，生产环境默认 `mode` 就是 `development`，所以脚本命令这里我不传 `mode` 也可以，但是如果大家把开发环境文件由 `.env.development` 改成 `.env.dev`，那脚本中 `mode` 就得传 `—-mode dev`，`build` 时也是一样的道理，如果有其他环境，那脚本命令传入对应的 `mode` 就可以了。
+
+如果想要在 `vite.config.js` 文件中获取对应运行 `mode` 环境变量的配置，我们可以使用 `vite` 的 [loadEnv API](https://cn.vitejs.dev/guide/api-javascript.html#loadenv)。
+
+`Vite` 的 `defineConfig` 方法也可以接收一个返回配置对象的回调函数，回调函数的参数里我们可以拿到运行脚本命令时传入的 `mode` 值，从而使用 `loadEnv` 方法去在 `Vite` 配置文件中获取对应 `mode` 下的环境变量，如下：
+
+```js
+// export default defineConfig({}) 修改
+
+export default defineConfig(({ mode }) => {
+  return {}
+})
+```
+
+那其他一些基础配置就不一一说明了，大家可以直接看 [Vite 官方文档](https://cn.vitejs.dev/)
+
+### 添加 Config 配置
+
+上面说了，环境变量默认以 `VITE_` 开头的配置，才会暴露给客户端，我们也写了几个` VITE_` 开头的配置，所以在项目运行时，我们可以直接 `import.meta.env.VITE_XXX` 去查看配置，但是这样太麻烦了，所以我们写一个统一的配置文件去获取环境变量，包括项目后期的一些全局配置也可以写里面
+
+项目 `src` 目录下新建 `config/config.js` 文件，写入下面文件：
+
+```js
+/*
+ * @LastEditors: isboyjc
+ * @Description: 全局config配置文件
+ * @Date: 2022-09-17 14:35:02
+ * @LastEditTime: 2022-09-17 14:35:02
+ * @Author: isboyjc
+ */
+
+// 获取环境变量
+const ENV = import.meta.env
+// 配置文件
+let config = {}
+// 默认配置文件
+const configSource = {
+  appCode: ENV.VITE_APP_CODE,
+  // 项目标识代码
+  projectCode: `${ENV.VITE_APP_CODE}_${ENV.VITE_APP_ENV}`,
+  // 项目名
+  projectName: ENV.VITE_APP_NAME,
+  // 项目描述
+  projectDesc: ENV.VITE_APP_DESCRIPTION,
+  // 资源base地址
+  base: ENV.VITE_BASE,
+  // 接口代理URL路径
+  baseUrl: ENV.VITE_BASE_URL,
+  // 模拟数据接口路径
+  mockBaseUrl: ENV.VITE_BASE_MOCK_URL,
+  // 服务端接口路径
+  serverUrl: ENV.VITE_BASE_SERVER_URL
+}
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 设置全局配置
+ * @param {Object} cfg 配置项
+ * @return {Object} 新的全局配置 config
+ */
+const setConfig = cfg => {
+  config = Object.assign(config, cfg)
+  return config
+}
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 重置全局配置
+ * @param {*}
+ * @return {Object} 全局默认配置 configSource
+ */
+const resetConfig = () => {
+  config = { ...configSource }
+  return config
+}
+resetConfig()
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 获取全局配置
+ * @param {String} key 配置项，支持 'a.b.c' 的方式获取
+ * @return {Object} 新的全局配置 config
+ */
+const getConfig = key => {
+  if (typeof key === 'string') {
+    const arr = key.split('.')
+    if (arr && arr.length) {
+      let data = config
+      arr.forEach(v => {
+        if (data && typeof data[v] !== 'undefined') {
+          data = data[v]
+        } else {
+          data = null
+        }
+      })
+      return data
+    }
+  }
+  if (Array.isArray(key)) {
+    const data = config
+    if (key && key.length > 1) {
+      let res = {}
+      key.forEach(v => {
+        if (data && typeof data[v] !== 'undefined') {
+          res[v] = data[v]
+        } else {
+          res[v] = null
+        }
+      })
+      return res
+    }
+    return data[key]
+  }
+  return { ...config }
+}
+
+export { getConfig, setConfig, resetConfig }
+```
+
+上面代码不复杂，所以不过多解释了，介绍下为什么用这种方式，而不是直接写一个对象导出，其实是因为有次写项目有用到了动态修改全局配置的需求，所以就把全局配置项获取写成动态的了。
+
+我们写入配置时，只需要在 `configSource` 对象中写入就可以了，项目中使用起来的话如下：
+
+```js
+import { getConfig, setConfig, resetConfig } from "@/config/config.js"
+
+// 获取配置
+getConfig("a")
+getConfig("a.b")
+getConfig("a.b.c")
+
+// 动态设置
+setConfig({ ... })
+
+// 重置配置
+resetConfig()
+```
+
+### 配置 VSCode 推荐扩展插件
+
+打开项目根目录的 `.vscode/extensions.json` 文件如下：
+
+```js
+{
+  "recommendations": [
+    "vue.volar",
+  ]
+}
+```
+
+这是创建项目时默认存在的扩展插件推荐配置，此文件的作用上面也介绍过了，就是个扩展推荐，数组里是 `VSCode` 的扩展插件 `ID`，你在根目录打开此项目时，如果编辑器没有安装这两个插件，`VSCode` 就会在右下角自动提示你去安装插件。
