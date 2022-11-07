@@ -5,6 +5,7 @@
 ### 官方
 
 - [Vue3 文档](https://cn.vuejs.org/)
+- [Vite](https://cn.vitejs.dev/)
 - [Vue Router 4](https://router.vuejs.org/zh/index.html)
 - [VueUse](https://vueuse.org/)
 - [VueUse 中文 api](https://blog.csdn.net/qq_28550263/article/details/122138846)
@@ -76,7 +77,6 @@
 
 - [这是一份保姆级 Vue3+Vite 实战教程](https://juejin.cn/post/7147353734912147470)
 - [01.Vben Admin 源码学习:项目初始化](https://juejin.cn/post/7102052860388442120)
-- [2022 年值得推荐的 Vue 库！](https://juejin.cn/post/7124128574029692959)
 - [Vue3 + setup + ts 使用总结](https://juejin.cn/post/7127668333565968421)
 - [vite + vue3 + setup + pinia + ts 项目实战](https://juejin.cn/post/7041188884864040991)
 - [vue3 实现国际化](https://juejin.cn/post/7094916084838432781)
@@ -264,3 +264,5 @@
 ## 旅游
 
 - [被裁员后我选择去看青海湖（青甘大环线攻略）](https://juejin.cn/post/7129790391120822303)
+
+nvm-setup.zip 全自动安装版，推荐使用，下载这个文件

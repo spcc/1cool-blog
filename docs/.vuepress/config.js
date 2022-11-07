@@ -159,6 +159,20 @@ module.exports = {
           ],
         },
         {
+          title: "初始化", // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            {
+              title: "创建项目",
+              collapsable: false,
+              sidebarDepth: 0,
+              // path: "/skill/web/vue3/game",
+              children: ["/skill/web/vue3/create/init"],
+            },
+          ],
+        },
+        {
           title: "其他", // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
