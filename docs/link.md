@@ -259,6 +259,7 @@
 - [【进阶】JavaScript 这门语言下的 14 种设计模式](https://juejin.cn/post/7072678950173933605)
 - [三面面试官：运行 npm run xxx 的时候发生了什么？](https://juejin.cn/post/7078924628525056007)
 - [简历中的“项目经验”该怎么写？](https://juejin.cn/post/7020973195305943077)
+- [聊聊样式穿透 vue 中的 scoped](https://juejin.cn/post/7083051766874374174)
 
 ## 旅游
 

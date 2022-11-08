@@ -185,9 +185,13 @@ module.exports = {
       '/skill/web/other': [
         {
           title: 'npm',
-          collapsable: false,
+          collapsable: true,
           sidebarDepth: 0,
-          path: '/skill/web/other/npm'
+          children: [
+            '/skill/web/other/npm/base',
+            '/skill/web/other/npm/common',
+            '/skill/web/other/npm/package',
+          ]
         },
         {
           title: 'Git', // 必要的
@@ -204,12 +208,6 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           path: '/skill/web/other/http/base'
-        },
-        {
-          title: 'npm', // 必要的
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          path: '/skill/web/other/npm/base'
         },
         {
           title: 'nrm',

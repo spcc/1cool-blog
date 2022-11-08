@@ -1,4 +1,4 @@
-# Npm 包
+# 常用包
 
 ## 状态管理
 
@@ -62,13 +62,13 @@ vue-chartjs 是一个 Vue 对于 Chart.js 的封装，让用户可以在 Vue 中
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d3bf5be768e4389ad0ff84ea9128a9a~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/apertureles…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fapertureless%2Fvue-chartjs "https://github.com/apertureless/vue-chartjs")
+**Github：**[github.com/apertureles…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fapertureless%2Fvue-chartjs 'https://github.com/apertureless/vue-chartjs')
 
 ### Apache ECharts
 
 Apache ECharts 是一款基于 Javascript 的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。它是用纯 JavaScript 编写的，基于 zrender，是一个全新的轻量级画布库。!
 
-**GitHub：**[github.com/apache/echa…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fapache%2Fecharts "https://github.com/apache/echarts")
+**GitHub：**[github.com/apache/echa…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fapache%2Fecharts 'https://github.com/apache/echarts')
 
 ### Vue-ECharts
 
@@ -76,7 +76,7 @@ Vue-ECharts 是 Apache ECharts 的 Vue.js 组件。使用 Apache ECharts 5，同
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4d12c98dc6ef4dd79a28f907ecfd5d89~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/ecomfe/vue-…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fecomfe%2Fvue-echarts "https://github.com/ecomfe/vue-echarts")
+**Github：**[github.com/ecomfe/vue-…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fecomfe%2Fvue-echarts 'https://github.com/ecomfe/vue-echarts')
 
 ## 组件
 
@@ -86,7 +86,7 @@ vue-grid-layout 是一个网格布局系统，类似于 Gridster，用于 Vue.js
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae46003276ca4fd28e837d70087989d0~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/jbaysolutio…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fjbaysolutions%2Fvue-grid-layout "https://github.com/jbaysolutions/vue-grid-layout")
+**Github：**[github.com/jbaysolutio…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fjbaysolutions%2Fvue-grid-layout 'https://github.com/jbaysolutions/vue-grid-layout')
 
 ### Vue Draggable
 
@@ -94,7 +94,7 @@ Vue Draggable 是一个基于 Sortable.js 的 Vue 拖拽组件。
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cedb45e6520f42bb92ea0b3fcf401607~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/SortableJS/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FSortableJS%2FVue.Draggable "https://github.com/SortableJS/Vue.Draggable")
+**Github：**[github.com/SortableJS/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FSortableJS%2FVue.Draggable 'https://github.com/SortableJS/Vue.Draggable')
 
 ### Vue Tour
 
@@ -102,7 +102,7 @@ Vue Tour 是一个轻量级、简单且可定制的导览插件，可与 Vue.js 
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/98f9f21473684eafb540ca6a02d6be80~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/pulsardev/v…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fpulsardev%2Fvue-tour "https://github.com/pulsardev/vue-tour")
+**Github：**[github.com/pulsardev/v…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fpulsardev%2Fvue-tour 'https://github.com/pulsardev/vue-tour')
 
 ### Swiper.js
 
@@ -110,7 +110,7 @@ Swiper 是一款免费以及轻量级的移动设备触控滑块的框架，使�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07f45f96b87547c3b9c752b14a308709~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/nolimits4we…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fnolimits4web%2Fswiper "https://github.com/nolimits4web/swiper")
+**Github：**[github.com/nolimits4we…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fnolimits4web%2Fswiper 'https://github.com/nolimits4web/swiper')
 
 ### vue-easytable
 
@@ -118,7 +118,7 @@ Swiper 是一款免费以及轻量级的移动设备触控滑块的框架，使�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/163d0429cf1b45bb8c64099e7646affd~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/Happy-Codin…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FHappy-Coding-Clans%2Fvue-easytable "https://github.com/Happy-Coding-Clans/vue-easytable")
+**Github：**[github.com/Happy-Codin…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FHappy-Coding-Clans%2Fvue-easytable 'https://github.com/Happy-Coding-Clans/vue-easytable')
 
 ## 动画
 
@@ -128,7 +128,7 @@ animate.css 是一个使用 CSS3 的 animation 制作的动画效果的 CSS 集�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2da46148ef2948dab70cf2a3047cbf98~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**GitHub：**[github.com/animate-css…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fanimate-css%2Fanimate.css "https://github.com/animate-css/animate.css")
+**GitHub：**[github.com/animate-css…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fanimate-css%2Fanimate.css 'https://github.com/animate-css/animate.css')
 
 ### Greensock
 
@@ -136,7 +136,7 @@ GreenSock 是一个 JavaScript 动画库，可轻松对 HTML 元素进行动画�
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d650a7daf5544b40896b3ad2bb3ae54d~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/greensock/G…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fgreensock%2FGreenSock-JS%2F "https://github.com/greensock/GreenSock-JS/")
+**Github：**[github.com/greensock/G…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fgreensock%2FGreenSock-JS%2F 'https://github.com/greensock/GreenSock-JS/')
 
 ### Popmotion
 
@@ -144,7 +144,7 @@ Popmotion 是一个只有 12KB 的 JavaScript 运动引擎，可以用来实现�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ea919a4b500b4b97ac28ef61cff940c3~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/Popmotion/p…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FPopmotion%2Fpopmotion "https://github.com/Popmotion/popmotion")
+**Github：**[github.com/Popmotion/p…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FPopmotion%2Fpopmotion 'https://github.com/Popmotion/popmotion')
 
 ### Vue Kinesis
 
@@ -152,7 +152,7 @@ Vue Kinesis 支持使用 Vue.js 轻松创建复杂的交互式动画，其支持
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5252b340751c4f629ebe7d0651e69d98~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/Aminerman/v…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FAminerman%2Fvue-kinesis "https://github.com/Aminerman/vue-kinesis")
+**Github：**[github.com/Aminerman/v…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FAminerman%2Fvue-kinesis 'https://github.com/Aminerman/vue-kinesis')
 
 ## 图标
 
@@ -162,7 +162,7 @@ IconPark 提供超过 2400 个高质量图标，还提供了每个图标的含�
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42dc68aa59bf4694af406f378d0db419~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/bytedance/i…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fbytedance%2Ficonpark "https://github.com/bytedance/iconpark")
+**Github：**[github.com/bytedance/i…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fbytedance%2Ficonpark 'https://github.com/bytedance/iconpark')
 
 ### Font Awesome
 
@@ -170,7 +170,7 @@ Font Awesome 提供了可缩放的矢量图标，可以使用 CSS 所提供的�
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6fee1aaabfbf4f0daf4ae5aa15c11fc5~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/FortAwesome…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FFortAwesome%2FFont-Awesome "https://github.com/FortAwesome/Font-Awesome")
+**Github：**[github.com/FortAwesome…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FFortAwesome%2FFont-Awesome 'https://github.com/FortAwesome/Font-Awesome')
 
 ### Ionicons
 
@@ -178,7 +178,7 @@ Ionicons 是一个完全开源的图标集，是知名混合开发框架 Ionic F
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5216addff6014225b6058364c87862b3~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/ionic-team/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fionic-team%2Fionicons "https://github.com/ionic-team/ionicons")
+**Github：**[github.com/ionic-team/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fionic-team%2Fionicons 'https://github.com/ionic-team/ionicons')
 
 ### Bootstrap Icons
 
@@ -186,7 +186,7 @@ Bootstrap Icons 是 Bootstrap 开源的 SVG 图标库，此图标库起初专门
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89bee69d3d8043d8940513abd585fd37~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/twbs/icons](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Ftwbs%2Ficons "https://github.com/twbs/icons")
+**Github：**[github.com/twbs/icons](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Ftwbs%2Ficons 'https://github.com/twbs/icons')
 
 ## 富文本编辑器
 
@@ -196,7 +196,7 @@ Tiptap 是一个基于 Vue 的无渲染的富文本编辑器，它基于 Prosemi
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/22eb5824b1d244f6a298966fbfcf0c9f~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**GitHub：**[github.com/ueberdosis/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fueberdosis%2Ftiptap "https://github.com/ueberdosis/tiptap")
+**GitHub：**[github.com/ueberdosis/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fueberdosis%2Ftiptap 'https://github.com/ueberdosis/tiptap')
 
 ### Quill.js
 
@@ -204,7 +204,7 @@ Quill.js 是一个具有跨平台和跨浏览器支持的富文本编辑器。�
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/208498fab3fa4d82844158f51e55ce63~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**GitHub：**[github.com/quilljs/qui…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fquilljs%2Fquill%2F "https://github.com/quilljs/quill/")
+**GitHub：**[github.com/quilljs/qui…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fquilljs%2Fquill%2F 'https://github.com/quilljs/quill/')
 
 ### TinyMCE
 
@@ -212,7 +212,7 @@ TinyMCE 是一个热门的富文本编辑器。它的目标是帮助其他开发
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80a39cb6c63d4934b53e7c4857007b20~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**GitHub：**[github.com/tinymce/tin…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Ftinymce%2Ftinymce "https://github.com/tinymce/tinymce")
+**GitHub：**[github.com/tinymce/tin…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Ftinymce%2Ftinymce 'https://github.com/tinymce/tinymce')
 
 ### **CKEditor 5**
 
@@ -220,7 +220,7 @@ CKEditor 是一个强大的富文本编辑器框架，具有模块化架构、�
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fb2111358f434427973ce9556efa606e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**GitHub：**[github.com/ckeditor/ck…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fckeditor%2Fckeditor5 "https://github.com/ckeditor/ckeditor5")
+**GitHub：**[github.com/ckeditor/ck…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fckeditor%2Fckeditor5 'https://github.com/ckeditor/ckeditor5')
 
 ## 服务端渲染
 
@@ -230,7 +230,7 @@ Nuxt.js 是一个基于 Vue.js 的通用应用框架。通过对客户端/服务
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/935fca25761c4c9da8a93b888bae44bf~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/nuxt/nuxt.j…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fnuxt%2Fnuxt.js "https://github.com/nuxt/nuxt.js")
+**Github：**[github.com/nuxt/nuxt.j…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fnuxt%2Fnuxt.js 'https://github.com/nuxt/nuxt.js')
 
 ### SSR
 
@@ -238,7 +238,7 @@ ssr 框架是为前端框架在服务端渲染的场景下所打造的开箱即�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c2841eb69e9e4b5c9850297e3501d08f~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/zhangyuang/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fzhangyuang%2Fssr "https://github.com/zhangyuang/ssr")
+**Github：**[github.com/zhangyuang/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fzhangyuang%2Fssr 'https://github.com/zhangyuang/ssr')
 
 ### Vue-meta
 
@@ -246,7 +246,7 @@ Vue-meta 是 Vue.js 的一个插件，它可以帮助你使用 SSR 支持管理 
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07b18d838e624984ac35b77ad510e096~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[vue-meta.nuxtjs.org/](https://link.juejin.cn?target=https%3A%2F%2Fvue-meta.nuxtjs.org%2F "https://vue-meta.nuxtjs.org/")
+**Github：**[vue-meta.nuxtjs.org/](https://link.juejin.cn?target=https%3A%2F%2Fvue-meta.nuxtjs.org%2F 'https://vue-meta.nuxtjs.org/')
 
 ## 数据获取
 
@@ -256,7 +256,7 @@ Axios 是一个基于 promise 的网络请求库，作用于 node.js 和浏览�
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/717d14616c7e4d6a8c5cde2c3c361585~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/axios/axios](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Faxios%2Faxios "https://github.com/axios/axios")
+**Github：**[github.com/axios/axios](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Faxios%2Faxios 'https://github.com/axios/axios')
 
 ### vue-axios
 
@@ -264,7 +264,7 @@ vue-axios 是一个将 axios 集成到 Vuejs 的小型库。
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d334c2455344b84a868450156b10a92~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/imcvampire/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fimcvampire%2Fvue-axios "https://github.com/imcvampire/vue-axios")
+**Github：**[github.com/imcvampire/…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fimcvampire%2Fvue-axios 'https://github.com/imcvampire/vue-axios')
 
 ## 构建工具
 
@@ -274,7 +274,7 @@ Vite 是下一代前端开发与构建工具。 Vite 意在提供开箱即用的
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b3546030d10545a99487195c8d3a91c8~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/vitejs/vite](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvitejs%2Fvite "https://github.com/vitejs/vite")
+**Github：**[github.com/vitejs/vite](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvitejs%2Fvite 'https://github.com/vitejs/vite')
 
 ### Webpack
 
@@ -282,4 +282,4 @@ webpack 是一个用于现代 JavaScript 应用程序的静态模块打包工具
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1c9adace8bf4d72896a7aa448ecc1a7~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
-**Github：**[github.com/webpack/web…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fwebpack%2Fwebpack "https://github.com/webpack/webpack")
+**Github：**[github.com/webpack/web…](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fwebpack%2Fwebpack 'https://github.com/webpack/webpack')
