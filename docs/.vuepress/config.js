@@ -190,7 +190,7 @@ module.exports = {
           children: [
             '/skill/web/other/npm/base',
             '/skill/web/other/npm/common',
-            '/skill/web/other/npm/package',
+            '/skill/web/other/npm/package'
           ]
         },
         {
@@ -236,42 +236,29 @@ module.exports = {
       ],
 
       /**
-       * vue2
+       * 面试
        */
-      '/skill/web/vue2': [
+      '/interview': [
         {
-          title: '路由', // 必要的
-          path: '/skill/web/vue2/router/base' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        }
-      ],
-
-      /**
-       * CSS3
-       */
-      '/skill/web/css3': [
-        {
-          title: '基础', // 必要的
+          title: '面试', // 必要的
+          path: '/interview/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/skill/web/css3/bem', '/skill/web/css3/scss-mixin']
+          children: ['/interview/reverse-interview']
         }
       ],
-
-      /**
-       * VSCODE
-       */
-      '/skill/tool/vscode': [
+      '/interview': [
         {
-          title: '常用', // 必要的
-          path: '/skill/tool/vscode/base' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          title: 'JS理论',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: ['/interview/base']
         },
         {
-          title: '快捷键', // 必要的
-          path: '/skill/tool/vscode/key' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        },
-        {
-          title: '娱乐类', // 必要的
-          path: '/skill/tool/vscode/fun' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          title: '其他',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: ['/reverse-interview']
         }
       ],
 
@@ -319,15 +306,6 @@ module.exports = {
             '/skill/web/js/clean-function-reset',
             '/skill/web/js/clean-notes'
           ]
-        }
-      ],
-      '/interview': [
-        {
-          title: '面试', // 必要的
-          path: '/interview/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/interview/reverse-interview']
         }
       ],
 
