@@ -15,6 +15,7 @@
 - [Element Plus](https://element-plus.org/zh-CN/#/zh-CN)
 - [Vant 4](https://vant-contrib.gitee.io/vant/v4/#/zh-CN)
 - [Ant Design Vue](https://www.antdv.com/components/overview-cn/)
+- [Vue 纪录片](https://www.bilibili.com/video/BV1L7411M7Ut/)
 
 ## VUE2
 
@@ -230,7 +231,6 @@
 - [你会怎么做前端优化？](https://juejin.cn/post/7028028584463695879)
 - [当面试官让我回答 React 和 Vue 框架的区别......](https://juejin.cn/post/7144648542472044558)
 - [老板让你做性能优化，第一步你应该做什么？🔥🔥](https://juejin.cn/post/7121323745980973070)
-- [我从来不理解闭包，直到我要去面试](https://juejin.cn/post/7088216038063472670)
 - [面试不面试，你都必须得掌握的 vue 知识](https://juejin.cn/post/7146785917473620005)
 - [轻松拿下 JS 浅拷贝、深拷贝](https://juejin.cn/post/7072528644739956773)
 - [前端储存技术](https://juejin.cn/post/7123863335434469406)
