@@ -243,7 +243,7 @@ module.exports = {
           title: 'JS理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/base']
+          children: ['/interview/js/closure']
         },
         {
           title: '其他',

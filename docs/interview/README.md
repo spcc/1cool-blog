@@ -14,3 +14,5 @@
 [面试官为啥总是嘴上挂着低耦合高复用?](https://juejin.cn/post/7143873919412355109)
 
 [从小公司内推入职阿里，这些实战项目写在简历上真吃香！安排](https://juejin.cn/post/7143812283109408782)
+
+- [简历模板](https://www.processon.com/view/link/61c53fb31efad45a2b42afd9#map)
