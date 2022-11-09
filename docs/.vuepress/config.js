@@ -240,15 +240,6 @@ module.exports = {
        */
       '/interview': [
         {
-          title: '面试', // 必要的
-          path: '/interview/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/interview/reverse-interview']
-        }
-      ],
-      '/interview': [
-        {
           title: 'JS理论',
           collapsable: true,
           sidebarDepth: 0,
@@ -258,7 +249,7 @@ module.exports = {
           title: '其他',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/reverse-interview']
+          children: ['/interview/reverse-interview']
         }
       ],
 
