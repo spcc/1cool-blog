@@ -244,7 +244,6 @@
 - [2022 高频前端面试题汇总（附答案）](https://juejin.cn/post/7127217262133510158)
 - [前端都应该要掌握的防抖和节流](https://juejin.cn/post/7088483826552274952)
 - [面试官:你觉得你最大的缺点是什么?](https://juejin.cn/post/7120805355042373662)
-- [一文颠覆大众对闭包的认知](https://juejin.cn/post/7079995358624874509)
 - [因为实现不了 Promise.all，一场面试凉凉了](https://juejin.cn/post/7038371452084551694)
 - [面试官：说说 Cookie 和 Token 的区别？](https://juejin.cn/post/7111349594625146887)
 - [面试被问到用 Vue 手写一个功能，直接懵了](https://juejin.cn/post/7080346428832219149)
