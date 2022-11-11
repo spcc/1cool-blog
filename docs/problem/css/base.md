@@ -1,5 +1,18 @@
 # 常用
 
+## 超出显示省略号
+
+```scss
+width: 100px; // 必须要设置一个宽度
+
+// 强制超出不换行
+// 超出隐藏
+// 文本超出显示成...
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+```
+
 ## 选中文字样式
 
 ::: details 点击查看代码
@@ -28,7 +41,7 @@
   position: relative;
 }
 .btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -20px;
   right: -20px;

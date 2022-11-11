@@ -243,7 +243,11 @@ module.exports = {
           title: 'JS理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/js/closure', '/interview/js/copy']
+          children: [
+            '/interview/js/closure',
+            '/interview/js/copy',
+            '/interview/js/debounce-throttle'
+          ]
         },
         {
           title: '其他',
