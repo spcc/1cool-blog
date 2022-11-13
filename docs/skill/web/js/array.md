@@ -119,9 +119,9 @@ let myBest2 = fruits.slice(1, 2); // 截取第一个（包含）到第二个（�
 
 ```js
 let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsLength = fruits.push("Kiwi", "Mike");
+let fruitsLength = fruits.unshift("Kiwi", "Mike");
 
-// fruits：["Orange", "Apple", "Mango", "Kiwi", "Mike"]
+// fruits：['Kiwi', 'Mike', 'Banana', 'Orange', 'Apple', 'Mango']
 // fruitsLength：6
 ```
 

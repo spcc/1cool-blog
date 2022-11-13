@@ -1,4 +1,4 @@
-# npm
+# 基础
 
 ## 指定 registry
 

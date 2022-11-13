@@ -185,9 +185,13 @@ module.exports = {
       '/skill/web/other': [
         {
           title: 'npm',
-          collapsable: false,
+          collapsable: true,
           sidebarDepth: 0,
-          path: '/skill/web/other/npm'
+          children: [
+            '/skill/web/other/npm/base',
+            '/skill/web/other/npm/common',
+            '/skill/web/other/npm/package'
+          ]
         },
         {
           title: 'Git', // 必要的
@@ -204,12 +208,6 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           path: '/skill/web/other/http/base'
-        },
-        {
-          title: 'npm', // 必要的
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          path: '/skill/web/other/npm/base'
         },
         {
           title: 'nrm',
@@ -238,42 +236,24 @@ module.exports = {
       ],
 
       /**
-       * vue2
+       * 面试
        */
-      '/skill/web/vue2': [
+      '/interview': [
         {
-          title: '路由', // 必要的
-          path: '/skill/web/vue2/router/base' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        }
-      ],
-
-      /**
-       * CSS3
-       */
-      '/skill/web/css3': [
-        {
-          title: '基础', // 必要的
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/skill/web/css3/bem', '/skill/web/css3/scss-mixin']
-        }
-      ],
-
-      /**
-       * VSCODE
-       */
-      '/skill/tool/vscode': [
-        {
-          title: '常用', // 必要的
-          path: '/skill/tool/vscode/base' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          title: 'JS理论',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: [
+            '/interview/js/closure',
+            '/interview/js/copy',
+            '/interview/js/debounce-throttle'
+          ]
         },
         {
-          title: '快捷键', // 必要的
-          path: '/skill/tool/vscode/key' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        },
-        {
-          title: '娱乐类', // 必要的
-          path: '/skill/tool/vscode/fun' // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+          title: '其他',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: ['/interview/reverse-interview']
         }
       ],
 
@@ -307,7 +287,8 @@ module.exports = {
             '/skill/web/js/base',
             '/skill/web/js/array',
             '/skill/web/js/string',
-            '/skill/web/js/math'
+            '/skill/web/js/math',
+            '/skill/web/js/closure'
           ]
         },
         {
@@ -321,15 +302,6 @@ module.exports = {
             '/skill/web/js/clean-function-reset',
             '/skill/web/js/clean-notes'
           ]
-        }
-      ],
-      '/interview': [
-        {
-          title: '面试', // 必要的
-          path: '/interview/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/interview/reverse-interview']
         }
       ],
 
