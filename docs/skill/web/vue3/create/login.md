@@ -88,16 +88,13 @@ const loginRules = reactive({
 
       <!-- password -->
       <el-form-item prop="password">
-        <span class="login-form__svg">
-          <!-- <el-icon><Avator /></el-icon> -->
-        </span>
         <el-input
           v-model="loginForm.password"
           :prefix-icon="Lock"
           placeholder="请输入密码"
           show-password
           autocomplete="off"
-        ></el-input>
+        />
       </el-form-item>
 
       <!--登录按钮-->
