@@ -354,8 +354,9 @@ module.exports = {
               sidebarDepth: 0,
               path: '/problem/element-plus/components',
               children: [
+                '/problem/element-plus/components/el-input',
+                '/problem/element-plus/components/el-date-time-picker',
                 '/problem/element-plus/components/el-scrollbar',
-                '/problem/element-plus/components/el-date-time-picker'
               ]
             }
           ]
