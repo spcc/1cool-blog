@@ -246,7 +246,8 @@ module.exports = {
           children: [
             '/interview/js/closure',
             '/interview/js/copy',
-            '/interview/js/debounce-throttle'
+            '/interview/js/debounce-throttle',
+            '/interview/js/save'
           ]
         },
         {
