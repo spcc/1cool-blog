@@ -1,6 +1,5 @@
 # 登录架构
 
-- 密码框状态通用处理
 - 通用后台登录方案解析
 - 配置环境变量封装 axios 模块
 - 封装请求动作
@@ -175,3 +174,165 @@ export const validatePassword = () => {
 //   }
 // };
 ```
+
+## 通用后台登录解决方案
+
+- axios 模块封装
+- 接口请求模块
+- 登录请求动作
+- Token 缓存
+- 登录路由鉴权
+
+### 根据环境变量封装 axios 模块
+
+根据当前模式的不同，设置不同的`BaseUrl`,通常情况，**开发状态**和**生产状态**下他的 baseUrl 是不同的
+
+1. 新建 `.env.development` 和 `.env.production`
+
+开发模式 `.env.development` 配置
+
+```sh
+
+# 环境标识
+VITE_ENV = "development"
+
+# 代理URL路径
+VITE_BASE_URL = "/api"
+```
+
+开发模式 `.env.production` 配置
+
+```sh
+# 生产环境加载
+
+# 环境标识
+VITE_ENV = "production"
+
+# 代理URL路径
+VITE_BASE_URL = "/"
+```
+
+2. 新建`utils/axios`
+
+安装 [axios](https://www.axios-http.cn/)
+
+```sh
+npm install axios
+```
+
+```js
+import axios from 'axios'
+
+const service = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: 5000 // 超时时间
+})
+
+export default service
+```
+
+## 封装请求动作
+
+### 封装接口请求模块
+
+1. 创建 api 文件夹，创建 sys.js
+
+```js
+import request from '@/utils/request'
+
+/**
+ * 登录
+ * return promise
+ */
+export const login = data => {
+  return request({
+    url: '/sys/login',
+    methods: 'post',
+    data
+  })
+}
+```
+
+### 封装登录请求动作
+
+在 `store` 目录下新建 `user.js` 模块，用于处理所有和 **用户相关** 的内容
+
+```js
+import axios from 'axios'
+import md5 from 'md5'
+import { defineStore } from 'pinia'
+
+const useUserStore = defineStore('user', {
+  state: () => ({
+    username: '',
+    token: ''
+  }),
+
+  actions: {
+    async login({ username = '', password = '' }) {
+      const result = await axios.post('/api/user/login', {
+        username,
+        password: md5(password)
+      })
+      const { data, code } = result.data
+      if (code === 0) {
+        // action 中修改状态
+        this.username = data.username
+        this.token = data.token
+      }
+    }
+  }
+})
+
+export default useUserStore
+```
+
+## 登录触发动作
+
+在 login 中，触发定义的 action
+
+```vue
+<script setup>
+import { validatePassword } from './rules'
+const userStore = useUserStore()
+
+// 处理登录
+const loading = ref(false)
+const loginFormRef = ref(null)
+const handleLogin = async formEl => {
+  // 1. 进行表单验证
+  if (!formEl) return
+  const validate = await formEl.validate(valid => valid)
+  if (!validate) return
+
+  try {
+    loading.value = true
+    const res = await userStore.login(loginForm)
+    if (res) {
+      loading.value = false
+    }
+  } catch (err) {
+    console.error(err)
+  } finally {
+    loading.value = false
+  }
+
+  // 3. 进行登录后操作
+  //
+}
+</script>
+
+<template>
+  <el-form ref="loginFormRef">
+    <!--登录按钮-->
+    <el-button :loading="loading" @click="handleLogin(loginFormRef)">
+      登录
+    </el-button>
+  </el-form>
+</template>
+```
+
+## 本地缓存处理方案
+
+- 本地缓存一份`LocalStorage`(因为 token 没有过期的情况下，可以实现自动登录功能)
+- 保存 `pinia` 中是为了后面在其他位置进行使用
