@@ -526,6 +526,24 @@ npm install sass -D
 
 其他的公共 `css` 文件我们用到的时候也可以这样引入一下就可以了。
 
+但是也需要一份[Normalize.css](https://necolas.github.io/normalize.css/latest/normalize.css)不支持的一部分样式重置，新建`style/reset.scss`
+
+```scss
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+```
+
 ### Utils、Hooks、API 管理
 
 在项目 `src` 目录下添加一个 `utils` 文件夹，此文件夹用于存放我们项目中用到的一些公共方法文件。
