@@ -504,6 +504,12 @@ module.exports = {
 
 `Prettier` 配置就比较简单，按照文档和喜好在 `.prettierrc.json` 文件中配置就可以，注意配置的时候一定要和 `ESLint` 的 `rules` 比较一下，这里是会发生冲突的地方，检测和格式化规则一定要一致。
 
+### scss
+
+```sh
+npm install sass -D
+```
+
 ### Styles 公共样式管理、初始化样式
 
 #### 公共样式处理
