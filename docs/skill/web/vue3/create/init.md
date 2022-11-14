@@ -40,10 +40,10 @@ Done.
 
 ### 1. 删除无用文件
 
-删除 `src/views` 下所有文件
-删除 `src/stores` 下所有文件
-删除 `src/components` 下所有文件
-删除 `src/assets` 下所有文件
+- 删除 `src/views` 下所有文件
+- 删除 `src/stores` 下所有文件
+- 删除 `src/components` 下所有文件
+- 删除 `src/assets` 下所有文件
 
 ### 2. 重构文件
 
@@ -64,15 +64,18 @@ Done.
 ```js
 import { createRouter, createWebHistory } from 'vue-router'
 
+// 公共路由表
+const publicRoutes = [
+  {
+    path: '/',
+    name: 'HomeView',
+    component: () => import('@/views/home/HomeView.vue')
+  }
+]
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'HomePage',
-      component: () => import('@/views/HomePage.vue')
-    }
-  ]
+  routes: publicRoutes
 })
 
 export default router
@@ -212,7 +215,7 @@ export default defineConfig({
 })
 ```
 
-### 2. 配置项目内组件 & API 的自动引入
+### 配置项目内组件 & API 的自动引入
 
 我们在使用 `Vue` 的过程中，每个 `script` 以及 `js` 文件中或多或少需要引入一些像 `ref`、`reactive` 等 `VueAPI`，包括 `VueRouter`、`Pinia` 等都要引入一些 `API`，还有我们自己写的组件也都需要我们手动去引入使用。
 
@@ -509,7 +512,7 @@ module.exports = {
 
 大家都知道，`HTML` 标签是有默认样式的，一般我们在写项目时都会直接清除掉这个默认样式，也就是做个重置。
 
-那相较于 [Eric Merer](https://meyerweb.com/eric/tools/css/reset/) 原版的清楚样式文件，`Normalize.css` 它在默认的 `HTML` 元素样式上提供了跨浏览器的高度一致性，是一种现代的、为 `HTML5` 准备的优质替代方案，所以我们直接使用它就好了。
+那相较于 [Eric Merer](https://meyerweb.com/eric/tools/css/reset/) 原版的清除样式文件，`Normalize.css` 它在默认的 `HTML` 元素样式上提供了跨浏览器的高度一致性，是一种现代的、为 `HTML5` 准备的优质替代方案，所以我们直接使用它就好了。
 
 下载 [Normalize.css](https://necolas.github.io/normalize.css/latest/normalize.css) 到 `styles` 文件夹下，当然你也可以直接 `npm` 安装它，不过我比较喜欢直接下载下来这个文件。
 
@@ -842,3 +845,7 @@ app.post('/api/user/login', (req, res) => {
 ```
 
 由于开启了 `mock` 服务，当前端在发出 `ajax` 请求时，会被拦截到，交由 `mock` 服务处理。没有做数据校验，前端传任何数据来都返回上面的结果。
+
+```js
+const result = await axios.post('/api/user/login', userData)
+```
