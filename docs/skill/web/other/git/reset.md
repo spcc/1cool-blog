@@ -1,5 +1,23 @@
 # 重置
 
+## 取消 merge
+
+### 已经 merge 但是未 add
+
+```sh
+git merge --abort
+```
+
+### 已经 add
+
+```sh
+# 显示历史操作
+git reflog
+
+# 回退到操作之前的状态
+git reset --hard commit id
+```
+
 ## 修复 commit 信息
 
 ### 修改远程
