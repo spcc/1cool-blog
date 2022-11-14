@@ -140,6 +140,12 @@ module.exports = {
           title: '实战搭建', // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
+          children: ['/skill/web/vue3/create/init', '/skill/web/vue3/create/login']
+        },
+        {
+          title: '初始化', // 必要的
+          collapsable: true, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
             {
               title: '搭建',
@@ -154,20 +160,6 @@ module.exports = {
               sidebarDepth: 0,
               path: '/problem/element-ui/components',
               children: ['/problem/element-ui/components/el-table']
-            }
-          ]
-        },
-        {
-          title: '初始化', // 必要的
-          collapsable: true, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: [
-            {
-              title: '创建项目',
-              collapsable: false,
-              sidebarDepth: 0,
-              // path: "/skill/web/vue3/game",
-              children: ['/skill/web/vue3/create/init']
             }
           ]
         },
