@@ -1,6 +1,8 @@
+const isDev = process.env.NODE_ENV === 'development'
+
 module.exports = {
   // 打包路径
-  base: '/cc/',
+  base: isDev ? '/' : '/cc/' ,
   // 标题
   title: '1cool',
   // 介绍
