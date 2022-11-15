@@ -570,13 +570,13 @@ OK，我们在 `env` 目录下新建下面 3 个文件
 # 所有环境都会加载
 
 # 项目标识代码
-VITE_APP_CODE="TOOLSDOG"
+VITE_CODE = "TOOLSDOG"
 
 # 项目名
-VITE_APP_NAME="工具狗"
+VITE_NAME = "工具狗"
 
 # 项目描述
-VITE_APP_DESCRIPTION="你用的到的工具，这里都有！"
+VITE_DESCRIPTION = "你用的到的工具，这里都有！"
 ```
 
 注意，我们在 `Vite` 中配置的环境变量默认只有以 `VITE_` 开头的配置，才会暴露给客户端，我们才能在项目中获取到。
@@ -587,22 +587,34 @@ VITE_APP_DESCRIPTION="你用的到的工具，这里都有！"
 # 开发环境加载
 
 # 环境标识
-VITE_APP_ENV="development"
+VITE_ENV = "development"
 
 # 公共基础路径
-VITE_BASE="/"
+VITE_BASE = "/"
 
 # 代理URL路径
-VITE_BASE_URL ="/api"
+VITE_BASE_URL = "/api"
 
 # 模拟数据接口路径
-VITE_BASE_MOCK_URL ="/mock-api"
+VITE_BASE_MOCK_URL = "/mock-api"
 
 # 服务端接口路径
 VITE_BASE_SERVER_URL = "..."
 
 # 打包是否使用Mock
-VITE_APP_PRODMOCK=false
+VITE_PRODMOCK = false
+```
+
+开发模式 `.env.production` 配置
+
+```sh
+# 生产环境加载
+
+# 环境标识
+VITE_ENV = "production"
+
+# 代理URL路径
+VITE_BASE_URL = "/"
 ```
 
 那生产环境除了环境标识 `VITE_APP_ENV` 和开发模式标识不同，其他配置项应尽量保持一致，只是配置项的内容不同而已，不一一的展示了。
