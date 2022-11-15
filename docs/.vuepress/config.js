@@ -243,6 +243,14 @@ module.exports = {
           ]
         },
         {
+          title: 'vue理论',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: [
+            '/interview/vue/scoped',
+          ]
+        },
+        {
           title: '其他',
           collapsable: true,
           sidebarDepth: 0,
