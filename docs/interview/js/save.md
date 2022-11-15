@@ -15,7 +15,7 @@
   - `cookie` 的数据会自动的传递到服务器，服务器端也可以写 `cookie` 到客户端
   - ​`sessionStorage` 和 `localStorage` 不会自动把数据发给服务器，仅在本地保存
 - 作用域
-  - `Cookie`、`SessionStorage`、 `LocalStorage` 数据共享都遵循同源原则，`SessionStorage` 还限制必须是同一个页面
+  - `Cookie`、`SessionStorage`、 `LocalStorage` 数据共享都遵循同源策略，`SessionStorage` 还限制必须是同一个页面
 
 **应用场景**
 
