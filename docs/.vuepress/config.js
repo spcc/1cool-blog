@@ -2,7 +2,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   // 打包路径
-  base: isDev ? '/' : '/cc/' ,
+  base: isDev ? '/' : '/cc/',
   // 标题
   title: '1cool',
   // 介绍
@@ -142,7 +142,11 @@ module.exports = {
           title: '实战搭建', // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/skill/web/vue3/create/init', '/skill/web/vue3/create/login']
+          children: [
+            '/skill/web/vue3/create/init',
+            '/skill/web/vue3/create/login',
+            '/skill/web/vue3/create/layout'
+          ]
         },
         {
           title: '初始化', // 必要的
@@ -248,9 +252,7 @@ module.exports = {
           title: 'vue理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: [
-            '/interview/vue/scoped',
-          ]
+          children: ['/interview/vue/scoped']
         },
         {
           title: '其他',
@@ -366,7 +368,7 @@ module.exports = {
               children: [
                 '/problem/element-plus/components/el-input',
                 '/problem/element-plus/components/el-date-time-picker',
-                '/problem/element-plus/components/el-scrollbar',
+                '/problem/element-plus/components/el-scrollbar'
               ]
             }
           ]

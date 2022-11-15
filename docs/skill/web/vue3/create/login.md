@@ -1,12 +1,15 @@
 # 登录架构
 
-- 通用后台登录方案解析
-- 配置环境变量封装 axios 模块
-- 封装请求动作
-- 登录触发动作
-- 本地缓存处理方案
-- 响应数据的统一处理
-- 登录后操作
+# 通用后台登录方案解析
+
+- `axios` 模块封装
+- 封装 `接口请求`
+  - 封装接口请求模块
+  - 封装登录请求动作
+- 封装登录请求动作
+- Token 缓存（本地数据缓存）
+  - 本地缓存处理方案
+  - 响应数据的统一处理
 - 登录鉴权解决方案
 
 ## 构建登录页面 UI 架构
@@ -324,9 +327,6 @@ const handleLogin = async formEl => {
   } finally {
     loading.value = false
   }
-
-  // 3. 进行登录后操作
-  //
 }
 </script>
 
@@ -425,3 +425,94 @@ export const removeAllItem = () => {
 ```
 
 :::
+
+## 响应数据的统一管理
+
+正常`axios` 请求不封装，请求数据会变成 data.data.data.token 的形式获取，让人很难受
+
+可以通过 axios 进行拦截
+
+在`utils/request.js`新增以下代码
+
+```js
+// 响应拦截器
+service.interceptors.response.use(
+  response => {
+    const { success, message, data } = response.data
+    // 判断当前请求是否成功
+    if (success) {
+      // 成功返回解析后的数据
+      return data
+    } else {
+      // 失败（请求成功，业务失败），消息提示
+      ELMessage.error(message)
+      return Promise.reject(new Error(message))
+    }
+  },
+  error => {
+    ELMessage.error(error.message)
+    return Promise.reject(error)
+  }
+)
+```
+
+## 登录鉴权
+
+### 前置准备
+
+在**登录鉴权**之前得先去创建一个登陆后得页面
+
+1. 创建`layout/LayoutView`,写入默认代码
+
+2. 在`router/index.js`中，指定对应的路由表
+
+### 登录鉴权
+
+#### 什么是登录鉴权
+
+1. 当用户未登录时，不允许进入除 login 之外的其他页面
+2. 用户登录后，token 未过期之前，不允许进入 login 页面
+
+实现这个功能，最好的方式就是通过**路由守卫**来实现
+
+新建 `src/permission`文件，配置登录鉴权
+
+```js
+import router from '@/router'
+import useUserStore from '@/stores/user'
+
+// 白名单（用户不登陆也可以进入）
+const whiteList = ['/login']
+
+/**
+ * 路由前置守卫
+ * @param {*} to 要到哪里去
+ * @param {*} from 你从哪里来
+ * @param {*} next 是否要去？
+ */
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+
+  // 1. 用户已登录，则不允许进入login
+  if (userStore.token) {
+    if (to.path === '/login') {
+      next('/')
+    } else {
+      next()
+    }
+  } else {
+    // 2. 用户未登录，只允许进行login
+    if (whiteList.includes(to.path)) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+})
+```
+
+在 main.js 中引入该文件
+
+```js
+import '@/permission'
+```
