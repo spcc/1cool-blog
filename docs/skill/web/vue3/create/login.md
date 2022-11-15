@@ -185,13 +185,14 @@ export const validatePassword = () => {
 
 ### 根据环境变量封装 axios 模块
 
-根据当前模式的不同，设置不同的`BaseUrl`,通常情况，**开发状态**和**生产状态**下他的 baseUrl 是不同的
+根据当前模式的不同，设置不同的`BaseUrl`（通常情况，**开发状态**和**生产状态**下 baseUrl 是不同的）
 
 1. 新建 `.env.development` 和 `.env.production`
 
 开发模式 `.env.development` 配置
 
 ```sh
+# 开发模式加载
 
 # 环境标识
 VITE_ENV = "development"
@@ -257,6 +258,14 @@ export const login = data => {
 
 在 `store` 目录下新建 `user.js` 模块，用于处理所有和 **用户相关** 的内容
 
+密码不能明文发送到后台,所以需要安装 md5
+
+```sh
+npm install md5
+```
+
+`user.js` 内容如下
+
 ```js
 import axios from 'axios'
 import md5 from 'md5'
@@ -267,7 +276,6 @@ const useUserStore = defineStore('user', {
     username: '',
     token: ''
   }),
-
   actions: {
     async login({ username = '', password = '' }) {
       const result = await axios.post('/api/user/login', {
@@ -275,7 +283,7 @@ const useUserStore = defineStore('user', {
         password: md5(password)
       })
       const { data, code } = result.data
-      if (code === 0) {
+      if (code === 200) {
         // action 中修改状态
         this.username = data.username
         this.token = data.token
@@ -337,9 +345,44 @@ const handleLogin = async formEl => {
 - 本地缓存一份`LocalStorage`(因为 token 没有过期的情况下，可以实现自动登录功能)
 - 保存 `pinia` 中是为了后面在其他位置进行使用
 
+### 插件 pinia-plugin-persistedstate
+
+在`main.js`中注册
+
+```js
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+const app = createApp(App)
+const pinia = createPinia()
+
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
+```
+
+在`user.js`开启持久化存储
+
+```js
+/**
+ * 存储key
+ * storage 存储方式
+ * paths 持久化存储key
+ */
+
+const useUserStore = defineStore('user', {
+  persist: {
+    key: 'USER',
+    storage: localStorage,
+    paths: ['token', 'username']
+  }
+})
+```
+
 ### localStorage
 
-1. 新建 `utils/storage.js`文件，封装 localStorage 方法
+:::details 点击查看代码
+
+新建 `utils/storage.js`文件，封装 localStorage 方法
 
 ```js
 /**
@@ -380,3 +423,5 @@ export const removeAllItem = () => {
   window.localStorage.clear()
 }
 ```
+
+:::
