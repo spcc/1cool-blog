@@ -336,3 +336,47 @@ const handleLogin = async formEl => {
 
 - 本地缓存一份`LocalStorage`(因为 token 没有过期的情况下，可以实现自动登录功能)
 - 保存 `pinia` 中是为了后面在其他位置进行使用
+
+### localStorage
+
+1. 新建 `utils/storage.js`文件，封装 localStorage 方法
+
+```js
+/**
+ * 存储数据
+ */
+export const setItem = (key, value) => {
+  // value 分为两种情况 1. 基本数据类型 2. 复杂数据类型
+  if (typeof value === 'object') {
+    value = JSON.stringify(value)
+  }
+  window.localStorage.setItem(key, value)
+}
+
+/**
+ * 获取数据
+ */
+export const getItem = key => {
+  const data = window.localStorage.getItem(key)
+  // 如果判断data是否是json字符串比较麻烦
+  try {
+    return JSON.parse(data)
+  } catch (err) {
+    return data
+  }
+}
+
+/**
+ * 删除指定数据
+ */
+export const removeItem = key => {
+  window.localStorage.removeItem(key)
+}
+
+/**
+ * 删除所有数据
+ */
+export const removeAllItem = () => {
+  window.localStorage.clear()
+}
+```
