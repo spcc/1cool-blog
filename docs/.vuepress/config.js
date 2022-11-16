@@ -350,7 +350,8 @@ module.exports = {
                 '/problem/element-ui/components/el-table',
                 '/problem/element-ui/components/el-tree',
                 '/problem/element-ui/components/el-tooltip',
-                '/problem/element-ui/components/el-dropdown'
+                '/problem/element-ui/components/el-dropdown',
+                '/problem/element-ui/components/el-form'
               ]
             }
           ]
