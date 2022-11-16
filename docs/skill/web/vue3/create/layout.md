@@ -679,4 +679,130 @@ const handleLogout = () => {
 处理方案
 
 - 主动处理：主要应对 token 失效
+  - 动态 token/可变 token（第一次请求是 1，第二次请求是 2）
+  - 刷新 token（token 过期的时候，通过另一个接口刷新 token）
+  - 时效 token（token 有一个有效期，超过重新登录）
 - 被动处理：同时应对 token 失效与**单点登录**
+  - token 过期（服务端生成 token 超过服务端指定时效）
+  - 单点登录（同一账户尽可以在一个设备中保持在线状态）
+
+#### 主动处理 - 时效 token
+
+服务端处理 token 时效的同时，在前端主动介入 token 时效的处理。从而保证用户信息的安全性。
+
+对应代码的试验方案为
+
+- 在用户登陆时，记录当前 **登录时间**
+- 制定一个 **失效时常**
+- 在接口调用时，根据 **当前时间** 对比 **登录时间**，看是否超过 **失效时间**
+  - 如果未超时，则正常进行后续操作
+  - 如果超时，则进行 **退出登录** 操作
+
+创建 utils/auth.js 文件，并写入以下代码
+
+```js
+import { getItem, setItem } from '@/utils/storage'
+import { TIME_STAMP, TOKEN_TIMEOUT_VALUE } from '@/constant'
+
+/**
+ * 获取时间戳
+ */
+
+export function getTimeStamp() {
+  return getItem(TIME_STAMP)
+}
+
+/**
+ * 设置时间戳
+ */
+export function setTimeStamp() {
+  setItem(TIME_STAMP, Date.now())
+}
+
+/**
+ * 是否超时
+ */
+export function isCheckTimeout() {
+  // 当前时间
+  const currentTime = Date.now()
+  // 缓存时间
+  const timeStamp = getTimeStamp()
+  return currentTime - timeStamp > TOKEN_TIMEOUT_VALUE
+}
+```
+
+utils/storage.js
+
+```js
+// token 时间戳
+export const TIME_STAMP = 'timeStamp'
+// 超时时常（2小时过期）
+export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 10
+```
+
+store/user.js 在登陆后保存登录时间
+
+```js
+import { setTimeStamp } from '@/utils/auth'
+const useUserStore = defineStore('user', {
+  actions: {
+    // 登录
+    async login({ username = '', password = '' }) {
+      // 跳转
+      router.push('/')
+      // 保存登录时间
+      setTimeStamp()
+    }
+  }
+})
+```
+
+utils/request.js 拦截器拦截
+
+```js
+// 请求拦截器
+service.interceptors.request.use(
+  config => {
+    const userStore = useUserStore()
+    // 在这里统一注入token
+    if (userStore.token) {
+      // 如果本地token超时
+      if (isCheckTimeout()) {
+        // 退出操作
+        userStore.logout()
+        return Promise.reject(new Error('token 失效'))
+      }
+      config.headers.Authorization = `Bearer ${userStore.token}`
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+```
+
+#### 用户被动退出-被动处理
+
+服务端通知前端的一个过程
+
+- 服务端返回数据时，会通过特定的状态码通知前端
+- 当前端接收到特定状态码时，表示遇到了特定状态：**token 时效** 或 **单点登录**
+- 此时进行 **退出登录** 处理
+
+在 utils/request.js 中
+
+```js
+// 响应拦截器
+service.interceptors.response.use(
+  response => {},
+  error => {
+    const userStore = useUserStore()
+    // token 过期
+    if (error.response?.data?.code === 401) {
+      userStore.logout()
+    }
+    ElMessage.error(error.message)
+    return Promise.reject(error)
+  }
+```
