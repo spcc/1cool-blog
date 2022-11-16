@@ -669,7 +669,7 @@ const handleLogout = () => {
 </template>
 ```
 
-### 用户被动退出
+#### 用户被动退出
 
 场景
 
@@ -686,7 +686,7 @@ const handleLogout = () => {
   - token 过期（服务端生成 token 超过服务端指定时效）
   - 单点登录（同一账户尽可以在一个设备中保持在线状态）
 
-#### 主动处理 - 时效 token
+##### 主动处理 - 时效 token
 
 服务端处理 token 时效的同时，在前端主动介入 token 时效的处理。从而保证用户信息的安全性。
 
@@ -782,7 +782,7 @@ service.interceptors.request.use(
 )
 ```
 
-#### 用户被动退出-被动处理
+##### 用户被动退出-被动处理
 
 服务端通知前端的一个过程
 
@@ -805,4 +805,204 @@ service.interceptors.response.use(
     ElMessage.error(error.message)
     return Promise.reject(error)
   }
+```
+
+## 动态 menu 菜单
+
+**动态 menu 菜单** 其实主要是和 **动态路由表** 配合来去实现 **用户权限** 的
+
+### 动态 menu 菜单
+
+指的是：
+
+- 根据路由表配置，自动生成对应的 menu 菜单
+- 当路由表发生变化时，menu 菜单自动发生变化
+
+实现方案：
+
+- 定义 **路由表** 对应 **menu 菜单规格**
+- 根据规格制定 **路由表**
+- 根据规格，依据**路由表**，生成 **menu 菜单**
+
+#### 1. 创建页面组件
+
+在 `views` 文件夹下，创建如下页面：
+
+1. 创建文章：`article-create`
+2. 文章详情：`article-detail`
+3. 文章排名：`article-ranking`
+4. 错误页面：`error-page`
+   1. `404`
+   2. `401`
+5. 导入：`import`
+6. 权限列表：`permission-list`
+7. 个人中心：`profile`
+8. 角色列表：`role-list`
+9. 用户信息：`user-info`
+10. 用户管理：`user-manage`
+
+#### 2. 创建结构路由表
+
+:::details 点击查看代码
+
+```js
+import { createRouter, createWebHistory } from 'vue-router'
+import layout from '@/layout/LayoutView.vue'
+
+/**
+ * 私有路由表
+ */
+const privateRoutes = [
+  {
+    path: '/user',
+    component: layout,
+    redirect: '/user/manage',
+    meta: {
+      title: 'user',
+      icon: 'personnel'
+    },
+    children: [
+      {
+        path: '/user/manage',
+        component: () => import('@/views/user-manage/index.vue'),
+        meta: {
+          title: 'userManage',
+          icon: 'personnel-manage'
+        }
+      },
+      {
+        path: '/user/role',
+        component: () => import('@/views/role-list/index.vue'),
+        meta: {
+          title: 'roleList',
+          icon: 'role'
+        }
+      },
+      {
+        path: '/user/permission',
+        component: () => import('@/views/permission-list/index.vue'),
+        meta: {
+          title: 'permissionList',
+          icon: 'permission'
+        }
+      },
+      {
+        path: '/user/info/:id',
+        name: 'userInfo',
+        component: () => import('@/views/user-info/index.vue'),
+        meta: {
+          title: 'userInfo'
+        }
+      },
+      {
+        path: '/user/import',
+        name: 'import',
+        component: () => import('@/views/import/index.vue'),
+        meta: {
+          title: 'excelImport'
+        }
+      }
+    ]
+  },
+  {
+    path: '/article',
+    component: layout,
+    redirect: '/article/ranking',
+    meta: {
+      title: 'article',
+      icon: 'article'
+    },
+    children: [
+      {
+        path: '/article/ranking',
+        component: () => import('@/views/article-ranking/index.vue'),
+        meta: {
+          title: 'articleRanking',
+          icon: 'article-ranking'
+        }
+      },
+      {
+        path: '/article/:id',
+        component: () => import('@/views/article-detail/index.vue'),
+        meta: {
+          title: 'articleDetail'
+        }
+      },
+      {
+        path: '/article/create',
+        component: () => import('@/views/article-create/index.vue'),
+        meta: {
+          title: 'articleCreate',
+          icon: 'article-create'
+        }
+      },
+      {
+        path: '/article/editor/:id',
+        component: () => import('@/views/article-create/index.vue'),
+        meta: {
+          title: 'articleEditor'
+        }
+      }
+    ]
+  }
+]
+
+/**
+ * 公开路由表
+ */
+const publicRoutes = [
+  {
+    path: '/login',
+    name: 'LoginView',
+    component: () => import('@/views/login/LoginView.vue')
+  },
+  {
+    path: '/',
+    // 注意：带有路径“/”的记录中的组件“默认”是一个不返回 Promise 的函数
+    component: layout,
+    redirect: '/profile',
+    children: [
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('@/views/profile/index.vue'),
+        meta: {
+          title: 'profile',
+          icon: 'el-icon-user'
+        }
+      },
+      {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/error-page/404.vue')
+      },
+      {
+        path: '/401',
+        name: '401',
+        component: () => import('@/views/error-page/401.vue')
+      }
+    ]
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [...publicRoutes, ...privateRoutes]
+})
+
+export default router
+```
+
+:::
+
+最后不要忘记在 `layout/appMain` 下设置路由出口
+
+```vue
+<script setup>
+import { RouterView } from 'vue-router'
+</script>
+
+<template>
+  <div class="app-main"><RouterView /></div>
+</template>
 ```
