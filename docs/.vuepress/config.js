@@ -262,7 +262,7 @@ module.exports = {
           title: '其他',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/reverse-interview']
+          children: ['/interview/other/reverse-interview']
         }
       ],
 
