@@ -29,36 +29,28 @@ history 路由模式的实现，是要归功于 HTML5 提供的一个 **history*
 - 都会改变当前页面显示的 url，但都不会刷新页面
 - pushState 是压入浏览器的会话历史栈中，会使得 history.length 加 1，而 replaceState 是替换当前的这条会话历史，因此不会增加 history.length
 
-既然已经能够通过 pushState 或 replaceState 实现改变 URL 而不刷新页面，那么是不是如果我们能够监听到改变 URL 这个动作，就可以实现前端渲染逻辑的处理呢？这个时候，我们还要了解一个事件处理程序 popstate，先看下它的官方定义
+既然已经能够通过 pushState 或 replaceState 实现改变 URL 而不刷新页面
+但是 popstate 无法监听 history.pushState 和 history.replaceState 方法
 
-> 每当激活同一文档中不同的历史记录条目时，`popstate` 事件就会在对应的 `window` 对象上触发。如果当前处于激活状态的历史记录条目是由 `history.pushState()` 方法创建的或者是由 `history.replaceState()` 方法修改的，则 `popstate` 事件的 `state` 属性包含了这个历史记录条目的 `state` 对象的一个拷贝。
->
-> 调用 `history.pushState()` 或者 `history.replaceState()` 不会触发 `popstate` 事件。`popstate` 事件只会在浏览器某些行为下触发，比如点击后退按钮（或者在 JavaScript 中调用 `history.back()` 方法）。即，在同一文档的两个历史记录条目之间导航会触发该事件。
-
-这里我用大白话总结下就是以下几点
-
-- history.pushState 和 history.replaceState 方法是不会触发 popstate 事件的
-- 但是浏览器的某些行为会导致 popstate，比如 go、back、forward
-- popstate 事件对象中的 state 属性，可以理解是我们在通过 history.pushState 或 history.replaceState 方法时，传入的指定的数据
-
-说了一大堆，结果却是 popstate 无法监听 history.pushState 和 history.replaceState 方法，这不是扯呢吗？那好吧，既然你厂商没实现此功能，那么我自己重新写下你这个 history.pushState 和 history.replaceState 方法吧，让你在这个方法中，也能够暴露出自定义的全局事件，然后我再监听自定义的事件，不就行了？
+既然厂商没实现此功能，那只能重新写下你这个 history.pushState 和 history.replaceState 方法，让你在这个方法中，也能够暴露出自定义的全局事件，然后再监听自定义的事件
 
 #### 改写
 
-    let _wr = function(type) {
-       let orig = history[type]
-       return function() {
-          let rv = orig.apply(this, arguments)
-          let e = new Event(type)
-          e.arguments = arguments
-          window.dispatchEvent(e)
-          return rv
-       }
-    }
+```js
+let _wr = function(type) {
+  let orig = history[type]
+	return function() {
+		let rv = orig.apply(this, arguments)
+		let e = new Event(type)
+		e.arguments = arguments
+		window.dispatchEvent(e)
+		return rv
+	}
+}
 
-    history.pushState = _wr('pushState')
-    history.replaceState = \_wr('replaceState')
-    复制代码
+history.pushState = _wr('pushState')
+history.replaceState = \_wr('replaceState')
+```
 
 执行完上面两个方法后，相当于将 pushState 和 replaceState 这两个监听器注册到了 window 上面，具体的定义可参考[EventTarget.dispatchEvent](https://link.juejin.cn?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FAPI%2FEventTarget%2FdispatchEvent 'https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/dispatchEvent')
 
