@@ -18,61 +18,67 @@
 
 ### 1.1 查看隐式原型
 
-- `obj.__proto__`,早期由浏览器实现，兼容性较差
-- `Object.getPrototypeOf`方法也能获取到
+1. `obj.__proto__`,早期由浏览器实现，兼容性较差
+2. `Object.getPrototypeOf`方法也能获取到
 
-  const info = {
+```js
+const info = {
   name: 'ice',
   age: 22
-  }
+}
 
-  console.log(info.**proto**)
-  console.log(Object.getPrototypeOf(info))
+console.log(info.__proto__)
+console.log(Object.getPrototypeOf(info))
 
-  console.log(info.**proto** === Object.getPrototypeOf(info)) // true
+console.log(info.__proto__ === Object.getPrototypeOf(info)) // true
+```
 
-  复制代码
+打印结果如下:
 
-- 打印结果如下:
-  - 我们从打印结果可以看出，通过`__proto__`和`Object.getPrototypeOf`方法，获取的对象应用是同一个 ![1663940777873.jpg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f7461ae9c188417a8733d49cfea0402e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
-  - `constructor`这个特殊的属性，我们在后面再来剖析，它默认会指向当前的函数对象
+我们从打印结果可以看出，通过`__proto__`和`Object.getPrototypeOf`方法，获取的对象应用是同一个
+
+![1663940777873.jpg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f7461ae9c188417a8733d49cfea0402e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
+
+`constructor`这个特殊的属性，我们在后面再来剖析，它默认会指向当前的函数对象
 
 ### 1.2 隐式原型有什么用？
 
 1.  当你访问该对象的属性时会触发`[[GET]]`操作（对象的存取描述符）
 2.  当我访问`info.name`的时候，首先会查找该`info`对象中，是否有这个属性，有就使用它
 
-    const info = {
-    name: 'ice',
-    age: 22
-    }
+```js
+const info = {
+  name: 'ice',
+  age: 22
+}
 
-    console.log(info.name)
-    复制代码
+console.log(info.name)
+```
 
-3.  如果无法在该`info`对象中找到，就会沿着该对象的隐式原型`[[prototype]]`(沿着原型链)，有就使用它。直到查询到“尽头”后，还未找到该属性的值，返回`undefined`
+3. 如果无法在该`info`对象中找到，就会沿着该对象的隐式原型`[[prototype]]`(沿着原型链)，有就使用它。直到查询到“尽头”后，还未找到该属性的值，返回`undefined`
 
-    //1. 未找到
-    const info1 = {
-    name: 'ice',
-    age: 22
-    }
+```js
+//1. 未找到
+const info1 = {
+  name: 'ice',
+  age: 22
+}
 
-    console.log(info1.money) //undefined
+console.log(info1.money) //undefined
 
-    //2. 隐式原型中找到
-    const info2 = {
-    name: 'ice',
-    age: 22
-    }
+//2. 隐式原型中找到
+const info2 = {
+  name: 'ice',
+  age: 22
+}
 
-    ///后续会讲到是什么
-    Object.prototype.money = 100
+///后续会讲到是什么
+Object.prototype.money = 100
 
-    console.log(info2.money) //100
-    复制代码
+console.log(info2.money) //100
+```
 
-## 2\. 函数的显示原型
+## 2. 函数的显示原型
 
 多年以来，js 中有一种奇怪的行为，一直被“无耻”的滥用，那就是模仿类（早期是面向对象编程的天下）。这种奇怪的“类似类”的行为，就是利用函数的特殊属性，因为所有函数都会有一个显示原型(`prototype`)属性，它会指向另外一个对象，可以通过这一特性变相实现继承。
 
@@ -80,30 +86,33 @@
 
 - 所有的函数都一个`prototype`属性(**箭头函数除外**)，注意：**不是对象的\_\_proto\_\_**
 
-  function bar() {}
+```js
+function bar() {}
 
-  //所有的函数都有 prototype 属性
-  console.log(bar.prototype)
+//所有的函数都有 prototype 属性
+console.log(bar.prototype)
 
-  const info = {}
-  //对象没有 prototype 属性
-  console.log(info.prototype)
-  复制代码
+const info = {}
+//对象没有 prototype 属性
+console.log(info.prototype)
+```
 
 ### 2.2 显示原型有什么用呢？
 
-- 最直接的解释，通过`new`关键字调用的函数(`new Foo()`)，创建的对象，最终这个对象的`[[prototype]]` (`__proto__`/隐式原型)，会指向`Foo.prototype`（**函数的显示原型**）这个对象。
+最直接的解释：  
+通过`new`关键字调用的函数(`new Person()`)，创建的对象，最终这个对象的 `__proto__`/**隐式原型**，会指向`Person.prototype`（**函数的显示原型**）这个对象。
 
-  function Person() {}
+```js
+function Person() {}
 
-  const p1 = new Person()
-  const p2 = new Person()
+const p1 = new Person()
+const p2 = new Person()
 
-  console.log(p1.**proto** === Person.prototype) //true
-  console.log(p1.**proto** === p2.**proto**) //true
-  复制代码
+console.log(p1.__proto__ === Person.prototype) // true
+console.log(p1.__proto__ === p2.__proto__) // true
+```
 
-**内存表现**
+#### 内存表现
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e26f956817e40978b0e915a571036b5~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
 
@@ -113,24 +122,25 @@
 
 #### 2.3.1 `new Fn()` 发生了什么
 
-1.  创建一个空对象
-2.  `this`指向创建出来的对象
-3.  这个对象的隐式原型指向了函数的显示原型，(即`p1.__proto__ === Person.prototype`)
-4.  运行函数体代码
-5.  如果没有明确返回一个非空对象，那么返回的就是创建出来的对象
+1. 创建一个空对象
+2. `this`指向创建出来的对象
+3. 这个对象的隐式原型指向了函数的显示原型，(即`p1.__proto__ === Person.prototype`)
+4. 运行函数体代码
+5. 如果没有明确返回一个非空对象，那么返回的就是创建出来的对象
 
-    function Person(name, age) {
-    this.name = name
-    this.age = age
-    }
+```js
+function Person(name, age) {
+  this.name = name
+  this.age = age
+}
 
-    const p1 = new Person('ice', 22)
+const p1 = new Person('ice', 22)
 
-    console.log(p1) //{ name: 'ice', age: 22 }
-    console.log(p1.**proto** === Person.prototype) //true
-    复制代码
+console.log(p1) // { name: 'ice', age: 22 }
+console.log(p1.__proto__ === Person.prototype) //true
+```
 
-**内存表现**
+##### 内存表现
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f39734f88654a278936d7f6d15e50f2~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
 
@@ -138,57 +148,63 @@
 
 函数的显示原型，是一个对象，我们当然可以在对象上面添加我们自定义属性，思考以下代码
 
-    function Person() {}
+```js
+function Person() {}
 
-    Person.prototype.money = 100
-    Person.prototype.getDoubleMoney = function() {
-      return this.money * 2
-    }
+Person.prototype.money = 100
+Person.prototype.getDoubleMoney = function () {
+  return this.money * 2
+}
 
-    const p1 = new Person()
+const p1 = new Person()
 
-    console.log(p1.money) //100
-    console.log(p1.getDoubleMoney()) //200
-    复制代码
+console.log(p1.money) //100
+console.log(p1.getDoubleMoney()) //200
+```
 
-- 我们在构造函数的显示原型上，添加了`money`属性和`getDoubleMoney`方法，方法中设计到了`this`的概念，不懂的小伙伴可以翻一下，之前写的[有关 this 的文章](https://juejin.cn/post/7138827972525424676 'https://juejin.cn/post/7138827972525424676')
-- 当我们对象自身上没有该`money`属性和`getDoubleMoney`方法，就会沿着对象的原型链一直查找，直至找到“尽头”，还未找到则为`undefined`，其实很明显这些属性/方法，存放在`Person`函数的原型上
-- `p1`对象为`Person`的实例（instance），即 `p1.__proto__ === Person.prototype`
+在构造函数的显示原型上，添加了`money`属性和`getDoubleMoney`方法，方法中设计到了`this`的概念[掘金 this 文章](https://juejin.cn/post/7138827972525424676 'https://juejin.cn/post/7138827972525424676')
 
-**内存表现**
+当我们对象自身上没有该`money`属性和`getDoubleMoney`方法，就会沿着对象的原型链一直查找，直至找到“尽头”，还未找到则为`undefined`，其实很明显这些属性/方法，存放在`Person`函数的原型上
+
+`p1`对象为`Person`的实例（instance），即 `p1.__proto__ === Person.prototype`
+
+##### 内存表现
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c1962fd68ffc461f8d5b18d0df1ebfea~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
 
-- 每个函数都会有`name`和`length`属性，`name`为函数的名称，`length`为函数的形参个数
+每个函数都会有`name`和`length`属性，`name`为函数的名称，`length`为函数的形参个数
 
-**为什么添加到原型上？**
+##### 为什么添加到原型上？
 
-- 为什么我要添加到原型上？ 我为啥不能把属性/方法写在函数内部呢？
-- 思考以下代码
+为什么我要添加到原型上？ 我为啥不能把属性/方法写在函数内部呢？
 
-  function Person(name, age, money) {
+思考以下代码
+
+```js
+function Person(name, age, money) {
   this.name = name
   this.age = age
   this.money = money
 
-  this.getDoubleMoney = function() {
-  return this.money \* 2
+  this.getDoubleMoney = function () {
+    return this.money * 2
   }
-  }
+}
 
-  const p1 = new Person('ice', 22, 100)
-  const p2 = new Person('panda', 22, 200)
+const p1 = new Person('ice', 22, 100)
+const p2 = new Person('panda', 22, 200)
 
-  console.log(p1.name, p1.money) //ice 100
-  console.log(p1.name, p1.getDoubleMoney()) //ice 200
+console.log(p1.name, p1.money) //ice 100
+console.log(p1.name, p1.getDoubleMoney()) //ice 200
 
-  console.log(p2.name, p2.money) //panda 200
-  console.log(p2.name, p2.getDoubleMoney()) //panda 400
-  复制代码
+console.log(p2.name, p2.money) //panda 200
+console.log(p2.name, p2.getDoubleMoney()) //panda 400
+```
 
-- 我这里直接说结论：
-  - 属性应该写在函数内部，而不是写在原型对象上，因为对于构造函数来说，每个实例对象应该有属于自己的属性，而不是同一个。
-  - **公共方法**应该放在构造函数的原型上，因为**可以复用**。当我创建一个实例都会运行构造函数，我创建多个实例，那么就要调用多次。如果方法在函数体中，调用多次构造函数，方法就会被定义多次，这样其实是没有必要的。(多次调用、多次定义、浪费性能)
+直接说结论：
+
+- 属性应该写在函数内部，而不是写在原型对象上，因为对于构造函数来说，每个实例对象应该有属于自己的属性，而不是同一个。
+- **公共方法**应该放在构造函数的原型上，因为**可以复用**。当我创建一个实例都会运行构造函数，我创建多个实例，那么就要调用多次。如果方法在函数体中，调用多次构造函数，方法就会被定义多次，这样其实是没有必要的。(多次调用、多次定义、浪费性能)
 
 ### 2.4 constructor 属性
 
@@ -197,93 +213,105 @@
 - 每个原型对象上都有一个`constructor`，它默认指向了当前的函数，形成循环引用，V8 引擎 GC 采用标记清除算法，不会存在内存泄漏问题
 - `Person.prototype.constructor === Person`
 
-  function Person() {}
+```js
+function Person() {}
 
-  const p1 = new Person()
+const p1 = new Person()
 
-  console.log(Person.prototype.constructor.name) //person
-  console.log(Person.prototype.constructor === Person) //true
-  console.log(p1.**proto**.constructor === Person.prototype.constructor) //true
-  复制代码
+console.log(Person.prototype.constructor.name) // person
+console.log(Person.prototype.constructor === Person) // true
+console.log(p1.__proto__.constructor === Person.prototype.constructor) // true
+```
 
 ### 2.5 重写函数的显示原型
 
-    function Person(name, age, money) {
-      this.name = name
-      this.age = age
-      this.money = money
-    }
+```js
+function Person(name, age, money) {
+  this.name = name
+  this.age = age
+  this.money = money
+}
 
-    //重写了显示原型，是一个全新的对象
-    Person.prototype = {
-      getDoubleMoney () {
-        return this.money * 2
-      }
-    }
+//重写了显示原型，是一个全新的对象
+Person.prototype = {
+  getDoubleMoney() {
+    return this.money * 2
+  }
+}
 
-    const p1 = new Person('ice', 22, 100)
+const p1 = new Person('ice', 22, 100)
 
-    console.log(p1.getDoubleMoney()) //200
-    复制代码
+console.log(p1.getDoubleMoney()) //200
+```
 
 - 我们之前采用赋值的方式，是添加属性的方式添加方法，即`Person.prototype.getDoubleMoney = function() {}` ，这是相当于在原对象上添加
 - 这个案例是，是直接赋值了一个新对象，在内存中的表现为，指向了另外一个对象，而不是默认的显示原型了。
 
-**探究 constructor**  
-上面的案例中我们把函数的原型进行了**重写**的操作，你们有思考过`constructor`属性吗，原来的原型已经被我重写，赋值为一个全新的对象了，那这个全新的对象`constructor`又指向谁了呢？  
+#### 探究 constructor
+
+上面的案例中我们把函数的原型进行了**重写**的操作，你们有思考过`constructor`属性吗，原来的原型已经被我重写，赋值为一个全新的对象了，那这个全新的对象`constructor`又指向谁了呢？
 绕来绕去都快被绕晕了，什么乱七八糟的！接下来跟我一起探究
 
-    function Person(name, age, money) {
-      this.name = name
-      this.age = age
-      this.money = money
-    }
+```js
+function Person(name, age, money) {
+  this.name = name
+  this.age = age
+  this.money = money
+}
 
-    Person.prototype = {
-      getDoubleMoney () {
-        return this.money * 2
-      }
-    }
+Person.prototype = {
+  getDoubleMoney() {
+    return this.money * 2
+  }
+}
 
-    console.log(Person.prototype.constructor === Object) // true
-    复制代码
+console.log(Person.prototype.constructor === Object) // true
+```
 
-- 你会惊讶的发现，woc，这是什么意思？ 为什么指向的却是 Object 呢？难道是 bug 吗？其实并不是，原型/原型链/继承都是环环相扣，一环扣着一环，一个点没吃透，剩下的就很难明白。
+为什么指向的却是 Object 呢？难道是 bug 吗？其实并不是，原型/原型链/继承都是环环相扣，一环扣着一环，一个点没吃透，剩下的就很难明白。
 
-**继续推断探究**
+#### 继续推断探究
 
 - 探索`Person.prototype.constructor === Object`
 
-  /_解: Person.prototype.constructor === Object 1. 首先我们对原对象进行了重写 2. 每个原型对象上都有 constructor 属性，我们赋值的那个对象身上肯定也有原型对象啊！
-  Person.prototype = { getDoubleMoney () { return this.money _ 2 } } 3. 此时的 Person.prototype = {}，等于了一个全新的对象，并不用关心里面的方法 getDoubleMoney 4. 伪代码: const obj = {}（字面量写法） 等同于 const obj = new Object()，所以 obj 对象的隐式原型即（obj.**proto** === Object.prototype），obj 为 Object 的实例对象。 5. 我们赋值的新对象的隐式原型指向了 Object.prototype,所以 Person.prototype.constructor 去查找 constructor 的时候，自己没有 constructor，找到的其实 Object.prototype.constructor,所以它的值等于 Object 6. js 中的一句话：万物皆对象(虽然不严谨)，因为 Object.prototype 是"尽头"，在查找就等于 null 了
-  \*/
-  复制代码
+```js
+/*解: Person.prototype.constructor === Object
+      1. 首先我们对原对象进行了重写
+      2. 每个原型对象上都有constructor属性，我们赋值的那个对象身上肯定也有原型对象啊！
+        Person.prototype = { getDoubleMoney () { return this.money * 2 } }
+      3. 此时的Person.prototype = {}，等于了一个全新的对象，并不用关心里面的方法getDoubleMoney
+      4. 伪代码: const obj = {}（字面量写法） 等同于 const obj = new Object()，所以obj对象的隐式原型即（obj.__proto__ === Object.prototype），obj为Object的实例对象。
+      5. 我们赋值的新对象的隐式原型指向了Object.prototype,所以Person.prototype.constructor去查找constructor的时候，自己没有constructor，找到的其实Object.prototype.constructor,所以它的值等于Object
+      6. js中的一句话：万物皆对象(虽然不严谨)，因为Object.prototype是"尽头"，在查找就等于null了
+*/
+```
 
-**自定义 constructor**
+#### 自定义 constructor
 
-    function Person(name, age, money) {
-      this.name = name
-      this.age = age
-      this.money = money
-    }
+```js
+function Person(name, age, money) {
+  this.name = name
+  this.age = age
+  this.money = money
+}
 
-    Person.prototype = {
-      getDoubleMoney () {
-        return this.money * 2
-      }
-    }
+Person.prototype = {
+  getDoubleMoney() {
+    return this.money * 2
+  }
+}
 
-    Object.defineProperty(Person.prototype, "constructor", {
-      value: Person,
-      writable:true,
-      configurable: false,
-      enumerable: false
-    })
+Object.defineProperty(Person.prototype, 'constructor', {
+  value: Person,
+  writable: true,
+  configurable: false,
+  enumerable: false
+})
 
-    console.log(Person.prototype.constructor === Person) // true
-    复制代码
+console.log(Person.prototype.constructor === Person) // true
+```
 
-- 这样才是正确重写函数显示原型的正确方法，跟默认提供的显示原型一致
+这样才是正确重写函数显示原型的正确方法，跟默认提供的显示原型一致
 
 ## 3\. 函数的隐式原型
 
@@ -669,7 +697,7 @@
   F.prototype = o
   return new F()
   }
-  //1. 创建一个新对象  
+  //1. 创建一个新对象
   //2. 新对象 **proto** 指向父类的 prototype
   //3. 最后返回这个对象
 
@@ -742,25 +770,25 @@
 
 首先就是`new Foo`出发
 
-1.  `f1 = new Foo()`  
+1.  `f1 = new Foo()`
     即 `f1.__proto__ === Foo.prototype`
-2.  `Foo.prototype`也是一个对象，也有自己的隐式原型  
-    即 `Foo.prototype.__proto__ === Object.prototype`  
+2.  `Foo.prototype`也是一个对象，也有自己的隐式原型
+    即 `Foo.prototype.__proto__ === Object.prototype`
     `Object.prototype`是顶层（"尽头"）, 在继续查找就为 null
 3.  `Foo`函数的`prototype`则是，`Foo.prototype`
-4.  `Foo`身为对象身份也有属于自己的`__proto__`,也有自己的构造函数  
+4.  `Foo`身为对象身份也有属于自己的`__proto__`,也有自己的构造函数
     即`Foo.__proto__ === Function.prototype` , 因为`Foo的创建`相当于 `new Function()`
 5.  `Function.prototype`也是一个对象，它的`__proto__`为`Object.prototype`“尽头”，在查找下去为 null
-6.  `Function`也是一个对象，它也有自己的构造函数，但是它也是相当于`new Function`创建出来的**比较特殊**  
+6.  `Function`也是一个对象，它也有自己的构造函数，但是它也是相当于`new Function`创建出来的**比较特殊**
     即`Function.__proto__ === Function.prototype`
 
 ### 5.2 new Object()
 
 从 `new Object()`出发
 
-1.  `o1 = new Object()`  
+1.  `o1 = new Object()`
     即`o1.__proto__ === Object.prototype`, 因为它是由`Object`的实例，“尽头”，在沿着\_\_proto\_\_查找，则为 null
-2.  `Object`它的显示原型为`Object.prototype`,作为对象身份也有自己的`__proto__`，那它是由谁构建出来的呢？  
+2.  `Object`它的显示原型为`Object.prototype`,作为对象身份也有自己的`__proto__`，那它是由谁构建出来的呢？
     即 `Object.__proto__ === Function.prototype`,它是由函数构建出来的，也可以说它是函数的实例对象
 
 ### 5.3 内存图分析
@@ -965,3 +993,5 @@
     复制代码
 
 - 继承字内置 Array 类，调用`lastItem`，每次获取最后一个元素。
+
+[摘自](https://juejin.cn/post/7147159884658638856#)

@@ -7,6 +7,8 @@ module.exports = {
   title: '1cool',
   // 介绍
   description: '成功不是终点，失败也不是终结，只有勇气才是永恒',
+  // 喜欢的人是真的会发光啊
+  // 我做过最勇敢的一件事，就是喜欢你
   // 主题
   theme: '@qingui/v1',
   plugins: [
