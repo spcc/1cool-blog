@@ -256,7 +256,7 @@ module.exports = {
           title: 'vue理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/vue/scoped']
+          children: ['/interview/vue/scoped', '/interview/vue/router']
         },
         {
           title: '其他',
