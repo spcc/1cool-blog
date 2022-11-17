@@ -235,7 +235,6 @@
 - [面试官为啥总是喜欢问前端路由实现方式？](https://juejin.cn/post/7127143415879303204)
 - [Vue100 问（第 5 问）为什么 v-for 的 key 值不能是 index？](https://juejin.cn/post/7055463998015143966)
 - [关于 Vue 的一些高频面试题总结](https://juejin.cn/post/7135251623864958984)
-- [你还有什么问题吗？](https://juejin.cn/post/7137157243292057613)
 - [2022 高频前端面试题汇总（附答案）](https://juejin.cn/post/7127217262133510158)
 - [面试官:你觉得你最大的缺点是什么?](https://juejin.cn/post/7120805355042373662)
 - [因为实现不了 Promise.all，一场面试凉凉了](https://juejin.cn/post/7038371452084551694)
