@@ -16,6 +16,7 @@
 [从小公司内推入职阿里，这些实战项目写在简历上真吃香！安排](https://juejin.cn/post/7143812283109408782)
 
 - [简历模板](https://www.processon.com/view/link/61c53fb31efad45a2b42afd9#map)
+- [Github 最火简历模板](https://github.com/FrontEndGitHub/FrontEndGitHub/issues/15)
 
 - [面试官为啥总是让我们手撕 call、apply、bind](https://juejin.cn/post/7128233572380442660 'https://juejin.cn/post/7128233572380442660')
 

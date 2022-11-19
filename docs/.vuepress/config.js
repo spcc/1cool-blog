@@ -267,6 +267,12 @@ module.exports = {
           children: ['/interview/other/reverse-interview']
         },
         {
+          title: '心态',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: ['/interview/money/base']
+        },
+        {
           title: '暂时没有用到',
           collapsable: true,
           sidebarDepth: 0,
