@@ -17,6 +17,8 @@
 
 - [简历模板](https://www.processon.com/view/link/61c53fb31efad45a2b42afd9#map)
 
+- [面试官为啥总是让我们手撕 call、apply、bind](https://juejin.cn/post/7128233572380442660 'https://juejin.cn/post/7128233572380442660')
+
 ## 使用技术
 
 Thinkphp

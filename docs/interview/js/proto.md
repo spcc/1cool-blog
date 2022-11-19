@@ -1,5 +1,7 @@
 # 原型/继承/class
 
+[摘自](https://juejin.cn/post/7147159884658638856#)
+
 原型/继承
 
 - 对象的[[prototype]](即隐式原型)
@@ -993,5 +995,3 @@ console.log(Person.prototype.constructor === Person) // true
     复制代码
 
 - 继承字内置 Array 类，调用`lastItem`，每次获取最后一个元素。
-
-[摘自](https://juejin.cn/post/7147159884658638856#)

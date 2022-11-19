@@ -265,6 +265,12 @@ module.exports = {
           collapsable: true,
           sidebarDepth: 0,
           children: ['/interview/other/reverse-interview']
+        },
+        {
+          title: '暂时没有用到',
+          collapsable: true,
+          sidebarDepth: 0,
+          children: ['/interview/not-used/base']
         }
       ],
 
