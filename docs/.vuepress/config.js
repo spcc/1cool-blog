@@ -258,7 +258,7 @@ module.exports = {
           title: 'vue理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/vue/scoped', '/interview/vue/router']
+          children: ['/interview/vue/common', '/interview/vue/scoped', '/interview/vue/router']
         },
         {
           title: '其他',
@@ -387,7 +387,8 @@ module.exports = {
               children: [
                 '/problem/element-plus/components/el-input',
                 '/problem/element-plus/components/el-date-time-picker',
-                '/problem/element-plus/components/el-scrollbar'
+                '/problem/element-plus/components/el-scrollbar',
+                '/problem/element-plus/components/el-dialog'
               ]
             }
           ]
