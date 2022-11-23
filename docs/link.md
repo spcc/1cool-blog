@@ -174,7 +174,6 @@
 
 ## css
 
-- [12 个你可能不知道的 CSS 小技巧](https://juejin.cn/post/7157971234696167461#heading-3)
 - [PC 端响应式布局方案](https://juejin.cn/post/7155013489394712606)
 - [5 个需要避免的 CSS 错误](https://juejin.cn/post/7054325882441187359)
 - [我慢慢的听雪落下的声音-css 实现雪花飘飘](https://juejin.cn/post/7085926566735118349)
