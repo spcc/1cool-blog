@@ -13,20 +13,68 @@ overflow: hidden;
 text-overflow: ellipsis;
 ```
 
-## 选中文字样式
+## 自定义插入光标颜色（caret-color）
+
+通过 `caret-color`属性可以改变光标颜色  
+如果不想要展示这个插入光标，可以将 `caret-color` 设置为 `transparent`
+
+<img src="/caret.png" />
+
+```scss
+input {
+  caret-color: red;
+}
+```
+
+## 自定义 placeholder 样式（::placeholder）
+
+### 修改 input 的 placeholder 样式
+
+<img src="/placeholder.png" />
 
 ::: details 点击查看代码
 
 ```scss
-/* webkit, opera, IE9 （谷歌浏览器）*/
-::selection {
-  background: yellow;
+input::placeholder {
   color: red;
 }
-/* mozilla firefox（火狐浏览器） */
-::-moz-selection {
-  background: yellow;
-  color: red;
+```
+
+:::
+
+### 禁用时 不显示 `placeholder`
+
+::: details 点击查看代码
+
+```scss
+input:disabled::placeholder {
+  color: transparent;
+}
+```
+
+:::
+
+## 自定义选中样式（::selection）
+
+只有以下这些 CSS 属性可以用于`::selection 选择器`
+
+- [color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/color)
+- [background-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color)
+- [cursor](https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor)
+- [caret-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/caret-color)
+- [outline](https://developer.mozilla.org/zh-CN/docs/Web/CSS/outline)
+- [text-decoration](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-decoration)
+- [text-emphasis-color (en-US)](https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color)
+- [text-shadow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-shadow)
+
+<img src="/selection.png" />
+
+::: details 点击查看代码
+
+```scss
+::selection {
+  background: rgb(91, 60, 146);
+  color: #fff;
 }
 ```
 
@@ -47,32 +95,6 @@ text-overflow: ellipsis;
   right: -20px;
   bottom: -20px;
   left: -20px;
-}
-```
-
-:::
-
-## Input 的 placeholder
-
-### 修改 input 的 placeholder 样式
-
-::: details 点击查看代码
-
-```scss
-input::placeholder {
-  color: red;
-}
-```
-
-:::
-
-### 禁用时 不显示 `placeholder`
-
-::: details 点击查看代码
-
-```scss
-input:disabled::placeholder {
-  color: transparent;
 }
 ```
 
@@ -163,3 +185,43 @@ input:disabled::placeholder {
 ```
 
 :::
+
+## 禁止用户选择 & 可以整段选择（user-select）
+
+禁止用户选中内容进行复制，在 CSS 层面可以通过 `user-select: none` 来实现
+
+`user-select` 属性用来控制用户能否选中文本。它可以接收的参数还有 `auto`、`text`、`contain`、`all` 等  
+当为 `all` 时，当点击子元素或者上下文时，会全选所有元素
+
+:::details 点击查看代码
+
+```scss
+// 可以选择(text)
+.text {
+  user-select: text;
+}
+
+// 不可以选择(none)
+.none {
+  user-select: none;
+}
+
+// 单击其中任意一个元素就会选中所有(all)
+.all {
+  user-select: all;
+}
+```
+
+:::
+
+## 让网站变灰（filter:grayscale）
+
+公祭日的时候，浏览网站通常都会把网站整体风格变成灰色的
+
+<img src="/grayscale.png" />
+
+```scss
+.grayscale {
+  filter: grayscale();
+}
+```
