@@ -398,7 +398,7 @@ module.exports = {
           title: 'Css', // 必要的
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
-          children: ['/problem/css/base']
+          children: ['/problem/css/base', '/problem/css/common']
         },
         {
           title: 'Html', // 必要的
@@ -408,15 +408,6 @@ module.exports = {
         }
       ],
 
-      // "/problem/element-ui": [
-      //   {
-      //     title: "组件", // 必要的
-      //     path: "/problem/element-ui/components", // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-      //     collapsable: false, // 可选的, 默认值是 true,
-      //     sidebarDepth: 0, // 可选的, 默认值是 1
-      //     children: ["/problem/element-ui/components/el-table"],
-      //   },
-      // ],
       '/book/': [
         {
           title: 'ES6 标准入门',
