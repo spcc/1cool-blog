@@ -41,23 +41,23 @@ MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步
 - `deactivated`：keep-alive 所缓存组件停用时调用
 - `errorCaptured`：子孙组件的错误捕获，此函数可返回 false 阻止继续向上传播
 
-### . 使用过哪些 Vue 的修饰符呢?
+## . 使用过哪些 Vue 的修饰符呢?
 
-- `.once`：事件只触发一次
-- `.number`：将 v-medol 绑定的值转数字
-- `.trim`：讲 v-model 绑定的值首位空格给去掉
+- `.sync`：简化子修改父值的步骤
 - `.stop`：阻止事件冒泡
-- `.capture`：事件的捕获
+- `.trim`：讲 v-model 绑定的值首位空格给去掉
+- `.once`：事件只触发一次
 - `.self`：点击事件绑定本身才触发
-- `.lazy`：输入框失焦时才会更新 v-model 的值
-- `.prevent`：阻止默认事件
 - `.native`：绑定事件在自定义组件上时，确保能执行
+- `.prevent`：阻止默认事件
 - `.left、.middle、.right`：鼠标左中右键的触发
+- `.number`：将 v-medol 绑定的值转数字
+- `.capture`：事件的捕获
+- `.lazy`：输入框失焦时才会更新 v-model 的值
 - `passive`：相当于给移动端滚动事件加一个`.lazy`
 - `camel`：确保变量名会被识别成驼峰命名
-- `.sync`：简化子修改父值的步骤
 
-### .使用过哪些 Vue 的内部指令呢？
+## .使用过哪些 Vue 的内部指令呢？
 
 - `v-text`：元素的 textContent
 - `v-html`：元素的 innerHTML
@@ -74,17 +74,18 @@ MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步
 - `v-pre`：跳过元素编译
 - `v-cloak`：隐藏双括号，有值显示
 
-### v-if 和 v-show 有何区别？
+## v-if 和 v-show 有何区别？
 
-- `v-if`：通过操作 DOM 来控制显隐，适用于偶尔的情况,因为每一次执行它都要生成和销毁,v-if 有着更高的切换消耗
-- `v-show`：通过改变 css 样式 display 属性控制显隐，适用于频繁显隐的情况,不会销毁,v-show 在初始渲染消耗更高点
-- 频繁或者大数量显隐使用 v-show ，否则使用 v-if
+- `v-if`：通过操作 DOM 来控制显隐
+- `v-show`：通过改变 css 样式 display 属性控制显隐
 
-### 为什么 v-if 和 v-for 不建议用在同一标签？
+**频繁或者大数量显隐使用 v-show ，否则使用 v-if**
+
+## 为什么 v-if 和 v-for 不建议用在同一标签？
 
 `v-for`优先级高于`v-if`，每项都通过`v-for`渲染出来后再去通过`v-if`判断显隐,过程中会增加无用的 dom 操作,渲染了无用的节点
 
-### .组件之间的传值方式有哪些?
+## 组件之间的传值方式有哪些?
 
 - 父传子： 组件使用`props`进行接收
 - 子传父： 子组件使用`$emit`+事件对父组件进行传值
@@ -93,12 +94,12 @@ MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步
 - 使用`eventBus`进行跨组件触发事件，进而传递数据
 - 使用浏览器本地缓存，例如` localstorage``sessionStorage `
 
-### 路由有哪些模式呢?又有什么不同呢?
+## 路由有哪些模式呢?又有什么不同呢?
 
 - hash 模式:通过#号后面的内容的更改，触发 hashchange 事件，实现路由切换，而不刷新页面
 - history 模式:通过 pushState 和 replaceState 切换 url，触发 popstate 事件，实现路由切换，需要后端配合
 
-### 路由的钩子函数？
+## 路由的钩子函数？
 
 - beforeEach：跳转路由前
 - - to：将要跳转进入的路由对象
@@ -110,13 +111,13 @@ MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步
 - beforeRouteUpdate(to, from, next)：跳转到路由且组件被复用时触发
 - beforeRouteLeave(to, from, next)：跳转到路由且离开组件时触发
 
-### 如何设置动态 class，动态 style？
+## 如何设置动态 class，动态 style？
 
 - 动态 class 对象：`<div :class="{ 'is-active': true, 'red': isRed }"></div>`
 - 动态 class 数组：`<div :class="['is-active', isRed ? 'red' : '' ]"></div>`
 - 动态 style 对象：`<div :style="{ color: textColor, fontSize: '18px' }"></div>`
 
-###  vuex 的有哪些属性？用处是什么？
+##  vuex 的有哪些属性？用处是什么？
 
 - `state`：定义初始状态
 - `getter`：从 store 从取数据
@@ -124,28 +125,28 @@ MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步
 - `action`：用于提交 mutation，而不直接更改状态，可异步操作
 - `module`：store 的模块拆分
 
-### watch 有哪些属性，分别有什么用？
+## watch 有哪些属性，分别有什么用？
 
 - `immediate`：初次加载时立即执行
 - `deep`：是否进行深度监听
 - `handler`：监听的回调函数
 
-### 一般在哪个生命周期请求异步数据
+## 一般在哪个生命周期请求异步数据
 
 - 可以啊钩子函数中的 `created`、`beforeMount`、`mounted` 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
 - 在 created 中最好
 - - 能更快获取到服务端数据，减少页面加载时间，用户体验更好；
 - - SSR 不支持 beforeMount 、mounted 钩子函数，放在 created 中有助于一致性。
 
-### 父子组件生命周期顺序？
+## 父子组件生命周期顺序？
 
 父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
 
-### 为什么不建议用 index 做 key，为什么不建议用随机数做 key？
+## 为什么不建议用 index 做 key，为什么不建议用随机数做 key？
 
 - 用 index 和用随机数都是同理，随机数每次都在变，做不到专一性，也很消耗性能
 
-### 使用过那些插槽的使用,原理是什么
+## 使用过那些插槽的使用,原理是什么
 
 - 默认插槽 \- 又名匿名查抄，当 slot 没有指定 name 属性值的时候一个默认显示插槽，一个组件内只有有一个匿名插槽
 - 具名插槽：带有具体名字的插槽，也就是带有 name 属性的 slot，一个组件可以出现多个具名插槽。
