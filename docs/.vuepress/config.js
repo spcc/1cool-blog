@@ -183,6 +183,36 @@ module.exports = {
       ],
 
       /**
+       * js
+       */
+       '/skill/web/js': [
+        {
+          title: 'JS', // 必要的
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            '/skill/web/js/base',
+            '/skill/web/js/array',
+            '/skill/web/js/string',
+            '/skill/web/js/math',
+            '/skill/web/js/closure'
+          ]
+        },
+        {
+          title: '代码整洁', // 必要的
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0, // 可选的, 默认值是 1
+          children: [
+            '/skill/web/js/clean',
+            '/skill/web/js/clean-name',
+            '/skill/web/js/clean-function',
+            '/skill/web/js/clean-function-reset',
+            '/skill/web/js/clean-notes'
+          ]
+        }
+      ],
+
+      /**
        * 其他
        */
       '/skill/web/other': [
@@ -298,34 +328,6 @@ module.exports = {
           collapsable: false, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ['/life/read/2022', '/life/read/2023']
-        }
-      ],
-
-      '/skill/web/js': [
-        {
-          title: 'JS', // 必要的
-          path: '/skill/web/js/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: [
-            '/skill/web/js/base',
-            '/skill/web/js/array',
-            '/skill/web/js/string',
-            '/skill/web/js/math',
-            '/skill/web/js/closure'
-          ]
-        },
-        {
-          title: '代码整洁', // 必要的
-          collapsable: false, // 可选的, 默认值是 true,
-          sidebarDepth: 0, // 可选的, 默认值是 1
-          children: [
-            '/skill/web/js/clean',
-            '/skill/web/js/clean-name',
-            '/skill/web/js/clean-function',
-            '/skill/web/js/clean-function-reset',
-            '/skill/web/js/clean-notes'
-          ]
         }
       ],
 
