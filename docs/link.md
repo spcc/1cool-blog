@@ -28,19 +28,22 @@
 
 [ES6 标准入门](https://es6.ruanyifeng.com/)
 
-## 周边文档
-
-[这些前端新技术你很难再忽视了 —— Svelte](https://juejin.cn/post/7129695531852365832)
-
 ## 需要学习
 
 - Iterator（迭代器）
 
-## 架构(重)
+## 架构
+
+### table+分页+查询
 
 - [vue3 基于 element-plus 封装一套完整的 table + 分页 + 查询](https://juejin.cn/post/7132755214108459015)
-- [01.Vben Admin 源码学习:项目初始化](https://juejin.cn/post/7102052860388442120)
-- [解放劳动力，玩转自定义 Hook](https://juejin.cn/post/7137177180915646471)
+
+### hooks 复用
+
+- [请求重复封装 hooks - 解放劳动力，玩转自定义 Hook](https://juejin.cn/post/7137177180915646471)
+
+## 架构(重)
+
 - [阿里 P7，如何才能达到该水平 ？](https://juejin.cn/post/7132268525112000525)
 - [中后台系统提升质量和效率的一个思路](https://juejin.cn/post/7158947795087409183)
 - [技术周报·前端架构师的一些思考和总结](https://juejin.cn/post/7154769628416688136)
