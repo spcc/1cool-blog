@@ -228,7 +228,7 @@ module.exports = {
         },
         {
           title: 'Git', // 必要的
-          collapsable: false, // 可选的, 默认值是 true,
+          collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
             '/skill/web/other/git/common',
@@ -301,7 +301,7 @@ module.exports = {
           title: '心态',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/money/base']
+          children: ['/interview/money/base', '/interview/money/p7']
         },
         {
           title: '暂时没有用到',
