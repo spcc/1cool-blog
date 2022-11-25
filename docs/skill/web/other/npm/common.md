@@ -36,6 +36,41 @@ axios 自动重试
 
 处理 async await 的错误
 
+### number-precision
+
+使用 javascript 精确地执行加法、减法、乘法和除法运算[文档](https://www.npmjs.com/package/number-precision)
+
+```js
+import NP from 'number-precision' // plus(+) minus(-) times(*) divide(/) round
+
+NP.plus(1.111, 2.222)
+```
+
+### accounting
+
+accounting.js 是一个用于数字、货币和货币解析/格式化的小型 JavaScript 库。它是轻量级的，完全可本地化的，没有依赖关系，并且在客户端或服务器端工作得很好
+
+```js
+import account from 'accounting' // 小数处理
+
+accounting.formatMoney(12345678) // $12,345,678.00
+```
+
+### countUp.js
+
+CountUp.js 是一个无依赖的轻量级 JavaScript 类，可用于快速创建以更有趣的方式显示数字数据的动画。[文档](http://inorganik.github.io/countUp.js/)
+
+```js
+import { CountUp } from 'countup.js'
+
+let demo = new CountUp('myTargetElement', 6964)
+if (!demo.error) {
+  demo.start()
+} else {
+  console.error(demo.error)
+}
+```
+
 ## 表单
 
 ### VeeValidate
