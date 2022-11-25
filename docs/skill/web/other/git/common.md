@@ -1,5 +1,12 @@
 # 常用操作
 
+- [【讲真!】Git 进阶精选看这篇就够了](https://juejin.cn/post/7133045617877581831)
+- [工作中使用 Git 解决问题的场景](https://juejin.cn/post/7117174240012402701)
+- [git 知识点自我总结](https://juejin.cn/post/7136896920840044558)
+- [企业级 GIT 分支管控方案](https://juejin.cn/post/7129001195548622861)
+- [Git 不要只会 pull 和 push，试试这 5 条提高效率的命令](https://juejin.cn/post/7071780876501123085)
+- [我是怎么在公共分支上使用 git 的](https://juejin.cn/post/7038822817483194398)
+
 ## 修改源
 
 ```sh

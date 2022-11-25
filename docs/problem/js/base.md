@@ -1,5 +1,67 @@
 # 常用方法
 
+## 等待函数
+
+::: details 点击查看代码
+
+```js
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const asyncFn = async () => {
+  await wait(1000)
+  console.log('等待异步函数执行结束')
+}
+
+asyncFn()
+```
+
+:::
+
+## 获取链接参数
+
+`window.location.search` 可以获取 url 中 ““?” 问号后面的参数：
+
+:::details 点击查看代码
+
+```js
+const getParamByUrl = key => {
+  const url = new URL(location.href)
+  return url.searchParams.get(key)
+}
+```
+
+:::
+
+## 复制到剪切板
+
+复制到剪切板是一项非常实用且能够提高用户便利性的功能。
+
+:::details 点击查看代码
+
+```js
+const copyToClipboard = text =>
+  navigator.clipboard &&
+  navigator.clipboard.writeText &&
+  navigator.clipboard.writeText(text)
+
+copyToClipboard('Hello World!')
+```
+
+:::
+
+## 生成随机颜色
+
+:::details
+
+```js
+const generateRandomHexColor = () =>
+  `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
+
+console.log(generateRandomHexColor())
+```
+
+:::
+
 ## 判断当前标签页是否为可视状态
 
 浏览器可以打开很多标签页，下面 👇🏻 的代码段就是判断当前标签页是否是激活的标签页
@@ -33,20 +95,6 @@ NP.minus(1, 0.9) // 0.1
 ```
 
 :::
-
-## 获取链接参数
-
-`window.location.search` 可以获取 url 中 ““?” 问号后面的参数：
-
-```js
-window.location.search
-```
-
-然后我们可以再通过 `new URLSearchParams(location.search).get('type')` 方法获取具体某一个参数的值
-
-```js
-let type = new URLSearchParams(location.search).get('type')
-```
 
 ## 对象动态属性
 

@@ -14,6 +14,28 @@ Pinia 是最新一代的 Vue 轻量级状态管理库。它适用于 Vue 2.x 和
 
 vuex-persistedstate 是一个支持 Typescript 的 Vuex 插件，使你能够将应用程序的状态保存到持久存储中，例如 Cookies 或 localStorage。
 
+## 工具函数
+
+### lodash
+
+老牌工具函数库，虽然里面有一部分功能已经变成了 js 标准，但是为了兼容性，还是用一下比较好，比如我常用的 clonedeep 和 get
+
+### day.js
+
+极其轻量化的日期格式库，显示日期，转换日期的时候很有用
+
+### clipboard.js
+
+浏览器中操作剪贴板的库
+
+### axios-retry
+
+axios 自动重试
+
+### await-to-js
+
+处理 async await 的错误
+
 ## 表单
 
 ### VeeValidate

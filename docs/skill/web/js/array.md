@@ -1,5 +1,7 @@
 # Array 对象
 
+- [10 个 Reduce 常用“奇技淫巧”](https://juejin.cn/post/7109274711041212446)
+
 [数组对象方法](https://www.runoob.com/jsref/jsref-obj-array.html)
 
 ## 总结
@@ -68,9 +70,9 @@
 
 ```js
 // 从第二个index删除一个元素，并增加两个元素
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
 
-let returnValue = fruits.splice(2, 1, "Lemon", "Kiwi");
+let returnValue = fruits.splice(2, 1, 'Lemon', 'Kiwi')
 // returnValue：["Apple"]
 // fruits：["Banana", "Orange", "Lemon", "Kiwi", "Mango"]
 ```
@@ -94,11 +96,11 @@ let returnValue = fruits.splice(2, 1, "Lemon", "Kiwi");
 
 ```js
 // 从第二个index删除一个元素，并增加两个元素
-let fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+let fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango']
 
-let myBest1 = fruits.slice(-3, -1); // 截取倒数第三个（包含）到倒数第一个（不包含）的两个元素
+let myBest1 = fruits.slice(-3, -1) // 截取倒数第三个（包含）到倒数第一个（不包含）的两个元素
 // Lemon,Apple
-let myBest2 = fruits.slice(1, 2); // 截取第一个（包含）到第二个（不包含）元素
+let myBest2 = fruits.slice(1, 2) // 截取第一个（包含）到第二个（不包含）元素
 // Banana
 ```
 
@@ -118,8 +120,8 @@ let myBest2 = fruits.slice(1, 2); // 截取第一个（包含）到第二个（�
 - JavaScript 版本: 1.2
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsLength = fruits.unshift("Kiwi", "Mike");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsLength = fruits.unshift('Kiwi', 'Mike')
 
 // fruits：['Kiwi', 'Mike', 'Banana', 'Orange', 'Apple', 'Mango']
 // fruitsLength：6
@@ -141,8 +143,8 @@ let fruitsLength = fruits.unshift("Kiwi", "Mike");
 - JavaScript 版本: 1.2
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsLength = fruits.push("Kiwi", "Mike");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsLength = fruits.push('Kiwi', 'Mike')
 
 // fruits：["Orange", "Apple", "Mango", "Kiwi", "Mike"]
 // fruitsLength：6
@@ -160,8 +162,8 @@ let fruitsLength = fruits.push("Kiwi", "Mike");
   会改变原数组
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let result = fruits.shift();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let result = fruits.shift()
 
 // fruits：["Orange", "Apple", "Mango"]
 // result：["Banana"]
@@ -180,8 +182,8 @@ let result = fruits.shift();
 - JavaScript 版本: 1.2
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let result = fruits.pop();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let result = fruits.pop()
 
 // fruits：["Banana", "Orange", "Apple"]
 // result：["Mango"]
@@ -222,39 +224,39 @@ let result = fruits.pop();
  *       如果是遍历数组的同时，去改变数组里的元素内容，最好是用 map() 方法来做
  */
 // 1、数组的元素是基本数据类型（无法改变原数组）
-let numArr = [1, 2, 3];
-numArr.forEach((item) => (item = item * 2));
-console.log(numArr); // 打印结果：[1, 2, 3]
+let numArr = [1, 2, 3]
+numArr.forEach(item => (item = item * 2))
+console.log(numArr) // 打印结果：[1, 2, 3]
 
 // 2、数组的元素是引用数据类型：（直接修改整个元素对象时，无法改变原数组）
 let objArr = [
-  { name: "云牧", age: 20 },
-  { name: "许嵩", age: 30 },
-];
-objArr.forEach((item) => {
+  { name: '云牧', age: 20 },
+  { name: '许嵩', age: 30 }
+]
+objArr.forEach(item => {
   item = {
-    name: "邓紫棋",
-    age: "29",
-  };
-});
-console.log(JSON.stringify(objArr));
+    name: '邓紫棋',
+    age: '29'
+  }
+})
+console.log(JSON.stringify(objArr))
 // 打印结果：[{"name": "云牧","age": 20},{"name": "许嵩","age": 30}]
 
 // 3.数组的元素是引用数据类型：（修改元素对象里的某个属性时，可以改变原数组）
 let objArr = [
-  { name: "云牧", age: 28 },
-  { name: "许嵩", age: 30 },
-];
-objArr.forEach((item) => (item.name = "邓紫棋"));
-console.log(JSON.stringify(objArr));
+  { name: '云牧', age: 28 },
+  { name: '许嵩', age: 30 }
+]
+objArr.forEach(item => (item.name = '邓紫棋'))
+console.log(JSON.stringify(objArr))
 // 打印结果：[{"name":"邓紫棋","age":28},{"name":"邓紫棋","age":30}]
 
 /**
  * 如果想更改，可以通过原数组更改，但建议用map
  */
-let numArr = [1, 2, 3];
-numArr.forEach((item, index, arr) => (arr[index] = arr[index] * 2));
-console.log(numArr); // 打印结果：[1, 2, 3]
+let numArr = [1, 2, 3]
+numArr.forEach((item, index, arr) => (arr[index] = arr[index] * 2))
+console.log(numArr) // 打印结果：[1, 2, 3]
 ```
 
 #### continue 与 break
@@ -266,30 +268,30 @@ forEach() 本身是不支持的 continue 与 break 语句的，我们可以通�
 ##### continue 实现
 
 ```js
-let arr = [1, 2, 3, 4, 5];
+let arr = [1, 2, 3, 4, 5]
 arr.forEach(function (item) {
-  if (item === 3) return;
-  console.log(item);
-});
+  if (item === 3) return
+  console.log(item)
+})
 // 1 2 4 5
 
 // 不能为return false
-let arr = [1, 2, 3, 4, 5];
+let arr = [1, 2, 3, 4, 5]
 arr.forEach(function (item) {
-  if (item === 3) return false;
-  console.log(item);
-});
+  if (item === 3) return false
+  console.log(item)
+})
 // 1 2 4 5 false
 ```
 
 ##### break 实现
 
 ```js
-let arr = [1, 2, 3, 4, 5];
+let arr = [1, 2, 3, 4, 5]
 arr.every(function (item) {
-  console.log(item);
-  return item !== 3;
-});
+  console.log(item)
+  return item !== 3
+})
 // 1 2 3 false
 ```
 
@@ -318,8 +320,8 @@ arr.every(function (item) {
 
 ```js
 // 获取数组元素的2倍
-let numbers = [4, 9, 16, 25];
-let multiple = numbers.map((item) => item * 2);
+let numbers = [4, 9, 16, 25]
+let multiple = numbers.map(item => item * 2)
 // [8, 18, 32, 50]
 ```
 
@@ -349,8 +351,8 @@ let multiple = numbers.map((item) => item * 2);
 - JavaScript 版本: 1.6
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let returnValue = fruits.filters((item, index) => item === "Apple");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let returnValue = fruits.filters((item, index) => item === 'Apple')
 // returnValue：["Apple"]
 // fruits：["Banana", "Orange", "Apple","Mango"]
 ```
@@ -381,9 +383,9 @@ let returnValue = fruits.filters((item, index) => item === "Apple");
 
 ```js
 // 从第二个index删除一个元素，并增加两个元素
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
 
-let returnValue = fruits.find((item, index) => item === "Apple");
+let returnValue = fruits.find((item, index) => item === 'Apple')
 // returnValue：["Apple"]
 // fruits：["Banana", "Orange", "Apple","Mango"]
 ```
@@ -415,8 +417,8 @@ let returnValue = fruits.find((item, index) => item === "Apple");
 
 ```js
 // 从第二个index删除一个元素，并增加两个元素
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let returnValue = fruits.findIndex((item, index) => item === "Apple");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let returnValue = fruits.findIndex((item, index) => item === 'Apple')
 // returnValue：2
 ```
 
@@ -440,22 +442,22 @@ let returnValue = fruits.findIndex((item, index) => item === "Apple");
 
 ```js
 // 显示Apple第一次出现的位置
-let fruits = ["Banana", "Orange", "Apple", "Apple", "Mango"];
-let appleIndex = fruits.indexOf("Apple");
+let fruits = ['Banana', 'Orange', 'Apple', 'Apple', 'Mango']
+let appleIndex = fruits.indexOf('Apple')
 // 2
 
 // 显示Apple在index 4 以后的Apple最后一次出现位置
 let fruits = [
-  "Banana",
-  "Orange",
-  "Apple",
-  "Mango",
-  "Banana",
-  "Orange",
-  "Apple",
-  "Mango",
-];
-var a = fruits.indexOf("Apple", 4);
+  'Banana',
+  'Orange',
+  'Apple',
+  'Mango',
+  'Banana',
+  'Orange',
+  'Apple',
+  'Mango'
+]
+var a = fruits.indexOf('Apple', 4)
 // 6
 ```
 
@@ -479,13 +481,13 @@ var a = fruits.indexOf("Apple", 4);
 
 ```js
 // 显示Apple最后一次出现的位置
-let fruits = ["Banana", "Orange", "Apple", "Apple", "Mango"];
-let appleIndex = fruits.lastIndexOf("Apple");
+let fruits = ['Banana', 'Orange', 'Apple', 'Apple', 'Mango']
+let appleIndex = fruits.lastIndexOf('Apple')
 // 3
 
 // 显示Apple在index 4 以前的Apple最后一次出现位置
-let fruits = ["Banana", "Orange", "Apple", "Apple", "Mango"];
-var a = fruits.lastIndexOf("Apple", 4);
+let fruits = ['Banana', 'Orange', 'Apple', 'Apple', 'Mango']
+var a = fruits.lastIndexOf('Apple', 4)
 // 3
 ```
 
@@ -506,33 +508,32 @@ var a = fruits.lastIndexOf("Apple", 4);
 - 注意：
   - 能判断简单数据类型，对于复杂类型的数据，比如对象类型的数组，二维数组，这些是无法判断的.
     ```js
-    const arr = ["es6", ["es7", "es8"], "es9", { name: "jimmy" }];
-    console.log(arr.includes(["es7", "es8"])); // false
-    console.log(arr.includes({ name: "jimmy" })); // false
+    const arr = ['es6', ['es7', 'es8'], 'es9', { name: 'jimmy' }]
+    console.log(arr.includes(['es7', 'es8'])) // false
+    console.log(arr.includes({ name: 'jimmy' })) // false
     ```
   - 能识别 `NaN`，`indexOf` 是不能识别 `NaN` 的
     ```js
-    const arr = ["es6", "es7", NaN, "es8"];
-    console.log(arr.includes(NaN)); // true
-    console.log(arr.indexOf(NaN)); // -1
+    const arr = ['es6', 'es7', NaN, 'es8']
+    console.log(arr.includes(NaN)) // true
+    console.log(arr.indexOf(NaN)) // -1
     ```
 - JavaScript 版本: ECMAScript 6
 
 ```js
-[1, 2, 3].includes(2);
+;[1, 2, 3].includes(2)
 // true
 
 // 从第index 2开始进行查找
-[1, 2, 3].includes(2, 2);
+;[1, 2, 3].includes(2, 2)
 // false
 
 // 从第index 2开始进行查找
 // 数组长度4，fromIndex 计算后等于
 /// 4 + (-2) = 2
-[1, 2, 3, 4].includes(2, -2);
+;[1, 2, 3, 4].includes(2, -2)
 // true
-
-[1, 2, NaN].includes(NaN);
+;[1, 2, NaN].includes(NaN)
 // true
 ```
 
@@ -563,11 +564,11 @@ var a = fruits.lastIndexOf("Apple", 4);
 
 ```js
 // 检测数组中是否有元素大于 18
-let ages = [3, 10, 18, 20];
-let returnValue = ages.some((item) => item >= 18);
+let ages = [3, 10, 18, 20]
+let returnValue = ages.some(item => item >= 18)
 
 // returnValue
-true;
+true
 ```
 
 ### every() - 检测数组的每个元素是否都符合条件
@@ -598,11 +599,11 @@ true;
 
 ```js
 // 检测数组中是否有元素大于 18
-let ages = [3, 10, 18, 20];
-let returnValue = ages.every((item) => item > 18);
+let ages = [3, 10, 18, 20]
+let returnValue = ages.every(item => item > 18)
 
 // returnValue
-false;
+false
 ```
 
 ## 通用
@@ -627,20 +628,20 @@ false;
 
 ```js
 // 数字排序升序
-let ages = [40, 100, 1, 5, 25, 10];
-ages.sort((a, b) => a - b);
+let ages = [40, 100, 1, 5, 25, 10]
+ages.sort((a, b) => a - b)
 
 // 数字排序降序
-let ages = [40, 100, 1, 5, 25, 10];
-ages.sort((a, b) => b - a);
+let ages = [40, 100, 1, 5, 25, 10]
+ages.sort((a, b) => b - a)
 
 // 字母升序
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.sort();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+fruits.sort()
 
 // 字母降序 （先升序，在反转就是降序）
-fruits.sort();
-fruits.reverse();
+fruits.sort()
+fruits.reverse()
 ```
 
 ### reverse() 反转数组的元素顺序
@@ -656,8 +657,8 @@ fruits.reverse();
 - JavaScript 版本: 1.1
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.reverse();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+fruits.reverse()
 // Mango,Apple,Orange,Banana
 ```
 
@@ -674,12 +675,12 @@ fruits.reverse();
 - JavaScript 版本: 1.1
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsString = fruits.join();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsString = fruits.join()
 // 'Banana,Orange,Apple,Mango'
 
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsString = fruits.join(" and ");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsString = fruits.join(' and ')
 // 'Banana and Orange and Apple and Mango'
 ```
 
@@ -695,12 +696,12 @@ let fruitsString = fruits.join(" and ");
 - JavaScript 版本: ECMAScript 5
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsString = fruits.join();
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsString = fruits.join()
 // 'Banana,Orange,Apple,Mango'
 
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruitsString = fruits.join(" and ");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+let fruitsString = fruits.join(' and ')
 // 'Banana and Orange and Apple and Mango'
 ```
 
@@ -722,12 +723,12 @@ let fruitsString = fruits.join(" and ");
 
 ```js
 // 字符串转数组
-let str = "abc";
-let arr = Array.from(str);
+let str = 'abc'
+let arr = Array.from(str)
 // ['a', 'b', 'c']
 
 // 数组去重
-let arr = Array.from(new Set([1, 2, 1, 2]));
+let arr = Array.from(new Set([1, 2, 1, 2]))
 // [1, 2]
 
 // 伪数组转换为数组，伪数组必须要有length
@@ -735,29 +736,29 @@ let obj = {
   0: 1, //'0':1中的'0'将转换为下标0,下面的key同理
   1: 2,
   2: 3,
-  length: 4, // length规定了转换的数组有多长
-};
-let newObj = Array.from(obj, (item) => item);
+  length: 4 // length规定了转换的数组有多长
+}
+let newObj = Array.from(obj, item => item)
 // [1, 2, 3, undefined]
 
 // 填充空值
-let nullObject = Array.from({ length: 3 }, () => ({}));
+let nullObject = Array.from({ length: 3 }, () => ({}))
 // [{},{},{}]
-let nullNumber = Array.from({ length: 3 }, () => 1);
+let nullNumber = Array.from({ length: 3 }, () => 1)
 // [1,1,1]
 const data = Array.from({ length: 1000 }, (item, index) => ({
-  name: `name${index + 1}`,
-}));
+  name: `name${index + 1}`
+}))
 // 批量制造一组假数据
 
 // 生成数字范围
-let numberRange = Array.from({ length: 3 }, (_, index) => index);
+let numberRange = Array.from({ length: 3 }, (_, index) => index)
 // [0, 1, 2]
 
 // 浅拷贝一个数组
-const a = [1, 2, 3];
-const b = Array.from(a);
-b[1] = "cc";
+const a = [1, 2, 3]
+const b = Array.from(a)
+b[1] = 'cc'
 // a [1, 2, 3]
 // b [1, 'cc', 3]
 ```
@@ -782,12 +783,12 @@ b[1] = "cc";
 - JavaScript 版本: ECMAScript 6
 
 ```js
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.fill("Runoob");
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+fruits.fill('Runoob')
 // fruits：['Runoob', 'Runoob', 'Runoob', 'Runoob']
 
-let fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.fill("Runoob", 2, 4);
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango']
+fruits.fill('Runoob', 2, 4)
 // fruits：['Banana', 'Orange', 'Runoob', 'Runoob']
 ```
 
@@ -810,8 +811,8 @@ fruits.fill("Runoob", 2, 4);
 
 ```js
 // 复制数组的前面两个元素到第三和第四个位置上：
-let fruits = ["Banana", "Orange", "Apple", "Mango", "Kiwi", "Papaya"];
-fruits.copyWithin(2, 0, 2);
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango', 'Kiwi', 'Papaya']
+fruits.copyWithin(2, 0, 2)
 // Banana,Orange,Banana,Orange,Kiwi,Papaya
 ```
 
@@ -831,8 +832,8 @@ fruits.copyWithin(2, 0, 2);
 - JavaScript 版本: 1.2
 
 ```js
-let hege = ["Cecilie", "Lone"];
-let stale = ["Emil", "Tobias", "Linus"];
-let children = hege.concat(stale);
+let hege = ['Cecilie', 'Lone']
+let stale = ['Emil', 'Tobias', 'Linus']
+let children = hege.concat(stale)
 // children： Cecilie,Lone,Emil,Tobias,Linus
 ```

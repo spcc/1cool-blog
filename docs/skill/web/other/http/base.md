@@ -1,6 +1,7 @@
 # http 响应头
 
 - [还未学习：HTTP 中的头部规则](https://juejin.cn/post/7143082173967368200)
+- [中高级前端工程师都需要熟悉的技能--前端缓存](https://juejin.cn/post/7127194919235485733)
 
 ## 预览、下载
 
@@ -52,5 +53,3 @@ const contentDispositionNoFilename = async (req, res, next) => {
 ### 前端做：不推荐
 
 `FileSaver.js`
-
-## 项目升级了，需要客户 清空缓存
