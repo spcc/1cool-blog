@@ -129,7 +129,6 @@
 - [前端应该掌握的浏览器调试技巧](https://juejin.cn/post/7145256569041584142)
 - [Vue 1 分钟实现右键菜单，懒人的福音 😋](https://juejin.cn/post/7022836132224172069)
 - [🔥 花一个小时，迅速了解 ES6~ES12 的全部特性](https://juejin.cn/post/7068935394191998990)
-- [JS 循环中使用 async、await 的正确姿势](https://juejin.cn/post/7041858551538515981)
 - [2022 年，VSCode 插件推荐和基本使用（前端小白必看，超详细）](https://juejin.cn/post/7055339601245765645)
 - [从简到难，重新学习 ES6（上）](https://juejin.cn/post/7062956206955954184)
 - [从简到难，重新学习 ES6（中）](https://juejin.cn/post/7063688645600870431)
