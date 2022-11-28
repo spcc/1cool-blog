@@ -196,6 +196,7 @@ module.exports = {
             '/skill/web/js/string',
             '/skill/web/js/math',
             '/skill/web/js/closure',
+            '/skill/web/js/for',
             '/skill/web/js/regular'
           ]
         },
