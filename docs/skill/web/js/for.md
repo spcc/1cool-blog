@@ -1,8 +1,8 @@
 # JS 循环中使用 async、await 的正确姿势
 
-::: danger 警告
-循环不能处理回调的循环，如 forEach、map、filter 等。  
-支持 for。
+::: danger 总结
+异步支持支持 for。
+循环不能处理回调的循环，如 forEach、map、filter 等。
 :::
 
 ## 声明遍历的数组和异步方法
