@@ -1,9 +1,109 @@
 # 代码整洁
 
 - [一定要优雅，高端前端程序员都应该具备的基本素养](https://juejin.cn/post/7107119166989336583)
-  [代码整洁](https://juejin.cn/column/7055643524095541261)
+- [代码整洁](https://juejin.cn/column/7055643524095541261)
+- [从【if...else...】到【责任链】再到【composeAOP】，顺带把【传参】解决了~](https://juejin.cn/post/6996811608756322334)
 
 以下技巧可能在示例中看起来不值一提，但是在实际的项目中，当业务逻辑复杂起来、当代码量变得很大的时候，这些小技巧一定能给出正面的作用、帮助，甚至超乎想象。
+
+## 魔法字符串
+
+:::details 点击查看代码
+bad
+
+```js
+<template>
+  <div>
+    <el-button v-if="roleId !== 2" @click="handleClick">新增</el-button>
+    <el-button v-if="roleId !== 2" @click="handleClick">编辑</el-button>
+    <el-button v-if="roleId === 3" @click="handleClick">删除</el-button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      roleId: null
+    }
+  },
+  created() {
+    this.roleId = localStorage.getItem('roleId')
+    if (this.roleId === 2) {
+      this.getNormalList()
+    }
+    if (this.roleId === 3) {
+      this.getSuperManageList()
+    }
+    if (this.roleId === 1) {
+      this.getManageList()
+    }
+  },
+  methods: {
+    handleClick() {
+      // 普通员工
+      if (this.roleId === 2) {
+        return
+      }
+    }
+  }
+}
+</script>
+```
+
+魔术字符串就是指在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。
+
+优秀的代码应该及时发现并消除魔术字符串。
+
+```js
+<template>
+  <div>
+    <el-button v-if="roleId !== rolesConfig.normalRole" @click="handleClick">新增</el-button>
+    <el-button v-if="roleId !== rolesConfig.normalRole" @click="handleClick">编辑</el-button>
+    <el-button v-if="roleId === rolesConfig.superManagerRole" @click="handleClick">删除</el-button>
+  </div>
+</template>
+
+<script>
+const rolesConfig = {
+  normalRole: 2,
+  managerRole: 1,
+  superManagerRole: 3
+}
+export default {
+  data() {
+    return {
+      roleId: null,
+      rolesConfig
+    }
+  },
+  created() {
+    this.roleId = localStorage.getItem('roleId')
+    if (this.roleId === rolesConfig.normalRole) {
+      this.getNormalList()
+    }
+    if (this.roleId === rolesConfig.superManagerRole) {
+      this.getSuperManageList()
+    }
+    if (this.roleId === rolesConfig.managerRole) {
+      this.getManageList()
+    }
+  },
+  methods: {
+    handleClick() {
+      // 普通员工
+      if (this.roleId === rolesConfig.normalRole) {
+        return
+      }
+    },
+  }
+}
+</script>
+```
+
+还可以通过 `import` 方式将 `config` 作为全局配置项供所有模块消费
+
+:::
 
 ## 移除对象属性（简写）
 
