@@ -6,7 +6,7 @@ module.exports = {
   // 标题
   title: '1cool',
   // 介绍
-  description: '成功不是终点，失败也不是终结，只有勇气才是永恒',
+  description: '花有重开日，人无在少年',
   // 喜欢的人是真的会发光啊
   // 你要幸福哦，如果开心的话，忘了我也没关系的
   // 我做过最勇敢的一件事，就是喜欢你
@@ -192,6 +192,7 @@ module.exports = {
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: [
             '/skill/web/js/base',
+            '/skill/web/js/click',
             '/skill/web/js/array',
             '/skill/web/js/string',
             '/skill/web/js/math',
