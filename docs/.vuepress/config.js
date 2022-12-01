@@ -150,7 +150,9 @@ module.exports = {
           children: [
             '/skill/web/vue3/create/init',
             '/skill/web/vue3/create/login',
-            '/skill/web/vue3/create/layout'
+            '/skill/web/vue3/create/layout',
+            '/skill/web/vue3/create/ss',
+
           ]
         },
         {
