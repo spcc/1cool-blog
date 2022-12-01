@@ -807,7 +807,7 @@ service.interceptors.response.use(
   }
 ```
 
-## 动态 menu 菜单
+## 3. 动态 menu 菜单
 
 **动态 menu 菜单** 其实主要是和 **动态路由表** 配合来去实现 **用户权限** 的
 
@@ -1540,7 +1540,7 @@ const appStore = useAppStore()
 $hideSideBarWidth: 54px;
 ```
 
-## 4-17： SidebarHeader 处理
+### 6. SidebarHeader 处理
 
 整个左侧的 `menu` 菜单，到现在咱们还剩下最后一个 `header` 没有进行处理
 
