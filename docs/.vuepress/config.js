@@ -151,8 +151,8 @@ module.exports = {
             '/skill/web/vue3/create/init',
             '/skill/web/vue3/create/login',
             '/skill/web/vue3/create/layout',
-            '/skill/web/vue3/create/ss',
-
+            '/skill/web/vue3/create/component',
+            '/skill/web/vue3/create/ss'
           ]
         },
         {
@@ -187,7 +187,7 @@ module.exports = {
       /**
        * js
        */
-       '/skill/web/js': [
+      '/skill/web/js': [
         {
           title: 'JS', // 必要的
           collapsable: false, // 可选的, 默认值是 true,
@@ -287,20 +287,27 @@ module.exports = {
             '/interview/js/debounce-throttle',
             '/interview/js/save',
             '/interview/js/url',
-            '/interview/js/proto',
+            '/interview/js/proto'
           ]
         },
         {
           title: 'vue理论',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/vue/common', '/interview/vue/scoped', '/interview/vue/router']
+          children: [
+            '/interview/vue/common',
+            '/interview/vue/scoped',
+            '/interview/vue/router'
+          ]
         },
         {
           title: '其他',
           collapsable: true,
           sidebarDepth: 0,
-          children: ['/interview/other/reverse-interview', '/interview/other/short']
+          children: [
+            '/interview/other/reverse-interview',
+            '/interview/other/short'
+          ]
         },
         {
           title: '心态',

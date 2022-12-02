@@ -1,14 +1,11 @@
-# 第五章：后台项目前端综合解决方案之通用功能开发
+# 通用功能封装
 
-## 5-01：开篇
+为什么封装
 
-在后台项目的前端开发之中，存在着很多的通用业务功能，并且存在着一定的技术难度。
+- 通用业务功能，避免频繁 CV
+- 存在一定技术难度
 
-所以说就有很多同学在面临这些功能的时候，大多数时都是采用 `ctrl + c || v` 的形式来进行实现。这就导致了虽然做过类似的功能，但是对这些功能的实现原理一知半解。
-
-那么针对于这样的问题，就有了咱们这一章。
-
-在本章中我们列举出了常见的一些通用功能，具体如下：
+通用功能，具体如下：
 
 1. 国际化
 2. 动态换肤
@@ -16,10 +13,6 @@
 4. `headerSearch`
 5. `tagView`
 6. `guide`
-
-来为大家进行讲解。
-
-相信大家完成了本章的学习之后，对于这些功能无论是从 **原理上** 还是从 **实现上** 都可以做到 **了然于胸** 的目标
 
 ## 5-02：国际化实现原理
 
@@ -51,7 +44,7 @@
   function t(key) {
     return messages[locale][key]
   }
-  // 4. 为 msg 赋值 
+  // 4. 为 msg 赋值
   let msg = t('msg')
   console.log(msg);
   // 修改 locale， 重新执行 t 方法，获取不同语言环境下的值
@@ -59,14 +52,14 @@
 </script>
 ```
 
- 总结：
+总结：
 
 1. 通过一个变量来 **控制** 语言环境
 2. 所有语言环境下的数据源要 **预先** 定义好
 3. 通过一个方法来获取 **当前语言** 下 **指定属性** 的值
 4. 该值即为国际化下展示值
 
-## 5-03：基于 vue-i18n V9  的国际化实现方案分析
+## 5-03：基于 vue-i18n V9 的国际化实现方案分析
 
 在 `vue` 的项目中，我们不需要手写这么复杂的一些基础代码，可以直接使用 [vue-i18n](https://vue-i18n.intlify.dev/) 进行实现（注意：**`vue3` 下需要使用 `V 9.x` 的 `i18n`**）
 
@@ -84,8 +77,6 @@
    ```
    npm install vue-i18n@next
    ```
-
-   
 
 2. 创建 `i18n/index.js` 文件
 
@@ -116,7 +107,7 @@
 
    ```js
    import { createI18n } from 'vue-i18n'
-   
+
    const i18n = createI18n({
      // 使用 Composition API 模式，则需要将其设置为false
      legacy: false,
@@ -130,7 +121,6 @@
 6. 把 `i18n` 注册到 `vue` 实例
 
    ```js
-   
    export default i18n
    ```
 
@@ -147,7 +137,7 @@
 
    ```html
    <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
-           {{ $t('msg.test') }}
+     {{ $t('msg.test') }}
    </h1>
    ```
 
@@ -161,7 +151,7 @@
 2. 导入 `el-locale` 语言包
 3. 创建自定义语言包
 
-## 5-04：方案落地：封装  langSelect  组件
+## 5-04：方案落地：封装 langSelect 组件
 
 1. 定义 `store/app.js`
 
@@ -186,10 +176,8 @@
      },
      actions: {}
    }
-   
-   ```
 
-   
+   ```
 
 2. 在 `constant` 中定义常量
 
@@ -198,9 +186,7 @@
    export const LANG = 'language'
    ```
 
-   
-
-3. 创建 `components/LangSelect/index` 
+3. 创建 `components/LangSelect/index`
 
    ```vue
    <template>
@@ -226,27 +212,27 @@
        </template>
      </el-dropdown>
    </template>
-   
+
    <script setup>
    import { useI18n } from 'vue-i18n'
    import { defineProps, computed } from 'vue'
    import { useStore } from 'vuex'
    import { ElMessage } from 'element-plus'
-   
+
    defineProps({
      effect: {
        type: String,
        default: 'dark',
-       validator: function(value) {
+       validator: function (value) {
          // 这个值必须匹配下列字符串中的一个
          return ['dark', 'light'].indexOf(value) !== -1
        }
      }
    })
-   
+
    const store = useStore()
    const language = computed(() => store.getters.language)
-   
+
    // 切换语言的方法
    const i18n = useI18n()
    const handleSetLanguage = lang => {
@@ -270,38 +256,35 @@
        </div>
      </div>
    </template>
-   
+
    <script setup>
    import LangSelect from '@/components/LangSelect'
    ...
    </script>
-   
+
    <style lang="scss" scoped>
    .navbar {
      ...
-   
+
      .right-menu {
        ...
-   
+
        ::v-deep .right-menu-item {
          display: inline-block;
          padding: 0 18px 0 0;
          font-size: 24px;
          color: #5a5e66;
          vertical-align: text-bottom;
-   
+
          &.hover-effect {
            cursor: pointer;
          }
        }
-   
+
        ...
    }
    </style>
-   
    ```
-   
-   
 
 ## 5-05：方案落地：element-plus 国际化处理
 
@@ -314,13 +297,11 @@
 
 那么首先我们先来处理 `element-plus` 语言包：
 
-**按照正常的逻辑，我们是可以通过 `element-ui` 配合 `vue-i18n`来实现国际化功能的，但是目前的 `element-plus` 尚未提供配合  `vue-i18n` 实现国际化的方式！ **
+**按照正常的逻辑，我们是可以通过 `element-ui` 配合 `vue-i18n`来实现国际化功能的，但是目前的 `element-plus` 尚未提供配合 `vue-i18n` 实现国际化的方式！ **
 
 所以说，我们暂时只能先去做临时处理，等到 `element-plus` 支持 `vue-i18n` 功能之后，我们再进行对接实现
 
 那么临时处理我们怎么去做呢？
-
-
 
 1. 升级 `element-plus` 到最新版本
 
@@ -347,7 +328,7 @@ import en from 'element-plus/lib/locale/lang/en'
 
    ```js
    import store from '@/store'
-   
+
    export default app => {
      app.use(ElementPlus, {
        locale: store.getters.language === 'en' ? en : zhCn
@@ -355,46 +336,39 @@ import en from 'element-plus/lib/locale/lang/en'
    }
    ```
 
-   
-
-
-
 ## 5-06：方案落地：自定义语言包国际化处理
 
 处理完 `element` 的国际化内容之后，接下来我们来处理 **自定义语言包**。
 
-自定义语言包我们使用了 `commonJS` 导出了一个对象，这个对象就是所有的 **自定义语言对象** 
+自定义语言包我们使用了 `commonJS` 导出了一个对象，这个对象就是所有的 **自定义语言对象**
 
 > 大家可以在 **资料/lang** 中获取到所有的语言包
 
 1.  复制 `lang` 文件夹到 `i18n` 中
 
-2. 在 `lang/index` 中，导入语言包
+2.  在 `lang/index` 中，导入语言包
 
-   ```js
-   import mZhLocale from './lang/zh'
-   import mEnLocale from './lang/en'
-   ```
+    ```js
+    import mZhLocale from './lang/zh'
+    import mEnLocale from './lang/en'
+    ```
 
-3. 在 `messages` 中注册到语言包
+3.  在 `messages` 中注册到语言包
 
-   ```js
-   const messages = {
-     en: {
-       msg: {
-         ...mEnLocale
-       }
-     },
-     zh: {
-       msg: {
-         ...mZhLocale
-       }
-     }
-   }
-   ```
-   
-   
-
+    ```js
+    const messages = {
+      en: {
+        msg: {
+          ...mEnLocale
+        }
+      },
+      zh: {
+        msg: {
+          ...mZhLocale
+        }
+      }
+    }
+    ```
 
 ## 5-07：方案落地：处理项目国际化内容
 
@@ -431,7 +405,7 @@ import en from 'element-plus/lib/locale/lang/en'
         @click="handleLogin"
         >{{ $t('msg.login.loginBtn') }}</el-button
       >
-      
+
       <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
@@ -470,10 +444,9 @@ export const validatePassword = () => {
     }
   }
 }
-
 ```
 
- **`navbar` 区域**
+**`navbar` 区域**
 
 `layout/components/navbar`
 
@@ -505,15 +478,13 @@ export const validatePassword = () => {
 ```vue
 <el-tooltip :content="$t('msg.navBar.lang')" :effect="effect">
        ...
-    
-    
+
+
 const handleSetLanguage = lang => {
   ...
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
 }
 ```
-
-
 
 ## 5-08：方案落地：sidebar 与 面包屑 区域的国际化处理
 
@@ -534,7 +505,6 @@ import i18n from '@/i18n'
 export function generateTitle(title) {
   return i18n.global.t('msg.route.' + title)
 }
-
 ```
 
 在 `layout/components/Sidebar/MenuItem.vue` 中导入该方法：
@@ -549,7 +519,6 @@ export function generateTitle(title) {
 import { generateTitle } from '@/utils/i18n'
 ...
 </script>
-
 ```
 
 最后修改下 `sidebarHeader` 的内容
@@ -560,34 +529,29 @@ import { generateTitle } from '@/utils/i18n'
 </h1>
 ```
 
-
-
 **面包屑区域：**
 
 在 `components/Breadcrumb/index`
 
 ```vue
 <template>
-...
-    <!-- 不可点击项 -->
-    <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
-        generateTitle(item.meta.title)
-        }}</span>
-    <!-- 可点击项 -->
-    <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{
-        generateTitle(item.meta.title)
-        }}</a>
-...
+  ...
+  <!-- 不可点击项 -->
+  <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
+    generateTitle(item.meta.title)
+  }}</span>
+  <!-- 可点击项 -->
+  <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{
+    generateTitle(item.meta.title)
+  }}</a>
+  ...
 </template>
 
 <script setup>
 import { generateTitle } from '@/utils/i18n'
 ...
 </script>
-
 ```
-
-
 
 ## 5-09：方案落地：国际化缓存处理
 
@@ -612,7 +576,7 @@ function getLanguage() {
 }
 ```
 
-修改 `createI18n` 的 `locale` 为 `getLanguage()` 
+修改 `createI18n` 的 `locale` 为 `getLanguage()`
 
 ```js
 const i18n = createI18n({
@@ -621,15 +585,13 @@ const i18n = createI18n({
 })
 ```
 
-
-
 ## 5-10：国际化方案总结
 
 国际化是前端项目中的一个非常常见的功能，那么在前端项目中实现国际化主要依靠的就是 `vue-i18n` 这个第三方的包。
 
 关于国际化的实现原理大家可以参照 **国际化实现原理** 这一小节，这里我们就不再赘述了。
 
-而  `i18n` 的使用，整体来说就分为这么四步：
+而 `i18n` 的使用，整体来说就分为这么四步：
 
 1. 创建 `messages` 数据源
 2. 创建 `locale` 语言变量
@@ -638,7 +600,7 @@ const i18n = createI18n({
 
 核心的内容其实就是 数据源的部分，但是大家需要注意，如果你的项目中使用了 **第三方组件库** ，那么不要忘记 **第三方组件库的数据源** 需要 **单独** 进行处理！
 
-##   
+##
 
 接下来我们来处理 **动态换肤** 功能。
 
@@ -646,14 +608,14 @@ const i18n = createI18n({
 
 ```vue
 <el-menu
-    :default-active="activeMenu"
-    :collapse="!$store.getters.sidebarOpened"
-    :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText"
-    :active-text-color="$store.getters.cssVar.menuActiveText"
-    :unique-opened="true"
-    router
-  >x'z
+  :default-active="activeMenu"
+  :collapse="!$store.getters.sidebarOpened"
+  :background-color="$store.getters.cssVar.menuBg"
+  :text-color="$store.getters.cssVar.menuText"
+  :active-text-color="$store.getters.cssVar.menuActiveText"
+  :unique-opened="true"
+  router
+>x'z
     ...
   </el-menu>
 ```
@@ -664,7 +626,7 @@ const i18n = createI18n({
 
 首先我们先来说一下动态换肤的实现方式。
 
-在 `scss` 中，我们可以通过 `$变量名:变量值` 的方式定义  `css 变量`，然后通过该 `css 变量` 来去指定某一块 `DOM` 对应的颜色。
+在 `scss` 中，我们可以通过 `$变量名:变量值` 的方式定义 `css 变量`，然后通过该 `css 变量` 来去指定某一块 `DOM` 对应的颜色。
 
 那么大家可以想一下，如果我此时改变了该 `css 变量` 的值，那么所对应的 `DOM` 颜色是不是也会同步发生变化？
 
@@ -686,15 +648,15 @@ const i18n = createI18n({
 关于 **动态换肤** 我们之前已经提到过了，在 `layout/components/SidebarMenu.vue` 中，我们实现 `el-menu` 的背景色时，说过 **此处将来会实现换肤功能，所以我们不能直接写死，而需要通过一个动态的值进行指定**
 
 ```html
- <el-menu
-    :default-active="activeMenu"
-    :collapse="!$store.getters.sidebarOpened"
-    :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText"
-    :active-text-color="$store.getters.cssVar.menuActiveText"
-    :unique-opened="true"
-    router
-  >
+<el-menu
+  :default-active="activeMenu"
+  :collapse="!$store.getters.sidebarOpened"
+  :background-color="$store.getters.cssVar.menuBg"
+  :text-color="$store.getters.cssVar.menuText"
+  :active-text-color="$store.getters.cssVar.menuActiveText"
+  :unique-opened="true"
+  router
+></el-menu>
 ```
 
 那么换句话而言，想要实现 **动态换肤** 的一个前置条件就是：**色值不可以写死！**
@@ -726,16 +688,16 @@ const i18n = createI18n({
 
 1. 动态换肤的关键是修改 `css 变量` 的值
 2. 换肤需要同时兼顾
-   1. `element-plus` 
-   2. 非 `element-plus` 
+   1. `element-plus`
+   2. 非 `element-plus`
 
 那么根据以上关键信息，我们就可以得出对应的实现方案
 
 1. 创建一个组件 `ThemeSelect` 用来处理修改之后的 `css 变量` 的值
-2. 根据新值修改 `element-plus`  主题色
-3. 根据新值修改非 `element-plus`  主题色
+2. 根据新值修改 `element-plus` 主题色
+3. 根据新值修改非 `element-plus` 主题色
 
-## 5-13：方案落地：创建  ThemeSelect 组件
+## 5-13：方案落地：创建 ThemeSelect 组件
 
 查看完成之后的项目我们可以发现，`ThemeSelect` 组件将由两部分组成：
 
@@ -748,7 +710,7 @@ const i18n = createI18n({
 
 ```js
 <template>
-  <!-- 主题图标  
+  <!-- 主题图标
   v-bind：https://v3.cn.vuejs.org/api/instance-properties.html#attrs -->
   <el-dropdown
     v-bind="$attrs"
@@ -786,11 +748,11 @@ const handleSetTheme = command => {}
 ```vue
 <div class="right-menu">
       <theme-picker class="right-menu-item hover-effect"></theme-picker>
-      
+
 import ThemePicker from '@/components/ThemeSelect/index'
 ```
 
-## 5-14：方案落地：创建  SelectColor 组件
+## 5-14：方案落地：创建 SelectColor 组件
 
 在有了 `ThemeSelect ` 之后，接下来我们来去处理颜色选择的组件 `SelectColor`，在这里我们会用到 `element` 中的 `el-color-picker` 组件
 
@@ -801,7 +763,7 @@ import ThemePicker from '@/components/ThemeSelect/index'
 
 那么下面咱们先来看第一步：**完成 `SelectColor` 弹窗展示的双向数据绑定**
 
-创建 `components/ThemePicker/components/SelectColor.vue` 
+创建 `components/ThemePicker/components/SelectColor.vue`
 
 ```vue
 <template>
@@ -880,10 +842,7 @@ const comfirm = async () => {
   }
 }
 </style>
-
 ```
-
-
 
 在 `ThemePicker/index` 中使用该组件
 
@@ -905,10 +864,9 @@ const handleSetTheme = command => {
   selectColorVisible.value = true
 }
 </script>
-
 ```
 
- 完成双向数据绑定之后，我们来处理第二步：**把选中的色值进行本地缓存**
+完成双向数据绑定之后，我们来处理第二步：**把选中的色值进行本地缓存**
 
 缓存的方式分为两种：
 
@@ -967,7 +925,7 @@ export default createStore({
 })
 ```
 
-在 `selectColor` 中，设置初始色值 和  缓存色值
+在 `selectColor` 中，设置初始色值 和 缓存色值
 
 ```vue
 ...
@@ -993,8 +951,6 @@ const comfirm = async () => {
   closed()
 }
 </script>
-
-
 ```
 
 ## 5-15：方案落地：处理 element-plus 主题变更原理与步骤分析
@@ -1036,24 +992,20 @@ const comfirm = async () => {
  * @param {*} elNewStyle  element-plus 的新样式
  * @param {*} isNewStyleTag 是否生成新的 style 标签
  */
-export const writeNewStyle = elNewStyle => {
-  
-}
+export const writeNewStyle = elNewStyle => {}
 
 /**
  * 根据主色值，生成最新的样式表
  */
-export const generateNewStyle =  primaryColor => {
- 
-}
+export const generateNewStyle = primaryColor => {}
 ```
 
 那么接下来我们先实现第一个方法 `generateNewStyle`，在实现的过程中，我们需要安装两个工具类：
 
-1. [rgb-hex](https://www.npmjs.com/package/rgb-hex)：转换RGB(A)颜色为十六进制
-2. [css-color-function](https://www.npmjs.com/package/css-color-function)：在CSS中提出的颜色函数的解析器和转换器
+1. [rgb-hex](https://www.npmjs.com/package/rgb-hex)：转换 RGB(A)颜色为十六进制
+2. [css-color-function](https://www.npmjs.com/package/css-color-function)：在 CSS 中提出的颜色函数的解析器和转换器
 
-然后还需要写入一个 **颜色转化计算器  `formula.json`**
+然后还需要写入一个 **颜色转化计算器 `formula.json`**
 
 创建 `constants/formula.json` （https://gist.github.com/benfrain/7545629）
 
@@ -1153,10 +1105,7 @@ const getStyleTemplate = data => {
   })
   return data
 }
-
 ```
-
-
 
 接下来处理 `writeNewStyle` 方法：
 
@@ -1200,23 +1149,20 @@ const comfirm = async () => {
   closed()
 }
 </script>
-
 ```
 
 一些处理完成之后，我们可以在 `profile` 中通过一些代码进行测试：
 
 ```html
 <el-row>
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success">Success</el-button>
-      <el-button type="info">Info</el-button>
-      <el-button type="warning">Warning</el-button>
-      <el-button type="danger">Danger</el-button>
-    </el-row>
+  <el-button>Default</el-button>
+  <el-button type="primary">Primary</el-button>
+  <el-button type="success">Success</el-button>
+  <el-button type="info">Info</el-button>
+  <el-button type="warning">Warning</el-button>
+  <el-button type="danger">Danger</el-button>
+</el-row>
 ```
-
-
 
 ## 5-17：方案落地：element-plus 新主题的立即生效
 
@@ -1238,18 +1184,13 @@ generateNewStyle(store.getters.mainColor).then(newStyleText => {
   writeNewStyle(newStyleText)
 })
 </script>
-
 ```
-
-
-
-
 
 ## 5-18：方案落地：自定义主题变更
 
 自定义主题变更相对来说比较简单，因为 **自己的代码更加可控**。
 
-目前在我们的代码中，需要进行 **自定义主题变更** 为  **`menu` 菜单背景色**
+目前在我们的代码中，需要进行 **自定义主题变更** 为 **`menu` 菜单背景色**
 
 而目前指定 `menu` 菜单背景色的位置在 `layout/components/sidebar/SidebarMenu.vue` 中
 
@@ -1304,13 +1245,11 @@ export default getters
 
 ```html
 <sidebar
-      id="guide-sidebar"
-      class="sidebar-container"
-      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
-    />
+  id="guide-sidebar"
+  class="sidebar-container"
+  :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+/>
 ```
-
-
 
 2. 主题色替换之后，需要刷新页面才可响应
 
@@ -1364,7 +1303,7 @@ export default getters
 
 那么到这里整个自定义主题我们就处理完成了。
 
-对于 **自定义主题而言**，核心的原理其实就是 **修改`scss`变量来进行实现主题色变化** 
+对于 **自定义主题而言**，核心的原理其实就是 **修改`scss`变量来进行实现主题色变化**
 
 明确好了原理之后，对后续实现的步骤就具体情况具体分析了。
 
@@ -1410,7 +1349,7 @@ export default getters
 
 **封装 `screenfull` 组件：**
 
-1. 下来依赖包  [screenfull](https://www.npmjs.com/package/screenfull) 
+1. 下来依赖包 [screenfull](https://www.npmjs.com/package/screenfull)
 
    ```
    npm i screenfull@5.1.0
@@ -1427,37 +1366,36 @@ export default getters
        />
      </div>
    </template>
-   
+
    <script setup>
    import { ref, onMounted, onUnmounted } from 'vue'
    import screenfull from 'screenfull'
-   
+
    // 是否全屏
    const isFullscreen = ref(false)
-   
+
    // 监听变化
    const change = () => {
      isFullscreen.value = screenfull.isFullscreen
    }
-   
+
    // 切换事件
    const onToggle = () => {
      screenfull.toggle()
    }
-   
+
    // 设置侦听器
    onMounted(() => {
      screenfull.on('change', change)
    })
-   
+
    // 删除侦听器
    onUnmounted(() => {
      screenfull.off('change', change)
    })
    </script>
-   
+
    <style lang="scss" scoped></style>
-   
    ```
 
 **在 `navbar` 中引入该组件：**
@@ -1467,8 +1405,6 @@ export default getters
 import Screenfull from '@/components/Screenfull'
 ```
 
-
-
 ## 5-22：headerSearch 原理及方案分析
 
 > 所谓 `headerSearch` 指 **页面搜索**
@@ -1477,7 +1413,7 @@ import Screenfull from '@/components/Screenfull'
 
 `headerSearch` 是复杂后台系统中非常常见的一个功能，它可以：**在指定搜索框中对当前应用中所有页面进行检索，以 `select` 的形式展示出被检索的页面，以达到快速进入的目的**
 
-那么明确好了 `headerSearch`  的作用之后，接下来我们来看一下对应的实现原理
+那么明确好了 `headerSearch` 的作用之后，接下来我们来看一下对应的实现原理
 
 根据前面的目的我们可以发现，整个 `headerSearch` 其实可以分为三个核心的功能点：
 
@@ -1493,7 +1429,7 @@ import Screenfull from '@/components/Screenfull'
 
 1. 创建 `headerSearch` 组件，用作样式展示和用户输入内容获取
 2. 获取所有的页面数据，用作被检索的数据源
-3. 根据用户输入内容在数据源中进行 [模糊搜索](https://fusejs.io/) 
+3. 根据用户输入内容在数据源中进行 [模糊搜索](https://fusejs.io/)
 4. 把搜索到的内容以 `select` 进行展示
 5. 监听 `select` 的 `change` 事件，完成对应跳转
 
@@ -1590,7 +1526,6 @@ const onSelectChange = () => {
   }
 }
 </style>
-
 ```
 
 在 `navbar` 中导入该组件
@@ -1600,7 +1535,7 @@ const onSelectChange = () => {
 import HeaderSearch from '@/components/HeaderSearch'
 ```
 
-##  
+##
 
 在有了 `headerSearch` 之后，接下来就可以来处理对应的 **检索数据源了**
 
@@ -1627,11 +1562,9 @@ console.log(searchPool)
 </script>
 ```
 
-
-
 ## 5-25：方案落地：对检索数据源进行模糊搜索
 
-如果我们想要进行  [模糊搜索](https://fusejs.io/)  的话，那么需要依赖一个第三方的库  [fuse.js](https://fusejs.io/) 
+如果我们想要进行 [模糊搜索](https://fusejs.io/) 的话，那么需要依赖一个第三方的库 [fuse.js](https://fusejs.io/)
 
 1. 安装 [fuse.js](https://fusejs.io/)
 
@@ -1643,90 +1576,69 @@ console.log(searchPool)
 
    ```js
    import Fuse from 'fuse.js'
-   
+
    /**
     * 搜索库相关
     */
    const fuse = new Fuse(list, {
-       // 是否按优先级进行排序
-       shouldSort: true,
-       // 匹配长度超过这个值的才会被认为是匹配的
-       minMatchCharLength: 1,
-       // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
-       // name：搜索的键
-       // weight：对应的权重
-       keys: [
-         {
-           name: 'title',
-           weight: 0.7
-         },
-         {
-           name: 'path',
-           weight: 0.3
-         }
-       ]
-     })
-   
+     // 是否按优先级进行排序
+     shouldSort: true,
+     // 匹配长度超过这个值的才会被认为是匹配的
+     minMatchCharLength: 1,
+     // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+     // name：搜索的键
+     // weight：对应的权重
+     keys: [
+       {
+         name: 'title',
+         weight: 0.7
+       },
+       {
+         name: 'path',
+         weight: 0.3
+       }
+     ]
+   })
    ```
 
 3. 参考 [Fuse Demo](https://fusejs.io/demo.html) 与 最终效果，可以得出，我们最终期望得到如下的检索数据源结构
 
    ```json
    [
-       {
-           "path":"/my",
-           "title":[
-               "个人中心"
-           ]
-       },
-       {
-           "path":"/user",
-           "title":[
-               "用户"
-           ]
-       },
-       {
-           "path":"/user/manage",
-           "title":[
-               "用户",
-               "用户管理"
-           ]
-       },
-       {
-           "path":"/user/info",
-           "title":[
-               "用户",
-               "用户信息"
-           ]
-       },
-       {
-           "path":"/article",
-           "title":[
-               "文章"
-           ]
-       },
-       {
-           "path":"/article/ranking",
-           "title":[
-               "文章",
-               "文章排名"
-           ]
-       },
-       {
-           "path":"/article/create",
-           "title":[
-               "文章",
-               "创建文章"
-           ]
-       }
+     {
+       "path": "/my",
+       "title": ["个人中心"]
+     },
+     {
+       "path": "/user",
+       "title": ["用户"]
+     },
+     {
+       "path": "/user/manage",
+       "title": ["用户", "用户管理"]
+     },
+     {
+       "path": "/user/info",
+       "title": ["用户", "用户信息"]
+     },
+     {
+       "path": "/article",
+       "title": ["文章"]
+     },
+     {
+       "path": "/article/ranking",
+       "title": ["文章", "文章排名"]
+     },
+     {
+       "path": "/article/create",
+       "title": ["文章", "创建文章"]
+     }
    ]
    ```
 
 4. 所以我们之前处理了的数据源并不符合我们的需要，所以我们需要对数据源进行重新处理
 
-
-
-## 5-26：方案落地：数据源重处理，生成  searchPool
+## 5-26：方案落地：数据源重处理，生成 searchPool
 
 在上一小节，我们明确了最终我们期望得到数据源结构，那么接下来我们就对重新计算数据源，生成对应的 `searchPoll`
 
@@ -1771,7 +1683,6 @@ export const generateRoutes = (routes, basePath = '/', prefixTitle = []) => {
   }
   return res
 }
-
 ```
 
 在 `headerSearch` 中导入 `generateRoutes`
@@ -1824,13 +1735,13 @@ const querySearch = query => {
    ```vue
    <template>
      <el-option
-         v-for="option in searchOptions"
-         :key="option.item.path"
-         :label="option.item.title.join(' > ')"
-         :value="option.item"
+       v-for="option in searchOptions"
+       :key="option.item.path"
+       :label="option.item.title.join(' > ')"
+       :value="option.item"
      ></el-option>
    </template>
-   
+
    <script setup>
    ...
    // 搜索结果
@@ -1845,10 +1756,7 @@ const querySearch = query => {
    }
    ...
    </script>
-   
    ```
-
-   
 
 2. 完成对应跳转
 
@@ -1858,8 +1766,6 @@ const querySearch = query => {
      router.push(val.path)
    }
    ```
-
-   
 
 ## 5-28：方案落地：剩余问题处理
 
@@ -1901,7 +1807,7 @@ watch(isShow, val => {
    ```js
    import { watch } from 'vue'
    import store from '@/store'
-   
+
    /**
     *
     * @param  {...any} cbs 所有的回调
@@ -1922,9 +1828,9 @@ watch(isShow, val => {
    <script setup>
    ...
    import { watchSwitchLang } from '@/utils/i18n'
-   
+
    ...
-   
+
    // 检索数据源
    const router = useRouter()
    let searchPool = computed(() => {
@@ -1940,9 +1846,9 @@ watch(isShow, val => {
        ...
    }
    initFuse(searchPool.value)
-   
+
    ...
-   
+
    // 处理国际化
    watchSwitchLang(() => {
      searchPool = computed(() => {
@@ -1953,8 +1859,6 @@ watch(isShow, val => {
    })
    </script>
    ```
-
-
 
 ## 5-29：headerSearch 方案总结
 
@@ -1988,7 +1892,7 @@ watch(isShow, val => {
 
 那么现在我们忽略掉 `view`，现在只有一个要求：
 
-> 在 `view` 之上渲染这个 `tag` 
+> 在 `view` 之上渲染这个 `tag`
 
 仅看这一个要求，很简单吧。
 
@@ -2003,7 +1907,7 @@ watch(isShow, val => {
 
 这两个额外的功能。
 
-加上这两个功能之后可能会略显复杂，但是 [官网已经帮助我们处理了这个问题](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1) 
+加上这两个功能之后可能会略显复杂，但是 [官网已经帮助我们处理了这个问题](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1)
 
 所以 单看 `views` 也是一个很简单的功能。
 
@@ -2070,7 +1974,7 @@ watch(isShow, val => {
      },
      actions: {}
    }
-   
+
    ```
 
 3. 在 `appmain` 中监听路由的变化
@@ -2082,9 +1986,9 @@ watch(isShow, val => {
    import { generateTitle } from '@/utils/i18n'
    import { useRoute } from 'vue-router'
    import { useStore } from 'vuex'
-   
+
    const route = useRoute()
-   
+
    /**
     * 生成 title
     */
@@ -2099,7 +2003,7 @@ watch(isShow, val => {
      }
      return title
    }
-   
+
    /**
     * 监听路由变化
     */
@@ -2124,15 +2028,13 @@ watch(isShow, val => {
      }
    )
    </script>
-   
-   
    ```
 
 4. 创建 `utils/tags`
 
    ```js
    const whiteList = ['/login', '/import', '/404', '/401']
-   
+
    /**
     * path 是否需要被缓存
     * @param {*} path
@@ -2141,10 +2043,7 @@ watch(isShow, val => {
    export function isTags(path) {
      return !whiteList.includes(path)
    }
-   
    ```
-
-   
 
 ## 5-32：方案落地：生成 tagsView
 
@@ -2153,7 +2052,7 @@ watch(isShow, val => {
 1. 创建 `store/app` 中 `tagsViewList` 的快捷访问
 
    ```js
-     tagsViewList: state => state.app.tagsViewList
+   tagsViewList: state => state.app.tagsViewList
    ```
 
 2. 创建 `components/tagsview`
@@ -2161,44 +2060,44 @@ watch(isShow, val => {
    ```vue
    <template>
      <div class="tags-view-container">
-         <router-link
-           class="tags-view-item"
-           :class="isActive(tag) ? 'active' : ''"
-           :style="{
-             backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-             borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
-           }"
-           v-for="(tag, index) in $store.getters.tagsViewList"
-           :key="tag.fullPath"
-           :to="{ path: tag.fullPath }"
-         >
-           {{ tag.title }}
-           <i
-             v-show="!isActive(tag)"
-             class="el-icon-close"
-             @click.prevent.stop="onCloseClick(index)"
-           />
-         </router-link>
+       <router-link
+         class="tags-view-item"
+         :class="isActive(tag) ? 'active' : ''"
+         :style="{
+           backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
+           borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
+         }"
+         v-for="(tag, index) in $store.getters.tagsViewList"
+         :key="tag.fullPath"
+         :to="{ path: tag.fullPath }"
+       >
+         {{ tag.title }}
+         <i
+           v-show="!isActive(tag)"
+           class="el-icon-close"
+           @click.prevent.stop="onCloseClick(index)"
+         />
+       </router-link>
      </div>
    </template>
-   
+
    <script setup>
    import { useRoute } from 'vue-router'
    const route = useRoute()
-   
+
    /**
     * 是否被选中
     */
    const isActive = tag => {
      return tag.path === route.path
    }
-   
+
    /**
     * 关闭 tag 的点击事件
     */
    const onCloseClick = index => {}
    </script>
-   
+
    <style lang="scss" scoped>
    .tags-view-container {
      height: 34px;
@@ -2206,64 +2105,63 @@ watch(isShow, val => {
      background: #fff;
      border-bottom: 1px solid #d8dce5;
      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-       .tags-view-item {
-         display: inline-block;
-         position: relative;
-         cursor: pointer;
-         height: 26px;
-         line-height: 26px;
-         border: 1px solid #d8dce5;
-         color: #495060;
-         background: #fff;
-         padding: 0 8px;
-         font-size: 12px;
-         margin-left: 5px;
-         margin-top: 4px;
-         &:first-of-type {
-           margin-left: 15px;
-         }
-         &:last-of-type {
-           margin-right: 15px;
-         }
-         &.active {
-           color: #fff;
-           &::before {
-             content: '';
-             background: #fff;
-             display: inline-block;
-             width: 8px;
-             height: 8px;
-             border-radius: 50%;
-             position: relative;
-             margin-right: 4px;
-           }
-         }
-         // close 按钮
-         .el-icon-close {
-           width: 16px;
-           height: 16px;
-           line-height: 10px;
-           vertical-align: 2px;
+     .tags-view-item {
+       display: inline-block;
+       position: relative;
+       cursor: pointer;
+       height: 26px;
+       line-height: 26px;
+       border: 1px solid #d8dce5;
+       color: #495060;
+       background: #fff;
+       padding: 0 8px;
+       font-size: 12px;
+       margin-left: 5px;
+       margin-top: 4px;
+       &:first-of-type {
+         margin-left: 15px;
+       }
+       &:last-of-type {
+         margin-right: 15px;
+       }
+       &.active {
+         color: #fff;
+         &::before {
+           content: '';
+           background: #fff;
+           display: inline-block;
+           width: 8px;
+           height: 8px;
            border-radius: 50%;
-           text-align: center;
-           transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-           transform-origin: 100% 50%;
-           &:before {
-             transform: scale(0.6);
-             display: inline-block;
-             vertical-align: -3px;
-           }
-           &:hover {
-             background-color: #b4bccc;
-             color: #fff;
-           }
+           position: relative;
+           margin-right: 4px;
          }
-       
+       }
+       // close 按钮
+       .el-icon-close {
+         width: 16px;
+         height: 16px;
+         line-height: 10px;
+         vertical-align: 2px;
+         border-radius: 50%;
+         text-align: center;
+         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+         transform-origin: 100% 50%;
+         &:before {
+           transform: scale(0.6);
+           display: inline-block;
+           vertical-align: -3px;
+         }
+         &:hover {
+           background-color: #b4bccc;
+           color: #fff;
+         }
+       }
      }
    }
    </style>
    ```
-   
+
 3. 在 `layout/index` 中导入
 
    ```vue
@@ -2273,12 +2171,9 @@ watch(isShow, val => {
        <!-- tags -->
        <tags-view></tags-view>
    </div>
-   
+
    import TagsView from '@/components/TagsView'
-   
    ```
-
-
 
 ## 5-33：方案落地：tagsView 国际化处理
 
@@ -2303,13 +2198,11 @@ watch(isShow, val => {
    }
    ```
 
-   
-
 2. 在 `appmain` 中监听语言变化
 
    ```js
    import { generateTitle, watchSwitchLang } from '@/utils/i18n'
-   
+
    /**
     * 国际化 tags
     */
@@ -2325,8 +2218,6 @@ watch(isShow, val => {
      })
    })
    ```
-
-   
 
 ## 5-34：方案落地：contextMenu 展示处理
 
@@ -2355,7 +2246,7 @@ watch(isShow, val => {
        </li>
      </ul>
    </template>
-   
+
    <script setup>
    import { defineProps } from 'vue'
    defineProps({
@@ -2364,14 +2255,14 @@ watch(isShow, val => {
        required: true
      }
    })
-   
+
    const onRefreshClick = () => {}
-   
+
    const onCloseRightClick = () => {}
-   
+
    const onCloseOtherClick = () => {}
    </script>
-   
+
    <style lang="scss" scoped>
    .context-menu-container {
      position: fixed;
@@ -2394,7 +2285,6 @@ watch(isShow, val => {
      }
    }
    </style>
-   
    ```
 
 2. 在 `tagsview ` 中控制 `contextMenu` 的展示
@@ -2416,13 +2306,13 @@ watch(isShow, val => {
        ></context-menu>
      </div>
    </template>
-   
+
    <script setup>
    import ContextMenu from './ContextMenu.vue'
    import { ref, reactive, watch } from 'vue'
    import { useRoute } from 'vue-router'
    ...
-   
+
    // contextMenu 相关
    const selectIndex = ref(0)
    const visible = ref(false)
@@ -2440,12 +2330,10 @@ watch(isShow, val => {
      selectIndex.value = index
      visible.value = true
    }
-   
-   
+
+
    </script>
    ```
-   
-   
 
 ## 5-35：方案落地：contextMenu 事件处理
 
@@ -2537,8 +2425,6 @@ watch(isShow, val => {
    }
    ```
 
-   
-
 ## 5-36：方案落地：处理 contextMenu 的关闭行为
 
 ```js
@@ -2561,11 +2447,9 @@ watch(visible, val => {
 })
 ```
 
-
-
 ## 5-37：方案落地：处理基于路由的动态过渡
 
-[处理基于路由的动态过渡](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1)  官方已经给出了示例代码，结合 `router-view` 和 `transition` 我们可以非常方便的实现这个功能
+[处理基于路由的动态过渡](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1) 官方已经给出了示例代码，结合 `router-view` 和 `transition` 我们可以非常方便的实现这个功能
 
 1. 在 `appmain` 中处理对应代码逻辑
 
@@ -2604,19 +2488,17 @@ watch(visible, val => {
    .fade-transform-enter-active {
      transition: all 0.5s;
    }
-   
+
    .fade-transform-enter-from {
      opacity: 0;
      transform: translateX(-30px);
    }
-   
+
    .fade-transform-leave-to {
      opacity: 0;
      transform: translateX(30px);
    }
    ```
-
-
 
 ## 5-38：tagsView 方案总结
 
@@ -2633,8 +2515,6 @@ watch(visible, val => {
 再加上一部分的数据处理即可。
 
 最后关于 `tags` 的国际化部分，其实处理的方案有非常多，大家也可以在后面的 **讨论题** 中探讨一下关于 **此处国家化** 的实现，相信会有很多新的思路被打开的。
-
-
 
 ## 5-39：guide 原理及方案分析
 
@@ -2663,41 +2543,38 @@ watch(visible, val => {
 基于 [driver.js](https://kamranahmed.info/driver.js/) 我们的实现方案如下：
 
 1. 创建 `Guide` 组件：用于处理 `icon` 展示
-2. 初始化 [driver.js](https://kamranahmed.info/driver.js/) 
-3. 指定 [driver.js](https://kamranahmed.info/driver.js/) 的 `steps` 
+2. 初始化 [driver.js](https://kamranahmed.info/driver.js/)
+3. 指定 [driver.js](https://kamranahmed.info/driver.js/) 的 `steps`
 
 ## 5-40：方案落地：生成 Guide
 
 1.  创建`components/Guide`
 
-   ```vue
-   <template>
-     <div>
-       <el-tooltip :content="$t('msg.navBar.guide')">
-         <svg-icon icon="guide" />
-       </el-tooltip>
-     </div>
-   </template>
-   
-   <script setup></script>
-   
-   <style scoped></style>
-   
-   ```
+```vue
+<template>
+  <div>
+    <el-tooltip :content="$t('msg.navBar.guide')">
+      <svg-icon icon="guide" />
+    </el-tooltip>
+  </div>
+</template>
+
+<script setup></script>
+
+<style scoped></style>
+```
 
 2. 在 `navbar` 中导入该组件
 
    ```vue
    <guide class="right-menu-item hover-effect" />
-   
+
    import Guide from '@/components/Guide'
    ```
 
-
-
 ## 5-41：方案落地：Guide 业务逻辑处理
 
-1. 导入 [driver.js](https://kamranahmed.info/driver.js/) 
+1. 导入 [driver.js](https://kamranahmed.info/driver.js/)
 
    ```
    npm i driver.js@0.9.8
@@ -2711,9 +2588,9 @@ watch(visible, val => {
    import 'driver.js/dist/driver.min.css'
    import { onMounted } from 'vue'
    import { useI18n } from 'vue-i18n'
-   
+
    const i18n = useI18n()
-   
+
    let driver = null
    onMounted(() => {
      driver = new Driver({
@@ -2806,7 +2683,7 @@ watch(visible, val => {
    }
    export default steps
    ```
-   
+
 4. 在 `guide` 中导入“步骤”
 
    ```vue
@@ -2815,7 +2692,7 @@ watch(visible, val => {
      <svg-icon icon="guide" @click="onClick" />
      ...
    </template>
-   
+
    <script setup>
    ...
    import steps from './steps'
@@ -2825,9 +2702,8 @@ watch(visible, val => {
      driver.start()
    }
    </script>
-   
+
    <style scoped></style>
-   
    ```
 
 5. 为 **引导高亮区域增加 ID**
@@ -2853,22 +2729,22 @@ watch(visible, val => {
 9. 在 `components/HeaderSearch/index` 增加
 
    ```html
-    <svg-icon
-         id="guide-search"
-         class-name="search-icon"
-         icon="search"
-         @click.stop="onShowClick"
-       />
+   <svg-icon
+     id="guide-search"
+     class-name="search-icon"
+     icon="search"
+     @click.stop="onShowClick"
+   />
    ```
 
 10. 在 `components/Screenfull/index` 增加
 
     ```html
     <svg-icon
-          id="guide-full"
-          :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
-          @click="onToggle"
-        />
+      id="guide-full"
+      :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+      @click="onToggle"
+    />
     ```
 
 11. 在 `components/ThemePicker/index` 增加
@@ -2893,13 +2769,11 @@ watch(visible, val => {
 
     ```html
     <sidebar
-          id="guide-sidebar"
-          class="sidebar-container"
-          :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
-        />
+      id="guide-sidebar"
+      class="sidebar-container"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+    />
     ```
-
-    
 
 ## 5-42：总结
 
@@ -2921,6 +2795,3 @@ watch(visible, val => {
 只要大的步骤没有错误，那么具体的细节功能实现只需要具体情况具体分析即可。
 
 不过大家要注意，对于这些实现方案而言，**并非** 只有我们课程中的这一种实现方式。大家也可以针对这些实现方案在咱们的 **群里** 或者 **讨论区** 中，和我们一起多多发言或者讨论。
-
-
-

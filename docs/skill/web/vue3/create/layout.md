@@ -1,17 +1,17 @@
 # Layout 架构解决方案
 
-核心解决方案
+到这里我们本章的内容就算是完成了，本章围绕着`layout` 为核心，主要实现了三个大的业务方案：
 
 1. 用户退出方案
 2. 动态侧边栏方案
 3. 动态面包屑方案
 
-小功能
+除了这三块大的方案之后，还有一些小的功能，比如：
 
 1. 退出的通用逻辑封装
 2. 伸缩侧边栏动画
-3. vue3 动画
-4. 组件状态驱动的 css 值
+3. `vue3` 动画
+4. 组件状态驱动的动态 `CSS` 值等等
 
 ## 1. 创建 Layout 基础架构
 
@@ -1818,7 +1818,7 @@ watch(
 </style>
 ```
 
-## 4-23：vue3 动画处理
+## 6. vue3 动画处理
 
 vue3 对 [动画](https://v3.cn.vuejs.org/guide/transitions-overview.html#%E5%9F%BA%E4%BA%8E-class-%E7%9A%84%E5%8A%A8%E7%94%BB%E5%92%8C%E8%BF%87%E6%B8%A1) 进行了一些修改（[vue 动画迁移文档](https://v3.cn.vuejs.org/guide/migration/transition.html#%E6%A6%82%E8%A7%88)）
 
@@ -1841,48 +1841,25 @@ vue3 对 [动画](https://v3.cn.vuejs.org/guide/transitions-overview.html#%E5%9F
 
 2. 新建 `styles/transition` 样式文件
 
-   ```scss
-   .breadcrumb-enter-active,
-   .breadcrumb-leave-active {
-     transition: all 0.5s;
-   }
+```scss
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all 0.5s;
+}
 
-   .breadcrumb-enter-from,
-   .breadcrumb-leave-active {
-     opacity: 0;
-     transform: translateX(20px);
-   }
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
 
-   .breadcrumb-leave-active {
-     position: absolute;
-   }
-   ```
+.breadcrumb-leave-active {
+  position: absolute;
+}
+```
 
 3. 在 `styles/index` 中导入
 
-   ```scss
-   @import './transition.scss';
-   ```
-
-## 4-24：总结
-
-到这里我们本章的内容就算是完成了，本章围绕着`layout` 为核心，主要实现了三个大的业务方案：
-
-1. 用户退出方案
-2. 动态侧边栏方案
-3. 动态面包屑方案
-
-除了这三块大的方案之后，还有一些小的功能，比如：
-
-1. 退出的通用逻辑封装
-2. 伸缩侧边栏动画
-3. `vue3` 动画
-4. 组件状态驱动的动态 `CSS` 值等等
-
-那么这些方案的实现逻辑，就不在这里在跟大家重复了。
-
-这些方案在企业后台项目开发中，整体的覆盖率还是很高的
-
-那么在下一章节中，我们会去讲解一些通用的功能方案，相信这些功能方案大家一定都或多或少的遇到过，并且给大家带来过一定的麻烦。
-
-那么具体这样方案都有什么呢？我们一起期待吧！
+```scss
+@import './transition.scss';
+```
