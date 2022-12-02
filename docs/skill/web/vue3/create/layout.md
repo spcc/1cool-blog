@@ -1831,30 +1831,24 @@ vue3 对 [动画](https://v3.cn.vuejs.org/guide/transitions-overview.html#%E5%9F
 
 1. 在 `Breadcrumb/index` 中增加 `transition-group`
 
-   ```vue
-   <template>
-     <el-breadcrumb class="breadcrumb" separator="/">
-       <transition-group name="breadcrumb"> ... </transition-group>
-     </el-breadcrumb>
-   </template>
-   ```
+```vue
+<template>
+  <el-breadcrumb class="breadcrumb" separator="/">
+    <transition-group name="breadcrumb"> ... </transition-group>
+  </el-breadcrumb>
+</template>
+```
 
 2. 新建 `styles/transition` 样式文件
 
 ```scss
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-  transition: all 0.5s;
+.breadcrumb-enter-active {
+  transition: all 0.3s ease-out;
 }
 
-.breadcrumb-enter-from,
-.breadcrumb-leave-active {
-  opacity: 0;
+.breadcrumb-enter-from {
   transform: translateX(20px);
-}
-
-.breadcrumb-leave-active {
-  position: absolute;
+  opacity: 0;
 }
 ```
 

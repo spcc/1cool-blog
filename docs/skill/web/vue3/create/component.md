@@ -12,9 +12,19 @@
 3. `screenfull`
 4. `headerSearch`
 5. `tagView`
-6. `guide`
+6. `guide` 引导图
 
-## 5-02：国际化实现原理
+## 1. 国际化
+
+项目中完成国际化分成以下几步进行:
+
+1. 封装 `langSelect` 组件用于修改 `locale`
+2. 导入 `el-locale` 语言包
+3. 创建自定义语言包
+
+### 1.1 国际化实现原理
+
+:::details 点击查看代码
 
 先来看一个需求：
 
@@ -28,28 +38,28 @@
 这样的一个需求就是 国际化 的需求，那么我们可以通过以下代码来实现这个需求
 
 ```js
-<script>
-  // 1. 定义 msg 值的数据源
-  const messages = {
-    en: {
-      msg: 'hello world'
-    },
-    zh: {
-      msg: '你好世界'
-    }
+// 1. 定义 msg 值的数据源
+const messages = {
+  en: {
+    msg: 'hello world'
+  },
+  zh: {
+    msg: '你好世界'
   }
-  // 2. 定义切换变量
-  let locale = 'en'
-  // 3. 定义赋值函数
-  function t(key) {
-    return messages[locale][key]
-  }
-  // 4. 为 msg 赋值
-  let msg = t('msg')
-  console.log(msg);
-  // 修改 locale， 重新执行 t 方法，获取不同语言环境下的值
+}
 
-</script>
+// 2. 定义切换变量
+let locale = 'en'
+
+// 3. 定义赋值函数
+function t(key) {
+  return messages[locale][key]
+}
+
+// 4. 为 msg 赋值
+let msg = t('msg')
+console.log(msg)
+// 修改 locale， 重新执行 t 方法，获取不同语言环境下的值
 ```
 
 总结：
@@ -59,9 +69,11 @@
 3. 通过一个方法来获取 **当前语言** 下 **指定属性** 的值
 4. 该值即为国际化下展示值
 
-## 5-03：基于 vue-i18n V9 的国际化实现方案分析
+:::
 
-在 `vue` 的项目中，我们不需要手写这么复杂的一些基础代码，可以直接使用 [vue-i18n](https://vue-i18n.intlify.dev/) 进行实现（注意：**`vue3` 下需要使用 `V 9.x` 的 `i18n`**）
+### 1.2 基于 vue-i18n V9 的国际化实现方案分析
+
+使用第三方库实现 - [vue-i18n](https://vue-i18n.intlify.dev/) （注意：**`vue3` 下需要使用 `V 9.x` 的 `i18n`**）
 
 [vue-i18n](https://vue-i18n.intlify.dev/guide/) 的使用可以分为四个部分：
 
@@ -70,86 +82,93 @@
 3. 初始化 `i18n` 实例
 4. 注册 `i18n` 实例
 
+---
+
 那么接下来我们就去实现以下：
 
 1. 安装 `vue-i18n`
 
-   ```
-   npm install vue-i18n@next
-   ```
+```sh
+npm install vue-i18n@9
+```
 
 2. 创建 `i18n/index.js` 文件
 
-3. 创建 `messages` 数据源
+```js
+import { createI18n } from 'vue-i18n'
 
-   ```js
-   const messages = {
-     en: {
-       msg: {
-         test: 'hello world'
-       }
-     },
-     zh: {
-       msg: {
-         test: '你好世界'
-       }
-     }
-   }
-   ```
+import zh from './zh'
+import en from './en'
 
-4. 创建 `locale` 语言变量
+// 创建 `messages` 数据源
+const messages = {
+  zh: {
+    ...zh
+  },
+  en: {
+    ...en
+  }
+}
+// 设置默认语言类型
+const locale = 'en'
 
-   ```js
-   const locale = 'en'
-   ```
+// 初始化 i18n 实例
+const i18n = createI18n({
+  // 使用 Composition API 模式，则需要将其设置为false
+  legacy: false,
+  // 全局注入 $t 函数
+  globalInjection: true,
+  locale,
+  messages
+})
 
-5. 初始化 `i18n` 实例
+export default i18n
+```
 
-   ```js
-   import { createI18n } from 'vue-i18n'
+3. 新建 `zh.js` 存放中文语言
 
-   const i18n = createI18n({
-     // 使用 Composition API 模式，则需要将其设置为false
-     legacy: false,
-     // 全局注入 $t 函数
-     globalInjection: true,
-     locale,
-     messages
-   })
-   ```
+```js
+const langObj = {
+  // 全局提示,
+  tips: {},
+  msg: {
+    test: '你好世界'
+  }
+}
 
-6. 把 `i18n` 注册到 `vue` 实例
+export default langObj
+```
 
-   ```js
-   export default i18n
-   ```
+4. 新建 `en.js` 存放英文语言
 
-7. 在 `main.js` 中导入
+```js
+const langObj = {
+  // 全局提示,
+  tips: {},
+  msg: {
+    test: 'hello world'
+  }
+}
 
-   ```js
-   // i18n （PS：导入放到 APP.vue 导入之前，因为后面我们会在 app.vue 中使用国际化内容）
-   import i18n from '@/i18n'
-   ...
-   app.use(i18n)
-   ```
+export default langObj
+```
 
-8. 在 `layout/components/Sidebar/index.vue` 中使用 `i18n`
+5. 在 `main.js` 中导入
 
-   ```html
-   <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
-     {{ $t('msg.test') }}
-   </h1>
-   ```
+```js
+// i18n （PS：导入放到 APP.vue 导入之前，因为后面我们会在 app.vue 中使用国际化内容）
+import i18n from '@/i18n'
+...
+app.use(i18n)
+```
 
-9. 修改 `locale` 的值，即可改变展示的内容
+6. 在 `layout/components/sidebar/index.vue` 中使用 `i18n`
 
-截止到现在我们已经实现了 `i18n` 的最基础用法，那么解下来我们就可以在项目中使用 `i18n` 完成国际化。
+```html
+<h1 class="logo-title">{{ $t('msg.test') }}</h1>
+```
 
-项目中完成国际化分成以下几步进行:
-
-1. 封装 `langSelect` 组件用于修改 `locale`
-2. 导入 `el-locale` 语言包
-3. 创建自定义语言包
+7. 修改 `locale` 的值，即可改变展示的内容
 
 ## 5-04：方案落地：封装 langSelect 组件
 
