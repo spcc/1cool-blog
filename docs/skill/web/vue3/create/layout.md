@@ -1559,7 +1559,9 @@ $hideSideBarWidth: 54px;
         imooc-admin
       </h1>
     </div>
-    ...
+    <el-scrollbar>
+      <SidebarMenu />
+    </el-scrollbar>
   </div>
 </template>
 
@@ -1582,11 +1584,11 @@ $hideSideBarWidth: 54px;
 </style>
 ```
 
-创建 `styles/element.scss` 文件，统一处理 `el-avatar` 的背景问题
+创建 `styles/element-plus/el-avatar.scss` 文件，统一处理 `el-avatar` 的背景问题
 
 ```scss
 .el-avatar {
-  --el-avatar-background-color: none;
+  --el-avatar-bg-color: none;
 }
 ```
 
@@ -1594,7 +1596,7 @@ $hideSideBarWidth: 54px;
 
 ```scss
 ...
-@import './element.scss';
+@import './element-plus/el-avatar.scss';
 ```
 
 统一处理下动画时长的问题，在 `styles/variables.scss` 中，加入以下变量
@@ -1606,15 +1608,15 @@ $sideBarDuration: 0.28s;
 为 `styles/sidebar.scss` 修改时长
 
 ```scss
-  .main-container {
-    transition: margin-left #{$sideBarDuration};
-   ...
-  }
+.main-container {
+  transition: margin-left #{$sideBarDuration};
+  ...
+}
 
-  .sidebar-container {
-    transition: width #{$sideBarDuration};
-  	...
-  }
+.sidebar-container {
+  transition: width #{$sideBarDuration};
+  ...
+}
 ```
 
 为 `layout/index` 修改样式
@@ -1626,14 +1628,14 @@ $sideBarDuration: 0.28s;
 }
 ```
 
-## 4-18：全新 vue 能力：组件状态驱动的动态 CSS 值
+## 4. 组件状态驱动的动态 CSS 值
 
 在 [vue 3.2](https://blog.vuejs.org/posts/vue-3.2.html) 最新更新中，除了之前我们介绍的 **响应式变化** 之外，还有另外一个很重要的更新，那就是 **组件状态驱动的动态 `CSS` 值** ，对应的文档也已经公布，大家可以 [点击这里](https://v3.vuejs.org/api/sfc-style.html#state-driven-dynamic-css) 查看
 
 那么下面我们就使用下最新的特性，来为 `logo-container` 指定下高度：
 
 ```vue
-<template>... <el-avatar :size="logoHeight" ...</template>
+<template><el-avatar :size="logoHeight" /></template>
 
 <script setup>
 ...
@@ -1648,23 +1650,7 @@ const logoHeight = 44
 </style>
 ```
 
-## 4-19：动态面包屑方案分析
-
-到目前位置，本章中还剩下最后一个功能就是 **面包屑导航**，分为：
-
-1. 静态面包屑
-2. 动态面包屑
-
-**静态面包屑：**
-
-指的是：**在每个页面中写死对应的面包屑菜单**，缺点也很明显：
-
-1. 每个页面都得写一遍
-2. 页面路径结构变化了，得手动更改
-
-简单来说就是 **不好维护，不好扩展** 。
-
-**动态面包屑：**
+## 5. 动态面包屑方案分析
 
 **根据当前的 `url` 自动生成面包屑导航菜单**
 
@@ -1676,11 +1662,11 @@ const logoHeight = 44
 2. 计算面包屑结构数据
 3. 根据数据渲染动态面包屑内容
 
-## 4-20：业务落地：渲染基本的面包屑组件
+### 5.1 渲染基本的面包屑组件
 
 完成第一步，先去创建并渲染出基本的 [面包屑](https://element-plus.org/#/zh-CN/component/breadcrumb) 组件
 
-创建 `components/Breadcrumb/index`，并写入如下代码：
+创建 `components/breadcrumb/index`，并写入如下代码：
 
 ```vue
 <template>
@@ -1695,10 +1681,6 @@ const logoHeight = 44
   </el-breadcrumb>
 </template>
 
-<script setup>
-import {} from 'vue'
-</script>
-
 <style lang="scss" scoped>
 .breadcrumb {
   display: inline-block;
@@ -1706,7 +1688,7 @@ import {} from 'vue'
   line-height: 50px;
   margin-left: 8px;
 
-  ::v-deep .no-redirect {
+  :deep(.no-redirect) {
     color: #97a8be;
     cursor: text;
   }
@@ -1724,37 +1706,20 @@ import {} from 'vue'
     ...
   </div>
 </template>
-...
 
 <style lang="scss" scoped>
 .navbar {
- ...
+  ...
 
   .breadcrumb-container {
     float: left;
   }
-   ...
+  ...
 }
 </style>
 ```
 
-## 4-21：业务落地：动态计算面包屑结构数据
-
-现在我们是完成了一个静态的 面包屑，接下来咱们就需要依托这个静态的菜单来完成动态的。
-
-对于现在的静态面包屑来说，他分成了两个组件：
-
-1. `el-breadcrumb`：包裹性质的容器
-2. `el-breadcrumb-item`：每个单独项
-
-如果我们想要完成动态的，那么就需要 **依据动态数据，渲染 `el-breadcrumb-item` **
-
-所以说接下来我们需要做的事情就很简单了
-
-1. 动态数据
-2. 渲染 `el-breadcrumb-item`
-
-那么这一小节咱们先来看 **动态数据如何制作**
+### 5.2 动态计算面包屑结构数据
 
 我们希望可以制作出一个 **数组**，数组中每个 `item` 都表示一个 **路由信息**：
 
@@ -1762,18 +1727,18 @@ import {} from 'vue'
 
 ```vue
 <script setup>
-import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+
 // 生成数组数据
 const breadcrumbData = ref([])
 const getBreadcrumbData = () => {
   breadcrumbData.value = route.matched.filter(
     item => item.meta && item.meta.title
   )
-  console.log(breadcrumbData.value)
 }
+
 // 监听路由变化时触发
 watch(
   route,
@@ -1787,55 +1752,67 @@ watch(
 </script>
 ```
 
-## 4-22：业务落地：依据动态数据，渲染面包屑
+### 5.3 依据动态数据，渲染面包屑
 
 有了数据之后，根据数据来去渲染面包屑就比较简单了。
 
 ```vue
+<script setup>
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// 生成数组数据
+const breadcrumbData = ref([])
+const getBreadcrumbData = () => {
+  breadcrumbData.value = route.matched.filter(
+    item => item.meta && item.meta.title
+  )
+}
+
+// 监听路由变化时触发
+watch(
+  route,
+  () => {
+    getBreadcrumbData()
+  },
+  {
+    immediate: true
+  }
+)
+</script>
+
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
-    <el-breadcrumb-item
-      v-for="(item, index) in breadcrumbData"
-      :key="item.path"
-    >
+    <template v-for="(item, index) in breadcrumbData">
       <!-- 不可点击项 -->
-      <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
-        item.meta.title
-      }}</span>
+      <el-breadcrumb-item
+        v-if="index === breadcrumbData.length - 1"
+        :key="item.path"
+      >
+        <span v-if="index === breadcrumbData.length - 1" class="no-redirect">
+          {{ item.meta.title }}
+        </span>
+      </el-breadcrumb-item>
+
       <!-- 可点击项 -->
-      <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{
-        item.meta.title
-      }}</a>
-    </el-breadcrumb-item>
+      <el-breadcrumb-item v-else :to="{ path: item.path }" :key="item.path + 1">
+        {{ item.meta.title }}
+      </el-breadcrumb-item>
+    </template>
   </el-breadcrumb>
 </template>
 
-<script setup>
-...
-
-// 处理点击事件
-const router = useRouter()
-const onLinkClick = item => {
-  console.log(item)
-  router.push(item.path)
-}
-
-// 将来需要进行主题替换，所以这里获取下动态样式
-const store = useStore()
-// eslint-disable-next-line
-const linkHoverColor = ref(store.getters.cssVar.menuBg)
-</script>
-
 <style lang="scss" scoped>
 .breadcrumb {
-  ... .redirect {
-    color: #666;
-    font-weight: 600;
-  }
+  display: inline-block;
+  font-size: 14px;
+  line-height: 50px;
+  margin-left: 8px;
 
-  .redirect:hover {
-    // 将来需要进行主题替换，所以这里不去写死样式
-    color: v-bind(linkHoverColor);
+  :deep(.no-redirect) {
+    color: #97a8be;
+    cursor: text;
   }
 }
 </style>
