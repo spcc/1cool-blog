@@ -170,140 +170,135 @@ app.use(i18n)
 
 7. 修改 `locale` 的值，即可改变展示的内容
 
-## 5-04：方案落地：封装 langSelect 组件
+### 1.3 封装 langSelect 组件
 
 1. 定义 `store/app.js`
 
-   ```js
-   import { LANG } from '@/constant'
-   import { getItem, setItem } from '@/utils/storage'
-   export default {
-     namespaced: true,
-     state: () => ({
-       ...
-       language: getItem(LANG) || 'zh'
-     }),
-     mutations: {
-       ...
-       /**
-        * 设置国际化
-        */
-       setLanguage(state, lang) {
-         setItem(LANG, lang)
-         state.language = lang
-       }
-     },
-     actions: {}
-   }
+```js
+import { defineStore } from 'pinia'
 
-   ```
+const useAppStore = defineStore('app', {
+  persist: {
+    key: 'APP',
+    storage: localStorage,
+    paths: ['language']
+  },
+  state: () => ({
+    language: 'zh'
+  }),
+  actions: {
+    //设置国际化
+    setLanguage(lang) {
+      this.language = lang
+    }
+  }
+})
 
-2. 在 `constant` 中定义常量
+export default useAppStore
+```
 
-   ```js
-   // 国际化
-   export const LANG = 'language'
-   ```
+2. 创建 `components/LangSelect/index.vue`
 
-3. 创建 `components/LangSelect/index`
+```vue
+<script setup>
+import { defineProps, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { ElMessage } from 'element-plus'
+import { SwitchFilled } from '@element-plus/icons-vue'
 
-   ```vue
-   <template>
-     <el-dropdown
-       trigger="click"
-       class="international"
-       @command="handleSetLanguage"
-     >
-       <div>
-         <el-tooltip content="国际化" :effect="effect">
-           <svg-icon icon="language" />
-         </el-tooltip>
-       </div>
-       <template #dropdown>
-         <el-dropdown-menu>
-           <el-dropdown-item :disabled="language === 'zh'" command="zh">
-             中文
-           </el-dropdown-item>
-           <el-dropdown-item :disabled="language === 'en'" command="en">
-             English
-           </el-dropdown-item>
-         </el-dropdown-menu>
-       </template>
-     </el-dropdown>
-   </template>
+import useAppStore from '@/stores/app'
 
-   <script setup>
-   import { useI18n } from 'vue-i18n'
-   import { defineProps, computed } from 'vue'
-   import { useStore } from 'vuex'
-   import { ElMessage } from 'element-plus'
+defineProps({
+  effect: {
+    type: String,
+    default: 'dark',
+    validator: function (value) {
+      // 这个值必须匹配下列字符串中的一个
+      return ['dark', 'light'].indexOf(value) !== -1
+    }
+  }
+})
 
-   defineProps({
-     effect: {
-       type: String,
-       default: 'dark',
-       validator: function (value) {
-         // 这个值必须匹配下列字符串中的一个
-         return ['dark', 'light'].indexOf(value) !== -1
-       }
-     }
-   })
+const appStore = useAppStore()
+const language = computed(() => appStore.language)
 
-   const store = useStore()
-   const language = computed(() => store.getters.language)
+// 切换语言的方法
+const i18n = useI18n()
+const handleSetLanguage = lang => {
+  i18n.locale.value = lang
+  appStore.setLanguage(lang)
+  ElMessage.success('更新成功')
+}
+</script>
 
-   // 切换语言的方法
-   const i18n = useI18n()
-   const handleSetLanguage = lang => {
-     i18n.locale.value = lang
-     store.commit('app/setLanguage', lang)
-     ElMessage.success('更新成功')
-   }
-   </script>
-   ```
+<template>
+  <el-dropdown
+    trigger="click"
+    class="international"
+    @command="handleSetLanguage"
+  >
+    <div>
+      <el-tooltip content="国际化" :effect="effect">
+        <el-icon><SwitchFilled /></el-icon>
+      </el-tooltip>
+    </div>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item :disabled="language === 'zh'" command="zh">
+          中文
+        </el-dropdown-item>
+        <el-dropdown-item :disabled="language === 'en'" command="en">
+          English
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+</template>
+```
 
-4. 在 `navbar` 中导入 `LangSelect`
+3. 在 `navbar` 中导入 `LangSelect`
 
-   ```vue
-   <template>
-     <div class="navbar">
-       ...
-       <div class="right-menu">
-         <lang-select class="right-menu-item hover-effect" />
-         <!-- 头像 -->
-         ...
-       </div>
-     </div>
-   </template>
+```vue
+<script setup>
+import LangSelect from '@/components/lang-select/index.vue'
+...
+</script>
 
-   <script setup>
-   import LangSelect from '@/components/LangSelect'
-   ...
-   </script>
+<template>
+  <div class="navbar">
+    ...
+    <div class="right-menu">
+      <!-- 国际化 -->
+      <LangSelect class="right-menu-item hover-effect" />
+      <!-- 头像 -->
+      ...
+    </div>
+  </div>
+</template>
 
-   <style lang="scss" scoped>
-   .navbar {
-     ...
+<style lang="scss" scoped>
+.navbar {
+  ...
 
-     .right-menu {
-       ...
+  .right-menu {
+    ...
 
-       ::v-deep .right-menu-item {
-         display: inline-block;
-         padding: 0 18px 0 0;
-         font-size: 24px;
-         color: #5a5e66;
-         vertical-align: text-bottom;
+    :deep(.right-menu-item) {
+      display: inline-block;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
 
-         &.hover-effect {
-           cursor: pointer;
-         }
-       }
+      &.hover-effect {
+        cursor: pointer;
+      }
+    }
 
-       ...
-   }
-   </style>
-   ```
+    ...
+}
+</style>
+```
 
 ## 5-05：方案落地：element-plus 国际化处理
 
