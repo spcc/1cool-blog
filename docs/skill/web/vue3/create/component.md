@@ -174,6 +174,8 @@ app.use(i18n)
 
 1. 定义 `store/app.js`
 
+:::details 点击查看代码
+
 ```js
 import { defineStore } from 'pinia'
 
@@ -197,7 +199,11 @@ const useAppStore = defineStore('app', {
 export default useAppStore
 ```
 
+:::
+
 2. 创建 `components/LangSelect/index.vue`
+
+:::details 点击查看代码
 
 ```vue
 <script setup>
@@ -256,7 +262,11 @@ const handleSetLanguage = lang => {
 </template>
 ```
 
+:::
+
 3. 在 `navbar` 中导入 `LangSelect`
+
+:::details 点击查看代码
 
 ```vue
 <script setup>
@@ -300,132 +310,48 @@ import LangSelect from '@/components/lang-select/index.vue'
 </style>
 ```
 
-## 5-05：方案落地：element-plus 国际化处理
+:::
 
-截止到目前，我们的国际化内容已经基本功能已经处理完成了。接下来需要处理的就是对应的语言包，有了语言包就可以实现整个项目中的所有国际化处理了。
+### 1.4 element-plus 国际化处理
 
-那么对于语言包来说，我们整个项目中会分成两部分：
+在 `layout/LayoutMain.vue`
 
-1. `element-plus` 语言包：用来处理 `element` 组件的国际化功能
-2. 自定义语言包：用来处理 **非**`element` 组件的国际化功能
+:::details 点击查看代码
 
-那么首先我们先来处理 `element-plus` 语言包：
+```vue
+<script setup>
+import { RouterView } from 'vue-router'
+import elementZh from 'element-plus/dist/locale/zh-cn.mjs'
+import elementEn from 'element-plus/dist/locale/en.mjs'
 
-**按照正常的逻辑，我们是可以通过 `element-ui` 配合 `vue-i18n`来实现国际化功能的，但是目前的 `element-plus` 尚未提供配合 `vue-i18n` 实现国际化的方式！ **
+import useAppStore from '@/stores/app'
 
-所以说，我们暂时只能先去做临时处理，等到 `element-plus` 支持 `vue-i18n` 功能之后，我们再进行对接实现
+const appStore = useAppStore()
+const language = computed(() =>
+  appStore.language === 'zh' ? elementZh : elementEn
+)
+</script>
 
-那么临时处理我们怎么去做呢？
-
-1. 升级 `element-plus` 到最新版本
-
-   ```
-   npm i element-plus
-   ```
-
-   目前课程中使用的最新版本为：`^1.1.0-beta.15`
-
-2. 升级版本之后，左侧 `menu` 菜单无法正常显示，这是因为 `element-plus` 修改了 `el-submenu` 的组件名称
-
-3. 到 `layout/components/Sidebar/SidebarItem` 中，修改 `el-submenu` 为 `el-sub-menu`
-
-4. 接下来实现国际化
-
-5. 在 `plugins/index` 中导入 `element` 的中文、英文语言包：
-
-```js
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import en from 'element-plus/lib/locale/lang/en'
+<template>
+  <el-config-provider :locale="language">
+    <div class="app-main"><RouterView /></div>
+  </el-config-provider>
+</template>
 ```
 
-6. 注册 `element` 时，根据当前语言选择使用哪种语言包
+:::
 
-   ```js
-   import store from '@/store'
-
-   export default app => {
-     app.use(ElementPlus, {
-       locale: store.getters.language === 'en' ? en : zhCn
-     })
-   }
-   ```
-
-## 5-06：方案落地：自定义语言包国际化处理
-
-处理完 `element` 的国际化内容之后，接下来我们来处理 **自定义语言包**。
-
-自定义语言包我们使用了 `commonJS` 导出了一个对象，这个对象就是所有的 **自定义语言对象**
-
-> 大家可以在 **资料/lang** 中获取到所有的语言包
-
-1.  复制 `lang` 文件夹到 `i18n` 中
-
-2.  在 `lang/index` 中，导入语言包
-
-    ```js
-    import mZhLocale from './lang/zh'
-    import mEnLocale from './lang/en'
-    ```
-
-3.  在 `messages` 中注册到语言包
-
-    ```js
-    const messages = {
-      en: {
-        msg: {
-          ...mEnLocale
-        }
-      },
-      zh: {
-        msg: {
-          ...mZhLocale
-        }
-      }
-    }
-    ```
-
-## 5-07：方案落地：处理项目国际化内容
-
-在处理好了国际化的语言包之后，接下来我们就可以应用国际化功能到我们的项目中
-
-对于我们目前的项目而言，需要进行国际化处理的地方主要分为：
-
-1. 登录页面
-2. `navbar` 区域
-3. `sidebar` 区域
-4. 面包屑区域
-
-那么这一小节，我们先来处理前两个
-
-**登录页面：**
+### 1.5 文件内使用
 
 `login/index`
 
 ```vue
 <template>
-  <div class="login-container">
-    ...
-      <div class="title-container">
-        <h3 class="title">{{ $t('msg.login.title') }}</h3>
-          <lang-select class="lang-select" effect="light"></lang-select>
-      </div>
-
-      ...
-
-      <el-button
-        type="primary"
-        style="width: 100%; margin-bottom: 30px"
-        :loading="loading"
-        @click="handleLogin"
-        >{{ $t('msg.login.loginBtn') }}</el-button
-      >
-
-      <div class="tips" v-html="$t('msg.login.desc')"></div>
-    </el-form>
-  </div>
+  <h3 class="title">{{ $t('login.title') }}</h3>
 </template>
 
 <script setup>
+// js使用第一种
 import { useI18n } from 'vue-i18n'
 ...
 // 验证规则
@@ -441,18 +367,17 @@ const loginRules = ref({
 })
 ...
 </script>
-
-
 ```
 
 `login/rules`
 
 ```js
+// js使用第二种
 import i18n from '@/i18n'
 export const validatePassword = () => {
   return (rule, value, callback) => {
     if (value.length < 6) {
-      callback(new Error(i18n.global.t('msg.login.passwordRule')))
+      callback(new Error(i18n.global.t('login.passwordRule')))
     } else {
       callback()
     }
@@ -460,986 +385,177 @@ export const validatePassword = () => {
 }
 ```
 
-**`navbar` 区域**
-
-`layout/components/navbar`
-
-```vue
-<template>
-  <div class="navbar">
-    ...
-        <template #dropdown>
-          <el-dropdown-menu class="user-dropdown">
-            <router-link to="/">
-              <el-dropdown-item> {{ $t('msg.navBar.home') }} </el-dropdown-item>
-            </router-link>
-            <a target="_blank" href="">
-              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
-            </a>
-            <el-dropdown-item divided @click="logout">
-              {{ $t('msg.navBar.logout') }}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-  </div>
-</template>
-```
-
-`components/LangSelect/index`
-
-```vue
-<el-tooltip :content="$t('msg.navBar.lang')" :effect="effect">
-       ...
-
-
-const handleSetLanguage = lang => {
-  ...
-  ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
-}
-```
-
-## 5-08：方案落地：sidebar 与 面包屑 区域的国际化处理
+### 1.6 sidebar 与 面包屑 区域的国际化处理
 
 **sidebar 区域**
 
-目前对于 `sidebar` 而言，显示的文本是我们在定义路由表时的 `title`
-
-```html
-<span>{{ title }}</span>
-```
+目前对于 `sidebar` 而言，文本如何支持国际化
 
 我们可以 **把 `title` 作为语言包内容的 `key` 进行处理**
 
 创建 `utils/i18n` 工具模块，用于 **将 `title` 转化为国际化内容**
 
+:::details 点击查看代码
+
 ```js
 import i18n from '@/i18n'
+
 export function generateTitle(title) {
-  return i18n.global.t('msg.route.' + title)
+  return i18n.global.t('route.' + title)
 }
 ```
 
-在 `layout/components/Sidebar/MenuItem.vue` 中导入该方法：
+:::
+
+在 `layout/components/sidebar/MenuItem.vue` 中导入该方法：
+
+:::details 点击查看代码
 
 ```vue
+<script setup>
+import { generateTitle } from '@/utils/i18n'
+...
+</script>
+
 <template>
   ...
   <span>{{ generateTitle(title) }}</span>
 </template>
-
-<script setup>
-import { generateTitle } from '@/utils/i18n'
-...
-</script>
 ```
 
-最后修改下 `sidebarHeader` 的内容
-
-```php+HTML
-<h1 class="logo-title" v-if="$store.getters.sidebarOpened">
-	imooc-admin
-</h1>
-```
+:::
 
 **面包屑区域：**
 
-在 `components/Breadcrumb/index`
+在 `components/breadcrumb/index`
+
+:::details 点击查看代码
 
 ```vue
-<template>
-  ...
-  <!-- 不可点击项 -->
-  <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
-    generateTitle(item.meta.title)
-  }}</span>
-  <!-- 可点击项 -->
-  <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{
-    generateTitle(item.meta.title)
-  }}</a>
-  ...
-</template>
-
 <script setup>
 import { generateTitle } from '@/utils/i18n'
 ...
 </script>
+
+<template>
+  ...
+  <!-- 不可点击项 -->
+  <span v-if="index === breadcrumbData.length - 1" class="no-redirect">
+    {{ generateTitle(item.meta.title) }}
+  </span>
+  <!-- 可点击项 -->
+  <a v-else class="redirect" @click.prevent="onLinkClick(item)">
+    {{ generateTitle(item.meta.title) }}
+  </a>
+  ...
+</template>
 ```
 
-## 5-09：方案落地：国际化缓存处理
+:::
 
-我们希望在 **刷新页面后，当前的国际化选择可以被保留**，所以想要实现这个功能，那么就需要进行 **国际化的缓存处理**
+### 1.7 国际化缓存处理
 
-此处的缓存，我们依然通过两个方面进行：
+pinia 在 js 中如何实时获取不知道
 
-1. `vuex` 缓存
-2. `LocalStorage` 缓存
-
-只不过这里的缓存，我们已经在处理 **`langSelect` 组件时** 处理完成了，所以此时我们只需要使用缓存下来的数据即可。
-
-在 `i18n/index` 中，创建 `getLanguage` 方法：
+但是 localStorage
 
 ```js
-import store from '@/store'
-/**
- * 返回当前 lang
- */
-function getLanguage() {
-  return store && store.getters && store.getters.language
-}
-```
+const locale = JSON.parse(localStorage.getItem('APP')).language
 
-修改 `createI18n` 的 `locale` 为 `getLanguage()`
-
-```js
 const i18n = createI18n({
-  ...
-  locale: getLanguage()
+  locale
 })
 ```
 
-## 5-10：国际化方案总结
+## 2. 动态换肤
 
-国际化是前端项目中的一个非常常见的功能，那么在前端项目中实现国际化主要依靠的就是 `vue-i18n` 这个第三方的包。
+## 3. screenfull 全屏
 
-关于国际化的实现原理大家可以参照 **国际化实现原理** 这一小节，这里我们就不再赘述了。
+### 3.1 原生实现（兼容问题，不推荐）
 
-而 `i18n` 的使用，整体来说就分为这么四步：
+:::details 点击查看代码
 
-1. 创建 `messages` 数据源
-2. 创建 `locale` 语言变量
-3. 初始化 `i18n` 实例
-4. 注册 `i18n` 实例
-
-核心的内容其实就是 数据源的部分，但是大家需要注意，如果你的项目中使用了 **第三方组件库** ，那么不要忘记 **第三方组件库的数据源** 需要 **单独** 进行处理！
-
-##
-
-接下来我们来处理 **动态换肤** 功能。
-
-关于 **动态换肤** 我们之前已经提到过了，在 `layout/components/Sidebar/SidebarMenu.vue` 中，我们实现 `el-menu` 的背景色时，说过：**此处将来会实现换肤功能，所以我们不能直接写死，而需要通过一个动态的值，来进行指定**
-
-```vue
-<el-menu
-  :default-active="activeMenu"
-  :collapse="!$store.getters.sidebarOpened"
-  :background-color="$store.getters.cssVar.menuBg"
-  :text-color="$store.getters.cssVar.menuText"
-  :active-text-color="$store.getters.cssVar.menuActiveText"
-  :unique-opened="true"
-  router
->x'z
-    ...
-  </el-menu>
-```
-
-那么换句话而言，想要实现 **动态换肤** 的一个前置条件就是：**色值不可以写死！**
-
-那么为什么会有这个前置条件呢？动态换肤又是如何来去实现的呢？这一小节我们来看一下这个问题。
-
-首先我们先来说一下动态换肤的实现方式。
-
-在 `scss` 中，我们可以通过 `$变量名:变量值` 的方式定义 `css 变量`，然后通过该 `css 变量` 来去指定某一块 `DOM` 对应的颜色。
-
-那么大家可以想一下，如果我此时改变了该 `css 变量` 的值，那么所对应的 `DOM` 颜色是不是也会同步发生变化？
-
-当大量的 `DOM` 都依赖于这个 `css 变量` 设置颜色时，我们是不是只需要改变这个 `css 变量`，那么所有 `DOM` 的颜色是不是都会发生变化，所谓的 **动态换肤** 是不是就可以实现了！
-
-这个就是实现 **动态换肤** 的原理。
-
-而在我们的项目中想要实现动态换肤，需要同时处理两个方面的内容：
-
-1. `element-plus` 主题
-2. 非 `element-plus` 主题
-
-那么下面我们就分别来去处理这两块主题对应的内容
-
-## 5-11：动态换肤原理分析
-
-接下来我们来处理 **动态换肤** 功能
-
-关于 **动态换肤** 我们之前已经提到过了，在 `layout/components/SidebarMenu.vue` 中，我们实现 `el-menu` 的背景色时，说过 **此处将来会实现换肤功能，所以我们不能直接写死，而需要通过一个动态的值进行指定**
-
-```html
-<el-menu
-  :default-active="activeMenu"
-  :collapse="!$store.getters.sidebarOpened"
-  :background-color="$store.getters.cssVar.menuBg"
-  :text-color="$store.getters.cssVar.menuText"
-  :active-text-color="$store.getters.cssVar.menuActiveText"
-  :unique-opened="true"
-  router
-></el-menu>
-```
-
-那么换句话而言，想要实现 **动态换肤** 的一个前置条件就是：**色值不可以写死！**
-
-那么为什么会有这个前置条件呢？动态换肤又是如何去进行实现的呢？这一小节我们来看一下这个问题。
-
-首先我们先来说一下动态换肤的实现方式。
-
-在 `scss` 中，我们可以通过 `$变量名:变量值` 的方式定义 `css 变量` ，然后通过该 `css` 来去指定某一块 `DOM` 对应的颜色。
-
-那么大家可以想一下，如果我此时改变了该 `css` 变量的值，那么对应的 `DOM` 颜色是不是也会同步发生变化。
-
-当大量的 `DOM` 都依赖这个 `css 变量` 设置颜色时，我们是不是只需要改变这个 `css 变量` ，那么所有 `DOM` 的颜色是不是都会发生变化，所谓的 **动态换肤** 是不是就可以实现了！
-
-这个就是 **动态换肤** 的实现原理
-
-而在我们的项目中想要实现动态换肤，需要同时处理两个方面的内容：
-
-1. `element-plus` 主题
-2. 非 `element-plus` 主题
-
-那么下面我们就分别来去处理这两块主题对应的内容
-
-## 5-12：动态换肤实现方案分析
-
-明确好了原理之后，接下来我们就来理一下咱们的实现思路。
-
-从原理中我们可以得到以下两个关键信息：
-
-1. 动态换肤的关键是修改 `css 变量` 的值
-2. 换肤需要同时兼顾
-   1. `element-plus`
-   2. 非 `element-plus`
-
-那么根据以上关键信息，我们就可以得出对应的实现方案
-
-1. 创建一个组件 `ThemeSelect` 用来处理修改之后的 `css 变量` 的值
-2. 根据新值修改 `element-plus` 主题色
-3. 根据新值修改非 `element-plus` 主题色
-
-## 5-13：方案落地：创建 ThemeSelect 组件
-
-查看完成之后的项目我们可以发现，`ThemeSelect` 组件将由两部分组成：
-
-1. `navbar` 中的展示图标
-2. 选择颜色的弹出层
-
-那么本小节我们就先来处理第一个 **`navbar` 中的展示图标**
-
-创建 `components/ThemeSelect/index` 组件
-
-```js
-<template>
-  <!-- 主题图标
-  v-bind：https://v3.cn.vuejs.org/api/instance-properties.html#attrs -->
-  <el-dropdown
-    v-bind="$attrs"
-    trigger="click"
-    class="theme"
-    @command="handleSetTheme"
-  >
-    <div>
-      <el-tooltip :content="$t('msg.navBar.themeChange')">
-        <svg-icon icon="change-theme" />
-      </el-tooltip>
-    </div>
-    <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item command="color">
-          {{ $t('msg.theme.themeColorChange') }}
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </template>
-  </el-dropdown>
-  <!-- 展示弹出层 -->
-  <div></div>
-</template>
-
-<script setup>
-const handleSetTheme = command => {}
-</script>
-
-<style lang="scss" scoped></style>
-
-```
-
-在 `layout/components/navbar` 中进行引用
-
-```vue
-<div class="right-menu">
-      <theme-picker class="right-menu-item hover-effect"></theme-picker>
-
-import ThemePicker from '@/components/ThemeSelect/index'
-```
-
-## 5-14：方案落地：创建 SelectColor 组件
-
-在有了 `ThemeSelect ` 之后，接下来我们来去处理颜色选择的组件 `SelectColor`，在这里我们会用到 `element` 中的 `el-color-picker` 组件
-
-对于 `SelectColor` 的处理，我们需要分成两步进行：
-
-1. 完成 `SelectColor` 弹窗展示的双向数据绑定
-2. 把选中的色值进行本地缓存
-
-那么下面咱们先来看第一步：**完成 `SelectColor` 弹窗展示的双向数据绑定**
-
-创建 `components/ThemePicker/components/SelectColor.vue`
-
-```vue
-<template>
-  <el-dialog title="提示" :model-value="modelValue" @close="closed" width="22%">
-    <div class="center">
-      <p class="title">{{ $t('msg.theme.themeColorChange') }}</p>
-      <el-color-picker
-        v-model="mColor"
-        :predefine="predefineColors"
-      ></el-color-picker>
-    </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="closed">{{ $t('msg.universal.cancel') }}</el-button>
-        <el-button type="primary" @click="comfirm">{{
-          $t('msg.universal.confirm')
-        }}</el-button>
-      </span>
-    </template>
-  </el-dialog>
-</template>
-
-<script setup>
-import { defineProps, defineEmits, ref } from 'vue'
-defineProps({
-  modelValue: {
-    type: Boolean,
-    required: true
-  }
-})
-const emits = defineEmits(['update:modelValue'])
-
-// 预定义色值
-const predefineColors = [
-  '#ff4500',
-  '#ff8c00',
-  '#ffd700',
-  '#90ee90',
-  '#00ced1',
-  '#1e90ff',
-  '#c71585',
-  'rgba(255, 69, 0, 0.68)',
-  'rgb(255, 120, 0)',
-  'hsv(51, 100, 98)',
-  'hsva(120, 40, 94, 0.5)',
-  'hsl(181, 100%, 37%)',
-  'hsla(209, 100%, 56%, 0.73)',
-  '#c7158577'
-]
-// 默认色值
-const mColor = ref('#00ff00')
-
-/**
- * 关闭
- */
-const closed = () => {
-  emits('update:modelValue', false)
-}
-/**
- * 确定
- * 1. 修改主题色
- * 2. 保存最新的主题色
- * 3. 关闭 dialog
- */
-const comfirm = async () => {
-  // 3. 关闭 dialog
-  closed()
-}
-</script>
-
-<style lang="scss" scoped>
-.center {
-  text-align: center;
-  .title {
-    margin-bottom: 12px;
-  }
-}
-</style>
-```
-
-在 `ThemePicker/index` 中使用该组件
-
-```vue
-<template>
-  ...
-  <!-- 展示弹出层 -->
-  <div>
-    <select-color v-model="selectColorVisible"></select-color>
-  </div>
-</template>
-
-<script setup>
-import SelectColor from './components/SelectColor.vue'
-import { ref } from 'vue'
-
-const selectColorVisible = ref(false)
-const handleSetTheme = command => {
-  selectColorVisible.value = true
-}
-</script>
-```
-
-完成双向数据绑定之后，我们来处理第二步：**把选中的色值进行本地缓存**
-
-缓存的方式分为两种：
-
-1. `vuex`
-2. 本地存储
-
-在 `constants/index` 下新建常量值
-
-```js
-// 主题色保存的 key
-export const MAIN_COLOR = 'mainColor'
-// 默认色值
-export const DEFAULT_COLOR = '#409eff'
-```
-
-创建 `store/modules/theme` 模块，用来处理 **主题色** 相关内容
-
-```js
-import { getItem, setItem } from '@/utils/storage'
-import { MAIN_COLOR, DEFAULT_COLOR } from '@/constant'
-export default {
-  namespaced: true,
-  state: () => ({
-    mainColor: getItem(MAIN_COLOR) || DEFAULT_COLOR
-  }),
-  mutations: {
-    /**
-     * 设置主题色
-     */
-    setMainColor(state, newColor) {
-      state.mainColor = newColor
-      setItem(MAIN_COLOR, newColor)
-    }
-  }
-}
-```
-
-在 `store/getters` 下指定快捷访问
-
-```js
-mainColor: state => state.theme.mainColor
-```
-
-在 `store/index` 中导入 `theme`
-
-```js
-...
-import theme from './modules/theme.js'
-
-export default createStore({
-  getters,
-  modules: {
-    ...
-    theme
-  }
-})
-```
-
-在 `selectColor` 中，设置初始色值 和 缓存色值
-
-```vue
-...
-
-<script setup>
-import { defineProps, defineEmits, ref } from 'vue'
-import { useStore } from 'vuex'
-...
-const store = useStore()
-// 默认色值
-const mColor = ref(store.getters.mainColor)
-...
-/**
- * 确定
- * 1. 修改主题色
- * 2. 保存最新的主题色
- * 3. 关闭 dialog
- */
-const comfirm = async () => {
-  // 2. 保存最新的主题色
-  store.commit('theme/setMainColor', mColor.value)
-  // 3. 关闭 dialog
-  closed()
-}
-</script>
-```
-
-## 5-15：方案落地：处理 element-plus 主题变更原理与步骤分析
-
-对于 `element-plus` 的主题变更，相对比较复杂，所以说整个过程我们会分为三部分：
-
-1. 实现原理
-2. 实现步骤
-3. 实现过程
-
-**实现原理：**
-
-在之前我们分析主题变更的实现原理时，我们说过，核心的原理是：**通过修改 `scss` 变量 ** 的形式修改主题色完成主题变更
-
-但是对于 `element-plus` 而言，我们怎么去修改这样的主题色呢？
-
-其实整体的原理非常简单，分为三步：
-
-1. 获取当前 `element-plus` 的所有样式
-2. 找到我们想要替换的样式部分，通过正则完成替换
-3. 把替换后的样式写入到 `style` 标签中，利用样式优先级的特性，替代固有样式
-
-**实现步骤：**
-
-那么明确了原理之后，我们的实现步骤也就呼之欲出了，对应原理总体可分为四步：
-
-1. 获取当前 `element-plus` 的所有样式
-2. 定义我们要替换之后的样式
-3. 在原样式中，利用正则替换新样式
-4. 把替换后的样式写入到 `style` 标签中
-
-## 5-16：方案落地：处理 element-plus 主题变更
-
-创建 `utils/theme` 工具类，写入两个方法
-
-```js
-/**
- * 写入新样式到 style
- * @param {*} elNewStyle  element-plus 的新样式
- * @param {*} isNewStyleTag 是否生成新的 style 标签
- */
-export const writeNewStyle = elNewStyle => {}
-
-/**
- * 根据主色值，生成最新的样式表
- */
-export const generateNewStyle = primaryColor => {}
-```
-
-那么接下来我们先实现第一个方法 `generateNewStyle`，在实现的过程中，我们需要安装两个工具类：
-
-1. [rgb-hex](https://www.npmjs.com/package/rgb-hex)：转换 RGB(A)颜色为十六进制
-2. [css-color-function](https://www.npmjs.com/package/css-color-function)：在 CSS 中提出的颜色函数的解析器和转换器
-
-然后还需要写入一个 **颜色转化计算器 `formula.json`**
-
-创建 `constants/formula.json` （https://gist.github.com/benfrain/7545629）
-
-```json
-{
-  "shade-1": "color(primary shade(10%))",
-  "light-1": "color(primary tint(10%))",
-  "light-2": "color(primary tint(20%))",
-  "light-3": "color(primary tint(30%))",
-  "light-4": "color(primary tint(40%))",
-  "light-5": "color(primary tint(50%))",
-  "light-6": "color(primary tint(60%))",
-  "light-7": "color(primary tint(70%))",
-  "light-8": "color(primary tint(80%))",
-  "light-9": "color(primary tint(90%))",
-  "subMenuHover": "color(primary tint(70%))",
-  "subMenuBg": "color(primary tint(80%))",
-  "menuHover": "color(primary tint(90%))",
-  "menuBg": "color(primary)"
-}
-```
-
-准备就绪后，我们来实现 `generateNewStyle` 方法：
-
-```js
-import color from 'css-color-function'
-import rgbHex from 'rgb-hex'
-import formula from '@/constant/formula.json'
-import axios from 'axios'
-
-/**
- * 根据主色值，生成最新的样式表
- */
-export const generateNewStyle = async primaryColor => {
-  const colors = generateColors(primaryColor)
-  let cssText = await getOriginalStyle()
-
-  // 遍历生成的样式表，在 CSS 的原样式中进行全局替换
-  Object.keys(colors).forEach(key => {
-    cssText = cssText.replace(
-      new RegExp('(:|\\s+)' + key, 'g'),
-      '$1' + colors[key]
-    )
-  })
-
-  return cssText
-}
-
-/**
- * 根据主色生成色值表
- */
-export const generateColors = primary => {
-  if (!primary) return
-  const colors = {
-    primary
-  }
-  Object.keys(formula).forEach(key => {
-    const value = formula[key].replace(/primary/g, primary)
-    colors[key] = '#' + rgbHex(color.convert(value))
-  })
-  return colors
-}
-
-/**
- * 获取当前 element-plus 的默认样式表
- */
-const getOriginalStyle = async () => {
-  const version = require('element-plus/package.json').version
-  const url = `https://unpkg.com/element-plus@${version}/dist/index.css`
-  const { data } = await axios(url)
-  // 把获取到的数据筛选为原样式模板
-  return getStyleTemplate(data)
-}
-
-/**
- * 返回 style 的 template
- */
-const getStyleTemplate = data => {
-  // element-plus 默认色值
-  const colorMap = {
-    '#3a8ee6': 'shade-1',
-    '#409eff': 'primary',
-    '#53a8ff': 'light-1',
-    '#66b1ff': 'light-2',
-    '#79bbff': 'light-3',
-    '#8cc5ff': 'light-4',
-    '#a0cfff': 'light-5',
-    '#b3d8ff': 'light-6',
-    '#c6e2ff': 'light-7',
-    '#d9ecff': 'light-8',
-    '#ecf5ff': 'light-9'
-  }
-  // 根据默认色值为要替换的色值打上标记
-  Object.keys(colorMap).forEach(key => {
-    const value = colorMap[key]
-    data = data.replace(new RegExp(key, 'ig'), value)
-  })
-  return data
-}
-```
-
-接下来处理 `writeNewStyle` 方法：
-
-```js
-/**
- * 写入新样式到 style
- * @param {*} elNewStyle  element-plus 的新样式
- * @param {*} isNewStyleTag 是否生成新的 style 标签
- */
-export const writeNewStyle = elNewStyle => {
-  const style = document.createElement('style')
-  style.innerText = elNewStyle
-  document.head.appendChild(style)
-}
-```
-
-最后在 `SelectColor.vue` 中导入这两个方法：
-
-```vue
-...
-
-<script setup>
-...
-import { generateNewStyle, writeNewStyle } from '@/utils/theme'
-...
-/**
- * 确定
- * 1. 修改主题色
- * 2. 保存最新的主题色
- * 3. 关闭 dialog
- */
-
-const comfirm = async () => {
-  // 1.1 获取主题色
-  const newStyleText = await generateNewStyle(mColor.value)
-  // 1.2 写入最新主题色
-  writeNewStyle(newStyleText)
-  // 2. 保存最新的主题色
-  store.commit('theme/setMainColor', mColor.value)
-  // 3. 关闭 dialog
-  closed()
-}
-</script>
-```
-
-一些处理完成之后，我们可以在 `profile` 中通过一些代码进行测试：
-
-```html
-<el-row>
-  <el-button>Default</el-button>
-  <el-button type="primary">Primary</el-button>
-  <el-button type="success">Success</el-button>
-  <el-button type="info">Info</el-button>
-  <el-button type="warning">Warning</el-button>
-  <el-button type="danger">Danger</el-button>
-</el-row>
-```
-
-## 5-17：方案落地：element-plus 新主题的立即生效
-
-到目前我们已经完成了 `element-plus` 的主题变更，但是当前的主题变更还有一个小问题，那就是：**在刷新页面后，新主题会失效**
-
-那么出现这个问题的原因，非常简单：**因为没有写入新的 `style`**
-
-所以我们只需要在 **应用加载后，写入 `style` 即可**
-
-那么写入的时机，我们可以放入到 `app.vue` 中
-
-```vue
-<script setup>
-import { useStore } from 'vuex'
-import { generateNewStyle, writeNewStyle } from '@/utils/theme'
-
-const store = useStore()
-generateNewStyle(store.getters.mainColor).then(newStyleText => {
-  writeNewStyle(newStyleText)
-})
-</script>
-```
-
-## 5-18：方案落地：自定义主题变更
-
-自定义主题变更相对来说比较简单，因为 **自己的代码更加可控**。
-
-目前在我们的代码中，需要进行 **自定义主题变更** 为 **`menu` 菜单背景色**
-
-而目前指定 `menu` 菜单背景色的位置在 `layout/components/sidebar/SidebarMenu.vue` 中
-
-```js
-  <el-menu
-    :default-active="activeMenu"
-    :collapse="!$store.getters.sidebarOpened"
-    :background-color="$store.getters.cssVar.menuBg"
-    :text-color="$store.getters.cssVar.menuText"
-    :active-text-color="$store.getters.cssVar.menuActiveText"
-    :unique-opened="true"
-    router
-  >
-```
-
-此处的 背景色是通过 `getters` 进行指定的，该 `cssVar` 的 `getters` 为：
-
-```js
-cssVar: state => variables,
-```
-
-所以，我们想要修改 **自定义主题** ，只需要从这里入手即可。
-
-**根据当前保存的 `mainColor` 覆盖原有的默认色值**
-
-```js
-import variables from '@/styles/variables.scss'
-import { MAIN_COLOR } from '@/constant'
-import { getItem } from '@/utils/storage'
-import { generateColors } from '@/utils/theme'
-
-const getters = {
-  ...
-  cssVar: state => {
-    return {
-      ...variables,
-      ...generateColors(getItem(MAIN_COLOR))
-    }
-  },
-  ...
-}
-export default getters
-
-```
-
-但是我们这样设定之后，整个自定义主题变更，还存在两个问题：
-
-1. `menuBg` 背景颜色没有变化
-   <img src="第五章：后台项目前端综合解决方案之通用功能开发.assets/image-20210925203000626.png" alt="image-20210925203000626" style="zoom:33%;" />
-
-这个问题是因为咱们的 `sidebar` 的背景色未被替换，所以我们可以在 `layout/index` 中设置 `sidebar` 的 `backgroundColor`
-
-```html
-<sidebar
-  id="guide-sidebar"
-  class="sidebar-container"
-  :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
-/>
-```
-
-2. 主题色替换之后，需要刷新页面才可响应
-
-这个是因为 `getters` 中没有监听到 **依赖值的响应变化**，所以我们希望修改依赖值
-
-在 `store/modules/theme` 中
-
-```js
-...
-import variables from '@/styles/variables.scss'
-export default {
-  namespaced: true,
-  state: () => ({
-    ...
-    variables
-  }),
-  mutations: {
-    /**
-     * 设置主题色
-     */
-    setMainColor(state, newColor) {
-      ...
-      state.variables.menuBg = newColor
-      ...
-    }
-  }
-}
-
-```
-
-在 `getters` 中
-
-```js
-....
-
-const getters = {
- ...
-  cssVar: state => {
-    return {
-      ...state.theme.variables,
-      ...generateColors(getItem(MAIN_COLOR))
-    }
-  },
-  ...
-}
-export default getters
-
-```
-
-## 5-19：自定义主题方案总结
-
-那么到这里整个自定义主题我们就处理完成了。
-
-对于 **自定义主题而言**，核心的原理其实就是 **修改`scss`变量来进行实现主题色变化**
-
-明确好了原理之后，对后续实现的步骤就具体情况具体分析了。
-
-1. 对于 `element-plus`：因为 `element-plus` 是第三方的包，所以它 **不是完全可控** 的，那么对于这种最简单直白的方案，就是直接拿到它编译后的 `css` 进行色值替换，利用 `style` **内部样式表** 优先级高于 **外部样式表** 的特性，来进行主题替换
-2. 对于自定义主题：因为自定义主题是 **完全可控** 的，所以我们实现起来就轻松很多，只需要修改对应的 `scss`变量即可
-
-那么在之后大家遇到 **自定义主题** 的处理时，就可以按照我们所梳理的方案进行处理了。
-
-## 5-20：screenfull 原理及方案分析
-
-接下来我们来看 `screenfull （全屏）` 功能实现
-
-对于 `screenfull ` 和之前一样 ，我们还是先分析它的原理，然后在制定对应的方案实现
-
-**原理：**
-
-对于 `screenfull ` 而言，浏览器本身已经提供了对用的 `API`，[点击这里即可查看](https://developer.mozilla.org/zh-CN/docs/Web/API/Fullscreen_API)，这个 `API` 中，主要提供了两个方法：
+对于 `screenfull ` 而言：浏览器本身已经提供了对用的 `API`，[点击这里即可查看](https://developer.mozilla.org/zh-CN/docs/Web/API/Fullscreen_API)，这个 `API` 中，主要提供了两个方法：
 
 1. [`Document.exitFullscreen()`](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/exitFullscreen)：该方法用于请求从全屏模式切换到窗口模式
 2. [`Element.requestFullscreen()`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/requestFullScreen)：该方法用于请求浏览器（user agent）将特定元素（甚至延伸到它的后代元素）置为全屏模式
-   1. 比如我们可以通过 `document.getElementById('app').requestFullscreen()` 在获取 `id=app` 的 `DOM` 之后，把该区域置为全屏
 
+比如我们可以通过 `document.getElementById('app').requestFullscreen()` 在获取 `id=app` 的 `DOM` 之后，把该区域置为全屏  
 但是该方法存在一定的小问题，比如：
 
-1. `appmain` 区域背景颜色为黑色
+- `appmain` 区域背景颜色为黑色
 
 所以通常情况下我们不会直接使用该 `API` 来去实现全屏效果，而是会使用它的包装库 [screenfull](https://www.npmjs.com/package/screenfull)
 
-**方案：**
+:::
 
-那么明确好了原理之后，接下来实现方案就比较容易了。
-
-整体的方案实现分为两步：
-
-1. 封装 `screenfull` 组件
-   1. 展示切换按钮
-   2. 基于 [screenfull](https://www.npmjs.com/package/screenfull) 实现切换功能
-2. 在 `navbar` 中引入该组件
-
-## 5-21：方案落地：screenfull
-
-明确好了方案之后，接下来我们就落地该方案
-
-**封装 `screenfull` 组件：**
+### 3.2 第三方插件
 
 1. 下来依赖包 [screenfull](https://www.npmjs.com/package/screenfull)
 
-   ```
-   npm i screenfull@5.1.0
-   ```
+```sh
+npm install screenfull
+```
 
-2. 创建 `components/Screenfull/index`
+2. 创建 `components/screenfull/index`
 
-   ```vue
-   <template>
-     <div>
-       <svg-icon
-         :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
-         @click="onToggle"
-       />
-     </div>
-   </template>
+:::details 点击查看代码
 
-   <script setup>
-   import { ref, onMounted, onUnmounted } from 'vue'
-   import screenfull from 'screenfull'
+```vue
+<script setup>
+import screenfull from 'screenfull'
+import { FullScreen, Aim } from '@element-plus/icons-vue'
 
-   // 是否全屏
-   const isFullscreen = ref(false)
+// 是否全屏
+const isFullscreen = ref(false)
 
-   // 监听变化
-   const change = () => {
-     isFullscreen.value = screenfull.isFullscreen
-   }
+// 监听变化
+const change = () => {
+  isFullscreen.value = screenfull.isFullscreen
+}
 
-   // 切换事件
-   const onToggle = () => {
-     screenfull.toggle()
-   }
+// 切换事件
+const onToggle = () => {
+  screenfull.toggle()
+}
 
-   // 设置侦听器
-   onMounted(() => {
-     screenfull.on('change', change)
-   })
+// 设置侦听器
+onMounted(() => {
+  screenfull.on('change', change)
+})
 
-   // 删除侦听器
-   onUnmounted(() => {
-     screenfull.off('change', change)
-   })
-   </script>
+// 删除侦听器
+onUnmounted(() => {
+  screenfull.off('change', change)
+})
+</script>
 
-   <style lang="scss" scoped></style>
-   ```
+<template>
+  <div @click="onToggle">
+    <el-icon v-if="isFullscreen"><FullScreen /></el-icon>
+    <el-icon v-else><Aim /></el-icon>
+  </div>
+</template>
+```
+
+:::
 
 **在 `navbar` 中引入该组件：**
 
-```
-<screenfull class="right-menu-item hover-effect" />
+```vue
 import Screenfull from '@/components/Screenfull'
+<screenfull class="right-menu-item hover-effect" />
 ```
 
-## 5-22：headerSearch 原理及方案分析
+## 4. headerSearch 原理及方案分析
 
-> 所谓 `headerSearch` 指 **页面搜索**
+所谓 `headerSearch` 指 **页面搜索**  
+`headerSearch` 是复杂后台系统中非常常见的一个功能  
+它可以：**在指定搜索框中对当前应用中所有页面进行检索，以 `select` 的形式展示出被检索的页面，以达到快速进入的目的**
 
-**原理：**
-
-`headerSearch` 是复杂后台系统中非常常见的一个功能，它可以：**在指定搜索框中对当前应用中所有页面进行检索，以 `select` 的形式展示出被检索的页面，以达到快速进入的目的**
-
-那么明确好了 `headerSearch` 的作用之后，接下来我们来看一下对应的实现原理
-
-根据前面的目的我们可以发现，整个 `headerSearch` 其实可以分为三个核心的功能点：
-
-1. 根据指定内容对所有页面进行检索
-2. 以 `select` 形式展示检索出的页面
-3. 通过检索页面可快速进入对应页面
-
-那么围绕着这三个核心的功能点，我们想要分析它的原理就非常简单了：**根据指定内容检索所有页面，把检索出的页面以 `select` 展示，点击对应 `option` 可进入**
+---
 
 **方案：**
-
-对照着三个核心功能点和原理，想要指定对应的实现方案是非常简单的一件事情了
 
 1. 创建 `headerSearch` 组件，用作样式展示和用户输入内容获取
 2. 获取所有的页面数据，用作被检索的数据源
@@ -1447,41 +563,15 @@ import Screenfull from '@/components/Screenfull'
 4. 把搜索到的内容以 `select` 进行展示
 5. 监听 `select` 的 `change` 事件，完成对应跳转
 
-## 5-23：方案落地：创建 headerSearch 组件
+### 4.1 创建 headerSearch 组件
 
-创建 `components/headerSearch/index` 组件：
+1. 创建 `components/headerSearch/index` 组件：
+
+::: details 点击查看代码
 
 ```vue
-<template>
-  <div :class="{ show: isShow }" class="header-search">
-    <svg-icon
-      class-name="search-icon"
-      icon="search"
-      @click.stop="onShowClick"
-    />
-    <el-select
-      ref="headerSearchSelectRef"
-      class="header-search-select"
-      v-model="search"
-      filterable
-      default-first-option
-      remote
-      placeholder="Search"
-      :remote-method="querySearch"
-      @change="onSelectChange"
-    >
-      <el-option
-        v-for="option in 5"
-        :key="option"
-        :label="option"
-        :value="option"
-      ></el-option>
-    </el-select>
-  </div>
-</template>
-
 <script setup>
-import { ref } from 'vue'
+import { Search } from '@element-plus/icons-vue'
 
 // 控制 search 显示
 const isShow = ref(false)
@@ -1503,6 +593,30 @@ const onSelectChange = () => {
   console.log('onSelectChange')
 }
 </script>
+
+<template>
+  <div :class="{ show: isShow }" class="header-search">
+    <el-icon class="search-icon" @click.stop="onShowClick"><Search /></el-icon>
+    <el-select
+      ref="headerSearchSelectRef"
+      class="header-search-select"
+      v-model="search"
+      filterable
+      default-first-option
+      remote
+      placeholder="Search"
+      :remote-method="querySearch"
+      @change="onSelectChange"
+    >
+      <el-option
+        v-for="option in 5"
+        :key="option"
+        :label="option"
+        :value="option"
+      ></el-option>
+    </el-select>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .header-search {
@@ -1542,16 +656,16 @@ const onSelectChange = () => {
 </style>
 ```
 
-在 `navbar` 中导入该组件
+:::
 
+2. 在 `navbar` 中导入该组件
+
+```vue
+<!-- 页面搜索 -->
+<HeaderSearch class="right-menu-item hover-effect" />
 ```
-<header-search class="right-menu-item hover-effect"></header-search>
-import HeaderSearch from '@/components/HeaderSearch'
-```
 
-##
-
-在有了 `headerSearch` 之后，接下来就可以来处理对应的 **检索数据源了**
+## 4.2 获取所有的页面数据，用作被检索的数据源
 
 **检索数据源** 表示：**有哪些页面希望检索**
 
@@ -1559,11 +673,12 @@ import HeaderSearch from '@/components/HeaderSearch'
 
 根据以上原理，我们可以得出以下代码：
 
+:::details 点击查看代码
+
 ```vue
 <script setup>
-import { ref, computed } from 'vue'
-import { filterRouters, generateMenus } from '@/utils/route'
 import { useRouter } from 'vue-router'
+import { filterRouters, generateMenus } from '@/utils/route'
 ...
 // 检索数据源
 const router = useRouter()
@@ -1576,87 +691,99 @@ console.log(searchPool)
 </script>
 ```
 
-## 5-25：方案落地：对检索数据源进行模糊搜索
+:::
 
-如果我们想要进行 [模糊搜索](https://fusejs.io/) 的话，那么需要依赖一个第三方的库 [fuse.js](https://fusejs.io/)
+## 4.3 对检索数据源进行模糊搜索
+
+如果我们想要进行 **模糊搜索** 的话，那么需要依赖一个第三方的库 [fuse.js](https://fusejs.io/)
 
 1. 安装 [fuse.js](https://fusejs.io/)
 
-   ```
-   npm install --save fuse.js@6.4.6
-   ```
+```sjh
+npm install --save fuse.js@6.4.6
+```
 
 2. 初始化 `Fuse`，更多初始化配置项 [可点击这里](https://fusejs.io/api/options.html)
 
-   ```js
-   import Fuse from 'fuse.js'
+在 `components/header-search/index.vue` 中
 
-   /**
-    * 搜索库相关
-    */
-   const fuse = new Fuse(list, {
-     // 是否按优先级进行排序
-     shouldSort: true,
-     // 匹配长度超过这个值的才会被认为是匹配的
-     minMatchCharLength: 1,
-     // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
-     // name：搜索的键
-     // weight：对应的权重
-     keys: [
-       {
-         name: 'title',
-         weight: 0.7
-       },
-       {
-         name: 'path',
-         weight: 0.3
-       }
-     ]
-   })
-   ```
+:::details 点击查看代码
+
+```js
+import Fuse from 'fuse.js'
+
+/**
+ * 搜索库相关
+ */
+const fuse = new Fuse(list, {
+  // 是否按优先级进行排序
+  shouldSort: true,
+  // 匹配长度超过这个值的才会被认为是匹配的
+  minMatchCharLength: 1,
+  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+  // name：搜索的键
+  // weight：对应的权重
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
+})
+```
+
+:::
 
 3. 参考 [Fuse Demo](https://fusejs.io/demo.html) 与 最终效果，可以得出，我们最终期望得到如下的检索数据源结构
 
-   ```json
-   [
-     {
-       "path": "/my",
-       "title": ["个人中心"]
-     },
-     {
-       "path": "/user",
-       "title": ["用户"]
-     },
-     {
-       "path": "/user/manage",
-       "title": ["用户", "用户管理"]
-     },
-     {
-       "path": "/user/info",
-       "title": ["用户", "用户信息"]
-     },
-     {
-       "path": "/article",
-       "title": ["文章"]
-     },
-     {
-       "path": "/article/ranking",
-       "title": ["文章", "文章排名"]
-     },
-     {
-       "path": "/article/create",
-       "title": ["文章", "创建文章"]
-     }
-   ]
-   ```
+:::details 点击查看代码
 
-4. 所以我们之前处理了的数据源并不符合我们的需要，所以我们需要对数据源进行重新处理
+```json
+[
+  {
+    "path": "/my",
+    "title": ["个人中心"]
+  },
+  {
+    "path": "/user",
+    "title": ["用户"]
+  },
+  {
+    "path": "/user/manage",
+    "title": ["用户", "用户管理"]
+  },
+  {
+    "path": "/user/info",
+    "title": ["用户", "用户信息"]
+  },
+  {
+    "path": "/article",
+    "title": ["文章"]
+  },
+  {
+    "path": "/article/ranking",
+    "title": ["文章", "文章排名"]
+  },
+  {
+    "path": "/article/create",
+    "title": ["文章", "创建文章"]
+  }
+]
+```
 
-## 5-26：方案落地：数据源重处理，生成 searchPool
+:::
 
-在上一小节，我们明确了最终我们期望得到数据源结构，那么接下来我们就对重新计算数据源，生成对应的 `searchPoll`
+4. 数据源重处理，生成 `searchPoll`
 
-创建 `compositions/HeaderSearch/FuseData.js`
+所以我们之前处理了的数据源并不符合我们的需要，所以我们需要对数据源进行重新处理
+
+创建 `compositions/header-search/fuseData.js`
+
+:::details 点击查看代码
 
 ```js
 import path from 'path'
@@ -1699,13 +826,16 @@ export const generateRoutes = (routes, basePath = '/', prefixTitle = []) => {
 }
 ```
 
+:::
+
 在 `headerSearch` 中导入 `generateRoutes`
+
+:::details 点击查看代码
 
 ```vue
 <script setup>
-import { computed, ref } from 'vue'
-import { generateRoutes } from './FuseData'
 import Fuse from 'fuse.js'
+import { generateRoutes } from './FuseData'
 import { filterRouters } from '@/utils/route'
 import { useRouter } from 'vue-router'
 
@@ -1726,7 +856,11 @@ const fuse = new Fuse(searchPool.value, {
 </script>
 ```
 
+:::
+
 通过 `querySearch` 测试搜索结果
+
+:::details 点击查看代码
 
 ```js
 // 搜索方法
@@ -1735,63 +869,56 @@ const querySearch = query => {
 }
 ```
 
-## 5-27：方案落地：渲染检索数据
+:::
 
-数据源处理完成之后，最后我们就只需要完成:
+### 4.4 渲染检索数据
 
-1. 渲染检索出的数据
-2. 完成对应跳转
+```vue
+<template>
+  <el-option
+    v-for="option in searchOptions"
+    :key="option.item.path"
+    :label="option.item.title.join(' > ')"
+    :value="option.item"
+  ></el-option>
+</template>
 
-那么下面我们按照步骤进行实现：
+<script setup>
+...
+// 搜索结果
+const searchOptions = ref([])
+// 搜索方法
+const querySearch = query => {
+  if (query !== '') {
+    searchOptions.value = fuse.search(query)
+  } else {
+    searchOptions.value = []
+  }
+}
+...
+</script>
+```
 
-1. 渲染检索出的数据
+### 4.5 完成对应跳转
 
-   ```vue
-   <template>
-     <el-option
-       v-for="option in searchOptions"
-       :key="option.item.path"
-       :label="option.item.title.join(' > ')"
-       :value="option.item"
-     ></el-option>
-   </template>
+```js
+// 选中回调
+const onSelectChange = val => {
+  router.push(val.path)
+}
+```
 
-   <script setup>
-   ...
-   // 搜索结果
-   const searchOptions = ref([])
-   // 搜索方法
-   const querySearch = query => {
-     if (query !== '') {
-       searchOptions.value = fuse.search(query)
-     } else {
-       searchOptions.value = []
-     }
-   }
-   ...
-   </script>
-   ```
-
-2. 完成对应跳转
-
-   ```js
-   // 选中回调
-   const onSelectChange = val => {
-     router.push(val.path)
-   }
-   ```
-
-## 5-28：方案落地：剩余问题处理
-
-到这里我们的 `headerSearch` 功能基本上就已经处理完成了，但是还存在一些小 `bug` ，那么最后这一小节我们就处理下这些剩余的 `bug`
+### 4.6 剩余问题处理
 
 1. 在 `search` 打开时，点击 `body` 关闭 `search`
 2. 在 `search` 关闭时，清理 `searchOptions`
 3. `headerSearch` 应该具备国际化能力
 
-明确好问题之后，接下来我们进行处理
+---
 
 首先我们先处理前前面两个问题：
+
+:::details 点击查看代码
 
 ```js
 /**
@@ -1814,65 +941,76 @@ watch(isShow, val => {
 })
 ```
 
+:::
+
 接下来是国际化的问题，想要处理这个问题非常简单，我们只需要：**监听语言变化，重新计算数据源初始化 `fuse` 即可**
 
 1. 在 `utils/i18n` 下，新建方法 `watchSwitchLang`
 
-   ```js
-   import { watch } from 'vue'
-   import store from '@/store'
+::: details 点击查看代码
 
-   /**
-    *
-    * @param  {...any} cbs 所有的回调
-    */
-   export function watchSwitchLang(...cbs) {
-     watch(
-       () => store.getters.language,
-       () => {
-         cbs.forEach(cb => cb(store.getters.language))
-       }
-     )
-   }
-   ```
+```js
+import { watch } from 'vue'
+import store from '@/store'
+
+/**
+ *
+ * @param  {...any} cbs 所有的回调
+ */
+export function watchSwitchLang(...cbs) {
+  watch(
+    () => JSON.parse(localStorage.getItem('APP')).language,
+    () => {
+      cbs.forEach(cb => cb(JSON.parse(localStorage.getItem('APP')).language))
+    }
+  )
+}
+```
+
+:::
 
 2. 在 `headerSearch` 监听变化，重新赋值
 
-   ```vue
-   <script setup>
-   ...
-   import { watchSwitchLang } from '@/utils/i18n'
+:::details 点击查看代码
 
-   ...
+```vue
+<script setup>
+...
+import { watchSwitchLang } from '@/utils/i18n'
 
-   // 检索数据源
-   const router = useRouter()
-   let searchPool = computed(() => {
-     const filterRoutes = filterRouters(router.getRoutes())
-     return generateRoutes(filterRoutes)
-   })
-   /**
-    * 搜索库相关
-    */
-   let fuse
-   const initFuse = searchPool => {
-     fuse = new Fuse(searchPool, {
-       ...
-   }
-   initFuse(searchPool.value)
+...
 
-   ...
+// 检索数据源
+const router = useRouter()
+let searchPool = computed(() => {
+  const filterRoutes = filterRouters(router.getRoutes())
+  return generateRoutes(filterRoutes)
+})
+/**
+* 搜索库相关
+*/
+let fuse
+const initFuse = searchPool => {
+  fuse = new Fuse(searchPool, {
+    ...
+  })
+}
+initFuse(searchPool.value)
 
-   // 处理国际化
-   watchSwitchLang(() => {
-     searchPool = computed(() => {
-       const filterRoutes = filterRouters(router.getRoutes())
-       return generateRoutes(filterRoutes)
-     })
-     initFuse(searchPool.value)
-   })
-   </script>
-   ```
+...
+
+// 处理国际化
+watchSwitchLang(() => {
+  searchPool = computed(() => {
+    const filterRoutes = filterRouters(router.getRoutes())
+    return generateRoutes(filterRoutes)
+  })
+  initFuse(searchPool.value)
+})
+</script>
+```
+
+:::
 
 ## 5-29：headerSearch 方案总结
 
