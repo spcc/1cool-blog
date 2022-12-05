@@ -4,7 +4,7 @@
 
 ## 提示无权限
 
-1. 打开 `C:\Windows\System32\drivers\etc\文件夹`，找到 hosts, 然后给 User 分配所有权限
+1. 打开 `C:\Windows\System32\drivers\etc文件夹`，找到 hosts, 然后给 User 分配所有权限(右键属性->安全)
 
 <img src="https://img-blog.csdnimg.cn/20190726144738530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbnBhb2RlbHVsdV9ndWFqaWFu,size_16,color_FFFFFF,t_70" />
 
