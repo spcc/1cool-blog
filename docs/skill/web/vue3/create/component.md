@@ -1014,46 +1014,12 @@ watchSwitchLang(() => {
 
 ## 5. tagsView 原理及方案分析
 
-所谓 `tagsView` 可以分成两部分来去看：
-
-1. tags
-2. view
-
-好像和废话一样是吧。那怎么分开看呢？
-
-首先我们先来看 `tags`：
-
-所谓 `tgas` 指的是：**位于 `appmain` 之上的标签**
-
-那么现在我们忽略掉 `view`，现在只有一个要求：
-
-> 在 `view` 之上渲染这个 `tag`
-
-仅看这一个要求，很简单吧。
-
-**views：**
-
-明确好了 `tags` 之后，我们来看 `views`。
-
-脱离了 `tags` 只看 `views` 就更简单了，所谓 `views` ：**指的就是一个用来渲染组件的位置**，就像我们之前的 `Appmain` 一样，只不过这里的 `views` 可能稍微复杂一点，因为它需要在渲染的基础上增加：
-
-1. 动画
-2. 缓存
-
-这两个额外的功能。
-
-加上这两个功能之后可能会略显复杂，但是 [官网已经帮助我们处理了这个问题](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1)
-
-所以 单看 `views` 也是一个很简单的功能。
-
-那么接下来我们需要做的就是把 `tags` 和 `view` 合并起来而已。
-
-那么明确好了原理之后，我们就来看 **实现方案：**
+整个方案分为两大部：
 
 1. 创建 `tagsView` 组件：用来处理 `tags` 的展示
 2. 处理基于路由的动态过渡，在 `AppMain` 中进行：用于处理 `view` 的部分
 
-整个的方案就是这么两大部，但是其中我们还需要处理一些细节相关的，**完整的方案为**：
+完整方案分为：
 
 1. 监听路由变化，组成用于渲染 `tags` 的数据源
 2. 创建 `tags` 组件，根据数据源渲染 `tag`，渲染出来的 `tags` 需要同时具备
@@ -1062,255 +1028,266 @@ watchSwitchLang(() => {
 3. 处理鼠标右键效果，根据右键处理对应数据源
 4. 处理基于路由的动态过渡
 
-那么明确好了方案之后，接下来我们根据方案进行处理即可。
-
-## 5-31：方案落地：创建 tags 数据源
+### 5.1 创建 tags 数据源
 
 `tags` 的数据源分为两部分：
 
-1. 保存数据：`appmain` 组件中进行
+1. 保存数据：`appMain` 组件中进行
 2. 展示数据：`tags` 组件中进行
 
-所以 `tags` 的数据我们最好把它保存到 `vuex` 中。
+所以 `tags` 的数据最好把它保存到 `pinia` 中
 
-1. 在 `constant` 中新建常量
+---
 
-   ```js
-   // tags
-   export const TAGS_VIEW = 'tagsView'
-   ```
+1. 在 `store/app` 中创建 `tagsViewList` 数据
 
-2. 在 `store/app` 中创建 `tagsViewList`
+::: details 点击查看代码
 
-   ```js
-   import { LANG, TAGS_VIEW } from '@/constant'
-   import { getItem, setItem } from '@/utils/storage'
-   export default {
-     namespaced: true,
-     state: () => ({
-       ...
-       tagsViewList: getItem(TAGS_VIEW) || []
-     }),
-     mutations: {
-       ...
-       /**
-        * 添加 tags
-        */
-       addTagsViewList(state, tag) {
-         const isFind = state.tagsViewList.find(item => {
-           return item.path === tag.path
-         })
-       // 处理重复
-         if (!isFind) {
-           state.tagsViewList.push(tag)
-           setItem(TAGS_VIEW, state.tagsViewList)
-         }
-       }
-     },
-     actions: {}
-   }
+```js
+export default {
+  persist: {
+    key: 'APP',
+    storage: localStorage,
+    paths: ['tagsViewList']
+  },
+  state: () => ({
+    tagsViewList: []
+  }),
+  actions: {
+    ...
+    // 添加 tags
+    addTagsViewList(tag) {
+      const isFind = this.tagsViewList.find(item => item.path === tag.path)
+      // 处理重复
+      if (!isFind) {
+        this.tagsViewList.push(tag)
+      }
+    },
+  },
+}
 
-   ```
+```
 
-3. 在 `appmain` 中监听路由的变化
+2. 在 `AppMain.vue` 中监听路由的变化
 
-   ```vue
-   <script setup>
-   import { watch } from 'vue'
-   import { isTags } from '@/utils/tags'
-   import { generateTitle } from '@/utils/i18n'
-   import { useRoute } from 'vue-router'
-   import { useStore } from 'vuex'
+:::details 点击查看代码
 
-   const route = useRoute()
+```vue
+<script setup>
+import { useRoute } from 'vue-router'
+import useAppStore from '@/stores/app'
 
-   /**
-    * 生成 title
-    */
-   const getTitle = route => {
-     let title = ''
-     if (!route.meta) {
-       // 处理无 meta 的路由
-       const pathArr = route.path.split('/')
-       title = pathArr[pathArr.length - 1]
-     } else {
-       title = generateTitle(route.meta.title)
-     }
-     return title
-   }
+import { isTags } from '@/utils/tags'
+import { generateTitle } from '@/utils/i18n'
 
-   /**
-    * 监听路由变化
-    */
-   const store = useStore()
-   watch(
-     route,
-     (to, from) => {
-       if (!isTags(to.path)) return
-       const { fullPath, meta, name, params, path, query } = to
-       store.commit('app/addTagsViewList', {
-         fullPath,
-         meta,
-         name,
-         params,
-         path,
-         query,
-         title: getTitle(to)
-       })
-     },
-     {
-       immediate: true
-     }
-   )
-   </script>
-   ```
+const route = useRoute()
+const appStore = useAppStore()
 
-4. 创建 `utils/tags`
+/**
+ * 生成 title
+ */
+const getTitle = route => {
+  let title = ''
+  if (!route.meta) {
+    // 处理无 meta 的路由
+    const pathArr = route.path.split('/')
+    title = pathArr[pathArr.length - 1]
+  } else {
+    title = generateTitle(route.meta.title)
+  }
+  return title
+}
+/**
+ * 监听路由变化
+ */
+watch(
+  route,
+  to => {
+    if (!isTags(to.path)) return
+    const { fullPath, meta, name, params, path, query } = to
+    appStore.addTagsViewList({
+      fullPath,
+      meta,
+      name,
+      params,
+      path,
+      query,
+      title: getTitle(to)
+    })
+  },
+  {
+    immediate: true
+  }
+)
+</script>
+```
 
-   ```js
-   const whiteList = ['/login', '/import', '/404', '/401']
+:::
 
-   /**
-    * path 是否需要被缓存
-    * @param {*} path
-    * @returns
-    */
-   export function isTags(path) {
-     return !whiteList.includes(path)
-   }
-   ```
+3. 新建 `utils/tags.js`
 
-## 5-32：方案落地：生成 tagsView
+过滤不需要显示 tag 的页面
+
+:::details 点击查看代码
+
+```js
+const whiteList = ['/login', '/import', '/404', '/401']
+
+/**
+ * path 是否需要被缓存
+ * @param {*} path
+ * @returns
+ */
+export function isTags(path) {
+  return !whiteList.includes(path)
+}
+```
+
+:::
+
+### 5.2 生成 tagsView
 
 目前数据已经被保存到 `store` 中，那么接下来我们就依赖数据渲染 `tags`
 
-1. 创建 `store/app` 中 `tagsViewList` 的快捷访问
+1. 创建 `components/tags-view/index.vue`
 
-   ```js
-   tagsViewList: state => state.app.tagsViewList
-   ```
+:::details 点击查看代码
 
-2. 创建 `components/tagsview`
+```vue
+<script setup>
+import { useRoute } from 'vue-router'
+import useAppStore from '@/stores/app'
+import { Close } from '@element-plus/icons-vue'
 
-   ```vue
-   <template>
-     <div class="tags-view-container">
-       <router-link
-         class="tags-view-item"
-         :class="isActive(tag) ? 'active' : ''"
-         :style="{
-           backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-           borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
-         }"
-         v-for="(tag, index) in $store.getters.tagsViewList"
-         :key="tag.fullPath"
-         :to="{ path: tag.fullPath }"
-       >
-         {{ tag.title }}
-         <i
-           v-show="!isActive(tag)"
-           class="el-icon-close"
-           @click.prevent.stop="onCloseClick(index)"
-         />
-       </router-link>
-     </div>
-   </template>
+const route = useRoute()
+const appStore = useAppStore()
 
-   <script setup>
-   import { useRoute } from 'vue-router'
-   const route = useRoute()
+/**
+ * 是否被选中
+ */
+const isActive = tag => {
+  return tag.path === route.path
+}
 
-   /**
-    * 是否被选中
-    */
-   const isActive = tag => {
-     return tag.path === route.path
-   }
+/**
+ * 关闭 tag 的点击事件
+ */
+const onCloseClick = index => {}
+</script>
 
-   /**
-    * 关闭 tag 的点击事件
-    */
-   const onCloseClick = index => {}
-   </script>
+<template>
+  <div class="tags-view-container">
+    <router-link
+      class="tags-view-item"
+      :class="isActive(tag) ? 'active' : ''"
+      :style="{
+        backgroundColor: isActive(tag) ? '#304156' : '',
+        borderColor: isActive(tag) ? '#304156' : ''
+      }"
+      v-for="(tag, index) in appStore.tagsViewList"
+      :key="tag.fullPath"
+      :to="{ path: tag.fullPath }"
+    >
+      {{ tag.title }}
+      <el-icon
+        v-show="!isActive(tag)"
+        class="el-icon-close"
+        @click.prevent.stop="onCloseClick(index)"
+      >
+        <Close />
+      </el-icon>
+    </router-link>
+  </div>
+</template>
 
-   <style lang="scss" scoped>
-   .tags-view-container {
-     height: 34px;
-     width: 100%;
-     background: #fff;
-     border-bottom: 1px solid #d8dce5;
-     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-     .tags-view-item {
-       display: inline-block;
-       position: relative;
-       cursor: pointer;
-       height: 26px;
-       line-height: 26px;
-       border: 1px solid #d8dce5;
-       color: #495060;
-       background: #fff;
-       padding: 0 8px;
-       font-size: 12px;
-       margin-left: 5px;
-       margin-top: 4px;
-       &:first-of-type {
-         margin-left: 15px;
-       }
-       &:last-of-type {
-         margin-right: 15px;
-       }
-       &.active {
-         color: #fff;
-         &::before {
-           content: '';
-           background: #fff;
-           display: inline-block;
-           width: 8px;
-           height: 8px;
-           border-radius: 50%;
-           position: relative;
-           margin-right: 4px;
-         }
-       }
-       // close 按钮
-       .el-icon-close {
-         width: 16px;
-         height: 16px;
-         line-height: 10px;
-         vertical-align: 2px;
-         border-radius: 50%;
-         text-align: center;
-         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-         transform-origin: 100% 50%;
-         &:before {
-           transform: scale(0.6);
-           display: inline-block;
-           vertical-align: -3px;
-         }
-         &:hover {
-           background-color: #b4bccc;
-           color: #fff;
-         }
-       }
-     }
-   }
-   </style>
-   ```
+<style lang="scss" scoped>
+.tags-view-container {
+  height: 34px;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #d8dce5;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  .tags-view-item {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #d8dce5;
+    color: #495060;
+    background: #fff;
+    padding: 0 8px;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 4px;
+    &:first-of-type {
+      margin-left: 15px;
+    }
+    &:last-of-type {
+      margin-right: 15px;
+    }
+    &.active {
+      color: #fff;
+      &::before {
+        content: '';
+        background: #fff;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: relative;
+        margin-right: 4px;
+      }
+    }
+    // close 按钮
+    .el-icon-close {
+      width: 16px;
+      height: 16px;
+      line-height: 10px;
+      vertical-align: 2px;
+      border-radius: 50%;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transform-origin: 100% 50%;
+      &:before {
+        transform: scale(0.6);
+        display: inline-block;
+        vertical-align: -3px;
+      }
+      &:hover {
+        background-color: #b4bccc;
+        color: #fff;
+      }
+    }
+  }
+}
+</style>
+```
 
-3. 在 `layout/index` 中导入
+:::
 
-   ```vue
-   <div class="fixed-header">
-       <!-- 顶部的 navbar -->
-       <navbar />
-       <!-- tags -->
-       <tags-view></tags-view>
-   </div>
+2. 在 `layout/index.vue` 中导入
 
-   import TagsView from '@/components/TagsView'
-   ```
+:::details 点击查看代码
 
-## 5-33：方案落地：tagsView 国际化处理
+```vue
+<script setup>
+import TagsView from '@/components/tags-view/index.vue'
+</script>
+
+<template>
+  <div class="fixed-header">
+    <!-- 顶部 navbar -->
+    <Navbar />
+    <!-- tags -->
+    <TagsView />
+  </div>
+</template>
+```
+
+:::
+
+#### 5.21 tagsView 国际化处理
 
 `tagsView` 的国际化处理可以理解为修改现有 `tags` 的 `title`。
 
@@ -1321,246 +1298,301 @@ watchSwitchLang(() => {
 
 根据方案，可生成如下代码：
 
-1. 在 `store/app` 中，创建修改 `ttile` 的 `mutations`
+1. 在 `store/app.js` 中，创建修改 `title` 的 `actions`
 
-   ```js
-   /**
-   * 为指定的 tag 修改 title
-   */
-   changeTagsView(state, { index, tag }) {
-       state.tagsViewList[index] = tag
-       setItem(TAGS_VIEW, state.tagsViewList)
-   }
-   ```
+:::details 点击查看代码
 
-2. 在 `appmain` 中监听语言变化
+```js
+// 为指定的 tag 修改 title
+changeTagsView({ index, tag }) {
+  this.tagsViewList[index] = tag
+},
+```
 
-   ```js
-   import { generateTitle, watchSwitchLang } from '@/utils/i18n'
+:::
 
-   /**
-    * 国际化 tags
-    */
-   watchSwitchLang(() => {
-     store.getters.tagsViewList.forEach((route, index) => {
-       store.commit('app/changeTagsView', {
-         index,
-         tag: {
-           ...route,
-           title: getTitle(route)
-         }
-       })
-     })
-   })
-   ```
+2. 在 `AppMain.vue` 中监听语言变化
 
-## 5-34：方案落地：contextMenu 展示处理
+:::details 点击查看代码
+
+```js
+import useAppStore from '@/stores/app'
+import { generateTitle } from '@/utils/i18n'
+
+const appStore = useAppStore()
+
+/**
+ * 国际化 tags
+ */
+watch(
+  () => appStore.language,
+  () => {
+    appStore.tagsViewList.forEach((route, index) => {
+      appStore.changeTagsView({
+        index,
+        tag: {
+          ...route,
+          title: getTitle(route)
+        }
+      })
+    })
+  }
+)
+```
+
+:::
+
+#### 5.22 contextMenu 展示处理
 
 > [contextMenu](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/contextmenu_event) 为 鼠标右键事件
 
 [contextMenu](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/contextmenu_event) 事件的处理分为两部分：
 
-1. `contextMenu` 的展示
-2. 右键项对应逻辑处理
+- `contextMenu` 的展示
+- 右键项对应逻辑处理
 
 那么这一小节我们先处理第一部分：`contextMenu` 的展示：
 
-1. 创建 `components/TagsView/ContextMenu` 组件，作为右键展示部分
+1. 创建 `components/tagsView/ContextMenu.vue` 组件，作为右键展示部分
 
-   ```vue
-   <template>
-     <ul class="context-menu-container">
-       <li @click="onRefreshClick">
-         {{ $t('msg.tagsView.refresh') }}
-       </li>
-       <li @click="onCloseRightClick">
-         {{ $t('msg.tagsView.closeRight') }}
-       </li>
-       <li @click="onCloseOtherClick">
-         {{ $t('msg.tagsView.closeOther') }}
-       </li>
-     </ul>
-   </template>
+:::details 点击查看代码
 
-   <script setup>
-   import { defineProps } from 'vue'
-   defineProps({
-     index: {
-       type: Number,
-       required: true
-     }
-   })
+```vue
+<template>
+  <ul class="context-menu-container">
+    <li @click="onRefreshClick">
+      {{ $t('tagsView.refresh') }}
+    </li>
+    <li @click="onCloseRightClick">
+      {{ $t('tagsView.closeRight') }}
+    </li>
+    <li @click="onCloseOtherClick">
+      {{ $t('tagsView.closeOther') }}
+    </li>
+  </ul>
+</template>
 
-   const onRefreshClick = () => {}
+<script setup>
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true
+  }
+})
 
-   const onCloseRightClick = () => {}
+const onRefreshClick = () => {}
 
-   const onCloseOtherClick = () => {}
-   </script>
+const onCloseRightClick = () => {}
 
-   <style lang="scss" scoped>
-   .context-menu-container {
-     position: fixed;
-     background: #fff;
-     z-index: 3000;
-     list-style-type: none;
-     padding: 5px 0;
-     border-radius: 4px;
-     font-size: 12px;
-     font-weight: 400;
-     color: #333;
-     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
-     li {
-       margin: 0;
-       padding: 7px 16px;
-       cursor: pointer;
-       &:hover {
-         background: #eee;
-       }
-     }
-   }
-   </style>
-   ```
+const onCloseOtherClick = () => {}
+</script>
 
-2. 在 `tagsview ` 中控制 `contextMenu` 的展示
+<style lang="scss" scoped>
+.context-menu-container {
+  position: fixed;
+  background: #fff;
+  z-index: 3000;
+  list-style-type: none;
+  padding: 5px 0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+  li {
+    margin: 0;
+    padding: 7px 16px;
+    cursor: pointer;
+    &:hover {
+      background: #eee;
+    }
+  }
+}
+</style>
+```
 
-   ```vue
-   <template>
-     <div class="tags-view-container">
-       <el-scrollbar class="tags-view-wrapper">
-         <router-link
-           ...
-           @contextmenu.prevent="openMenu($event, index)"
-         >
-           ...
-       </el-scrollbar>
-       <context-menu
-         v-show="visible"
-         :style="menuStyle"
-         :index="selectIndex"
-       ></context-menu>
-     </div>
-   </template>
+:::
 
-   <script setup>
-   import ContextMenu from './ContextMenu.vue'
-   import { ref, reactive, watch } from 'vue'
-   import { useRoute } from 'vue-router'
-   ...
+2. 在 `tags-view/index.vue ` 中控制 `contextMenu` 的展示
 
-   // contextMenu 相关
-   const selectIndex = ref(0)
-   const visible = ref(false)
-   const menuStyle = reactive({
-     left: 0,
-     top: 0
-   })
-   /**
-    * 展示 menu
-    */
-   const openMenu = (e, index) => {
-     const { x, y } = e
-     menuStyle.left = x + 'px'
-     menuStyle.top = y + 'px'
-     selectIndex.value = index
-     visible.value = true
-   }
+:::details 点击查看代码
 
+```vue
+<script setup>
+import { useRoute } from 'vue-router'
 
-   </script>
-   ```
+import ContextMenu from './ContextMenu.vue'
+...
 
-## 5-35：方案落地：contextMenu 事件处理
+// contextMenu 相关
+const selectIndex = ref(0)
+const visible = ref(false)
+const menuStyle = reactive({
+  left: 0,
+  top: 0
+})
+/**
+* 展示 menu
+*/
+const openMenu = (e, index) => {
+  const { x, y } = e
+  menuStyle.left = x + 'px'
+  menuStyle.top = y + 'px'
+  selectIndex.value = index
+  visible.value = true
+}
+</script>
 
-对于 `contextMenu` 的事件一共分为三个：
+<template>
+  <div class="tags-view-container">
+    <el-scrollbar class="tags-view-wrapper">
+      <router-link
+        ...
+        @contextmenu.prevent="openMenu($event, index)"
+      >
+        ...
+    </el-scrollbar>
+    <context-menu
+      v-show="visible"
+      :style="menuStyle"
+      :index="selectIndex"
+    />
+  </div>
+</template>
+```
+
+:::
+
+### 5.3：处理鼠标右键效果，根据右键处理对应数据源
+
+对于 `contextMenu` 的事件一共分为四个：
 
 1. 刷新
-2. 关闭右侧
-3. 关闭所有
+2. 关闭当前
+3. 关闭右侧
+4. 关闭所有
 
-但是不要忘记，我们之前 **关闭单个 `tags`** 的事件还没有进行处理，所以这一小节我们一共需要处理 4 个对应的事件
+---
 
 1. 刷新事件
 
-   ```js
-   const router = useRouter()
-   const onRefreshClick = () => {
-     router.go(0)
-   }
-   ```
+`tags-view/ContentMenu.vue`
 
-2. 在 `store/app` 中，创建删除 `tags` 的 `mutations`，该 `mutations` 需要同时具备以下三个能力：
+:::details 点击查看代码
+
+```js
+const router = useRouter()
+const onRefreshClick = () => {
+  router.go(0)
+}
+```
+
+:::
+
+2. 在 `store/app.js` 中，创建删除 `tags` 的 `actions`，该 `actions` 需要同时具备以下三个能力：
 
    1. 删除 “右侧”
    2. 删除 “其他”
    3. 删除 “当前”
 
-3. 根据以上理论得出以下代码：
+:::details 点击查看代码
 
-   ```js
-   /**
-        * 删除 tag
-        * @param {type: 'other'||'right'||'index', index: index} payload
-        */
-       removeTagsView(state, payload) {
-         if (payload.type === 'index') {
-           state.tagsViewList.splice(payload.index, 1)
-           return
-         } else if (payload.type === 'other') {
-           state.tagsViewList.splice(
-             payload.index + 1,
-             state.tagsViewList.length - payload.index + 1
-           )
-           state.tagsViewList.splice(0, payload.index)
-         } else if (payload.type === 'right') {
-           state.tagsViewList.splice(
-             payload.index + 1,
-             state.tagsViewList.length - payload.index + 1
-           )
-         }
-         setItem(TAGS_VIEW, state.tagsViewList)
-       },
-   ```
+```js
+/**
+ * 删除tag
+ * @param {type: 'other'||'right'||'index', index: index} payload
+ */
+removeTagsView(payload) {
+  if (payload.type === 'index') {
+    this.tagsViewList.splice(payload.index, 1)
+    return
+  } else if (payload.type === 'other') {
+    this.tagsViewList.splice(
+      payload.index + 1,
+      this.tagsViewList.length - payload.index + 1
+    )
+    this.tagsViewList.splice(0, payload.index)
+  } else if (payload.type === 'right') {
+    this.tagsViewList.splice(
+      payload.index + 1,
+      this.tagsViewList.length - payload.index + 1
+    )
+  }
+}
+```
 
-4. 关闭右侧事件
+:::
 
-   ```js
-   const store = useStore()
-   const onCloseRightClick = () => {
-     store.commit('app/removeTagsView', {
-       type: 'right',
-       index: props.index
-     })
-   }
-   ```
+3. 关闭右侧事件
 
-5. 关闭其他
+`tags-view/ContentMenu.vue`
 
-   ```js
-   const onCloseOtherClick = () => {
-     store.commit('app/removeTagsView', {
-       type: 'other',
-       index: props.index
-     })
-   }
-   ```
+:::details 点击查看代码
 
-6. 关闭当前（`tagsview`）
+```js
+import useAppStore from '@/stores/app'
+const appStore = useAppStore()
 
-   ```js
-   /**
-    * 关闭 tag 的点击事件
-    */
-   const store = useStore()
-   const onCloseClick = index => {
-     store.commit('app/removeTagsView', {
-       type: 'index',
-       index: index
-     })
-   }
-   ```
+const onCloseRightClick = () => {
+  appStore.removeTagsView({
+    type: 'right',
+    index: props.index
+  })
+}
+```
 
-## 5-36：方案落地：处理 contextMenu 的关闭行为
+:::
+
+4. 关闭其他
+
+`tags-view/ContentMenu.vue`
+
+:::details 点击查看代码
+
+```js
+import useAppStore from '@/stores/app'
+const appStore = useAppStore()
+
+const onCloseOtherClick = () => {
+  appStore.removeTagsView({
+    type: 'other',
+    index: props.index
+  })
+}
+```
+
+:::
+
+5. 关闭当前
+
+`tags-view/index.vue`
+
+:::details 点击查看代码
+
+```js
+import useAppStore from '@/stores/app'
+const appStore = useAppStore()
+
+/**
+ * 关闭 tag 的点击事件
+ */
+const onCloseClick = index => {
+  appStore.removeTagsView({
+    type: 'other',
+    index: index
+  })
+}
+```
+
+:::
+
+6. 处理 contextMenu 的关闭行为
+
+点击之后需要关闭自己
+
+`tagsView/index.vue`
+
+:::details 点击查看代码
 
 ```js
 /**
@@ -1582,76 +1614,75 @@ watch(visible, val => {
 })
 ```
 
-## 5-37：方案落地：处理基于路由的动态过渡
+:::
+
+### 5.4 处理基于路由的动态过渡
 
 [处理基于路由的动态过渡](https://next.router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1) 官方已经给出了示例代码，结合 `router-view` 和 `transition` 我们可以非常方便的实现这个功能
 
-1. 在 `appmain` 中处理对应代码逻辑
+1. 在 `AppMain.vue` 中处理对应代码逻辑
 
-   ```vue
-   <template>
-     <div class="app-main">
-       <router-view v-slot="{ Component, route }">
-         <transition name="fade-transform" mode="out-in">
-           <keep-alive>
-             <component :is="Component" :key="route.path" />
-           </keep-alive>
-         </transition>
-       </router-view>
-     </div>
-   </template>
-   ```
+:::details 点击查看代码
+
+```vue
+<template>
+  <el-config-provider :locale="language">
+    <div class="app-main">
+      <router-view v-slot="{ Component, route }">
+        <transition name="fade-transform" mode="out-in">
+          <keep-alive>
+            <component :is="Component" :key="route.path" />
+          </keep-alive>
+        </transition>
+      </router-view>
+    </div>
+  </el-config-provider>
+</template>
+```
+
+:::
 
 2. 增加了 `tags` 之后，`app-main` 的位置需要进行以下处理
 
-   ```vue
-   <style lang="scss" scoped>
-   .app-main {
-     min-height: calc(100vh - 50px - 43px);
-     ...
-     padding: 104px 20px 20px 20px;
-     ...
-   }
-   </style>
-   ```
+:::details 点击查看代码
 
-3. 在 `styles/transition` 中增加动画渲染
+```vue
+<style lang="scss" scoped>
+.app-main {
+  min-height: calc(100vh - 50px - 43px);
+  padding: 104px 20px 20px 20px;
+  ...
+}
+</style>
+```
 
-   ```scss
-   /* fade-transform */
-   .fade-transform-leave-active,
-   .fade-transform-enter-active {
-     transition: all 0.5s;
-   }
+:::
 
-   .fade-transform-enter-from {
-     opacity: 0;
-     transform: translateX(-30px);
-   }
+3. 在 `styles/transition.scss` 中增加动画渲染
 
-   .fade-transform-leave-to {
-     opacity: 0;
-     transform: translateX(30px);
-   }
-   ```
+:::details 点击查看代码
 
-## 5-38：tagsView 方案总结
+```scss
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
 
-那么到这里关于 `tagsView` 的内容我们就已经处理完成了。
+.fade-transform-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
 
-整个 `tagsView` 就像我们之前说的，拆开来看之后，会显得明确很多。
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+```
 
-整个 `tagsView` 整体来看就是三块大的内容：
+:::
 
-1. `tags`：`tagsView` 组件
-2. `contextMenu`：`contextMenu` 组件
-3. `view`：`appmain` 组件
-
-再加上一部分的数据处理即可。
-
-最后关于 `tags` 的国际化部分，其实处理的方案有非常多，大家也可以在后面的 **讨论题** 中探讨一下关于 **此处国家化** 的实现，相信会有很多新的思路被打开的。
-
-## 5-39：guide 原理及方案分析
+## 6. guide 原理及方案分析
 
 所谓 `guide` 指的就是 **引导页**
 

@@ -1,5 +1,14 @@
 # 关于我
 
+## 12 月计划
+
+<input type="checkbox"> 体重到 64.9  
+<input type="checkbox"> 学习完 VUE3 后台搭建课程  
+<input type="checkbox"> 买一套喜欢的四件套  
+<input type="checkbox"> 买一件喜欢的衣服  
+<input type="checkbox"> 收纳好自己的物品（统一管理起来，不要到处乱放）  
+<input type="checkbox"> 花费金额小于 1w
+
 **HELLO，你好，我是 CC**
 
 一名在职前端程序员
