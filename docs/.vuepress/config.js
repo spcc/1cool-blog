@@ -154,6 +154,7 @@ module.exports = {
             '/skill/web/vue3/create/layout',
             '/skill/web/vue3/create/component',
             '/skill/web/vue3/create/profile',
+            '/skill/web/vue3/create/quanXian',
             '/skill/web/vue3/create/ss'
           ]
         },
