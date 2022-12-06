@@ -1682,282 +1682,239 @@ watch(visible, val => {
 
 :::
 
-## 6. guide 原理及方案分析
+## 6. guide 引导页 原理及方案分析
 
-所谓 `guide` 指的就是 **引导页**
+[driver.js](https://kamranahmed.info/driver.js/) 进行引导页处理
 
-引导页是软件中经常见到的一个功能，无论是在后台项目还是前台或者是移动端项目中。
-
-那么对于引导页而言，它是如何实现的呢？我们来分析一下。
-
-通常情况下引导页是通过 **聚焦** 的方式，高亮一块视图，然后通过文字解释的形式来告知用户该功能的作用。
-
-所以说对于引导页而言，它的实现其实就是：**页面样式** 的实现。
-
-我们只需要可以做到：
-
-1. 高亮某一块指定的样式
-2. 在高亮的样式处通过文本展示内容
-3. 用户可以进行下一次高亮或者关闭事件
-
-那么就可以实现对应的引导功能。
-
-**方案：**
-
-对于引导页来说，市面上有很多现成的轮子，所以我们不需要手动的去进行以上内容的处理，我们这里可以直接使用 [driver.js](https://kamranahmed.info/driver.js/) 进行引导页处理。
-
-基于 [driver.js](https://kamranahmed.info/driver.js/) 我们的实现方案如下：
+基于 `driver.js` 实现方案如下：
 
 1. 创建 `Guide` 组件：用于处理 `icon` 展示
 2. 初始化 [driver.js](https://kamranahmed.info/driver.js/)
 3. 指定 [driver.js](https://kamranahmed.info/driver.js/) 的 `steps`
 
-## 5-40：方案落地：生成 Guide
+### 6.1 生成 Guide
 
-1.  创建`components/Guide`
+1. 创建`components/guide/index.vue`
+
+:::details 点击查看代码
 
 ```vue
+<script setup>
+import { WindPower } from '@element-plus/icons-vue'
+</script>
+
 <template>
   <div>
-    <el-tooltip :content="$t('msg.navBar.guide')">
-      <svg-icon icon="guide" />
+    <el-tooltip :content="$t('navBar.guide')">
+      <el-icon><WindPower /></el-icon>
     </el-tooltip>
   </div>
 </template>
-
-<script setup></script>
-
-<style scoped></style>
 ```
 
-2. 在 `navbar` 中导入该组件
+:::
 
-   ```vue
-   <guide class="right-menu-item hover-effect" />
+2. 在 `layout/components/Navbar.vue` 中导入该组件
 
-   import Guide from '@/components/Guide'
-   ```
+:::details 点击查看代码
 
-## 5-41：方案落地：Guide 业务逻辑处理
+```vue
+<script setup>
+import Guide from '@/components/guide/index.vue'
+</script>
+
+<template>
+  <!-- 引导图 -->
+  <Guide class="right-menu-item hover-effect" />
+  ...
+</template>
+```
+
+:::
+
+### 6.2 初始化 Guide 业务逻辑处理
 
 1. 导入 [driver.js](https://kamranahmed.info/driver.js/)
 
-   ```
-   npm i driver.js@0.9.8
-   ```
+```sh
+npm i driver.js@0.9.8
+```
 
-2. 在 `guide.vue` 中初始化 `driiver`
+2. 在 `components/guide/index.vue` 中初始化 `driiver`
 
-   ```vue
-   <script setup>
-   import Driver from 'driver.js'
-   import 'driver.js/dist/driver.min.css'
-   import { onMounted } from 'vue'
-   import { useI18n } from 'vue-i18n'
+:::details
 
-   const i18n = useI18n()
+```vue
+<script setup>
+import Driver from 'driver.js'
+import 'driver.js/dist/driver.min.css'
+import { WindPower } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
 
-   let driver = null
-   onMounted(() => {
-     driver = new Driver({
-       // 禁止点击蒙版关闭
-       allowClose: false,
-       closeBtnText: i18n.t('msg.guide.close'),
-       nextBtnText: i18n.t('msg.guide.next'),
-       prevBtnText: i18n.t('msg.guide.prev')
-     })
-   })
-   </script>
-   ```
+const i18n = useI18n()
 
-3. 创建 **步骤** `steps.js`
+let driver = null
+onMounted(() => {
+  driver = new Driver({
+    // 禁止点击蒙版关闭
+    allowClose: false,
+    closeBtnText: i18n.t('guide.close'),
+    nextBtnText: i18n.t('guide.next'),
+    prevBtnText: i18n.t('guide.prev')
+  })
+})
+</script>
+```
 
-   ```js
-   // 此处不要导入 @/i18n 使用 i18n.global ，因为我们在 router 中 layout 不是按需加载，所以会在 Guide 会在 I18n 初始化完成之前被直接调用。导致 i18n 为 undefined
-   const steps = i18n => {
-     return [
-       {
-         element: '#guide-start',
-         popover: {
-           title: i18n.t('msg.guide.guideTitle'),
-           description: i18n.t('msg.guide.guideDesc'),
-           position: 'bottom-right'
-         }
-       },
-       {
-         element: '#guide-hamburger',
-         popover: {
-           title: i18n.t('msg.guide.hamburgerTitle'),
-           description: i18n.t('msg.guide.hamburgerDesc')
-         }
-       },
-       {
-         element: '#guide-breadcrumb',
-         popover: {
-           title: i18n.t('msg.guide.breadcrumbTitle'),
-           description: i18n.t('msg.guide.breadcrumbDesc')
-         }
-       },
-       {
-         element: '#guide-search',
-         popover: {
-           title: i18n.t('msg.guide.searchTitle'),
-           description: i18n.t('msg.guide.searchDesc'),
-           position: 'bottom-right'
-         }
-       },
-       {
-         element: '#guide-full',
-         popover: {
-           title: i18n.t('msg.guide.fullTitle'),
-           description: i18n.t('msg.guide.fullDesc'),
-           position: 'bottom-right'
-         }
-       },
-       {
-         element: '#guide-theme',
-         popover: {
-           title: i18n.t('msg.guide.themeTitle'),
-           description: i18n.t('msg.guide.themeDesc'),
-           position: 'bottom-right'
-         }
-       },
-       {
-         element: '#guide-lang',
-         popover: {
-           title: i18n.t('msg.guide.langTitle'),
-           description: i18n.t('msg.guide.langDesc'),
-           position: 'bottom-right'
-         }
-       },
-       {
-         element: '#guide-tags',
-         popover: {
-           title: i18n.t('msg.guide.tagTitle'),
-           description: i18n.t('msg.guide.tagDesc')
-         }
-       },
-       {
-         element: '#guide-sidebar',
-         popover: {
-           title: i18n.t('msg.guide.sidebarTitle'),
-           description: i18n.t('msg.guide.sidebarDesc'),
-           position: 'right-center'
-         }
-       }
-     ]
-   }
-   export default steps
-   ```
+:::
 
-4. 在 `guide` 中导入“步骤”
+### 6.3 指定 step 步骤
 
-   ```vue
-   <template>
-     ...
-     <svg-icon icon="guide" @click="onClick" />
-     ...
-   </template>
+1. 创建 **步骤** `components/guide/steps.js`
 
-   <script setup>
-   ...
-   import steps from './steps'
-   ...
-   const onClick = () => {
-     driver.defineSteps(steps(i18n))
-     driver.start()
-   }
-   </script>
+:::details 点击查看代码
 
-   <style scoped></style>
-   ```
+```js
+// 此处不要导入 @/i18n 使用 i18n.global ，因为我们在 router 中 layout 不是按需加载，所以会在 Guide 会在 I18n 初始化完成之前被直接调用。导致 i18n 为 undefined
 
-5. 为 **引导高亮区域增加 ID**
+const steps = i18n => {
+  return [
+    {
+      element: '#guide-start',
+      popover: {
+        title: i18n.t('guide.guideTitle'),
+        description: i18n.t('guide.guideDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-hamburger',
+      popover: {
+        title: i18n.t('guide.hamburgerTitle'),
+        description: i18n.t('guide.hamburgerDesc')
+      }
+    },
+    {
+      element: '#guide-breadcrumb',
+      popover: {
+        title: i18n.t('guide.breadcrumbTitle'),
+        description: i18n.t('guide.breadcrumbDesc')
+      }
+    },
+    {
+      element: '#guide-search',
+      popover: {
+        title: i18n.t('guide.searchTitle'),
+        description: i18n.t('guide.searchDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-full',
+      popover: {
+        title: i18n.t('guide.fullTitle'),
+        description: i18n.t('guide.fullDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-lang',
+      popover: {
+        title: i18n.t('guide.langTitle'),
+        description: i18n.t('guide.langDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-tags',
+      popover: {
+        title: i18n.t('guide.tagTitle'),
+        description: i18n.t('guide.tagDesc')
+      }
+    },
+    {
+      element: '#guide-sidebar',
+      popover: {
+        title: i18n.t('guide.sidebarTitle'),
+        description: i18n.t('guide.sidebarDesc'),
+        position: 'right-center'
+      }
+    }
+  ]
+}
+export default steps
+```
 
-6. 在 `components/Guide/index` 中增加
+:::
 
-   ```html
-   <svg-icon id="guide-start" icon="guide" @click="onClick" />
-   ```
+2. 在 `components/guide/index.vue` 中导入“步骤”
 
-7. 在 `components/Hamburger/index` 增加
+:::details 点击查看代码
 
-   ```html
-   <svg-icon id="guide-hamburger" class="hamburger" :icon="icon"></svg-icon>
-   ```
+```vue
+<template>
+  ...
+  <el-icon @click="onClick"><WindPower /></el-icon>
+  ...
+</template>
 
-8. 在 `src/layout/components` 增加
+<script setup>
+import steps from './steps'
+...
+const onClick = () => {
+  driver.defineSteps(steps(i18n))
+  driver.start()
+}
+</script>
+```
 
-   ```html
-   <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
-   ```
+:::
 
-9. 在 `components/HeaderSearch/index` 增加
+3. 为 **引导高亮区域增加 ID**
 
-   ```html
-   <svg-icon
-     id="guide-search"
-     class-name="search-icon"
-     icon="search"
-     @click.stop="onShowClick"
-   />
-   ```
+::: details 点击查看代码
 
-10. 在 `components/Screenfull/index` 增加
+```js
+// components/guide/index.vue
+<svg-icon id="guide-start" icon="guide" @click="onClick" />
 
-    ```html
-    <svg-icon
-      id="guide-full"
-      :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
-      @click="onToggle"
-    />
-    ```
+// components/hamburger/index.vue
+<svg-icon id="guide-hamburger" class="hamburger" :icon="icon"></svg-icon>
 
-11. 在 `components/ThemePicker/index` 增加
+// src/layout/components
+<breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
 
-    ```html
-    <svg-icon id="guide-theme" icon="change-theme" />
-    ```
+// components/HeaderSearch/index
+<svg-icon
+  id="guide-search"
+  class-name="search-icon"
+  icon="search"
+  @click.stop="onShowClick"
+/>
 
-12. 在 `components/LangSelect/index` 增加
+// components/Screenfull/index
+<svg-icon
+  id="guide-full"
+  :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+  @click="onToggle"
+/>
 
-    ```html
-    <svg-icon id="guide-lang" icon="language" />
-    ```
+// components/ThemePicker/index
+<svg-icon id="guide-theme" icon="change-theme" />
 
-13. 在 `layout/index` 增加
+// components/LangSelect/index
+<svg-icon id="guide-lang" icon="language" />
 
-    ```html
-    <tags-view id="guide-tags"></tags-view>
-    ```
+// layout/index
+<tags-view id="guide-tags"></tags-view>
 
-14. 在 `layout/index` 增加
+// layout/index
+<sidebar
+  id="guide-sidebar"
+  class="sidebar-container"
+  :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
+/>
 
-    ```html
-    <sidebar
-      id="guide-sidebar"
-      class="sidebar-container"
-      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
-    />
-    ```
+```
 
-## 5-42：总结
-
-那么到这里我们整个的 **后台项目前端综合解决方案之通用功能开发** 这一章节就算是处理完成了。
-
-在本章中我们对以下通用功能进行了处理：
-
-1. 国际化
-2. 动态换肤
-3. `screenfull`
-4. `headerSearch`
-5. `tagView`
-6. `guide`
-
-其中除了 `screenfull` 和 `guide` 之外其他的功能都是具备一定的复杂度的。
-
-但是只要我们可以根据功能分析出对应原理，就可以根据原理实现对应方案，有了方案就可以制定出对应的实现步骤。
-
-只要大的步骤没有错误，那么具体的细节功能实现只需要具体情况具体分析即可。
-
-不过大家要注意，对于这些实现方案而言，**并非** 只有我们课程中的这一种实现方式。大家也可以针对这些实现方案在咱们的 **群里** 或者 **讨论区** 中，和我们一起多多发言或者讨论。
+:::

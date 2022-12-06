@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JS 循环中使用 async、await 的正确姿势 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/cc/js/MouseClickEffect.js"></script>
+    <meta name="description" content="花有重开日，人无在少年">
+    
+    <link rel="preload" href="/cc/assets/css/0.styles.d34e5755.css" as="style"><link rel="preload" href="/cc/assets/js/app.008eb101.js" as="script"><link rel="preload" href="/cc/assets/js/2.1f85ea53.js" as="script"><link rel="preload" href="/cc/assets/js/91.597a64d6.js" as="script"><link rel="prefetch" href="/cc/assets/js/10.e0649c7e.js"><link rel="prefetch" href="/cc/assets/js/100.cb54df57.js"><link rel="prefetch" href="/cc/assets/js/101.46854c2d.js"><link rel="prefetch" href="/cc/assets/js/102.e2f5cf82.js"><link rel="prefetch" href="/cc/assets/js/103.d884f09f.js"><link rel="prefetch" href="/cc/assets/js/104.a6918d88.js"><link rel="prefetch" href="/cc/assets/js/105.2e96a77b.js"><link rel="prefetch" href="/cc/assets/js/106.56055393.js"><link rel="prefetch" href="/cc/assets/js/107.76ac4f0b.js"><link rel="prefetch" href="/cc/assets/js/108.02a40977.js"><link rel="prefetch" href="/cc/assets/js/109.4f74c315.js"><link rel="prefetch" href="/cc/assets/js/11.3f70aeae.js"><link rel="prefetch" href="/cc/assets/js/110.8c404cca.js"><link rel="prefetch" href="/cc/assets/js/111.b4de8407.js"><link rel="prefetch" href="/cc/assets/js/112.aab85233.js"><link rel="prefetch" href="/cc/assets/js/113.55c57aea.js"><link rel="prefetch" href="/cc/assets/js/114.89dde8da.js"><link rel="prefetch" href="/cc/assets/js/115.01d05826.js"><link rel="prefetch" href="/cc/assets/js/116.f97806ea.js"><link rel="prefetch" href="/cc/assets/js/117.9d8a72d4.js"><link rel="prefetch" href="/cc/assets/js/118.df5a9720.js"><link rel="prefetch" href="/cc/assets/js/119.662958f9.js"><link rel="prefetch" href="/cc/assets/js/12.74f80593.js"><link rel="prefetch" href="/cc/assets/js/120.a926f470.js"><link rel="prefetch" href="/cc/assets/js/121.47456614.js"><link rel="prefetch" href="/cc/assets/js/122.6494cd53.js"><link rel="prefetch" href="/cc/assets/js/123.f03a9b06.js"><link rel="prefetch" href="/cc/assets/js/124.d73a7294.js"><link rel="prefetch" href="/cc/assets/js/13.6e7dbf46.js"><link rel="prefetch" href="/cc/assets/js/14.8e46c639.js"><link rel="prefetch" href="/cc/assets/js/15.0b75b5a4.js"><link rel="prefetch" href="/cc/assets/js/16.3d7d2683.js"><link rel="prefetch" href="/cc/assets/js/17.feed4c37.js"><link rel="prefetch" href="/cc/assets/js/18.de30ad69.js"><link rel="prefetch" href="/cc/assets/js/19.0b6c3069.js"><link rel="prefetch" href="/cc/assets/js/20.a106a454.js"><link rel="prefetch" href="/cc/assets/js/21.3dd398e1.js"><link rel="prefetch" href="/cc/assets/js/22.5b025ab8.js"><link rel="prefetch" href="/cc/assets/js/23.0cc31330.js"><link rel="prefetch" href="/cc/assets/js/24.760b69da.js"><link rel="prefetch" href="/cc/assets/js/25.4b367695.js"><link rel="prefetch" href="/cc/assets/js/26.ad5996cb.js"><link rel="prefetch" href="/cc/assets/js/27.8255c470.js"><link rel="prefetch" href="/cc/assets/js/28.de14f0a3.js"><link rel="prefetch" href="/cc/assets/js/29.28b7235e.js"><link rel="prefetch" href="/cc/assets/js/3.63dc4392.js"><link rel="prefetch" href="/cc/assets/js/30.0e364dac.js"><link rel="prefetch" href="/cc/assets/js/31.36cb2b37.js"><link rel="prefetch" href="/cc/assets/js/32.fc5dc21a.js"><link rel="prefetch" href="/cc/assets/js/33.aeab0b74.js"><link rel="prefetch" href="/cc/assets/js/34.28567cd5.js"><link rel="prefetch" href="/cc/assets/js/35.1cc39a6e.js"><link rel="prefetch" href="/cc/assets/js/36.09082632.js"><link rel="prefetch" href="/cc/assets/js/37.ea34894a.js"><link rel="prefetch" href="/cc/assets/js/38.683d01a4.js"><link rel="prefetch" href="/cc/assets/js/39.016abe55.js"><link rel="prefetch" href="/cc/assets/js/4.a185d924.js"><link rel="prefetch" href="/cc/assets/js/40.87990494.js"><link rel="prefetch" href="/cc/assets/js/41.031bdba4.js"><link rel="prefetch" href="/cc/assets/js/42.b9aef462.js"><link rel="prefetch" href="/cc/assets/js/43.5990eac0.js"><link rel="prefetch" href="/cc/assets/js/44.1c8e6928.js"><link rel="prefetch" href="/cc/assets/js/45.82e21699.js"><link rel="prefetch" href="/cc/assets/js/46.4414beb7.js"><link rel="prefetch" href="/cc/assets/js/47.c5b91c2d.js"><link rel="prefetch" href="/cc/assets/js/48.ac74e707.js"><link rel="prefetch" href="/cc/assets/js/49.5ad68f6e.js"><link rel="prefetch" href="/cc/assets/js/5.987e1949.js"><link rel="prefetch" href="/cc/assets/js/50.6eb24b66.js"><link rel="prefetch" href="/cc/assets/js/51.e3a0955b.js"><link rel="prefetch" href="/cc/assets/js/52.a1f2a554.js"><link rel="prefetch" href="/cc/assets/js/53.2ac70bd4.js"><link rel="prefetch" href="/cc/assets/js/54.cc2e9095.js"><link rel="prefetch" href="/cc/assets/js/55.80902fae.js"><link rel="prefetch" href="/cc/assets/js/56.c95d3db6.js"><link rel="prefetch" href="/cc/assets/js/57.b5c6eda4.js"><link rel="prefetch" href="/cc/assets/js/58.bc6c3737.js"><link rel="prefetch" href="/cc/assets/js/59.70c40948.js"><link rel="prefetch" href="/cc/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/cc/assets/js/60.391d8f42.js"><link rel="prefetch" href="/cc/assets/js/61.c92524fc.js"><link rel="prefetch" href="/cc/assets/js/62.31fa36f4.js"><link rel="prefetch" href="/cc/assets/js/63.5a9766fd.js"><link rel="prefetch" href="/cc/assets/js/64.f378dae2.js"><link rel="prefetch" href="/cc/assets/js/65.f2b620b2.js"><link rel="prefetch" href="/cc/assets/js/66.1c9fdb27.js"><link rel="prefetch" href="/cc/assets/js/67.b0b023c1.js"><link rel="prefetch" href="/cc/assets/js/68.e82affdc.js"><link rel="prefetch" href="/cc/assets/js/69.733ca0cb.js"><link rel="prefetch" href="/cc/assets/js/7.dae63b1b.js"><link rel="prefetch" href="/cc/assets/js/70.0747e479.js"><link rel="prefetch" href="/cc/assets/js/71.46600c06.js"><link rel="prefetch" href="/cc/assets/js/72.cd4944ab.js"><link rel="prefetch" href="/cc/assets/js/73.e1f58714.js"><link rel="prefetch" href="/cc/assets/js/74.dfa3fc1a.js"><link rel="prefetch" href="/cc/assets/js/75.e625b015.js"><link rel="prefetch" href="/cc/assets/js/76.c9b928e3.js"><link rel="prefetch" href="/cc/assets/js/77.11381a02.js"><link rel="prefetch" href="/cc/assets/js/78.0d4b0ceb.js"><link rel="prefetch" href="/cc/assets/js/79.0ede838e.js"><link rel="prefetch" href="/cc/assets/js/8.c0032b5c.js"><link rel="prefetch" href="/cc/assets/js/80.9cdb2528.js"><link rel="prefetch" href="/cc/assets/js/81.49394972.js"><link rel="prefetch" href="/cc/assets/js/82.e6ec3656.js"><link rel="prefetch" href="/cc/assets/js/83.b329ffbd.js"><link rel="prefetch" href="/cc/assets/js/84.cc9f1a61.js"><link rel="prefetch" href="/cc/assets/js/85.12236dea.js"><link rel="prefetch" href="/cc/assets/js/86.cc0192cf.js"><link rel="prefetch" href="/cc/assets/js/87.e4d4c1e2.js"><link rel="prefetch" href="/cc/assets/js/88.3d0e10eb.js"><link rel="prefetch" href="/cc/assets/js/89.33b37428.js"><link rel="prefetch" href="/cc/assets/js/9.11579874.js"><link rel="prefetch" href="/cc/assets/js/90.b4a5a744.js"><link rel="prefetch" href="/cc/assets/js/92.e85fb039.js"><link rel="prefetch" href="/cc/assets/js/93.2a0367e5.js"><link rel="prefetch" href="/cc/assets/js/94.80ac0f6e.js"><link rel="prefetch" href="/cc/assets/js/95.696b20af.js"><link rel="prefetch" href="/cc/assets/js/96.c3a57ecc.js"><link rel="prefetch" href="/cc/assets/js/97.8a34430f.js"><link rel="prefetch" href="/cc/assets/js/98.bfe59f28.js"><link rel="prefetch" href="/cc/assets/js/99.df9f4dfe.js">
+    <link rel="stylesheet" href="/cc/assets/css/0.styles.d34e5755.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/cc/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/js/base.html" class="sidebar-link">基础</a></li><li><a href="/cc/skill/web/js/click.html" class="sidebar-link">JS 事件</a></li><li><a href="/cc/skill/web/js/array.html" class="sidebar-link">Array 对象</a></li><li><a href="/cc/skill/web/js/string.html" class="sidebar-link">String 对象</a></li><li><a href="/cc/skill/web/js/math.html" class="sidebar-link">Math 对象</a></li><li><a href="/cc/skill/web/js/closure.html" class="sidebar-link">闭包</a></li><li><a href="/cc/skill/web/js/for.html" aria-current="page" class="active sidebar-link">JS 循环中使用 async、await 的正确姿势</a></li><li><a href="/cc/skill/web/js/regular.html" class="sidebar-link">/skill/web/js/regular.html</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>代码整洁</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/js/clean.html" class="sidebar-link">代码整洁</a></li><li><a href="/cc/skill/web/js/clean-name.html" class="sidebar-link">代码整洁之道 - 命名篇</a></li><li><a href="/cc/skill/web/js/clean-function.html" class="sidebar-link">代码整洁之道 - 函数篇</a></li><li><a href="/cc/skill/web/js/clean-function-reset.html" class="sidebar-link">代码整洁之道 - 重构函数</a></li><li><a href="/cc/skill/web/js/clean-notes.html" class="sidebar-link">代码整洁之道 - 注释篇</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#声明遍历的数组和异步方法" class="anchor-item__link" style="margin-left:0;">
+        声明遍历的数组和异步方法
+      </a></li><li class="anchor-item"><a href="#for-循环中使用" class="anchor-item__link" style="margin-left:0;">
+        for 循环中使用
+      </a></li><li class="anchor-item"><a href="#map-中使用" class="anchor-item__link" style="margin-left:0;">
+        map 中使用
+      </a></li><li class="anchor-item"><a href="#foreach-中使用" class="anchor-item__link" style="margin-left:0;">
+        forEach 中使用
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="js-循环中使用-async、await-的正确姿势"><a href="#js-循环中使用-async、await-的正确姿势" class="header-anchor">#</a> JS 循环中使用 async、await 的正确姿势</h1> <div class="custom-block danger"><p class="custom-block-title">总结</p> <p>异步支持支持 for。
+循环不能处理回调的循环，如 forEach、map、filter 等。</p></div> <h2 id="声明遍历的数组和异步方法"><a href="#声明遍历的数组和异步方法" class="header-anchor">#</a> 声明遍历的数组和异步方法</h2> <p>声明一个数组：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> skills <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'js'</span><span class="token punctuation">,</span> <span class="token string">'vue'</span><span class="token punctuation">,</span> <span class="token string">'node'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">]</span>
+</code></pre></div><p>再声明一个 <code>promise</code> 的异步代码:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="for-循环中使用"><a href="#for-循环中使用" class="header-anchor">#</a> for 循环中使用</h2> <blockquote><p>由于 <code>for</code> 循环并非函数，而 <code>async</code>、<code>await</code> 需要在函数中使用，因此需要在 <code>for</code> 循环外套一层 <code>function</code></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> skills<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> skill <span class="token operator">=</span> skills<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span>skill<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 调用</span>
+</code></pre></div><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/95da6c412be14354bce9aeb907dadcdf~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image?" alt=""></p> <p><code>for</code> 循环中有异步代码，是可以等到 <code>for</code> 循环中异步代码完全跑完之后再执行 <code>for</code> 循环后面的代码。</p> <p>但是它不能处理回调的循环，如 forEach、map、filter 等，下面具体分析</p> <h2 id="map-中使用"><a href="#map-中使用" class="header-anchor">#</a> map 中使用</h2> <p>在<code>map</code>中使用<code>await</code>, <code>map</code>  的返回值始是<code>promise</code>数组，这是因为异步函数总是返回<code>promise</code>。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> skills<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">await</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>结果：始终为<code>promise</code>数组</p> <div class="language-js extra-class"><pre class="language-js"><code>start
+<span class="token punctuation">[</span>
+  Promise <span class="token punctuation">{</span> <span class="token operator">&lt;</span>pending<span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  Promise <span class="token punctuation">{</span> <span class="token operator">&lt;</span>pending<span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  Promise <span class="token punctuation">{</span> <span class="token operator">&lt;</span>pending<span class="token operator">&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  Promise <span class="token punctuation">{</span> <span class="token operator">&lt;</span>pending<span class="token operator">&gt;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+end
+</code></pre></div><p>如果想要等到<code>promise</code>的返回结果，可以使用<code>promise.all()</code>处理一下</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> skills<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">await</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> resPromise <span class="token operator">=</span> <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>resPromise<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 结果</span>
+start<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'js'</span><span class="token punctuation">,</span> <span class="token string">'vue'</span><span class="token punctuation">,</span> <span class="token string">'node'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+end
+</code></pre></div><h2 id="foreach-中使用"><a href="#foreach-中使用" class="header-anchor">#</a> forEach 中使用</h2> <p>先上代码和结果</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
+  skills<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>预期结果</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token string">'Start'</span>
+<span class="token string">'js'</span>
+<span class="token string">'vue'</span>
+<span class="token string">'node'</span>
+<span class="token string">'react'</span>
+<span class="token string">'End'</span>
+</code></pre></div><p>实际结果 在<code>forEach</code>循环等待异步结果返回之前就执行了<code>console.log('end')</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token string">'Start'</span>
+<span class="token string">'End'</span>
+<span class="token string">'js'</span>
+<span class="token string">'vue'</span>
+<span class="token string">'node'</span>
+<span class="token string">'react'</span>
+</code></pre></div><p>JavaScript 中的  <code>forEach</code>不支持 promise 感知，也支持  <code>async</code>  和<code>await</code>，所以不能在  <code>forEach</code>  使用  <code>await</code> 。</p> <h1 id="filter-中使用"><a href="#filter-中使用" class="header-anchor">#</a> filter 中使用</h1> <p>使用<code>filter</code>过滤<code>item</code>为<code>vue</code>或者<code>react</code>的选项</p> <p>正常使用 <code>filter</code>：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> skills<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token string">'vue'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 调用</span>
+
+<span class="token comment">// 结果</span>
+start<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'vue'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+end
+</code></pre></div><p>使用 <code>await</code>后：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> skills<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> skill <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getSkillPromise</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token string">'vue'</span><span class="token punctuation">,</span> <span class="token string">'react'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>预期结果：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>start
+<span class="token punctuation">[</span> <span class="token string">'vue'</span>, <span class="token string">'react'</span> <span class="token punctuation">]</span>
+end
+</code></pre></div><p>实际结果:</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token punctuation">[</span><span class="token string">'js'</span>, <span class="token string">'vue'</span>, <span class="token string">'node'</span>, <span class="token string">'react'</span><span class="token punctuation">]</span>
+end
+</code></pre></div><p>结论：因为异步函数<code>getSkillPromise</code>返回结果返回的<code>promise</code>总是真的，所以所有选项都通过了过滤</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">11/28/2022, 11:33:06 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cc/skill/web/js/closure.html" class="prev">
+        闭包
+      </a></span> <span class="next"><a href="/cc/skill/web/js/regular.html">
+        /skill/web/js/regular.html
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/cc/assets/js/app.008eb101.js" defer></script><script src="/cc/assets/js/2.1f85ea53.js" defer></script><script src="/cc/assets/js/91.597a64d6.js" defer></script>
+  </body>
+</html>

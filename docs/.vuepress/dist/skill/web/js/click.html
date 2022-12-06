@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JS 事件 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/cc/js/MouseClickEffect.js"></script>
+    <meta name="description" content="花有重开日，人无在少年">
+    
+    <link rel="preload" href="/cc/assets/css/0.styles.d34e5755.css" as="style"><link rel="preload" href="/cc/assets/js/app.008eb101.js" as="script"><link rel="preload" href="/cc/assets/js/2.1f85ea53.js" as="script"><link rel="preload" href="/cc/assets/js/89.33b37428.js" as="script"><link rel="prefetch" href="/cc/assets/js/10.e0649c7e.js"><link rel="prefetch" href="/cc/assets/js/100.cb54df57.js"><link rel="prefetch" href="/cc/assets/js/101.46854c2d.js"><link rel="prefetch" href="/cc/assets/js/102.e2f5cf82.js"><link rel="prefetch" href="/cc/assets/js/103.d884f09f.js"><link rel="prefetch" href="/cc/assets/js/104.a6918d88.js"><link rel="prefetch" href="/cc/assets/js/105.2e96a77b.js"><link rel="prefetch" href="/cc/assets/js/106.56055393.js"><link rel="prefetch" href="/cc/assets/js/107.76ac4f0b.js"><link rel="prefetch" href="/cc/assets/js/108.02a40977.js"><link rel="prefetch" href="/cc/assets/js/109.4f74c315.js"><link rel="prefetch" href="/cc/assets/js/11.3f70aeae.js"><link rel="prefetch" href="/cc/assets/js/110.8c404cca.js"><link rel="prefetch" href="/cc/assets/js/111.b4de8407.js"><link rel="prefetch" href="/cc/assets/js/112.aab85233.js"><link rel="prefetch" href="/cc/assets/js/113.55c57aea.js"><link rel="prefetch" href="/cc/assets/js/114.89dde8da.js"><link rel="prefetch" href="/cc/assets/js/115.01d05826.js"><link rel="prefetch" href="/cc/assets/js/116.f97806ea.js"><link rel="prefetch" href="/cc/assets/js/117.9d8a72d4.js"><link rel="prefetch" href="/cc/assets/js/118.df5a9720.js"><link rel="prefetch" href="/cc/assets/js/119.662958f9.js"><link rel="prefetch" href="/cc/assets/js/12.74f80593.js"><link rel="prefetch" href="/cc/assets/js/120.a926f470.js"><link rel="prefetch" href="/cc/assets/js/121.47456614.js"><link rel="prefetch" href="/cc/assets/js/122.6494cd53.js"><link rel="prefetch" href="/cc/assets/js/123.f03a9b06.js"><link rel="prefetch" href="/cc/assets/js/124.d73a7294.js"><link rel="prefetch" href="/cc/assets/js/13.6e7dbf46.js"><link rel="prefetch" href="/cc/assets/js/14.8e46c639.js"><link rel="prefetch" href="/cc/assets/js/15.0b75b5a4.js"><link rel="prefetch" href="/cc/assets/js/16.3d7d2683.js"><link rel="prefetch" href="/cc/assets/js/17.feed4c37.js"><link rel="prefetch" href="/cc/assets/js/18.de30ad69.js"><link rel="prefetch" href="/cc/assets/js/19.0b6c3069.js"><link rel="prefetch" href="/cc/assets/js/20.a106a454.js"><link rel="prefetch" href="/cc/assets/js/21.3dd398e1.js"><link rel="prefetch" href="/cc/assets/js/22.5b025ab8.js"><link rel="prefetch" href="/cc/assets/js/23.0cc31330.js"><link rel="prefetch" href="/cc/assets/js/24.760b69da.js"><link rel="prefetch" href="/cc/assets/js/25.4b367695.js"><link rel="prefetch" href="/cc/assets/js/26.ad5996cb.js"><link rel="prefetch" href="/cc/assets/js/27.8255c470.js"><link rel="prefetch" href="/cc/assets/js/28.de14f0a3.js"><link rel="prefetch" href="/cc/assets/js/29.28b7235e.js"><link rel="prefetch" href="/cc/assets/js/3.63dc4392.js"><link rel="prefetch" href="/cc/assets/js/30.0e364dac.js"><link rel="prefetch" href="/cc/assets/js/31.36cb2b37.js"><link rel="prefetch" href="/cc/assets/js/32.fc5dc21a.js"><link rel="prefetch" href="/cc/assets/js/33.aeab0b74.js"><link rel="prefetch" href="/cc/assets/js/34.28567cd5.js"><link rel="prefetch" href="/cc/assets/js/35.1cc39a6e.js"><link rel="prefetch" href="/cc/assets/js/36.09082632.js"><link rel="prefetch" href="/cc/assets/js/37.ea34894a.js"><link rel="prefetch" href="/cc/assets/js/38.683d01a4.js"><link rel="prefetch" href="/cc/assets/js/39.016abe55.js"><link rel="prefetch" href="/cc/assets/js/4.a185d924.js"><link rel="prefetch" href="/cc/assets/js/40.87990494.js"><link rel="prefetch" href="/cc/assets/js/41.031bdba4.js"><link rel="prefetch" href="/cc/assets/js/42.b9aef462.js"><link rel="prefetch" href="/cc/assets/js/43.5990eac0.js"><link rel="prefetch" href="/cc/assets/js/44.1c8e6928.js"><link rel="prefetch" href="/cc/assets/js/45.82e21699.js"><link rel="prefetch" href="/cc/assets/js/46.4414beb7.js"><link rel="prefetch" href="/cc/assets/js/47.c5b91c2d.js"><link rel="prefetch" href="/cc/assets/js/48.ac74e707.js"><link rel="prefetch" href="/cc/assets/js/49.5ad68f6e.js"><link rel="prefetch" href="/cc/assets/js/5.987e1949.js"><link rel="prefetch" href="/cc/assets/js/50.6eb24b66.js"><link rel="prefetch" href="/cc/assets/js/51.e3a0955b.js"><link rel="prefetch" href="/cc/assets/js/52.a1f2a554.js"><link rel="prefetch" href="/cc/assets/js/53.2ac70bd4.js"><link rel="prefetch" href="/cc/assets/js/54.cc2e9095.js"><link rel="prefetch" href="/cc/assets/js/55.80902fae.js"><link rel="prefetch" href="/cc/assets/js/56.c95d3db6.js"><link rel="prefetch" href="/cc/assets/js/57.b5c6eda4.js"><link rel="prefetch" href="/cc/assets/js/58.bc6c3737.js"><link rel="prefetch" href="/cc/assets/js/59.70c40948.js"><link rel="prefetch" href="/cc/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/cc/assets/js/60.391d8f42.js"><link rel="prefetch" href="/cc/assets/js/61.c92524fc.js"><link rel="prefetch" href="/cc/assets/js/62.31fa36f4.js"><link rel="prefetch" href="/cc/assets/js/63.5a9766fd.js"><link rel="prefetch" href="/cc/assets/js/64.f378dae2.js"><link rel="prefetch" href="/cc/assets/js/65.f2b620b2.js"><link rel="prefetch" href="/cc/assets/js/66.1c9fdb27.js"><link rel="prefetch" href="/cc/assets/js/67.b0b023c1.js"><link rel="prefetch" href="/cc/assets/js/68.e82affdc.js"><link rel="prefetch" href="/cc/assets/js/69.733ca0cb.js"><link rel="prefetch" href="/cc/assets/js/7.dae63b1b.js"><link rel="prefetch" href="/cc/assets/js/70.0747e479.js"><link rel="prefetch" href="/cc/assets/js/71.46600c06.js"><link rel="prefetch" href="/cc/assets/js/72.cd4944ab.js"><link rel="prefetch" href="/cc/assets/js/73.e1f58714.js"><link rel="prefetch" href="/cc/assets/js/74.dfa3fc1a.js"><link rel="prefetch" href="/cc/assets/js/75.e625b015.js"><link rel="prefetch" href="/cc/assets/js/76.c9b928e3.js"><link rel="prefetch" href="/cc/assets/js/77.11381a02.js"><link rel="prefetch" href="/cc/assets/js/78.0d4b0ceb.js"><link rel="prefetch" href="/cc/assets/js/79.0ede838e.js"><link rel="prefetch" href="/cc/assets/js/8.c0032b5c.js"><link rel="prefetch" href="/cc/assets/js/80.9cdb2528.js"><link rel="prefetch" href="/cc/assets/js/81.49394972.js"><link rel="prefetch" href="/cc/assets/js/82.e6ec3656.js"><link rel="prefetch" href="/cc/assets/js/83.b329ffbd.js"><link rel="prefetch" href="/cc/assets/js/84.cc9f1a61.js"><link rel="prefetch" href="/cc/assets/js/85.12236dea.js"><link rel="prefetch" href="/cc/assets/js/86.cc0192cf.js"><link rel="prefetch" href="/cc/assets/js/87.e4d4c1e2.js"><link rel="prefetch" href="/cc/assets/js/88.3d0e10eb.js"><link rel="prefetch" href="/cc/assets/js/9.11579874.js"><link rel="prefetch" href="/cc/assets/js/90.b4a5a744.js"><link rel="prefetch" href="/cc/assets/js/91.597a64d6.js"><link rel="prefetch" href="/cc/assets/js/92.e85fb039.js"><link rel="prefetch" href="/cc/assets/js/93.2a0367e5.js"><link rel="prefetch" href="/cc/assets/js/94.80ac0f6e.js"><link rel="prefetch" href="/cc/assets/js/95.696b20af.js"><link rel="prefetch" href="/cc/assets/js/96.c3a57ecc.js"><link rel="prefetch" href="/cc/assets/js/97.8a34430f.js"><link rel="prefetch" href="/cc/assets/js/98.bfe59f28.js"><link rel="prefetch" href="/cc/assets/js/99.df9f4dfe.js">
+    <link rel="stylesheet" href="/cc/assets/css/0.styles.d34e5755.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/cc/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/js/base.html" class="sidebar-link">基础</a></li><li><a href="/cc/skill/web/js/click.html" aria-current="page" class="active sidebar-link">JS 事件</a></li><li><a href="/cc/skill/web/js/array.html" class="sidebar-link">Array 对象</a></li><li><a href="/cc/skill/web/js/string.html" class="sidebar-link">String 对象</a></li><li><a href="/cc/skill/web/js/math.html" class="sidebar-link">Math 对象</a></li><li><a href="/cc/skill/web/js/closure.html" class="sidebar-link">闭包</a></li><li><a href="/cc/skill/web/js/for.html" class="sidebar-link">JS 循环中使用 async、await 的正确姿势</a></li><li><a href="/cc/skill/web/js/regular.html" class="sidebar-link">/skill/web/js/regular.html</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>代码整洁</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/js/clean.html" class="sidebar-link">代码整洁</a></li><li><a href="/cc/skill/web/js/clean-name.html" class="sidebar-link">代码整洁之道 - 命名篇</a></li><li><a href="/cc/skill/web/js/clean-function.html" class="sidebar-link">代码整洁之道 - 函数篇</a></li><li><a href="/cc/skill/web/js/clean-function-reset.html" class="sidebar-link">代码整洁之道 - 重构函数</a></li><li><a href="/cc/skill/web/js/clean-notes.html" class="sidebar-link">代码整洁之道 - 注释篇</a></li></ul></section></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#_1-有哪些事件" class="anchor-item__link" style="margin-left:0;">
+        1. 有哪些事件？
+      </a></li><li class="anchor-item"><a href="#_1-1-鼠标事件" class="anchor-item__link" style="margin-left:20px;">
+        1.1 鼠标事件
+      </a></li><li class="anchor-item"><a href="#_1-2-键盘事件" class="anchor-item__link" style="margin-left:20px;">
+        1.2 键盘事件
+      </a></li><li class="anchor-item"><a href="#_1-3-窗口事件" class="anchor-item__link" style="margin-left:20px;">
+        1.3 窗口事件
+      </a></li><li class="anchor-item"><a href="#_1-4-表单事件" class="anchor-item__link" style="margin-left:20px;">
+        1.4 表单事件
+      </a></li><li class="anchor-item"><a href="#_2-点击事件执行顺序" class="anchor-item__link" style="margin-left:0;">
+        2. 点击事件执行顺序
+      </a></li><li class="anchor-item"><a href="#_3-代码演示" class="anchor-item__link" style="margin-left:0;">
+        3. 代码演示
+      </a></li><li class="anchor-item"><a href="#_3-1-正常事件流" class="anchor-item__link" style="margin-left:20px;">
+        3.1 正常事件流
+      </a></li><li class="anchor-item"><a href="#_3-2-阻止冒泡" class="anchor-item__link" style="margin-left:20px;">
+        3.2 阻止冒泡
+      </a></li><li class="anchor-item"><a href="#_3-3-捕获阶段执行" class="anchor-item__link" style="margin-left:20px;">
+        3.3 捕获阶段执行
+      </a></li><li class="anchor-item"><a href="#_4-事件委托" class="anchor-item__link" style="margin-left:0;">
+        4. 事件委托
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="js-事件"><a href="#js-事件" class="header-anchor">#</a> JS 事件</h1> <h2 id="_1-有哪些事件"><a href="#_1-有哪些事件" class="header-anchor">#</a> 1. 有哪些事件？</h2> <h3 id="_1-1-鼠标事件"><a href="#_1-1-鼠标事件" class="header-anchor">#</a> 1.1 鼠标事件</h3> <table><tr><th>事件名</th> <th>解释</th></tr> <tr><td>onclick</td> <td>点击鼠标时触发此事件</td></tr> <tr><td>ondblclick</td> <td>双击鼠标时触发此事件</td></tr> <tr><td>onmousedown</td> <td>按下鼠标时触发此事件</td></tr> <tr><td>onmouseup</td> <td>鼠标按下后又松开时触发此事件</td></tr> <tr><td>onmouseover</td> <td>当鼠标移动到某个元素上方时触发此事件</td></tr> <tr><td>onmousemove</td> <td>移动鼠标时触发此事件</td></tr> <tr><td>onmouseout</td> <td>当鼠标离开某个元素范围时触发此事件</td></tr></table> <h3 id="_1-2-键盘事件"><a href="#_1-2-键盘事件" class="header-anchor">#</a> 1.2 键盘事件</h3> <table><tr><th>事件名</th> <th>解释</th></tr> <tr><td>onkeypress</td> <td>当按下并松开键盘上的某个键时触发此事件</td></tr> <tr><td>onkeydown</td> <td>当按下键盘上的某个按键时触发此事件</td></tr> <tr><td>onkeyup</td> <td>当放开键盘上的某个按键时触发此事件</td></tr></table> <h3 id="_1-3-窗口事件"><a href="#_1-3-窗口事件" class="header-anchor">#</a> 1.3 窗口事件</h3> <table><tr><th>事件名</th> <th>解释</th></tr> <tr><td>onabort</td> <td>图片在下载过程中被用户中断时触发此事件</td></tr> <tr><td>onbeforeunload</td> <td>当前页面的内容将要被改变时触发此事件</td></tr> <tr><td>onerror</td> <td>出现错误时触发此事件</td></tr> <tr><td>onload</td> <td>页面内容加载完成时触发此事件</td></tr> <tr><td>onmove</td> <td>当移动浏览器的窗口时触发此事件</td></tr> <tr><td>onresize</td> <td>当改变浏览器的窗口大小时触发此事件</td></tr> <tr><td>onscroll</td> <td>当滚动浏览器的滚动条时触发此事件</td></tr> <tr><td>onstop</td> <td>当按下浏览器的停止按钮或者正在下载的文件被中断时触发此事件</td></tr> <tr><td>oncontextmenu</td> <td>当弹出右键上下文菜单时触发此事件</td></tr> <tr><td>onunload</td> <td>改变当前页面时触发此事件</td></tr></table> <h3 id="_1-4-表单事件"><a href="#_1-4-表单事件" class="header-anchor">#</a> 1.4 表单事件</h3> <table><tr><th>事件名</th> <th>解释</th></tr> <tr><td>onblur</td> <td>当前元素失去焦点时触发此事件</td></tr> <tr><td>onchange</td> <td>当前元素失去焦点并且元素的内容发生改变时触发此事件</td></tr> <tr><td>onfocus</td> <td>当某个元素获得焦点时触发此事件</td></tr> <tr><td>onreset</td> <td>当点击表单中的重置按钮时触发此事件</td></tr> <tr><td>onsubmit</td> <td>当提交表单时触发此事件</td></tr></table> <h2 id="_2-点击事件执行顺序"><a href="#_2-点击事件执行顺序" class="header-anchor">#</a> 2. 点击事件执行顺序</h2> <p>总结下来主要就三步：<strong>事件捕获阶段-&gt;事件目标阶段-&gt;事件冒泡阶段</strong></p> <p>点击事件的执行过程，这过程也被称作 <strong>DOM 的事件模型</strong></p> <p>一个点击事件被触发，主要会走以下流程：</p> <ol><li>用户点击某个按钮，即触发点击事件。</li> <li>浏览器从顶层 document 元素发出一个事件流。</li> <li>事件流顺着 DOM 逐层向下查找触发事件的目标元素，这就是常说的事件捕获。</li> <li>如果在查找过程中遇到了相同的事件，比如其它元素也绑定点击事件，那么默认不执行，继续往下找。</li> <li>查找到目标元素后，就会执行目标元素所绑定的事件函数，这也就是常说的事件目标阶段 。</li> <li>到这儿整个点击事件还没有完，浏览器会逆向执行该操作，也就是我们所说的事件冒泡。</li> <li>事件冒泡阶段，默认会触发相同的事件，也就是我们刚刚在事件捕获阶段，遇到相同的事件未执行，因为默认在这个冒泡阶段执行。</li></ol> <h2 id="_3-代码演示"><a href="#_3-代码演示" class="header-anchor">#</a> 3. 代码演示</h2> <h3 id="_3-1-正常事件流"><a href="#_3-1-正常事件流" class="header-anchor">#</a> 3.1 正常事件流</h3> <p>执行子级点击事件，会执行所有的父级点击事件（冒泡）</p> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">#box1</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> #ccc<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">#box2</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">#box3</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>box1<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>box2<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>box3<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token comment">// 获取 3 个元素节点</span>
+  <span class="token keyword">let</span> box1 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'box1'</span><span class="token punctuation">)</span>
+  <span class="token keyword">let</span> box2 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'box2'</span><span class="token punctuation">)</span>
+  <span class="token keyword">let</span> box3 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'box3'</span><span class="token punctuation">)</span>
+  <span class="token comment">// 绑定点击事件</span>
+  box1<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> box1Click<span class="token punctuation">)</span>
+  box2<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> box2Click<span class="token punctuation">)</span>
+  box3<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> box3Click<span class="token punctuation">)</span>
+  <span class="token comment">// 事件处理函数</span>
+  <span class="token keyword">function</span> <span class="token function">box1Click</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'box1 被点击了！'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">function</span> <span class="token function">box2Click</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'box2 被点击了！'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">function</span> <span class="token function">box3Click</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'box3 被点击了！'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <p>点击 box1，输出结果：</p> <ul><li>box1 被点击了！</li></ul> <p>点击 box2，输出结果：</p> <ul><li>box2 被点击了！</li> <li>box1 被点击了！</li></ul> <p>点击 box3，输出结果：</p> <ul><li>box3 被点击了！</li> <li>box2 被点击了！</li> <li>box1 被点击了！</li></ul> <h3 id="_3-2-阻止冒泡"><a href="#_3-2-阻止冒泡" class="header-anchor">#</a> 3.2 阻止冒泡</h3> <p>函数会默认接收一个事件参数，可以调用 stopPropagation()阻止冒泡</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">box3Click</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'e'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+  e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'box3 被点击了！'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-3-捕获阶段执行"><a href="#_3-3-捕获阶段执行" class="header-anchor">#</a> 3.3 捕获阶段执行</h3> <p>在未阻止冒泡的前提下，我们点击 box3，执行顺序依次是：<strong>box3-&gt;box2-&gt;box1</strong><br>
+想要执行的顺序改为：<strong>box1-&gt;box2-&gt;box3</strong></p> <p>想要实现这种情况，我们得先了解 addEventListener 这个函数。</p> <div class="language-js extra-class"><pre class="language-js"><code>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>event<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">,</span> useCapture<span class="token punctuation">)</span>
+</code></pre></div><p>第三个参数 useCapture 接收一个 Boolean 值，它得作用主要如下：</p> <ul><li>true：事件在捕获阶段执行</li> <li>false：默认值，事件在冒泡阶段执行</li></ul> <p>只需要事件函数在捕获阶段执行即可</p> <div class="language-js extra-class"><pre class="language-js"><code>box3<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> box3Click<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 执行顺序就改变了</span>
+<span class="token comment">// box1-&gt;box2-&gt;box3</span>
+</code></pre></div><h2 id="_4-事件委托"><a href="#_4-事件委托" class="header-anchor">#</a> 4. 事件委托</h2> <p><strong>例：</strong><br>
+假如有 100 个 li 标签，我们要给每个 li 标签都添加一个点击事件。如果循环列表，然后分别添加点击事件。这种做法非常消耗内存的</p> <p><strong>思考：</strong>
+这个时候思考一下事件模型：是不是可以利用事件模型中的冒泡来实现这个需求呢？<br>
+将点击事件绑定在 li 标签的父级，当我们点击 li 标签是，在冒泡阶段就会触发 li 标签上一层的点击事件，这也算是变相给 li 标签添加了点击事件</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ul<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token comment">// 事件委托</span>
+  <span class="token keyword">let</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'ul'</span><span class="token punctuation">)</span>
+  ul<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> ulClick<span class="token punctuation">)</span>
+  <span class="token keyword">function</span> <span class="token function">ulClick</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 兼容性处理</span>
+    <span class="token keyword">let</span> event <span class="token operator">=</span> e <span class="token operator">||</span> window<span class="token punctuation">.</span>event
+    <span class="token keyword">let</span> target <span class="token operator">=</span> event<span class="token punctuation">.</span>target <span class="token operator">||</span> event<span class="token punctuation">.</span>srcElement
+    <span class="token comment">// 判断是否匹配目标元素</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token punctuation">.</span>nodeName<span class="token punctuation">.</span>toLocaleLowerCase <span class="token operator">===</span> <span class="token string">'li'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'the content is: '</span><span class="token punctuation">,</span> target<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'li 标签被点击了：'</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="兼容性问题"><a href="#兼容性问题" class="header-anchor">#</a> 兼容性问题</h4> <p>event 兼容性：</p> <ul><li>IE 下：event 对象有 srcElement 属性,但是没有 target 属性。</li> <li>火狐或谷歌下：event 对象有 target 属性,但是没有 srcElement 属性。</li></ul> <p>event || window.event：</p> <ul><li>也是为了兼容 IE</li></ul> <p>阻止冒泡：</p> <ul><li>e.stopPropagation()</li> <li>window.event.cancelBubble = true（兼容 IE）</li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">12/2/2022, 9:12:41 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cc/skill/web/js/base.html" class="prev">
+        基础
+      </a></span> <span class="next"><a href="/cc/skill/web/js/array.html">
+        Array 对象
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/cc/assets/js/app.008eb101.js" defer></script><script src="/cc/assets/js/2.1f85ea53.js" defer></script><script src="/cc/assets/js/89.33b37428.js" defer></script>
+  </body>
+</html>
