@@ -141,6 +141,12 @@ module.exports = {
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
               children: ['/skill/web/vue3/common']
+            },
+            {
+              title: 'Mock',
+              collapsable: false,
+              sidebarDepth: 0,
+              path: '/skill/web/vue3/mock'
             }
           ]
         },
