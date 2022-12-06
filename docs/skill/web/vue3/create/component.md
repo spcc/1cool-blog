@@ -1742,7 +1742,7 @@ npm i driver.js@0.9.8
 
 2. 在 `components/guide/index.vue` 中初始化 `driiver`
 
-:::details
+:::details 点击查看代码
 
 ```vue
 <script setup>
