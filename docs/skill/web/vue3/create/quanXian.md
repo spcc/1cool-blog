@@ -1,7 +1,5 @@
 # 第七章：权限架构处理之用户权限处理
 
-
-
 ## 7-01：开篇
 
 在处理完成了 **个人中心**之后， 那么接下来我们就需要来处理 **用户** 相关的模块了
@@ -24,9 +22,7 @@
 6. 用户删除
 7. 用户角色分配（需要在完成角色列表之后处理）
 
-那么明确好了这样的内容之后，接下来我们就进入到  **员工管理** 模块的开发之中
-
-
+那么明确好了这样的内容之后，接下来我们就进入到 **员工管理** 模块的开发之中
 
 ## 7-02：用户列表分页展示
 
@@ -41,7 +37,7 @@
 
    ```js
    import request from '@/utils/request'
-   
+
    /**
     * 获取用户列表数据
     */
@@ -51,7 +47,6 @@
        params: data
      })
    }
-   
    ```
 
 2. 在 `user-manage` 中获取对应数据
@@ -61,7 +56,7 @@
    import { ref } from 'vue'
    import { getUserManageList } from '@/api/user-manage'
    import { watchSwitchLang } from '@/utils/i18n'
-   
+
    // 数据相关
    const tableData = ref([])
    const total = ref(0)
@@ -89,7 +84,9 @@
      <div class="user-manage-container">
        <el-card class="header">
          <div>
-           <el-button type="primary"> {{ $t('msg.excel.importExcel') }}</el-button>
+           <el-button type="primary">
+             {{ $t('msg.excel.importExcel') }}</el-button
+           >
            <el-button type="success">
              {{ $t('msg.excel.exportExcel') }}
            </el-button>
@@ -143,7 +140,7 @@
              </template>
            </el-table-column>
          </el-table>
-   
+
          <el-pagination
            class="pagination"
            @size-change="handleSizeChange"
@@ -158,12 +155,12 @@
        </el-card>
      </div>
    </template>
-   
+
    <script setup>
    import { ref } from 'vue'
    import { getUserManageList } from '@/api/user-manage'
    import { watchSwitchLang } from '@/utils/i18n'
-   
+
    // 数据相关
    const tableData = ref([])
    const total = ref(0)
@@ -181,7 +178,7 @@
    getListData()
    // 监听语言切换
    watchSwitchLang(getListData)
-   
+
    // 分页相关
    /**
     * size 改变触发
@@ -190,7 +187,7 @@
      size.value = currentSize
      getListData()
    }
-   
+
    /**
     * 页码改变触发
     */
@@ -199,7 +196,7 @@
      getListData()
    }
    </script>
-   
+
    <style lang="scss" scoped>
    .user-manage-container {
      .header {
@@ -211,21 +208,18 @@
        height: 60px;
        border-radius: 50%;
      }
-   
+
      ::v-deep .el-tag {
        margin-right: 6px;
      }
-   
+
      .pagination {
        margin-top: 20px;
        text-align: center;
      }
    }
    </style>
-   
    ```
-
-   
 
 ## 7-03：全局属性处理时间展示问题
 
@@ -234,29 +228,29 @@
 1. 局部过滤器被完全删除
 2. 全局过滤器虽然被移除，但是可以使用 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 进行替代
 
-那么在列表中的时间处理部分，在 `vue2` 时代通常我们都是通过 **全局过滤器** 来进行实现的，所以在 `vue3` 中我们就顺理成章的通过  [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 替代实现
+那么在列表中的时间处理部分，在 `vue2` 时代通常我们都是通过 **全局过滤器** 来进行实现的，所以在 `vue3` 中我们就顺理成章的通过 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 替代实现
 
 1. 时间处理部分我们通过 [Day.js](https://day.js.org/) 进行处理
 
-2. 下载 [Day.js](https://day.js.org/) 
+2. 下载 [Day.js](https://day.js.org/)
 
    ```
    npm i dayjs@1.10.6
    ```
 
-3. 创建 `src/filter` 文件夹，用于定义 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 
+3. 创建 `src/filter` 文件夹，用于定义 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties)
 
    ```js
    import dayjs from 'dayjs'
-   
+
    const dateFilter = (val, format = 'YYYY-MM-DD') => {
      if (!isNaN(val)) {
        val = parseInt(val)
      }
-   
+
      return dayjs(val).format(format)
    }
-   
+
    export default app => {
      app.config.globalProperties.$filters = {
        dateFilter
@@ -269,7 +263,7 @@
    ```js
    // filter
    import installFilter from '@/filters'
-   
+
    installFilter(app)
    ```
 
@@ -277,13 +271,11 @@
 
    ```html
    <el-table-column :label="$t('msg.excel.openTime')">
-             <template #default="{ row }">
-               {{ $filters.dateFilter(row.openTime) }}
-             </template>
-           </el-table-column>
+     <template #default="{ row }">
+       {{ $filters.dateFilter(row.openTime) }}
+     </template>
+   </el-table-column>
    ```
-
-   
 
 ## 7-04：excel 导入原理与实现分析
 
@@ -291,9 +283,9 @@
 
 对于 **excel 导入** 首先我们先来明确一下它的业务流程：
 
-1. 点击  **excel 导入** 按钮进入  **excel 导入页面**
+1. 点击 **excel 导入** 按钮进入 **excel 导入页面**
 2. 页面提供了两种导入形式
-   1. 点击按钮上传 `excel` 
+   1. 点击按钮上传 `excel`
    2. 把 `excel` 拖入指定区域
 3. 选中文件，进行两步操作
    1. 解析 `excel` 数据
@@ -320,7 +312,7 @@
 
 ## 7-05：业务落地：提供两种文件导入形式
 
- `excel` 页面我们在之前已经创建过了，就是 `views/import/index` 。
+`excel` 页面我们在之前已经创建过了，就是 `views/import/index` 。
 
 所以此处，我们只需要在按钮处完成页面跳转即可，在 `user-manage` 中：
 
@@ -348,7 +340,7 @@ const onImportExcelClick = () => {
    <template>
      <upload-excel></upload-excel>
    </template>
-   
+
    <script setup>
    import UploadExcel from '@/components/UploadExcel'
    </script>
@@ -369,7 +361,7 @@ const onImportExcelClick = () => {
            {{ $t('msg.uploadExcel.upload') }}
          </el-button>
        </div>
-   
+
        <input
          ref="excelUploadInput"
          class="excel-upload-input"
@@ -389,11 +381,11 @@ const onImportExcelClick = () => {
        </div>
      </div>
    </template>
-   
+
    <script setup>
    import {} from 'vue'
    </script>
-   
+
    <style lang="scss" scoped>
    .upload-excel {
      display: flex;
@@ -424,14 +416,11 @@ const onImportExcelClick = () => {
      }
    }
    </style>
-   
    ```
-
-
 
 ## 7-06：业务落地：文件选择之后的数据解析处理
 
-那么接下来我们来处理整个业务中最核心的一块内容 **选中文件之后，解析 `excel` 数据** 
+那么接下来我们来处理整个业务中最核心的一块内容 **选中文件之后，解析 `excel` 数据**
 
 解析的方式根据我们的导入形式的不同也可以分为两种：
 
@@ -448,7 +437,7 @@ const onImportExcelClick = () => {
    npm i xlsx@0.17.0
    ```
 
- [xlsx](https://www.npmjs.com/package/xlsx) 安装完成之后，接下来我们就可以来去实现对应代码了：
+[xlsx](https://www.npmjs.com/package/xlsx) 安装完成之后，接下来我们就可以来去实现对应代码了：
 
 ```vue
 <script setup>
@@ -539,8 +528,6 @@ const generateData = excelData => {
 </script>
 ```
 
-
-
 `getHeaderRow` 为 `xlsx` 解析表头数据的通用方法，直接使用即可
 
 ```js
@@ -564,10 +551,7 @@ export const getHeaderRow = sheet => {
   }
   return headers
 }
-
 ```
-
- 
 
 在 `import` 组件中传入 `onSuccess` 事件，获取解析成功之后的 `excel` 数据
 
@@ -585,11 +569,9 @@ import UploadExcel from '@/components/UploadExcel'
 const onSuccess = excelData => {
   console.log(excelData)
 }
-</script>、
-
+</script>
+、
 ```
-
-
 
 ## 7-07：业务落地：文件拖入之后的数据解析处理
 
@@ -649,8 +631,6 @@ export const isExcel = file => {
 }
 ```
 
-
-
 ## 7-08：业务落地：传递解析后的 excel 数据
 
 那么到现在我们已经处理好了 `excel` 的数据解析操作。
@@ -663,7 +643,7 @@ export const isExcel = file => {
    /**
     * 批量导入
     */
-   export const userBatchImport = (data) => {
+   export const userBatchImport = data => {
      return request({
        url: '/user-manage/batch/import',
        method: 'POST',
@@ -691,7 +671,6 @@ export const isExcel = file => {
      角色: 'role',
      开通时间: 'openTime'
    }
-   
    ```
 
 5. 创建数据解析方法，生成新数组
@@ -730,8 +709,6 @@ export const isExcel = file => {
    }
    ```
 
-
-
 ## 7-09：业务落地：处理剩余 bug
 
 截止到目前整个 `excel` 上传我们就已经处理完成了，只不过目前还存在两个小 bug 需要处理：
@@ -751,7 +728,7 @@ export const isExcel = file => {
    /**
     * 解析 excel 导入的时间格式
     */
-   export const formatDate = (numb) => {
+   export const formatDate = numb => {
      const time = new Date((numb - 1) * 24 * 3600000 + 1)
      time.setYear(time.getFullYear() - 70)
      const year = time.getFullYear() + ''
@@ -765,7 +742,6 @@ export const isExcel = file => {
        (date < 10 ? '0' + date : date)
      )
    }
-   
    ```
 
 2. 在 `generateData` 中针对 `openTime` 进行单独处理
@@ -793,7 +769,7 @@ export const isExcel = file => {
 
 出现该问题的原因是因为：**`appmain` 中使用 `keepAlive` 进行了组件缓存**。
 
-解决的方案也很简单，只需要：**监听 [onActivated](https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html#activated) 事件，重新获取数据即可** 
+解决的方案也很简单，只需要：**监听 [onActivated](https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html#activated) 事件，重新获取数据即可**
 
 在 `user-manage` 中：
 
@@ -803,8 +779,6 @@ import { ref, onActivated } from 'vue'
 // 处理导入用户后数据不重新加载的问题
 onActivated(getListData)
 ```
-
-
 
 ## 7-10：excel 导入功能总结
 
@@ -831,7 +805,7 @@ onActivated(getListData)
    /**
     * 删除指定数据
     */
-   export const deleteUser = (id) => {
+   export const deleteUser = id => {
      return request({
        url: `/user-manage/detele/${id}`
      })
@@ -841,9 +815,9 @@ onActivated(getListData)
 2. 在 `views/user-manage` 中调用删除接口接口
 
    ```html
-   <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{
-                 $t('msg.excel.remove')
-               }}</el-button>
+   <el-button type="danger" size="mini" @click="onRemoveClick(row)"
+     >{{ $t('msg.excel.remove') }}</el-button
+   >
    ```
 
    ```js
@@ -868,8 +842,6 @@ onActivated(getListData)
    }
    ```
 
-
-
 ## 7-12：excel 导出原理与实现分析
 
 对于 `excel` 导出而言我们还是先来分析一下它的业务逻辑：
@@ -889,8 +861,6 @@ onActivated(getListData)
 2. 处理弹出层相关的业务
 3. 点击导出按钮，将 `json` 结构数据转化为 `excel` 数据，并下载（核心）
 
-
-
 ## 7-13：业务落地：Export2Excel 组件
 
 那么首先我们先去创建 `excel` 弹出层组件 `Export2Excel `
@@ -905,9 +875,7 @@ onActivated(getListData)
        @close="closed"
        width="30%"
      >
-       <el-input
-         :placeholder="$t('msg.excel.placeholder')"
-       ></el-input>
+       <el-input :placeholder="$t('msg.excel.placeholder')"></el-input>
        <template #footer>
          <span class="dialog-footer">
            <el-button @click="closed">{{ $t('msg.excel.close') }}</el-button>
@@ -918,10 +886,10 @@ onActivated(getListData)
        </template>
      </el-dialog>
    </template>
-   
+
    <script setup>
    import { defineProps, defineEmits } from 'vue'
-   
+
    defineProps({
      modelValue: {
        type: Boolean,
@@ -929,14 +897,14 @@ onActivated(getListData)
      }
    })
    const emits = defineEmits(['update:modelValue'])
-   
+
    /**
     * 导出按钮点击事件
     */
    const onConfirm = async () => {
      closed()
    }
-   
+
    /**
     * 关闭
     */
@@ -944,7 +912,6 @@ onActivated(getListData)
      emits('update:modelValue', false)
    }
    </script>
-   
    ```
 
 2. 在 `user-manage` 中进行导入 `dialog` 组件
@@ -953,7 +920,7 @@ onActivated(getListData)
 
       ```html
       <el-button type="success" @click="onToExcelClick">
-      	{{ $t('msg.excel.exportExcel') }}
+        {{ $t('msg.excel.exportExcel') }}
       </el-button>
       ```
 
@@ -976,8 +943,6 @@ onActivated(getListData)
       }
       ```
 
-      
-
 ## 7-14：业务落地：导出前置业务处理
 
 那么这一小节我们来处理一些实现 `excel` 导出时的前置任务，具体有：
@@ -991,9 +956,9 @@ onActivated(getListData)
 
    ```html
    <el-input
-         v-model="excelName"
-         :placeholder="$t('msg.excel.placeholder')"
-       ></el-input>
+     v-model="excelName"
+     :placeholder="$t('msg.excel.placeholder')"
+   ></el-input>
    ```
 
 2. 指定默认文件名
@@ -1008,8 +973,6 @@ onActivated(getListData)
      excelName.value = exportDefaultName
    })
    ```
-
-
 
 **定义获取全部用户列表接口，并调用：**
 
@@ -1029,16 +992,14 @@ onActivated(getListData)
 2. 调用接口数据，并指定 `loading`
 
    ```html
-   <el-button type="primary" @click="onConfirm" :loading="loading">{{
-   	$t('msg.excel.confirm')
-   }}</el-button>
+   <el-button type="primary" @click="onConfirm" :loading="loading"
+     >{{ $t('msg.excel.confirm') }}</el-button
+   >
    ```
-
-   
 
    ```js
    import { getUserManageAllList } from '@/api/user-manage'
-   
+
    /**
     * 导出按钮点击事件
     */
@@ -1046,10 +1007,10 @@ onActivated(getListData)
    const onConfirm = async () => {
      loading.value = true
      const allUser = (await getUserManageAllList()).list
-   
+
      closed()
    }
-   
+
    /**
     * 关闭
     */
@@ -1058,8 +1019,6 @@ onActivated(getListData)
      emits('update:modelValue', false)
    }
    ```
-
-   
 
 ## 7-15：业务落地：实现 excel 导出逻辑
 
@@ -1077,15 +1036,15 @@ onActivated(getListData)
 那么有了 `Export2Excel.js` 的代码之后 ，接下来我们还需要导入两个依赖库：
 
 1.  [xlsx](https://www.npmjs.com/package/xlsx) （已下载）：`excel` 解析器和编译器
-2. [file-saver](https://www.npmjs.com/package/file-saver)：文件下载工具，通过 `npm i file-saver@2.0.5` 下载
+2.  [file-saver](https://www.npmjs.com/package/file-saver)：文件下载工具，通过 `npm i file-saver@2.0.5` 下载
 
 那么一切准备就绪，我们去实现 `excel` 导出功能：
 
-1. 动态导入 `Export2Excel.js` 
+1. 动态导入 `Export2Excel.js`
 
    ```js
    // 导入工具包
-     const excel = await import('@/utils/Export2Excel')
+   const excel = await import('@/utils/Export2Excel')
    ```
 
 2. 因为从服务端获取到的为 `json 数组对象` 结构，但是导出时的数据需要为 **二维数组**，所以我们需要有一个方法来把 **`json` 结构转化为 二维数组**
@@ -1118,7 +1077,7 @@ onActivated(getListData)
             // 角色特殊处理
             if (headers[key] === 'role') {
               const roles = item[headers[key]]
-      
+
               return JSON.stringify(roles.map(role => role.title))
             }
             return item[headers[key]]
@@ -1131,28 +1090,26 @@ onActivated(getListData)
 
    ```js
    import { USER_RELATIONS } from './Export2ExcelConstants'
-   
+
    const data = formatJson(USER_RELATIONS, allUser)
    ```
 
 5. 调用 `export_json_to_excel` 方法，完成 `excel` 导出
 
    ```js
-     excel.export_json_to_excel({
-       // excel 表头
-       header: Object.keys(USER_RELATIONS),
-       // excel 数据（二维数组结构）
-       data,
-       // 文件名称
-       filename: excelName.value || exportDefaultName,
-       // 是否自动列宽
-       autoWidth: true,
-       // 文件类型
-       bookType: 'xlsx'
-     })
+   excel.export_json_to_excel({
+     // excel 表头
+     header: Object.keys(USER_RELATIONS),
+     // excel 数据（二维数组结构）
+     data,
+     // 文件名称
+     filename: excelName.value || exportDefaultName,
+     // 是否自动列宽
+     autoWidth: true,
+     // 文件类型
+     bookType: 'xlsx'
+   })
    ```
-
-
 
 ## 7-16：业务落地：excel 导出时的时间逻辑处理
 
@@ -1168,14 +1125,12 @@ onActivated(getListData)
 
    ```js
    // 时间特殊处理
-         if (headers[key] === 'openTime') {
-           return dateFormat(item[headers[key]])
-         }
+   if (headers[key] === 'openTime') {
+     return dateFormat(item[headers[key]])
+   }
    ```
 
-
-
-## 7-17：excel  导出功能总结
+## 7-17：excel 导出功能总结
 
 那么到这里我们的整个 `excel` 导出就算是实现完成了。
 
@@ -1192,8 +1147,6 @@ onActivated(getListData)
 其中 **将 `json` 结构数据转化为 `excel` 数据** 部分因为有通用的实现方式，所以我们没有必要进行手动的代码书写，毕竟 **“程序猿是最懒的群体嘛”**
 
 但是如果大家想要了解一下这个业务逻辑中所进行的事情，我们也对代码进行了完整的备注，大家可以直接进行查看
-
-
 
 ## 7-18：局部打印详情原理与实现分析
 
@@ -1218,7 +1171,7 @@ onActivated(getListData)
 
 1. 获取员工详情数据
 2. 在员工详情页面，渲染详情数据
-3. 利用  [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 进行局部打印
+3. 利用 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 进行局部打印
 
 ## 7-19：业务落地：获取展示数据
 
@@ -1230,7 +1183,7 @@ onActivated(getListData)
    /**
     * 获取用户详情
     */
-   export const userDetail = (id) => {
+   export const userDetail = id => {
      return request({
        url: `/user-manage/detail/${id}`
      })
@@ -1244,14 +1197,14 @@ onActivated(getListData)
    import { userDetail } from '@/api/user-manage'
    import { watchSwitchLang } from '@/utils/i18n'
    import { defineProps, ref } from 'vue'
-   
+
    const props = defineProps({
      id: {
        type: String,
        required: true
      }
    })
-   
+
    // 数据相关
    const detailData = ref({})
    const getUserDetail = async () => {
@@ -1282,23 +1235,13 @@ onActivated(getListData)
 5. 在 `views/user-manage` 中传递用户 `id`
 
    ```vue
-   <el-button
-       type="primary"
-       size="mini"
-       @click="onShowClick(row._id)"
-   >
+   <el-button type="primary" size="mini" @click="onShowClick(row._id)">
    	{{ $t('msg.excel.show') }}
    </el-button>
-   
-   /**
-    * 查看按钮点击事件
-    */
-   const onShowClick = id => {
-     router.push(`/user/info/${id}`)
-   }
+
+   /** * 查看按钮点击事件 */ const onShowClick = id => {
+   router.push(`/user/info/${id}`) }
    ```
-
-
 
 ## 7-20：业务落地：渲染详情结构
 
@@ -1439,10 +1382,7 @@ onActivated(getListData)
   }
 }
 </style>
-
 ```
-
-
 
 ## 7-21：业务落地：局部打印功能实现
 
@@ -1460,7 +1400,7 @@ npm i vue3-print-nb@0.1.4
    <el-button type="primary" :loading="printLoading">{{
            $t('msg.userInfo.print')
          }}</el-button>
-   
+
    // 打印相关
    const printLoading = ref(false)
    ```
@@ -1487,7 +1427,7 @@ npm i vue3-print-nb@0.1.4
 3. 指定打印区域 `id` 匹配
 
    ```html
-   <div id="userInfoBox" class="user-info-box">
+   <div id="userInfoBox" class="user-info-box"></div>
    ```
 
 4. [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 以指令的形式存在，所以我们需要创建对应指令
@@ -1498,11 +1438,10 @@ npm i vue3-print-nb@0.1.4
 
    ```js
    import print from 'vue3-print-nb'
-   
+
    export default app => {
      app.use(print)
    }
-   
    ```
 
 7. 在 `main.js` 中导入该指令
@@ -1515,12 +1454,10 @@ npm i vue3-print-nb@0.1.4
 8. 将打印指令挂载到 `el-button` 中
 
    ```html
-     <el-button type="primary" v-print="printObj" :loading="printLoading">{{
-           $t('msg.userInfo.print')
-         }}</el-button>
+   <el-button type="primary" v-print="printObj" :loading="printLoading"
+     >{{ $t('msg.userInfo.print') }}</el-button
+   >
    ```
-
-   
 
 ## 7-22：局部打印功能总结
 
@@ -1529,13 +1466,11 @@ npm i vue3-print-nb@0.1.4
 1. 以表格的形式展示员工详情
 2. 打印详情表格
 
-其中第一部分使用  [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件配合一些小技巧即可实现
+其中第一部分使用 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件配合一些小技巧即可实现
 
 而局部打印功能则需要借助 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 这个第三方库进行实现
 
 所以整个局部打印功能应该并不算复杂，掌握这两部分即可轻松实现
-
-
 
 ## 7-23：总结
 
@@ -1557,4 +1492,3 @@ npm i vue3-print-nb@0.1.4
 但是这里有一点大家不要忘记，我们在本章开篇的时候说过，**员工管理** 是 **用户权限中的一个前置！** 比如我们的分配角色功能就需要配合其他的业务实现，那么具体的整个用户权限都包含了哪些内容呢？
 
 想要知道快来看下一章节吧！
-
