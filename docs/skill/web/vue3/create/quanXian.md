@@ -1,8 +1,4 @@
-# 第七章：权限架构处理之用户权限处理
-
-## 7-01：开篇
-
-在处理完成了 **个人中心**之后， 那么接下来我们就需要来处理 **用户** 相关的模块了
+# 第七章：权限架构处理 - 用户权限处理
 
 整个用户相关的模块分为三部分：
 
@@ -10,9 +6,7 @@
 2. 角色列表
 3. 权限列表
 
-这三部分的内容我们会分成两个大章来进行处理。
-
-那么这一大章我们要来处理的就是 **员工管理** 模块的内容，整个 **员工管理** 模块可以分为以下功能：
+这一大章我们要来处理的就是 **员工管理** 模块的内容，整个 **员工管理** 模块可以分为以下功能：
 
 1. 用户列表分页展示
 2. `excel` 导入用户
@@ -22,262 +16,250 @@
 6. 用户删除
 7. 用户角色分配（需要在完成角色列表之后处理）
 
-那么明确好了这样的内容之后，接下来我们就进入到 **员工管理** 模块的开发之中
+---
 
-## 7-02：用户列表分页展示
+## 1. 用户列表分页展示
 
-首先我们先来处理最基础的 **用户列表分页展示** 功能，整个功能大体可以分为两步：
+1). 获取分页数据
+2). el-table 渲染数据
 
-1. 获取分页数据
-2. 利用 [el-table](https://element-plus.org/zh-CN/component/table.html) 和 [el-pagination](https://element-plus.org/zh-CN/component/pagination.html) 渲染数据
-
-那么下面我们就根据这个步骤进行一个实现即可：
+---
 
 1. 创建 `api/user-manage` 文件，用于定义接口
 
-   ```js
-   import request from '@/utils/request'
+:::details 点击查看代码
 
-   /**
-    * 获取用户列表数据
-    */
-   export const getUserManageList = data => {
-     return request({
-       url: '/user-manage/list',
-       params: data
-     })
-   }
-   ```
+```js
+import request from '@/utils/request'
 
-2. 在 `user-manage` 中获取对应数据
+/**
+ * 获取用户列表数据
+ */
+export const getUserManageList = data => {
+  return request({
+    url: '/user-manage/list',
+    params: data
+  })
+}
+```
 
-   ```vue
-   <script setup>
-   import { ref } from 'vue'
-   import { getUserManageList } from '@/api/user-manage'
-   import { watchSwitchLang } from '@/utils/i18n'
+:::
 
-   // 数据相关
-   const tableData = ref([])
-   const total = ref(0)
-   const page = ref(1)
-   const size = ref(2)
-   // 获取数据的方法
-   const getListData = async () => {
-     const result = await getUserManageList({
-       page: page.value,
-       size: size.value
-     })
-     tableData.value = result.list
-     total.value = result.total
-   }
-   getListData()
-   // 监听语言切换
-   watchSwitchLang(getListData)
-   </script>
-   ```
+2. 在 `user-manage/index.vue` 中获取对应数据并渲染视图
 
-3. 根据数据利用 [el-table](https://element-plus.org/zh-CN/component/table.html) 和 [el-pagination](https://element-plus.org/zh-CN/component/pagination.html) 渲染视图
+:::details 点击查看代码
 
-   ```vue
-   <template>
-     <div class="user-manage-container">
-       <el-card class="header">
-         <div>
-           <el-button type="primary">
-             {{ $t('msg.excel.importExcel') }}</el-button
-           >
-           <el-button type="success">
-             {{ $t('msg.excel.exportExcel') }}
-           </el-button>
-         </div>
-       </el-card>
-       <el-card>
-         <el-table :data="tableData" border style="width: 100%">
-           <el-table-column label="#" type="index" />
-           <el-table-column prop="username" :label="$t('msg.excel.name')">
-           </el-table-column>
-           <el-table-column prop="mobile" :label="$t('msg.excel.mobile')">
-           </el-table-column>
-           <el-table-column :label="$t('msg.excel.avatar')" align="center">
-             <template v-slot="{ row }">
-               <el-image
-                 class="avatar"
-                 :src="row.avatar"
-                 :preview-src-list="[row.avatar]"
-               ></el-image>
-             </template>
-           </el-table-column>
-           <el-table-column :label="$t('msg.excel.role')">
-             <template #default="{ row }">
-               <div v-if="row.role && row.role.length > 0">
-                 <el-tag v-for="item in row.role" :key="item.id" size="mini">{{
-                   item.title
-                 }}</el-tag>
-               </div>
-               <div v-else>
-                 <el-tag size="mini">{{ $t('msg.excel.defaultRole') }}</el-tag>
-               </div>
-             </template>
-           </el-table-column>
-           <el-table-column prop="openTime" :label="$t('msg.excel.openTime')">
-           </el-table-column>
-           <el-table-column
-             :label="$t('msg.excel.action')"
-             fixed="right"
-             width="260"
-           >
-             <template #default>
-               <el-button type="primary" size="mini">{{
-                 $t('msg.excel.show')
-               }}</el-button>
-               <el-button type="info" size="mini">{{
-                 $t('msg.excel.showRole')
-               }}</el-button>
-               <el-button type="danger" size="mini">{{
-                 $t('msg.excel.remove')
-               }}</el-button>
-             </template>
-           </el-table-column>
-         </el-table>
+```vue
+<template>
+  <div class="user-manage-container">
+    <el-card class="header">
+      <div>
+        <el-button type="primary"> {{ $t('msg.excel.importExcel') }}</el-button>
+        <el-button type="success">
+          {{ $t('msg.excel.exportExcel') }}
+        </el-button>
+      </div>
+    </el-card>
+    <el-card>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column label="#" type="index" />
+        <el-table-column prop="username" :label="$t('msg.excel.name')">
+        </el-table-column>
+        <el-table-column prop="mobile" :label="$t('msg.excel.mobile')">
+        </el-table-column>
+        <el-table-column :label="$t('msg.excel.avatar')" align="center">
+          <template v-slot="{ row }">
+            <el-image
+              class="avatar"
+              :src="row.avatar"
+              :preview-src-list="[row.avatar]"
+            ></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('msg.excel.role')">
+          <template #default="{ row }">
+            <div v-if="row.role && row.role.length > 0">
+              <el-tag v-for="item in row.role" :key="item.id" size="mini">{{
+                item.title
+              }}</el-tag>
+            </div>
+            <div v-else>
+              <el-tag size="mini">{{ $t('msg.excel.defaultRole') }}</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="openTime" :label="$t('msg.excel.openTime')">
+        </el-table-column>
+        <el-table-column
+          :label="$t('msg.excel.action')"
+          fixed="right"
+          width="260"
+        >
+          <template #default>
+            <el-button type="primary" size="mini">{{
+              $t('msg.excel.show')
+            }}</el-button>
+            <el-button type="info" size="mini">{{
+              $t('msg.excel.showRole')
+            }}</el-button>
+            <el-button type="danger" size="mini">{{
+              $t('msg.excel.remove')
+            }}</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
 
-         <el-pagination
-           class="pagination"
-           @size-change="handleSizeChange"
-           @current-change="handleCurrentChange"
-           :current-page="page"
-           :page-sizes="[2, 5, 10, 20]"
-           :page-size="size"
-           layout="total, sizes, prev, pager, next, jumper"
-           :total="total"
-         >
-         </el-pagination>
-       </el-card>
-     </div>
-   </template>
+      <el-pagination
+        class="pagination"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page"
+        :page-sizes="[2, 5, 10, 20]"
+        :page-size="size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
+    </el-card>
+  </div>
+</template>
 
-   <script setup>
-   import { ref } from 'vue'
-   import { getUserManageList } from '@/api/user-manage'
-   import { watchSwitchLang } from '@/utils/i18n'
+<script setup>
+import { ref } from 'vue'
+import { getUserManageList } from '@/api/user-manage'
+import { watchSwitchLang } from '@/utils/i18n'
 
-   // 数据相关
-   const tableData = ref([])
-   const total = ref(0)
-   const page = ref(1)
-   const size = ref(2)
-   // 获取数据的方法
-   const getListData = async () => {
-     const result = await getUserManageList({
-       page: page.value,
-       size: size.value
-     })
-     tableData.value = result.list
-     total.value = result.total
-   }
-   getListData()
-   // 监听语言切换
-   watchSwitchLang(getListData)
+// 数据相关
+const tableData = ref([])
+const total = ref(0)
+const page = ref(1)
+const size = ref(2)
+// 获取数据的方法
+const getListData = async () => {
+  const result = await getUserManageList({
+    page: page.value,
+    size: size.value
+  })
+  tableData.value = result.list
+  total.value = result.total
+}
+getListData()
+// 监听语言切换
+watchSwitchLang(getListData)
 
-   // 分页相关
-   /**
-    * size 改变触发
-    */
-   const handleSizeChange = currentSize => {
-     size.value = currentSize
-     getListData()
-   }
+// 分页相关
+/**
+ * size 改变触发
+ */
+const handleSizeChange = currentSize => {
+  size.value = currentSize
+  getListData()
+}
 
-   /**
-    * 页码改变触发
-    */
-   const handleCurrentChange = currentPage => {
-     page.value = currentPage
-     getListData()
-   }
-   </script>
+/**
+ * 页码改变触发
+ */
+const handleCurrentChange = currentPage => {
+  page.value = currentPage
+  getListData()
+}
+</script>
 
-   <style lang="scss" scoped>
-   .user-manage-container {
-     .header {
-       margin-bottom: 22px;
-       text-align: right;
-     }
-     ::v-deep .avatar {
-       width: 60px;
-       height: 60px;
-       border-radius: 50%;
-     }
+<style lang="scss" scoped>
+.user-manage-container {
+  .header {
+    margin-bottom: 22px;
+    text-align: right;
+  }
+  ::v-deep .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
 
-     ::v-deep .el-tag {
-       margin-right: 6px;
-     }
+  ::v-deep .el-tag {
+    margin-right: 6px;
+  }
 
-     .pagination {
-       margin-top: 20px;
-       text-align: center;
-     }
-   }
-   </style>
-   ```
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+</style>
+```
 
-## 7-03：全局属性处理时间展示问题
+:::
 
-在 `Vue3`中取消了 [过滤器的概念](https://v3.cn.vuejs.org/guide/migration/filters.html)，其中：
+## 2. 过滤器 和 全局过滤器
+
+在 `Vue3`中取消了 [过滤器的概念](https://v3-migration.vuejs.org/breaking-changes/filters.html)，其中：
 
 1. 局部过滤器被完全删除
 2. 全局过滤器虽然被移除，但是可以使用 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 进行替代
 
-那么在列表中的时间处理部分，在 `vue2` 时代通常我们都是通过 **全局过滤器** 来进行实现的，所以在 `vue3` 中我们就顺理成章的通过 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties) 替代实现
+## 3. 全局属性处理时间展示问题
 
-1. 时间处理部分我们通过 [Day.js](https://day.js.org/) 进行处理
+1. 时间处理部分我们通过 [Day.js](https://dayjs.gitee.io/zh-CN/) 进行处理
 
-2. 下载 [Day.js](https://day.js.org/)
+2. 下载 [Day.js](https://dayjs.gitee.io/zh-CN/)
 
-   ```
-   npm i dayjs@1.10.6
-   ```
+```sh
+npm i dayjs@1.10.6
+```
 
-3. 创建 `src/filter` 文件夹，用于定义 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties)
+3. 创建 `src/filters/index.js` 文件夹，用于定义 [全局属性](https://v3.cn.vuejs.org/api/application-config.html#globalproperties)
 
-   ```js
-   import dayjs from 'dayjs'
+:::details 点击查看代码
 
-   const dateFilter = (val, format = 'YYYY-MM-DD') => {
-     if (!isNaN(val)) {
-       val = parseInt(val)
-     }
+```js
+import dayjs from 'dayjs'
 
-     return dayjs(val).format(format)
-   }
+const dateFilter = (val, format = 'YYYY-MM-DD') => {
+  if (!isNaN(val)) {
+    val = parseInt(val)
+  }
 
-   export default app => {
-     app.config.globalProperties.$filters = {
-       dateFilter
-     }
-   }
-   ```
+  return dayjs(val).format(format)
+}
+
+export default app => {
+  app.config.globalProperties.$filters = {
+    dateFilter
+  }
+}
+```
+
+:::
 
 4. 在 `main.js` 中导入
 
-   ```js
-   // filter
-   import installFilter from '@/filters'
+:::details 点击查看代码
 
-   installFilter(app)
-   ```
+```js
+// filter
+import installFilter from '@/filters'
 
-5. 在 `user-manage` 中使用全局属性处理时间解析
+installFilter(app)
+```
 
-   ```html
-   <el-table-column :label="$t('msg.excel.openTime')">
-     <template #default="{ row }">
-       {{ $filters.dateFilter(row.openTime) }}
-     </template>
-   </el-table-column>
-   ```
+:::
 
-## 7-04：excel 导入原理与实现分析
+5. 在 `user-manage/index.vue` 中使用全局属性处理时间解析
+
+:::details 点击查看代码
+
+```html
+<el-table-column :label="$t('msg.excel.openTime')">
+  <template #default="{ row }">
+    {{ $filters.dateFilter(row.openTime) }}
+  </template>
+</el-table-column>
+```
+
+:::
+
+## 4. excel 导入原理与实现分析
 
 在处理完成这些基础的内容展示之后，接下来我们来看 **excel 导入** 功能
 

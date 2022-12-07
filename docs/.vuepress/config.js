@@ -141,12 +141,6 @@ module.exports = {
               sidebarDepth: 0,
               // path: "/skill/web/vue3/game",
               children: ['/skill/web/vue3/common']
-            },
-            {
-              title: 'Mock',
-              collapsable: false,
-              sidebarDepth: 0,
-              path: '/skill/web/vue3/mock'
             }
           ]
         },
@@ -190,6 +184,12 @@ module.exports = {
           collapsable: true, // 可选的, 默认值是 true,
           sidebarDepth: 0, // 可选的, 默认值是 1
           children: ['/skill/web/vue3/other/package']
+        },
+        {
+          title: 'Mock',
+          collapsable: false,
+          sidebarDepth: 0,
+          path: '/skill/web/vue3/mock'
         }
       ],
 
