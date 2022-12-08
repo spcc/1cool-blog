@@ -1,4 +1,4 @@
-# 第七章：权限架构处理 - 用户权限处理
+# 6.1 权限架构处理 - 用户权限处理
 
 整个用户相关的模块分为三部分：
 
@@ -6,21 +6,23 @@
 2. 角色列表
 3. 权限列表
 
-这一大章我们要来处理的就是 **员工管理** 模块的内容，整个 **员工管理** 模块可以分为以下功能：
+---
 
-1. 用户列表分页展示
-2. `excel` 导入用户
-3. 用户列表导出为 `excel`
-4. 用户详情的表格展示
-5. 用户详情表格打印
-6. 用户删除
-7. 用户角色分配（需要在完成角色列表之后处理）
+**员工管理** 模块可以分为以下功能：
+
+- 用户列表分页展示
+- `excel` 导入用户
+- 用户列表导出为 `excel`
+- 用户详情的表格展示
+- 用户详情表格打印
+- 用户删除
+- 用户角色分配（需要在完成角色列表之后处理）
 
 ---
 
 ## 1. 用户列表分页展示
 
-1). 获取分页数据
+1). 获取分页数据  
 2). el-table 渲染数据
 
 ---
@@ -54,20 +56,20 @@ export const getUserManageList = data => {
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary"> {{ $t('msg.excel.importExcel') }}</el-button>
+        <el-button type="primary"> {{ $t('excel.importExcel') }}</el-button>
         <el-button type="success">
-          {{ $t('msg.excel.exportExcel') }}
+          {{ $t('excel.exportExcel') }}
         </el-button>
       </div>
     </el-card>
     <el-card>
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column label="#" type="index" />
-        <el-table-column prop="username" :label="$t('msg.excel.name')">
+        <el-table-column prop="username" :label="$t('excel.name')">
         </el-table-column>
-        <el-table-column prop="mobile" :label="$t('msg.excel.mobile')">
+        <el-table-column prop="mobile" :label="$t('excel.mobile')">
         </el-table-column>
-        <el-table-column :label="$t('msg.excel.avatar')" align="center">
+        <el-table-column :label="$t('excel.avatar')" align="center">
           <template v-slot="{ row }">
             <el-image
               class="avatar"
@@ -76,7 +78,7 @@ export const getUserManageList = data => {
             ></el-image>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('msg.excel.role')">
+        <el-table-column :label="$t('excel.role')">
           <template #default="{ row }">
             <div v-if="row.role && row.role.length > 0">
               <el-tag v-for="item in row.role" :key="item.id" size="mini">{{
@@ -84,26 +86,22 @@ export const getUserManageList = data => {
               }}</el-tag>
             </div>
             <div v-else>
-              <el-tag size="mini">{{ $t('msg.excel.defaultRole') }}</el-tag>
+              <el-tag size="mini">{{ $t('excel.defaultRole') }}</el-tag>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="openTime" :label="$t('msg.excel.openTime')">
+        <el-table-column prop="openTime" :label="$t('excel.openTime')">
         </el-table-column>
-        <el-table-column
-          :label="$t('msg.excel.action')"
-          fixed="right"
-          width="260"
-        >
+        <el-table-column :label="$t('excel.action')" fixed="right" width="260">
           <template #default>
             <el-button type="primary" size="mini">{{
-              $t('msg.excel.show')
+              $t('excel.show')
             }}</el-button>
             <el-button type="info" size="mini">{{
-              $t('msg.excel.showRole')
+              $t('excel.showRole')
             }}</el-button>
             <el-button type="danger" size="mini">{{
-              $t('msg.excel.remove')
+              $t('excel.remove')
             }}</el-button>
           </template>
         </el-table-column>
@@ -250,7 +248,7 @@ installFilter(app)
 :::details 点击查看代码
 
 ```html
-<el-table-column :label="$t('msg.excel.openTime')">
+<el-table-column :label="$t('excel.openTime')">
   <template #default="{ row }">
     {{ $filters.dateFilter(row.openTime) }}
   </template>
@@ -261,170 +259,146 @@ installFilter(app)
 
 ## 4. excel 导入原理与实现分析
 
-在处理完成这些基础的内容展示之后，接下来我们来看 **excel 导入** 功能
+页面提供了两种导入形式:
 
-对于 **excel 导入** 首先我们先来明确一下它的业务流程：
+- 点击按钮上传 `excel`
+- 拖入指定区域上传 `excel`
 
-1. 点击 **excel 导入** 按钮进入 **excel 导入页面**
-2. 页面提供了两种导入形式
-   1. 点击按钮上传 `excel`
-   2. 把 `excel` 拖入指定区域
-3. 选中文件，进行两步操作
-   1. 解析 `excel` 数据
-   2. 上传解析之后的数据
-4. 上传成功之后，返回 **员工管理（用户列表）** 页面，进行数据展示
+### 4.1 excel 上传跳转页面
 
-所以根据这个业务我们可以看出，整个 `excel` 导入核心的原理部分在于 **选中文件之后，上传成功之前** 的操作，即：
+点击 excel `上传按钮` 完成页面跳转即可，在 `views/user-manage/index.vue` 中：
 
-1. 解析 `excel` 数据（**最重要**）
-2. 上传解析之后的数据
+:::details 点击查看代码
 
-对于解析部分，我们回头再去详细说明，在这里我们只需要明确大的实现流程即可。
+```vue
+<el-button @click="onImportExcelClick">{{ $t('excel.importExcel') }}</el-button>
 
-根据上面所说，整个的实现流程我们也可以很轻松得出：
-
-1. 创建 `excel` 导入页面
-2. 点击 `excel` 导入按钮，进入该页面
-3. 该页面提供两种文件导入形式
-4. 选中文件之后，解析 `excel` 数据（核心）
-5. 上传解析之后的数据
-6. 返回 员工管理（用户列表） 页面
-
-那么明确好了这样的流程之后，接下来我们就可以实现对应的代码了。
-
-## 7-05：业务落地：提供两种文件导入形式
-
-`excel` 页面我们在之前已经创建过了，就是 `views/import/index` 。
-
-所以此处，我们只需要在按钮处完成页面跳转即可，在 `user-manage` 中：
-
-```js
-<el-button type="primary" @click="onImportExcelClick">
-          {{ $t('msg.excel.importExcel') }}</el-button
-        >
-
+<script>
+import { useRouter } from 'vue-router'
 const router = useRouter()
-/**
- * excel 导入点击事件
- */
-const onImportExcelClick = () => {
-  router.push('/user/import')
-}
+
+// excel 导入点击事件
+const onImportExcelClick = () => router.push('/user/import')
+</script>
 ```
 
-这样我们就已经完成了前面两步，那么接下来我们就来实现 **提供两种文件导入形式**
+:::
 
-1. 创建 `components/UploadExcel` 组件，用于处理上传 `excel` 相关的问题
+### 4.2 提供两种文件导入形式
 
-2. 在 `import` 中导入该组件
+1. 创建 `components/UploadExcel/index.vue` 组件，用于处理上传 `excel` 相关的问题
 
-   ```vue
-   <template>
-     <upload-excel></upload-excel>
-   </template>
+2. 在 `/views/import/index.vue` 中导入该组件
 
-   <script setup>
-   import UploadExcel from '@/components/UploadExcel'
-   </script>
-   ```
+:::details 点击查看代码
 
-3. 整个 `UploadExcel` 组件的内容可以分成两部分：
+```vue
+<script setup>
+import UploadExcel from '@/components/UploadExcel'
+</script>
 
-   1. 样式
-   2. 逻辑
+<template>
+  <UploadExcel />
+</template>
+```
 
-4. 那么首先我们先处理样式内容
+:::
 
-   ```vue
-   <template>
-     <div class="upload-excel">
-       <div class="btn-upload">
-         <el-button :loading="loading" type="primary" @click="handleUpload">
-           {{ $t('msg.uploadExcel.upload') }}
-         </el-button>
-       </div>
+3. `components/UploadExcel/index.vue` 处理样式问题
 
-       <input
-         ref="excelUploadInput"
-         class="excel-upload-input"
-         type="file"
-         accept=".xlsx, .xls"
-         @change="handleChange"
-       />
-       <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API -->
-       <div
-         class="drop"
-         @drop.stop.prevent="handleDrop"
-         @dragover.stop.prevent="handleDragover"
-         @dragenter.stop.prevent="handleDragover"
-       >
-         <i class="el-icon-upload" />
-         <span>{{ $t('msg.uploadExcel.drop') }}</span>
-       </div>
-     </div>
-   </template>
+:::details 点击查看代码
 
-   <script setup>
-   import {} from 'vue'
-   </script>
+```vue
+<script setup></script>
 
-   <style lang="scss" scoped>
-   .upload-excel {
-     display: flex;
-     justify-content: center;
-     margin-top: 100px;
-     .excel-upload-input {
-       display: none;
-       z-index: -9999;
-     }
-     .btn-upload,
-     .drop {
-       border: 1px dashed #bbb;
-       width: 350px;
-       height: 160px;
-       text-align: center;
-       line-height: 160px;
-     }
-     .drop {
-       line-height: 60px;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       color: #bbb;
-       i {
-         font-size: 60px;
-         display: block;
-       }
-     }
-   }
-   </style>
-   ```
+<template>
+  <div class="upload-excel">
+    <div class="btn-upload">
+      <el-button :loading="loading" type="primary" @click="handleUpload">
+        {{ $t('uploadExcel.upload') }}
+      </el-button>
+    </div>
 
-## 7-06：业务落地：文件选择之后的数据解析处理
+    <input
+      ref="excelUploadInput"
+      class="excel-upload-input"
+      type="file"
+      accept=".xlsx, .xls"
+      @change="handleChange"
+    />
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API -->
+    <div
+      class="drop"
+      @drop.stop.prevent="handleDrop"
+      @dragover.stop.prevent="handleDragover"
+      @dragenter.stop.prevent="handleDragover"
+    >
+      <i class="el-icon-upload" />
+      <span>{{ $t('uploadExcel.drop') }}</span>
+    </div>
+  </div>
+</template>
 
-那么接下来我们来处理整个业务中最核心的一块内容 **选中文件之后，解析 `excel` 数据**
+<style lang="scss" scoped>
+.upload-excel {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  .excel-upload-input {
+    display: none;
+    z-index: -9999;
+  }
+  .btn-upload,
+  .drop {
+    border: 1px dashed #bbb;
+    width: 350px;
+    height: 160px;
+    text-align: center;
+    line-height: 160px;
+  }
+  .drop {
+    line-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #bbb;
+    i {
+      font-size: 60px;
+      display: block;
+    }
+  }
+}
+</style>
+```
+
+:::
+
+### 4.3 文件选择之后的数据解析处理
+
+`components/UploadExcel/index.vue`
 
 解析的方式根据我们的导入形式的不同也可以分为两种：
 
 1. 文件选择（选择隐藏域）导入
 2. 文件拖拽导入
 
-那么这一小节，我们先来处理第一种。
+---
 
-处理之前我们需要先来做一件事情：
+#### 4.31 文件选择（选择隐藏域）导入
 
-1. 解析 `excel` 数据我们需要使用 [xlsx](https://www.npmjs.com/package/xlsx) ，所以我们需要先下载它
+1. 解析 `excel` 数据我们需要使用 [xlsx](https://www.npmjs.com/package/xlsx)
 
-   ```
-   npm i xlsx@0.17.0
-   ```
+```sh
+npm i xlsx@0.17.0
+```
 
-[xlsx](https://www.npmjs.com/package/xlsx) 安装完成之后，接下来我们就可以来去实现对应代码了：
+2. `components/uploadFile/index.vue`
+
+:::details 点击查看代码
 
 ```vue
 <script setup>
 import XLSX from 'xlsx'
-import { defineProps, ref } from 'vue'
 import { getHeaderRow } from './utils'
 
 const props = defineProps({
@@ -485,7 +459,7 @@ const readerData = rawFile => {
       const firstSheetName = workbook.SheetNames[0]
       // 4. 只读取 Sheet1（第一张表格）的数据
       const worksheet = workbook.Sheets[firstSheetName]
-      // 5. 解析数据表头
+      // 5. 解析数据表头 `getHeaderRow` 为 `xlsx` 解析表头数据的通用方法，直接使用即可
       const header = getHeaderRow(worksheet)
       // 6. 解析数据体
       const results = XLSX.utils.sheet_to_json(worksheet)
@@ -510,7 +484,11 @@ const generateData = excelData => {
 </script>
 ```
 
-`getHeaderRow` 为 `xlsx` 解析表头数据的通用方法，直接使用即可
+:::
+
+3. 新建 `components/uploadFile/utils.js`
+
+:::details 点击查看代码
 
 ```js
 import XLSX from 'xlsx'
@@ -535,7 +513,11 @@ export const getHeaderRow = sheet => {
 }
 ```
 
-在 `import` 组件中传入 `onSuccess` 事件，获取解析成功之后的 `excel` 数据
+:::
+
+4. 在 `import/index.vue` 组件中传入 `onSuccess` 事件，获取解析成功之后的 `excel` 数据
+
+:::details 点击查看代码
 
 ```vue
 <template>
@@ -552,25 +534,30 @@ const onSuccess = excelData => {
   console.log(excelData)
 }
 </script>
-、
 ```
 
-## 7-07：业务落地：文件拖入之后的数据解析处理
+:::
 
-想要了解 **文件拖入**，那么我们就必须要先能够了解 [HTML_Drag_and_Drop（HTML 拖放 API）](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API) 事件，我们这里主要使用到其中三个事件：
+#### 4.32 文件拖入之后的数据解析处理
+
+**文件拖入**: 需要了解[HTML_Drag_and_Drop（HTML 拖放 API）](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API) 事件
+
+主要使用到其中三个事件：
 
 1. [drop (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/Document/drop_event)：当元素或选中的文本在可释放目标上被释放时触发
 2. [dragover (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/Document/dragover_event)：当元素或选中的文本被拖到一个可释放目标上时触发
 3. [dragenter (en-US)](https://developer.mozilla.org/en-US/docs/Web/API/Document/dragenter_event)：当拖拽元素或选中的文本到一个可释放目标时触发
 
-那么明确好了这三个事件之后，我们就可以实现对应的拖入代码逻辑了
+---
+
+1. `components/UploadFile/index.vue`
+
+:::details 点击查看代码
 
 ```vue
 <script setup>
 ...
 import { getHeaderRow, isExcel } from './utils'
-import { ElMessage } from 'element-plus'
-
 ...
 /**
  * 拖拽文本释放时触发
@@ -601,11 +588,15 @@ const handleDragover = e => {
   e.dataTransfer.dropEffect = 'copy'
 }
 
-。。。
+...
 </script>
 ```
 
-在 `utils` 中生成 `isExcel` 方法
+:::
+
+2. 在 `components/UploadFile/utils.js` 中生成 `isExcel` 方法
+
+:::details 点击查看代码
 
 ```js
 export const isExcel = file => {
@@ -613,141 +604,172 @@ export const isExcel = file => {
 }
 ```
 
-## 7-08：业务落地：传递解析后的 excel 数据
+:::
 
-那么到现在我们已经处理好了 `excel` 的数据解析操作。
-
-接下来就可以实现对应的数据上传，完成 `excel` 导入功能了
+### 4.4 传递解析后的 excel 数据
 
 1. 定义 `api/user-manage` 上传接口
 
-   ```js
-   /**
-    * 批量导入
-    */
-   export const userBatchImport = data => {
-     return request({
-       url: '/user-manage/batch/import',
-       method: 'POST',
-       data
-     })
-   }
-   ```
+:::details 点击查看代码
 
-2. 在 `onSuccess` 中调用接口上传数据，但是此处大家要注意两点内容：
+```js
+/**
+ * 批量导入
+ */
+export const userBatchImport = data => {
+  return request({
+    url: '/user-manage/batch/import',
+    method: 'POST',
+    data
+  })
+}
+```
 
-   1. `header` 头不需要上传
-   2. `results` 中 `key` 为中文，我们必须要按照接口要求进行上传
+:::
 
-3. 所以我们需要处理 `results` 中的数据结构
+2. 创建 `import/utils.js` 文件
 
-4. 创建 `import/utils` 文件
+在 `onSuccess` 中调用接口上传数据需注意：
 
-   ```js
-   /**
-    * 导入数据对应表
-    */
-   export const USER_RELATIONS = {
-     姓名: 'username',
-     联系方式: 'mobile',
-     角色: 'role',
-     开通时间: 'openTime'
-   }
-   ```
+- `header` 头不需要上传
+- `results` 中 `key` 为中文，我们必须要按照接口要求进行上传
 
-5. 创建数据解析方法，生成新数组
+所以我们需要处理 `results` 中的数据结构
 
-   ```js
-   /**
-    * 筛选数据
-    */
-   const generateData = results => {
-     const arr = []
-     results.forEach(item => {
-       const userInfo = {}
-       Object.keys(item).forEach(key => {
-         userInfo[USER_RELATIONS[key]] = item[key]
-       })
-       arr.push(userInfo)
-     })
-     return arr
-   }
-   ```
+:::details 点击查看代码
 
-6. 完成数据上传即可
+```js
+/**
+ * 导入数据对应表
+ */
+export const USER_RELATIONS = {
+  姓名: 'username',
+  联系方式: 'mobile',
+  角色: 'role',
+  开通时间: 'openTime'
+}
+```
 
-   ```js
-   /**
-    * 数据解析成功之后的回调
-    */
-   const onSuccess = async ({ header, results }) => {
-     const updateData = generateData(results)
-     await userBatchImport(updateData)
-     ElMessage.success({
-       message: results.length + i18n.t('msg.excel.importSuccess'),
-       type: 'success'
-     })
-     router.push('/user/manage')
-   }
-   ```
+:::
 
-## 7-09：业务落地：处理剩余 bug
+3. 创建数据解析方法，生成新数组
 
-截止到目前整个 `excel` 上传我们就已经处理完成了，只不过目前还存在两个小 bug 需要处理：
+`import/index.vue`
+
+:::details 点击查看代码
+
+```js
+/**
+ * 筛选数据
+ */
+const generateData = results => {
+  const arr = []
+  results.forEach(item => {
+    const userInfo = {}
+    Object.keys(item).forEach(key => {
+      userInfo[USER_RELATIONS[key]] = item[key]
+    })
+    arr.push(userInfo)
+  })
+  return arr
+}
+```
+
+:::
+
+4. 完成数据上传即可
+
+`import/index.vue`
+
+:::details 点击查看代码
+
+```js
+import { useRouter } from 'vue-router'
+import i18n from '@/i18n'
+import { userBatchImport } from '@/api/user-manage'
+import UploadExcel from '@/components/UploadExcel/index.vue'
+import { USER_RELATIONS } from './utils'
+
+const router = useRouter()
+/**
+ * 数据解析成功之后的回调
+ */
+const onSuccess = async ({ results }) => {
+  const updateData = generateData(results)
+  await userBatchImport(updateData)
+  ElMessage.success({
+    message: results.length + i18n.t('excel.importSuccess'),
+    type: 'success'
+  })
+  router.push('/user/manage')
+}
+```
+
+:::
+
+### 4.5 处理剩余 bug
 
 1. 上传之后的时间解析错误
 2. 返回用户列表之后，数据不会自动刷新
 
-那么这一小节我们就针对这两个问题进行分别处理
-
-**上传之后的时间解析错误：**
+#### 4.51 上传之后的时间解析错误
 
 导致该问题出现的原因是因为 **excel 导入解析时间会出现错误，** 处理的方案也很简单，是一个固定方案，我们只需要进行固定的时间解析处理即可：
 
-1. 在 `import/utils` 中新增事件处理方法（固定方式直接使用即可）
+1. 在 `import/utils.js` 中新增事件处理方法（固定方式直接使用即可）
 
-   ```js
-   /**
-    * 解析 excel 导入的时间格式
-    */
-   export const formatDate = numb => {
-     const time = new Date((numb - 1) * 24 * 3600000 + 1)
-     time.setYear(time.getFullYear() - 70)
-     const year = time.getFullYear() + ''
-     const month = time.getMonth() + 1 + ''
-     const date = time.getDate() - 1 + ''
-     return (
-       year +
-       '-' +
-       (month < 10 ? '0' + month : month) +
-       '-' +
-       (date < 10 ? '0' + date : date)
-     )
-   }
-   ```
+:::details 点击查看代码
+
+```js
+/**
+ * 解析 excel 导入的时间格式
+ */
+export const formatDate = numb => {
+  const time = new Date((numb - 1) * 24 * 3600000 + 1)
+  time.setYear(time.getFullYear() - 70)
+  const year = time.getFullYear() + ''
+  const month = time.getMonth() + 1 + ''
+  const date = time.getDate() - 1 + ''
+  return (
+    year +
+    '-' +
+    (month < 10 ? '0' + month : month) +
+    '-' +
+    (date < 10 ? '0' + date : date)
+  )
+}
+```
+
+:::
 
 2. 在 `generateData` 中针对 `openTime` 进行单独处理
 
-   ```js
-   /**
-    * 筛选数据
-    */
-   const generateData = results => {
-     ...
-       Object.keys(item).forEach(key => {
-         if (USER_RELATIONS[key] === 'openTime') {
-           userInfo[USER_RELATIONS[key]] = formatDate(item[key])
-           return
-         }
-         userInfo[USER_RELATIONS[key]] = item[key]
-       })
-       ...
-     })
-     return arr
-   }
-   ```
+`import/index.vue`
 
-**返回用户列表之后，数据不会自动刷新：**
+:::details 点击查看代码
+
+```js
+/**
+* 筛选数据
+*/
+const generateData = results => {
+  ...
+    Object.keys(item).forEach(key => {
+      if (USER_RELATIONS[key] === 'openTime') {
+        userInfo[USER_RELATIONS[key]] = formatDate(item[key])
+        return
+      }
+      userInfo[USER_RELATIONS[key]] = item[key]
+    })
+    ...
+  })
+  return arr
+}
+```
+
+:::
+
+#### 4.52 返回用户列表之后，数据不会自动刷新
 
 出现该问题的原因是因为：**`appmain` 中使用 `keepAlive` 进行了组件缓存**。
 
@@ -756,24 +778,9 @@ export const isExcel = file => {
 在 `user-manage` 中：
 
 ```js
-import { ref, onActivated } from 'vue'
-
 // 处理导入用户后数据不重新加载的问题
 onActivated(getListData)
 ```
-
-## 7-10：excel 导入功能总结
-
-那么到这里我们的 `excel` 导入功能我们就已经实现完成了，再来回顾一下我们整体的流程：
-
-1. 创建 `excel` 导入页面
-2. 点击 `excel` 导入按钮，进入该页面
-3. 该页面提供两种文件导入形式
-4. 选中文件之后，解析 `excel` 数据（核心）
-5. 上传解析之后的数据
-6. 返回 员工管理（用户列表） 页面
-
-游离于这些流程之外的，还包括额外的两个小 bug 的处理，特别是 **`excel` 的时间格式问题，** 大家要格外注意，因为这是一个必然会出现的错误，当然处理方案也是固定的。
 
 ## 7-11：辅助业务之用户删除
 
@@ -798,7 +805,7 @@ onActivated(getListData)
 
    ```html
    <el-button type="danger" size="mini" @click="onRemoveClick(row)"
-     >{{ $t('msg.excel.remove') }}</el-button
+     >{{ $t('excel.remove') }}</el-button
    >
    ```
 
@@ -809,15 +816,15 @@ onActivated(getListData)
    const i18n = useI18n()
    const onRemoveClick = row => {
      ElMessageBox.confirm(
-       i18n.t('msg.excel.dialogTitle1') +
+       i18n.t('excel.dialogTitle1') +
          row.username +
-         i18n.t('msg.excel.dialogTitle2'),
+         i18n.t('excel.dialogTitle2'),
        {
          type: 'warning'
        }
      ).then(async () => {
        await deleteUser(row._id)
-       ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+       ElMessage.success(i18n.t('excel.removeSuccess'))
        // 重新渲染数据
        getListData()
      })
@@ -852,17 +859,17 @@ onActivated(getListData)
    ```vue
    <template>
      <el-dialog
-       :title="$t('msg.excel.title')"
+       :title="$t('excel.title')"
        :model-value="modelValue"
        @close="closed"
        width="30%"
      >
-       <el-input :placeholder="$t('msg.excel.placeholder')"></el-input>
+       <el-input :placeholder="$t('excel.placeholder')"></el-input>
        <template #footer>
          <span class="dialog-footer">
-           <el-button @click="closed">{{ $t('msg.excel.close') }}</el-button>
+           <el-button @click="closed">{{ $t('excel.close') }}</el-button>
            <el-button type="primary" @click="onConfirm">{{
-             $t('msg.excel.confirm')
+             $t('excel.confirm')
            }}</el-button>
          </span>
        </template>
@@ -902,7 +909,7 @@ onActivated(getListData)
 
       ```html
       <el-button type="success" @click="onToExcelClick">
-        {{ $t('msg.excel.exportExcel') }}
+        {{ $t('excel.exportExcel') }}
       </el-button>
       ```
 
@@ -939,7 +946,7 @@ onActivated(getListData)
    ```html
    <el-input
      v-model="excelName"
-     :placeholder="$t('msg.excel.placeholder')"
+     :placeholder="$t('excel.placeholder')"
    ></el-input>
    ```
 
@@ -947,11 +954,11 @@ onActivated(getListData)
 
    ```js
    const i18n = useI18n()
-   let exportDefaultName = i18n.t('msg.excel.defaultName')
+   let exportDefaultName = i18n.t('excel.defaultName')
    const excelName = ref('')
    excelName.value = exportDefaultName
    watchSwitchLang(() => {
-     exportDefaultName = i18n.t('msg.excel.defaultName')
+     exportDefaultName = i18n.t('excel.defaultName')
      excelName.value = exportDefaultName
    })
    ```
@@ -975,7 +982,7 @@ onActivated(getListData)
 
    ```html
    <el-button type="primary" @click="onConfirm" :loading="loading"
-     >{{ $t('msg.excel.confirm') }}</el-button
+     >{{ $t('excel.confirm') }}</el-button
    >
    ```
 
@@ -1218,7 +1225,7 @@ onActivated(getListData)
 
    ```vue
    <el-button type="primary" size="mini" @click="onShowClick(row._id)">
-   	{{ $t('msg.excel.show') }}
+   	{{ $t('excel.show') }}
    </el-button>
 
    /** * 查看按钮点击事件 */ const onShowClick = id => {
@@ -1239,35 +1246,35 @@ onActivated(getListData)
 <template>
   <div class="user-info-container">
     <el-card class="print-box">
-      <el-button type="primary">{{ $t('msg.userInfo.print') }}</el-button>
+      <el-button type="primary">{{ $t('userInfo.print') }}</el-button>
     </el-card>
     <el-card>
       <div class="user-info-box">
         <!-- 标题 -->
-        <h2 class="title">{{ $t('msg.userInfo.title') }}</h2>
+        <h2 class="title">{{ $t('userInfo.title') }}</h2>
 
         <div class="header">
           <!-- 头部渲染表格 -->
           <el-descriptions :column="2" border>
-            <el-descriptions-item :label="$t('msg.userInfo.name')">{{
+            <el-descriptions-item :label="$t('userInfo.name')">{{
               detailData.username
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.sex')">{{
+            <el-descriptions-item :label="$t('userInfo.sex')">{{
               detailData.gender
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.nation')">{{
+            <el-descriptions-item :label="$t('userInfo.nation')">{{
               detailData.nationality
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.mobile')">{{
+            <el-descriptions-item :label="$t('userInfo.mobile')">{{
               detailData.mobile
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.province')">{{
+            <el-descriptions-item :label="$t('userInfo.province')">{{
               detailData.province
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.date')">{{
+            <el-descriptions-item :label="$t('userInfo.date')">{{
               $filters.dateFilter(detailData.openTime)
             }}</el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.remark')" :span="2">
+            <el-descriptions-item :label="$t('userInfo.remark')" :span="2">
               <el-tag
                 class="remark"
                 size="small"
@@ -1276,11 +1283,9 @@ onActivated(getListData)
                 >{{ item }}</el-tag
               >
             </el-descriptions-item>
-            <el-descriptions-item
-              :label="$t('msg.userInfo.address')"
-              :span="2"
-              >{{ detailData.address }}</el-descriptions-item
-            >
+            <el-descriptions-item :label="$t('userInfo.address')" :span="2">{{
+              detailData.address
+            }}</el-descriptions-item>
           </el-descriptions>
           <!-- 头像渲染 -->
           <el-image
@@ -1292,7 +1297,7 @@ onActivated(getListData)
         <div class="body">
           <!-- 内容渲染表格 -->
           <el-descriptions direction="vertical" :column="1" border>
-            <el-descriptions-item :label="$t('msg.userInfo.experience')">
+            <el-descriptions-item :label="$t('userInfo.experience')">
               <ul>
                 <li v-for="(item, index) in detailData.experience" :key="index">
                   <span>
@@ -1305,16 +1310,16 @@ onActivated(getListData)
                 </li>
               </ul>
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.major')">
+            <el-descriptions-item :label="$t('userInfo.major')">
               {{ detailData.major }}
             </el-descriptions-item>
-            <el-descriptions-item :label="$t('msg.userInfo.glory')">
+            <el-descriptions-item :label="$t('userInfo.glory')">
               {{ detailData.glory }}
             </el-descriptions-item>
           </el-descriptions>
         </div>
         <!-- 尾部签名 -->
-        <div class="foot">{{ $t('msg.userInfo.foot') }}</div>
+        <div class="foot">{{ $t('userInfo.foot') }}</div>
       </div>
     </el-card>
   </div>
@@ -1380,7 +1385,7 @@ npm i vue3-print-nb@0.1.4
 
    ```
    <el-button type="primary" :loading="printLoading">{{
-           $t('msg.userInfo.print')
+           $t('userInfo.print')
          }}</el-button>
 
    // 打印相关
@@ -1437,7 +1442,7 @@ npm i vue3-print-nb@0.1.4
 
    ```html
    <el-button type="primary" v-print="printObj" :loading="printLoading"
-     >{{ $t('msg.userInfo.print') }}</el-button
+     >{{ $t('userInfo.print') }}</el-button
    >
    ```
 
@@ -1474,3 +1479,7 @@ npm i vue3-print-nb@0.1.4
 但是这里有一点大家不要忘记，我们在本章开篇的时候说过，**员工管理** 是 **用户权限中的一个前置！** 比如我们的分配角色功能就需要配合其他的业务实现，那么具体的整个用户权限都包含了哪些内容呢？
 
 想要知道快来看下一章节吧！
+
+```
+
+```

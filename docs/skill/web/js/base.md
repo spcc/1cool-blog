@@ -1,5 +1,14 @@
 # 基础
 
+## Object.keys 和 Object.values
+
+```js
+let person = { name: '张三', age: 25, address: '深圳' }
+
+Object.keys(person) // ['name', 'age', 'address']
+Object.values(person) // ['张三', 25, '深圳']
+```
+
 ## ?? 与 || 的区别
 
 一般用来赋默认值
@@ -23,20 +32,20 @@
 
 ```js
 // ??
-undefined ?? 2; // 2
-null ?? 2; // 2
-0 ?? 2; // 0
-"" ?? 2; // ""
-true ?? 2; // true
-false ?? 2; // false
+undefined ?? 2 // 2
+null ?? 2 // 2
+0 ?? 2 // 0
+'' ?? 2 // ""
+true ?? 2 // true
+false ?? 2 // false
 
 // ||
-undefined || 2; // 2
-null || 2; // 2
-0 || 2; // 2
-"" || 2; // 2
-true || 2; // true
-false || 2; // 2
+undefined || 2 // 2
+null || 2 // 2
+0 || 2 // 2
+'' || 2 // 2
+true || 2 // true
+false || 2 // 2
 ```
 
 :::
@@ -49,21 +58,21 @@ false || 2; // 2
 const people = {
   girl: {
     age: 18,
-    weight: 100,
+    weight: 100
   },
   boy: {
     age: 18,
-    weight: 150,
-  },
-};
+    weight: 150
+  }
+}
 
 const {
   girl: { age, weight },
   girl,
-  boy,
-} = people;
-console.log(age, weight); // 18  100
-console.log(girl); // {age: 18, weight: 100}
+  boy
+} = people
+console.log(age, weight) // 18  100
+console.log(girl) // {age: 18, weight: 100}
 ```
 
 :::
@@ -73,7 +82,7 @@ console.log(girl); // {age: 18, weight: 100}
 ::: details 点击查看代码
 
 ```js
-console.log(Math.random().toString(36).substr(2, 6)); // a6vasu
+console.log(Math.random().toString(36).substr(2, 6)) // a6vasu
 ```
 
 解释：  
@@ -118,29 +127,29 @@ async fun() {
 使用：
 
 ```js
-const realTypeOf = (context) => {
+const realTypeOf = context => {
   return Object.prototype.toString
     .call(context)
     .match(/(\w+)\]$/)[1]
-    .toLowerCase();
-};
+    .toLowerCase()
+}
 
-console.log(realTypeOf({ a: 1 })); // object
-console.log(realTypeOf([1, 2, 3])); // array
+console.log(realTypeOf({ a: 1 })) // object
+console.log(realTypeOf([1, 2, 3])) // array
 ```
 
 typeOf 能否准确的判断类型呢？答案是否定的，例如：
 
 ```js
-console.log(typeof { a: 1 }); // object
-console.log(typeof [1, 2]); // object
+console.log(typeof { a: 1 }) // object
+console.log(typeof [1, 2]) // object
 ```
 
 所以需要 `Object.prototype.toString.call` 判断
 
 ```js
-console.log(Object.prototype.toString.call({ a: 1 })); // [object object]
-console.log(Object.prototype.toString.call([1, 2, 3])); // [object Array]
+console.log(Object.prototype.toString.call({ a: 1 })) // [object object]
+console.log(Object.prototype.toString.call([1, 2, 3])) // [object Array]
 ```
 
 可以查看`使用`，简写获取类型
