@@ -6,7 +6,7 @@ module.exports = {
   // 标题
   title: '1cool',
   // 介绍
-  description: '花有重开日，人无在少年',
+  description: '我本可以容忍黑暗，如果我不曾见过太阳',
   // 喜欢的人是真的会发光啊
   // 你要幸福哦，如果开心的话，忘了我也没关系的
   // 我做过最勇敢的一件事，就是喜欢你
@@ -412,7 +412,8 @@ module.exports = {
                 '/problem/element-plus/components/el-input',
                 '/problem/element-plus/components/el-date-time-picker',
                 '/problem/element-plus/components/el-scrollbar',
-                '/problem/element-plus/components/el-dialog'
+                '/problem/element-plus/components/el-dialog',
+                '/problem/element-plus/components/el-tree'
               ]
             }
           ]
