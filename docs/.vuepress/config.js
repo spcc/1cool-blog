@@ -157,6 +157,9 @@ module.exports = {
             '/skill/web/vue3/create/quanXian',
             '/skill/web/vue3/create/rbac',
             '/skill/web/vue3/create/table',
+            '/skill/web/vue3/create/markdown',
+            '/skill/web/vue3/create/publish',
+            '/skill/web/vue3/create/zongJie',
             '/skill/web/vue3/create/ss'
           ]
         },

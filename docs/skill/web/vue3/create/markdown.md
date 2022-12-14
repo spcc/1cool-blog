@@ -1,4 +1,4 @@
-# 第十章：富文本与markdown综合处理之创建文章
+# 8. 富文本与 markdown 综合处理之创建文章
 
 ## 10-1：开篇
 
@@ -29,54 +29,54 @@
 
 那么明确好了之后，我们就去进行对应的实现：
 
-1. 创建 `views/article-create/components/Editor`
+1. 创建 `views/article-create/components/Editor.vue`
 
-2. 创建 `views/article-create/components/Markdown`
+2. 创建 `views/article-create/components/Markdown.vue`
 
 3. 在 `views/article-create` 完成基本结构
 
-   ```vue
-   <template>
-     <div class="article-create">
-       <el-card>
-         <el-input
-           class="title-input"
-           :placeholder="$t('msg.article.titlePlaceholder')"
-           v-model="title"
-           maxlength="20"
-           clearable
-         >
-         </el-input>
-         <el-tabs v-model="activeName">
-           <el-tab-pane :label="$t('msg.article.markdown')" name="markdown">
-             <markdown></markdown>
-           </el-tab-pane>
-           <el-tab-pane :label="$t('msg.article.richText')" name="editor">
-             <editor></editor>
-           </el-tab-pane>
-         </el-tabs>
-       </el-card>
-     </div>
-   </template>
-   
-   <script setup>
-   import Editor from './components/Editor.vue'
-   import Markdown from './components/Markdown.vue'
-   import { ref } from 'vue'
-   
-   const activeName = ref('markdown')
-   const title = ref('')
-   </script>
-   
-   <style lang="scss" scoped>
-   .title-input {
-     margin-bottom: 20px;
-   }
-   </style>
-   
-   ```
+:::details 点击查看代码
 
-   
+```vue
+<script setup>
+import Editor from './components/Editor.vue'
+import Markdown from './components/Markdown.vue'
+
+const activeName = ref('markdown')
+const title = ref('')
+</script>
+
+<template>
+  <div class="article-create">
+    <el-card>
+      <el-input
+        class="title-input"
+        :placeholder="$t('article.titlePlaceholder')"
+        v-model="title"
+        maxlength="20"
+        clearable
+      >
+      </el-input>
+      <el-tabs v-model="activeName">
+        <el-tab-pane :label="$t('article.markdown')" name="markdown">
+          <markdown></markdown>
+        </el-tab-pane>
+        <el-tab-pane :label="$t('article.richText')" name="editor">
+          <editor></editor>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.title-input {
+  margin-bottom: 20px;
+}
+</style>
+```
+
+:::
 
 ## 10-3：编辑库选择标准
 
@@ -104,11 +104,11 @@
 那么最后给大家推荐一些编辑器库，大家可以进行一些参考：
 
 1. `markdown` 编辑器：
-   1. [tui.editor](https://github.com/nhn/tui.editor)：`Markdown` 所见即所得编辑器-高效且可扩展，使用MIT开源协议。
+   1. [tui.editor](https://github.com/nhn/tui.editor)：`Markdown` 所见即所得编辑器-高效且可扩展，使用 MIT 开源协议。
    2. [editor](https://github.com/lepture/editor)：纯文本 `markdown` 编辑器
    3. [editor.md](https://github.com/pandao/editor.md)：开源可嵌入的在线`markdown`编辑器(组件)，基于 `CodeMirror` & `jQuery` & `Marked`。国产
    4. [markdown-here](https://github.com/adam-p/markdown-here)：谷歌开源，但是已经 **多年不更新** 了
-   5. [stackedit](https://github.com/benweet/stackedit)：基于`PageDown`，`Stack Overflow`和其他Stack Exchange站点使用的`Markdown`库的功能齐全的开源Markdown编辑器。**两年未更新了**
+   5. [stackedit](https://github.com/benweet/stackedit)：基于`PageDown`，`Stack Overflow`和其他 Stack Exchange 站点使用的`Markdown`库的功能齐全的开源 Markdown 编辑器。**两年未更新了**
    6. [markdown-it](https://github.com/markdown-it/markdown-it)：可配置语法，可添加、替换规则。**挺长时间未更新了**
 2. 富文本编辑器：
    1. [wangEditor](https://github.com/wangeditor-team/wangEditor)：国产、文档详尽、更新快速
@@ -125,78 +125,77 @@
 
 1. 下载 [tui.editor](https://github.com/nhn/tui.editor)
 
-   ```
-   npm i @toast-ui/editor@3.0.2
-   ```
+```
+npm i @toast-ui/editor@3.0.2
+```
 
 2. 渲染基本结构
 
-   ```vue
-   <template>
-     <div class="markdown-container">
-       <!-- 渲染区 -->
-       <div id="markdown-box"></div>
-       <div class="bottom">
-         <el-button type="primary" @click="onSubmitClick">{{
-           $t('msg.article.commit')
-         }}</el-button>
-       </div>
-     </div>
-   </template>
-   
-   <script setup>
-   import {} from 'vue'
-   </script>
-   
-   <style lang="scss" scoped>
-   .markdown-container {
-     .bottom {
-       margin-top: 20px;
-       text-align: right;
-     }
-   }
-   </style>
-   
-   ```
+```vue
+<template>
+  <div class="markdown-container">
+    <!-- 渲染区 -->
+    <div id="markdown-box"></div>
+    <div class="bottom">
+      <el-button type="primary" @click="onSubmitClick">{{
+        $t('article.commit')
+      }}</el-button>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import {} from 'vue'
+</script>
+
+<style lang="scss" scoped>
+.markdown-container {
+  .bottom {
+    margin-top: 20px;
+    text-align: right;
+  }
+}
+</style>
+```
 
 3. 初始化 `editor` ，处理国际化内容
 
-   ```vue
-   <script setup>
-   import MkEditor from '@toast-ui/editor'
-   import '@toast-ui/editor/dist/toastui-editor.css'
-   import '@toast-ui/editor/dist/i18n/zh-cn'
-   import { onMounted } from 'vue'
-   import { useStore } from 'vuex'
-   
-   // Editor实例
-   let mkEditor
-   // 处理离开页面切换语言导致 dom 无法被获取
-   let el
-   onMounted(() => {
-     el = document.querySelector('#markdown-box')
-     initEditor()
-   })
-   
-   const store = useStore()
-   const initEditor = () => {
-     mkEditor = new MkEditor({
-       el,
-       height: '500px',
-       previewStyle: 'vertical',
-       language: store.getters.language === 'zh' ? 'zh-CN' : 'en'
-     })
-   
-     mkEditor.getMarkdown()
-   }
-   </script>
-   ```
+```vue
+<script setup>
+import MkEditor from '@toast-ui/editor'
+import '@toast-ui/editor/dist/toastui-editor.css'
+import '@toast-ui/editor/dist/i18n/zh-cn'
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
+
+// Editor实例
+let mkEditor
+// 处理离开页面切换语言导致 dom 无法被获取
+let el
+onMounted(() => {
+  el = document.querySelector('#markdown-box')
+  initEditor()
+})
+
+const store = useStore()
+const initEditor = () => {
+  mkEditor = new MkEditor({
+    el,
+    height: '500px',
+    previewStyle: 'vertical',
+    language: store.getters.language === 'zh' ? 'zh-CN' : 'en'
+  })
+
+  mkEditor.getMarkdown()
+}
+</script>
+```
 
 4. 在语言改变时，重置 `editor`
 
    ```js
    import { watchSwitchLang } from '@/utils/i18n'
-   
+
    watchSwitchLang(() => {
      if (!el) return
      const htmlStr = mkEditor.getHTML()
@@ -206,8 +205,6 @@
    })
    ```
 
-
-
 ## 10-5：新建文章：markdown 文章提交
 
 1. 在 `api/article` 中，定义创建文章接口
@@ -216,7 +213,7 @@
    /**
     * 创建文章
     */
-   export const createArticle = (data) => {
+   export const createArticle = data => {
      return request({
        url: '/article/create',
        method: 'POST',
@@ -227,28 +224,26 @@
 
 2. 因为 `markdown` 或者是 富文本 最终都会处理提交事件，所以我们可以把这两件事情合并到一个模块中实现：
 
-3. 创建 `article-create/components/commit.js` 
+3. 创建 `article-create/components/commit.js`
 
-   ```js
-   import { createArticle } from '@/api/article'
-   import { ElMessage } from 'element-plus'
-   import i18n from '@/i18n'
-   const t = i18n.global.t
-   
-   export const commitArticle = async (data) => {
-     const res = await createArticle(data)
-     ElMessage.success(t('msg.article.createSuccess'))
-     return res
-   }
-   
-   ```
+```js
+import { createArticle } from '@/api/article'
+import { ElMessage } from 'element-plus'
+import i18n from '@/i18n'
+const t = i18n.global.t
+
+export const commitArticle = async data => {
+  const res = await createArticle(data)
+  ElMessage.success(t('article.createSuccess'))
+  return res
+}
+```
 
 4. 在 `markdown.vue` 中导入该方法
 
-   ```js
-   import { commitArticle } from './commit'
-   
-   ```
+```js
+import { commitArticle } from './commit'
+```
 
 5. 触发按钮提交事件
 
@@ -259,7 +254,7 @@
        type: String
      }
    })
-   
+
    const emits = defineEmits(['onSuccess'])
    ...
    // 处理提交
@@ -269,7 +264,7 @@
        title: props.title,
        content: mkEditor.getHTML()
      })
-   
+
      mkEditor.reset()
      emits('onSuccess')
    }
@@ -318,11 +313,7 @@
 4. 把获取到的数据传递给 `markdown` 组件
 
    ```html
-   <markdown
-       :title="title"
-       :detail="detail"
-       @onSuccess="onSuccess"
-   ></markdown>
+   <markdown :title="title" :detail="detail" @onSuccess="onSuccess"></markdown>
    ```
 
 5. 在 `markdown` 中接收该数据
@@ -342,7 +333,7 @@
    // 编辑相关
    watch(
      () => props.detail,
-     (val) => {
+     val => {
        if (val && val.content) {
          mkEditor.setHTML(val.content)
        }
@@ -359,7 +350,7 @@
    /**
     * 编辑文章详情
     */
-   export const articleEdit = (data) => {
+   export const articleEdit = data => {
      return request({
        url: '/article/edit',
        method: 'POST',
@@ -373,7 +364,7 @@
    ```js
    export const editArticle = async data => {
      const res = await articleEdit(data)
-     ElMessage.success(t('msg.article.editorSuccess'))
+     ElMessage.success(t('article.editorSuccess'))
      return res
    }
    ```
@@ -397,13 +388,11 @@
          content: mkEditor.getHTML()
        })
      }
-   
+
      mkEditor.reset()
      emits('onSuccess')
    }
    ```
-
-   
 
 ## 10-7：新建文章：富文本 实现
 
@@ -423,16 +412,16 @@ npm i wangeditor@4.7.6
        <div id="editor-box"></div>
        <div class="bottom">
          <el-button type="primary" @click="onSubmitClick">{{
-           $t('msg.article.commit')
+           $t('article.commit')
          }}</el-button>
        </div>
      </div>
    </template>
-   
+
    <script setup>
    import {} from 'vue'
    </script>
-   
+
    <style lang="scss" scoped>
    .editor-container {
      .bottom {
@@ -441,7 +430,6 @@ npm i wangeditor@4.7.6
      }
    }
    </style>
-   
    ```
 
 2. 初始化 `wangEditor`
@@ -450,7 +438,7 @@ npm i wangeditor@4.7.6
    <script setup>
    import E from 'wangeditor'
    import { onMounted } from 'vue'
-   
+
    // Editor实例
    let editor
    // 处理离开页面切换语言导致 dom 无法被获取
@@ -459,7 +447,7 @@ npm i wangeditor@4.7.6
      el = document.querySelector('#editor-box')
      initEditor()
    })
-   
+
    const initEditor = () => {
      editor = new E(el)
      editor.config.zIndex = 1
@@ -471,7 +459,7 @@ npm i wangeditor@4.7.6
    </script>
    ```
 
-3. `wangEditor`  的 [国际化处理](https://www.wangeditor.com/doc/pages/12-%E5%A4%9A%E8%AF%AD%E8%A8%80/)，官网支持 [i18next](https://www.i18next.com/)，所以想要处理 `wangEditor` 的国际化，那么我们需要安装 [i18next](https://www.i18next.com/)
+3. `wangEditor` 的 [国际化处理](https://www.wangeditor.com/doc/pages/12-%E5%A4%9A%E8%AF%AD%E8%A8%80/)，官网支持 [i18next](https://www.i18next.com/)，所以想要处理 `wangEditor` 的国际化，那么我们需要安装 [i18next](https://www.i18next.com/)
 
    ```js
    npm i --save i18next@20.4.0
@@ -482,16 +470,16 @@ npm i wangeditor@4.7.6
    ```js
    import i18next from 'i18next'
    import { useStore } from 'vuex'
-   
+
    const store = useStore()
    ...
    const initEditor = () => {
      ...
-   
+
      // 国际化相关处理
      editor.config.lang = store.getters.language === 'zh' ? 'zh-CN' : 'en'
      editor.i18next = i18next
-   
+
      editor.create()
    }
    ```
@@ -501,14 +489,14 @@ npm i wangeditor@4.7.6
    ```js
    import { onMounted, defineProps, defineEmits } from 'vue'
    import { commitArticle } from './commit'
-   
+
    const props = defineProps({
      title: {
        required: true,
        type: String
      }
    })
-   
+
    const emits = defineEmits(['onSuccess'])
    ...
    const onSubmitClick = async () => {
@@ -517,7 +505,7 @@ npm i wangeditor@4.7.6
        title: props.title,
        content: editor.txt.html()
      })
-   
+
      editor.txt.html('')
      emits('onSuccess')
    }
@@ -526,11 +514,7 @@ npm i wangeditor@4.7.6
 6. 不要忘记在 `article-create` 中处理对应事件
 
    ```html
-   <editor
-       :title="title"
-       :detail="detail"
-       @onSuccess="onSuccess"
-   ></editor>
+   <editor :title="title" :detail="detail" @onSuccess="onSuccess"></editor>
    ```
 
 7. 最后处理编辑
@@ -542,7 +526,7 @@ npm i wangeditor@4.7.6
        type: Object
      }
    })
-   
+
    // 编辑相关
    watch(
      () => props.detail,
@@ -555,7 +539,7 @@ npm i wangeditor@4.7.6
        immediate: true
      }
    )
-   
+
    const onSubmitClick = async () => {
      if (props.detail && props.detail._id) {
        // 编辑文章
@@ -571,13 +555,11 @@ npm i wangeditor@4.7.6
          content: editor.txt.html()
        })
      }
-   
+
      editor.txt.html('')
      emits('onSuccess')
    }
    ```
-
-   
 
 ## 10-8：总结
 
@@ -591,4 +573,3 @@ npm i wangeditor@4.7.6
 那么对于大家而言，不一定非要使用我们在课程中使用的这两个编辑器库。
 
 因为对于编辑器库而言，它的使用方式都是大同小异的，大家只需要根据我们 **《编辑器库选择标准》** 来选择使用自己当前情况的编辑器库即可
-
