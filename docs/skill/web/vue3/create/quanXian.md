@@ -8,15 +8,14 @@
 
 ---
 
-**员工管理** 模块可以分为以下功能：
+整个章节所实现的功能有：
 
-- 用户列表分页展示
-- `excel` 导入用户
-- 用户列表导出为 `excel`
-- 用户详情的表格展示
-- 用户详情表格打印
-- 用户删除
-- 用户角色分配（需要在完成角色列表之后处理）
+1. 用户列表分页展示
+2. `excel` 导入用户
+3. 用户列表导出为 `excel`
+4. 用户详情的表格展示
+5. 用户详情表格打印
+6. 用户删除
 
 ---
 
@@ -782,465 +781,464 @@ const generateData = results => {
 onActivated(getListData)
 ```
 
-## 7-11：辅助业务之用户删除
+## 5. 用户删除
 
-完成了 `excel` 的用户导入之后，那么我们肯定会产生很多的无用数据，所以说接下来我们来完成一个辅助功能：**删除用户（希望大家都可以在完成 `excel` 导入功能之后，删除掉无用数据，以方便其他的同学进行功能测试）**
+1. 在 `api/user-manage.js` 中指定删除接口
 
-删除用户的功能比较简单，我们只需要 **调用对应的接口即可**
+:::details 点击查看代码
 
-1. 在 `api/user-manage` 中指定删除接口
+```js
+/**
+ * 删除指定数据
+ */
+export const deleteUser = id => {
+  return request({
+    url: `/user-manage/delete/${id}`
+  })
+}
+```
 
-   ```js
-   /**
-    * 删除指定数据
-    */
-   export const deleteUser = id => {
-     return request({
-       url: `/user-manage/detele/${id}`
-     })
-   }
-   ```
+:::
 
-2. 在 `views/user-manage` 中调用删除接口接口
+2. 在 `views/user-manage/index.vue` 中调用删除接口接口
 
-   ```html
-   <el-button type="danger" size="mini" @click="onRemoveClick(row)"
-     >{{ $t('excel.remove') }}</el-button
-   >
-   ```
+:::details 点击查看代码
 
-   ```js
-   /**
-    * 删除按钮点击事件
-    */
-   const i18n = useI18n()
-   const onRemoveClick = row => {
-     ElMessageBox.confirm(
-       i18n.t('excel.dialogTitle1') +
-         row.username +
-         i18n.t('excel.dialogTitle2'),
-       {
-         type: 'warning'
-       }
-     ).then(async () => {
-       await deleteUser(row._id)
-       ElMessage.success(i18n.t('excel.removeSuccess'))
-       // 重新渲染数据
-       getListData()
-     })
-   }
-   ```
+```html
+<template #default="{ row }">
+  <el-button type="danger" size="small" @click="onRemoveClick(row)">
+    {{ $t('excel.remove') }}
+  </el-button>
+</template>
 
-## 7-12：excel 导出原理与实现分析
+<script setup>
+  import { useI18n } from 'vue-i18n'
+  import { getUserManageList, deleteUser } from '@/api/user-manage'
 
-对于 `excel` 导出而言我们还是先来分析一下它的业务逻辑：
-
-1. 点击 `excel` 导出按钮
-2. 展示 `dialog` 弹出层
-3. 确定导出的 `excel` 文件名称
-4. 点击导出按钮
-5. 获取 **所有用户列表数据**
-6. 将 `json` 结构数据转化为 `excel` 数据，并下载
-
-有了 `excel` 导入的经验之后，再来看这样的一套业务逻辑，相信大家应该可以直接根据这样的一套业务逻辑得出 `excel` 导出的核心原理了：**将 `json` 结构数据转化为 `excel` 数据，并下载**
-
-那么我们对应的实现方案也可以直接得出了：
-
-1. 创建 `excel` 导出弹出层
-2. 处理弹出层相关的业务
-3. 点击导出按钮，将 `json` 结构数据转化为 `excel` 数据，并下载（核心）
-
-## 7-13：业务落地：Export2Excel 组件
-
-那么首先我们先去创建 `excel` 弹出层组件 `Export2Excel `
-
-1. 创建 `views/user-manage/components/Export2Excel `
-
-   ```vue
-   <template>
-     <el-dialog
-       :title="$t('excel.title')"
-       :model-value="modelValue"
-       @close="closed"
-       width="30%"
-     >
-       <el-input :placeholder="$t('excel.placeholder')"></el-input>
-       <template #footer>
-         <span class="dialog-footer">
-           <el-button @click="closed">{{ $t('excel.close') }}</el-button>
-           <el-button type="primary" @click="onConfirm">{{
-             $t('excel.confirm')
-           }}</el-button>
-         </span>
-       </template>
-     </el-dialog>
-   </template>
-
-   <script setup>
-   import { defineProps, defineEmits } from 'vue'
-
-   defineProps({
-     modelValue: {
-       type: Boolean,
-       required: true
-     }
-   })
-   const emits = defineEmits(['update:modelValue'])
-
-   /**
-    * 导出按钮点击事件
-    */
-   const onConfirm = async () => {
-     closed()
-   }
-
-   /**
-    * 关闭
-    */
-   const closed = () => {
-     emits('update:modelValue', false)
-   }
-   </script>
-   ```
-
-2. 在 `user-manage` 中进行导入 `dialog` 组件
-
-   1. 指定 `excel`按钮 点击事件
-
-      ```html
-      <el-button type="success" @click="onToExcelClick">
-        {{ $t('excel.exportExcel') }}
-      </el-button>
-      ```
-
-   2. 导入 `ExportToExcel` 组件
-
-      ```vue
-      <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
-      import ExportToExcel from './components/Export2Excel.vue'
-      ```
-
-   3. 点击事件处理函数
-
-      ```js
-      /**
-       * excel 导出点击事件
-       */
-      const exportToExcelVisible = ref(false)
-      const onToExcelClick = () => {
-        exportToExcelVisible.value = true
+  /**
+   * 删除按钮点击事件
+   */
+  const i18n = useI18n()
+  const onRemoveClick = row => {
+    // eslint-disable-next-line no-undef
+    ElMessageBox.confirm(
+      i18n.t('excel.dialogTitle1') +
+        row.username +
+        i18n.t('excel.dialogTitle2'),
+      {
+        type: 'warning'
       }
-      ```
+    ).then(async () => {
+      await deleteUser({ id: row.id })
+      ElMessage.success(i18n.t('excel.removeSuccess'))
+      // 重新渲染数据
+      getListData()
+    })
+  }
+</script>
+```
 
-## 7-14：业务落地：导出前置业务处理
+:::
 
-那么这一小节我们来处理一些实现 `excel` 导出时的前置任务，具体有：
+## 6. excel 导出原理与实现分析
 
-1. 指定 `input` 默认导出文件名称
-2. 定义 **获取全部用户** 列表接口，并调用
+## 6.1 Export2Excel 弹出层组件
 
-那么下面我们先来处理第一步：**指定 `input` 默认导出文件名称**
+1. 创建 `views/user-manage/components/Export2Excel.vue`
 
-1. 指定 `input` 的双向绑定
+:::details 点击查看代码
 
-   ```html
-   <el-input
-     v-model="excelName"
-     :placeholder="$t('excel.placeholder')"
-   ></el-input>
-   ```
+```vue
+<script setup>
+defineProps({
+  modelValue: {
+    type: Boolean,
+    required: true
+  }
+})
+const emits = defineEmits(['update:modelValue'])
 
-2. 指定默认文件名
+/**
+ * 导出按钮点击事件
+ */
+const onConfirm = async () => {
+  closed()
+}
 
-   ```js
-   const i18n = useI18n()
-   let exportDefaultName = i18n.t('excel.defaultName')
-   const excelName = ref('')
-   excelName.value = exportDefaultName
-   watchSwitchLang(() => {
-     exportDefaultName = i18n.t('excel.defaultName')
-     excelName.value = exportDefaultName
-   })
-   ```
+/**
+ * 关闭
+ */
+const closed = () => {
+  emits('update:modelValue', false)
+}
+</script>
 
-**定义获取全部用户列表接口，并调用：**
+<template>
+  <el-dialog
+    :title="$t('excel.title')"
+    :model-value="modelValue"
+    @close="closed"
+    width="30%"
+  >
+    <el-input :placeholder="$t('excel.placeholder')"></el-input>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="closed">{{ $t('excel.close') }}</el-button>
+        <el-button type="primary" @click="onConfirm">{{
+          $t('excel.confirm')
+        }}</el-button>
+      </span>
+    </template>
+  </el-dialog>
+</template>
+```
 
-1. 在 `user-manage` 中定义获取全部数据接口
+:::
 
-   ```js
-   /**
-    * 获取所有用户列表数据
-    */
-   export const getUserManageAllList = () => {
-     return request({
-       url: '/user-manage/all-list'
-     })
-   }
-   ```
+2. 在 `views/user-manage/index.vue` 中进行导入 `Export2Excel.vue` 组件
+
+:::details 点击查看代码
+
+```vue
+<script setup>
+// 2. 导入 `ExportToExcel` 组件
+import ExportToExcel from './components/Export2Excel.vue'
+
+// 3. 点击事件处理函数
+/**
+ * excel 导出点击事件
+ */
+const exportToExcelVisible = ref(false)
+const onToExcelClick = () => {
+  exportToExcelVisible.value = true
+}
+</script>
+
+<template>
+  <div class="user-manage-container">
+    <el-card class="header">
+      <div>
+        <!-- 1. 指定 `excel`按钮 点击事件 -->
+        <el-button type="success" @click="onToExcelClick">
+          {{ $t('excel.exportExcel') }}
+        </el-button>
+      </div>
+    </el-card>
+
+    <!-- 2. 导入 `ExportToExcel` 组件  -->
+    <ExportToExcel v-model="exportToExcelVisible" />
+  </div>
+</template>
+```
+
+:::
+
+## 6.2 导出前置业务处理
+
+- 指定 `input` 默认导出文件名称
+- 定义 **获取全部用户** 列表接口，并调用
+
+---
+
+### 6.21 指定 `input` 默认导出文件名称
+
+`views/user-manage/components/Export2Excel.vue`
+
+:::details 点击查看代码
+
+```vue
+<template>
+  <!-- 指定 `input` 的双向绑定 -->
+  <el-input v-model="excelName"></el-input>
+</template>
+
+<script>
+// 指定默认文件名
+import { useI18n } from 'vue-i18n'
+import useAppStore from '@/stores/app'
+
+const i18n = useI18n()
+const appStore = useAppStore()
+
+let exportDefaultName = i18n.t('excel.defaultName')
+const excelName = ref('')
+excelName.value = exportDefaultName
+
+// 处理国际化
+watch(
+  () => appStore.language,
+  () => {
+    exportDefaultName = i18n.t('excel.defaultName')
+    excelName.value = exportDefaultName
+  }
+)
+</script>
+```
+
+:::
+
+### 6.22 定义 **获取全部用户** 列表接口，并调用
+
+1. 在 `/api/user-manage.js` 中定义获取全部数据接口
+
+:::details 点击查看代码
+
+```js
+/**
+ * 获取所有用户列表数据
+ */
+export const getUserManageAllList = () => {
+  return request({
+    url: '/user-manage/all-list'
+  })
+}
+```
+
+:::
 
 2. 调用接口数据，并指定 `loading`
 
-   ```html
-   <el-button type="primary" @click="onConfirm" :loading="loading"
-     >{{ $t('excel.confirm') }}</el-button
-   >
-   ```
+:::details 点击查看代码
 
-   ```js
-   import { getUserManageAllList } from '@/api/user-manage'
+```vue
+<script setup>
+import { getUserManageList } from '@/api/user-manage'
 
-   /**
-    * 导出按钮点击事件
-    */
-   const loading = ref(false)
-   const onConfirm = async () => {
-     loading.value = true
-     const allUser = (await getUserManageAllList()).list
+/**
+ * 导出按钮点击事件
+ */
+const loading = ref(false)
+const onConfirm = async () => {
+  loading.value = true
+  const allUser = (await getUserManageList({ page: 1, size: 9999 })).list
+  closed()
+}
 
-     closed()
-   }
+/**
+ * 关闭
+ */
+const closed = () => {
+  loading.value = false
+  emits('update:modelValue', false)
+}
+</script>
 
-   /**
-    * 关闭
-    */
-   const closed = () => {
-     loading.value = false
-     emits('update:modelValue', false)
-   }
-   ```
+<template>
+  <el-button type="primary" :loading="loading" @click="onConfirm">{{
+    $t('excel.confirm')
+  }}</el-button>
+</template>
+```
 
-## 7-15：业务落地：实现 excel 导出逻辑
+:::
 
-那么万事俱备，到此时我们就可以来实现整个业务逻辑的最后步骤：
+## 6.3 实现 excel 导出逻辑
 
-1. 将 `json` 结构数据转化为 `excel` 数据
-2. 下载对应的 `excel` 数据
+- 将 `json` 结构数据转化为 `excel` 数据（搜索 Export2Excel 可以得到超级多的解决方案）
+- 下载对应的 `excel` 数据
 
-对于这两步的逻辑而言，最复杂的莫过于 **将 `json` 结构数据转化为 `excel` 数据** 这一步的功能，不过万幸的是对于该操作的逻辑是 **通用处理逻辑**，搜索 **Export2Excel** 我们可以得到巨多的解决方案，所以此处我们 **没有必要** 手写对应的转换逻辑
-
-该转化逻辑我已经把它放置到 `课程资料/Export2Excel.js` 文件中，大家可以直接把该代码复制到 `utils` 文件夹下
-
-> PS：如果大家想要了解该代码的话，那么对应的业务逻辑我们也已经全部标出，大家可以直接查看
-
-那么有了 `Export2Excel.js` 的代码之后 ，接下来我们还需要导入两个依赖库：
+有了 `Export2Excel.js` 的代码之后 ，接下来还需要导入两个依赖库：
 
 1.  [xlsx](https://www.npmjs.com/package/xlsx) （已下载）：`excel` 解析器和编译器
 2.  [file-saver](https://www.npmjs.com/package/file-saver)：文件下载工具，通过 `npm i file-saver@2.0.5` 下载
 
-那么一切准备就绪，我们去实现 `excel` 导出功能：
+---
 
 1. 动态导入 `Export2Excel.js`
 
-   ```js
-   // 导入工具包
-   const excel = await import('@/utils/Export2Excel')
-   ```
+```js
+// 导入工具包
+const excel = await import('@/utils/Export2Excel')
+```
 
 2. 因为从服务端获取到的为 `json 数组对象` 结构，但是导出时的数据需要为 **二维数组**，所以我们需要有一个方法来把 **`json` 结构转化为 二维数组**
 
-3. 创建转化方法
+创建 `views/user-manage/components/Export2ExcelConstants.js` 中英文对照表
 
-   1. 创建 `views/user-manage/components/Export2ExcelConstants.js` 中英文对照表
+:::details 点击查看代码
 
-      ```js
-      /**
-       * 导入数据对应表
-       */
-      export const USER_RELATIONS = {
-        姓名: 'username',
-        联系方式: 'mobile',
-        角色: 'role',
-        开通时间: 'openTime'
+```js
+/**
+ * 导入数据对应表
+ */
+export const USER_RELATIONS = {
+  姓名: 'username',
+  联系方式: 'mobile',
+  角色: 'role',
+  开通时间: 'openTime'
+}
+```
+
+:::
+
+3. 创建数据解析方法
+
+:::details 点击查看代码
+
+```js
+// 该方法负责将数组转化成二维数组
+const formatJson = (headers, rows) => {
+  // 首先遍历数组
+  // [{ username: '张三'},{},{}]  => [[’张三'],[],[]]
+  return rows.map(item => {
+    return Object.keys(headers).map(key => {
+      // 角色特殊处理
+      if (headers[key] === 'role') {
+        const roles = item[headers[key]]
+
+        return JSON.stringify(roles.map(role => role.title))
       }
-      ```
+      return item[headers[key]]
+    })
+  })
+}
+```
 
-   2. 创建数据解析方法
-
-      ```js
-      // 该方法负责将数组转化成二维数组
-      const formatJson = (headers, rows) => {
-        // 首先遍历数组
-        // [{ username: '张三'},{},{}]  => [[’张三'],[],[]]
-        return rows.map(item => {
-          return Object.keys(headers).map(key => {
-            // 角色特殊处理
-            if (headers[key] === 'role') {
-              const roles = item[headers[key]]
-
-              return JSON.stringify(roles.map(role => role.title))
-            }
-            return item[headers[key]]
-          })
-        })
-      }
-      ```
+:::
 
 4. 调用该方法，获取导出的二维数组数据
 
-   ```js
-   import { USER_RELATIONS } from './Export2ExcelConstants'
+:::details 点击查看代码
 
-   const data = formatJson(USER_RELATIONS, allUser)
-   ```
+```js
+import { USER_RELATIONS } from './Export2ExcelConstants'
+
+const data = formatJson(USER_RELATIONS, allUser)
+```
+
+:::
 
 5. 调用 `export_json_to_excel` 方法，完成 `excel` 导出
 
-   ```js
-   excel.export_json_to_excel({
-     // excel 表头
-     header: Object.keys(USER_RELATIONS),
-     // excel 数据（二维数组结构）
-     data,
-     // 文件名称
-     filename: excelName.value || exportDefaultName,
-     // 是否自动列宽
-     autoWidth: true,
-     // 文件类型
-     bookType: 'xlsx'
-   })
-   ```
+:::details 点击查看代码
 
-## 7-16：业务落地：excel 导出时的时间逻辑处理
+```js
+excel.export_json_to_excel({
+  // excel 表头
+  header: Object.keys(USER_RELATIONS),
+  // excel 数据（二维数组结构）
+  data,
+  // 文件名称
+  filename: excelName.value || exportDefaultName,
+  // 是否自动列宽
+  autoWidth: true,
+  // 文件类型
+  bookType: 'xlsx'
+})
+```
+
+:::
+
+6. 导出时间逻辑处理
 
 因为服务端返回的 `openTime` 格式问题，所以我们需要在 `excel` 导出时对时间格式进行单独处理
 
-2. 导入时间格式处理工具
+```js
+// 导入时间格式处理工具
+import { dateFormat } from '@/filters'
 
-   ```js
-   import { dateFormat } from '@/filters'
-   ```
+// 时间特殊处理
+if (headers[key] === 'openTime') {
+  return dateFormat(item[headers[key]])
+}
+```
 
-3. 对时间格式进行单独处理
+## 6.4 局部打印详情原理与实现分析
 
-   ```js
-   // 时间特殊处理
-   if (headers[key] === 'openTime') {
-     return dateFormat(item[headers[key]])
-   }
-   ```
+[vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 进行局部打印
 
-## 7-17：excel 导出功能总结
-
-那么到这里我们的整个 `excel` 导出就算是实现完成了。
-
-整个 `excel` 导出遵循以下业务逻辑：
-
-1. 创建 `excel` 导出弹出层
-2. 处理弹出层相关的业务
-3. 点击导出按钮，将 `json` 结构数据转化为 `excel` 数据
-   1. `json` 数据转化为 **二维数组**
-   2. 时间处理
-   3. 角色数组处理
-4. 下载 `excel` 数据
-
-其中 **将 `json` 结构数据转化为 `excel` 数据** 部分因为有通用的实现方式，所以我们没有必要进行手动的代码书写，毕竟 **“程序猿是最懒的群体嘛”**
-
-但是如果大家想要了解一下这个业务逻辑中所进行的事情，我们也对代码进行了完整的备注，大家可以直接进行查看
-
-## 7-18：局部打印详情原理与实现分析
-
-那么接下来就是我们本章中最后一个功能 **员工详情打印**
-
-整个员工详情的打印逻辑分为两部分：
-
-1. 以表格的形式展示员工详情
-2. 打印详情表格
-
-其中 **以表格的形式展示员工详情** 部分我们需要使用到 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件，并且想要利用该组件实现详情的表格效果还需要一些小的技巧，这个具体的我们到时候再去说
-
-而 **打印详情表格** 的功能就是建立在展示详情页面之上的
-
-大家知道，当我们在浏览器右键时，其实可以直接看到对应的 **打印** 选项，但是这个打印选项是直接打印整个页面，不能指定打印页面中的某一部分的。
-
-所以说 **打印是浏览器本身的功能**，但是这个功能存在一定的小缺陷，那就是 **只能打印整个页面**
-
-而我们想要实现 **详情打印**，那么就需要在这个功能的基础之上做到指定打印具体的某一块视图，而这个功能已经有一个第三方的包 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 帮助我们进行了实现，所以我们只需要使用这个包即可完成打印功能
-
-那么明确好了原理之后，接下来步骤就呼之欲出了：
-
-1. 获取员工详情数据
-2. 在员工详情页面，渲染详情数据
-3. 利用 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 进行局部打印
-
-## 7-19：业务落地：获取展示数据
+### 6.41：业务落地：获取展示数据
 
 首先我们来获取对应的展示数据
 
-1. 在 `api/user-manage` 中定义获取用户详情接口
+1. 在 `api/user-manage.js` 中定义获取用户详情接口
 
-   ```js
-   /**
-    * 获取用户详情
-    */
-   export const userDetail = id => {
-     return request({
-       url: `/user-manage/detail/${id}`
-     })
-   }
-   ```
+:::details 点击查看代码
 
-2. 在 `views/user-info` 中根据 `id` 获取接口详情数据，并进行国际化处理
+```js
+/**
+ * 获取用户详情
+ */
+export const userDetail = id => {
+  return request({
+    url: `/user-manage/detail/${id}`
+  })
+}
+```
 
-   ```vue
-   <script setup>
-   import { userDetail } from '@/api/user-manage'
-   import { watchSwitchLang } from '@/utils/i18n'
-   import { defineProps, ref } from 'vue'
+:::
 
-   const props = defineProps({
-     id: {
-       type: String,
-       required: true
-     }
-   })
+2. 在 `views/user-info/index.vue` 中根据 `id` 获取接口详情数据，并进行国际化处理
 
-   // 数据相关
-   const detailData = ref({})
-   const getUserDetail = async () => {
-     detailData.value = await userDetail(props.id)
-   }
-   getUserDetail()
-   // 语言切换
-   watchSwitchLang(getUserDetail)
-   </script>
-   ```
+:::details 点击查看代码
+
+```vue
+<script setup>
+import { userDetail } from '@/api/user-manage'
+import { watchSwitchLang } from '@/utils/i18n'
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+
+// 数据相关
+const detailData = ref({})
+const getUserDetail = async () => {
+  detailData.value = await userDetail(props.id)
+}
+getUserDetail()
+// 语言切换
+watchSwitchLang(getUserDetail)
+</script>
+```
+
+:::
 
 3. 因为用户详情可以会以组件的形式进行呈现，所以对于此处我们需要得到的 `id` ，可以通过 [vue-router Props 传参](https://next.router.vuejs.org/zh/guide/essentials/passing-props.html#%E5%B8%83%E5%B0%94%E6%A8%A1%E5%BC%8F) 的形式进行
 
-4. 指定路由表
+指定路由表
 
-   ```js
-   {
-           path: '/user/info/:id',
-           name: 'userInfo',
-           component: () => import('@/views/user-info/index'),
-           props: true,
-           meta: {
-             title: 'userInfo'
-           }
-         }
-   ```
+:::details 点击查看代码
 
-5. 在 `views/user-manage` 中传递用户 `id`
+```js
+{
+  path: '/user/info/:id',
+  name: 'userInfo',
+  component: () => import('@/views/user-info/index'),
+  props: true,
+  meta: {
+    title: 'userInfo'
+  }
+}
+```
 
-   ```vue
-   <el-button type="primary" size="mini" @click="onShowClick(row._id)">
-   	{{ $t('excel.show') }}
-   </el-button>
+:::
 
-   /** * 查看按钮点击事件 */ const onShowClick = id => {
-   router.push(`/user/info/${id}`) }
-   ```
+4. 在 `views/user-manage/index.vue` 中传递用户 `id`
 
-## 7-20：业务落地：渲染详情结构
+:::details 点击查看代码
 
-渲染用户详情结构我们需要借助 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件，只不过使用该组件时我们需要一些小的技巧
+```vue
+<el-button @click="onShowClick(row._id)">
+{{ $t('excel.show') }}
+</el-button>
 
-因为 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件作用为：渲染描述列表。但是我们想要的包含头像的用户详情样式，直接利用一个 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件并无法进行渲染，所以此时我们需要对多个 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件 与 `img` 标签进行配合使用
+<script>
+/* 查看按钮点击事件 */
+const onShowClick = id => {
+  router.push(`/user/info/${id}`)
+}
+</script>
+```
 
-![image-20210929233418837](第七章：权限架构处理之用户权限处理.assets/image-20210929233418837.png)
+:::
 
-如果得出渲染代码
+5. 渲染用户数据
+
+:::details 点击查看代码
 
 ```vue
 <template>
@@ -1371,7 +1369,9 @@ onActivated(getListData)
 </style>
 ```
 
-## 7-21：业务落地：局部打印功能实现
+:::
+
+## 6.5 局部打印功能实现
 
 局部详情打印功能我们需要借助 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version)，所以首先我们需要下载该插件
 
@@ -1383,39 +1383,46 @@ npm i vue3-print-nb@0.1.4
 
 1. 指定 `printLoading`
 
-   ```
-   <el-button type="primary" :loading="printLoading">{{
-           $t('userInfo.print')
-         }}</el-button>
+:::details 点击查看代码
 
-   // 打印相关
-   const printLoading = ref(false)
-   ```
+```vue
+<el-button type="primary" :loading="printLoading">{{
+  $t('userInfo.print')
+}}</el-button>
+
+// 打印相关 const printLoading = ref(false)
+```
+
+:::
 
 2. 创建打印对象
 
-   ```js
-   const printObj = {
-     // 打印区域
-     id: 'userInfoBox',
-     // 打印标题
-     popTitle: 'imooc-vue-element-admin',
-     // 打印前
-     beforeOpenCallback(vue) {
-       printLoading.value = true
-     },
-     // 执行打印
-     openCallback(vue) {
-       printLoading.value = false
-     }
-   }
-   ```
+:::details 点击查看代码
+
+```js
+const printObj = {
+  // 打印区域
+  id: 'userInfoBox',
+  // 打印标题
+  popTitle: 'imooc-vue-element-admin',
+  // 打印前
+  beforeOpenCallback(vue) {
+    printLoading.value = true
+  },
+  // 执行打印
+  openCallback(vue) {
+    printLoading.value = false
+  }
+}
+```
+
+:::
 
 3. 指定打印区域 `id` 匹配
 
-   ```html
-   <div id="userInfoBox" class="user-info-box"></div>
-   ```
+```html
+<div id="userInfoBox" class="user-info-box"></div>
+```
 
 4. [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 以指令的形式存在，所以我们需要创建对应指令
 
@@ -1423,63 +1430,37 @@ npm i vue3-print-nb@0.1.4
 
 6. 写入如下代码
 
-   ```js
-   import print from 'vue3-print-nb'
+:::details 点击查看代码
 
-   export default app => {
-     app.use(print)
-   }
-   ```
+```js
+import print from 'vue3-print-nb'
+
+export default app => {
+  app.use(print)
+}
+```
+
+:::
 
 7. 在 `main.js` 中导入该指令
 
-   ```js
-   import installDirective from '@/directives'
-   installDirective(app)
-   ```
+:::details 点击查看代码
+
+```js
+import installDirective from '@/directives'
+installDirective(app)
+```
+
+:::
 
 8. 将打印指令挂载到 `el-button` 中
 
-   ```html
-   <el-button type="primary" v-print="printObj" :loading="printLoading"
-     >{{ $t('userInfo.print') }}</el-button
-   >
-   ```
+:::details 点击查看代码
 
-## 7-22：局部打印功能总结
-
-整个局部打印详情功能，整体的核心逻辑就是这么两块：
-
-1. 以表格的形式展示员工详情
-2. 打印详情表格
-
-其中第一部分使用 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件配合一些小技巧即可实现
-
-而局部打印功能则需要借助 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 这个第三方库进行实现
-
-所以整个局部打印功能应该并不算复杂，掌握这两部分即可轻松实现
-
-## 7-23：总结
-
-那么到这里我们整个章节就全部完成了，最后的 **为用户分配角色** 功能需要配合 **角色列表** 进行实现，所以我们需要等到后面进行
-
-那么整个章节所实现的功能有：
-
-1. 用户列表分页展示
-2. `excel` 导入用户
-3. 用户列表导出为 `excel`
-4. 用户详情的表格展示
-5. 用户详情表格打印
-6. 用户删除
-
-这么六个
-
-其中比较复杂的应该就是 **`excel` 导入 & 导出** 了，所以针对这两个功能我们花费了最多的篇幅进行讲解
-
-但是这里有一点大家不要忘记，我们在本章开篇的时候说过，**员工管理** 是 **用户权限中的一个前置！** 比如我们的分配角色功能就需要配合其他的业务实现，那么具体的整个用户权限都包含了哪些内容呢？
-
-想要知道快来看下一章节吧！
-
+```html
+<el-button type="primary" v-print="printObj" :loading="printLoading"
+  >{{ $t('userInfo.print') }}</el-button
+>
 ```
 
-```
+:::
