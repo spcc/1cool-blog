@@ -418,7 +418,9 @@ module.exports = {
                 '/problem/element-plus/components/el-date-time-picker',
                 '/problem/element-plus/components/el-scrollbar',
                 '/problem/element-plus/components/el-dialog',
-                '/problem/element-plus/components/el-tree'
+                '/problem/element-plus/components/el-tree',
+                '/problem/element-plus/components/el-color-picker',
+                
               ]
             }
           ]
