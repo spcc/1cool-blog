@@ -1,4 +1,4 @@
-const vue3 = require('./skill/vue3')
+const vue3 = require('./sidebar/skill/vue3')
 
 const sidebar = {
   /**
