@@ -1,10 +1,10 @@
 const vue3 = require('./sidebar/skill/vue3')
 
 const sidebar = {
-  /**
-   * vue3
-   */
+  // 知识点 -> vue3
+  // skill/web/vue3
   '/skill/web/vue3': vue3,
+  '/skill/vue3': vue3,
 
   /**
    * js

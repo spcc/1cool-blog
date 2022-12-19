@@ -93,6 +93,23 @@ const vue3 = [
     collapsable: false,
     sidebarDepth: 0,
     path: '/skill/web/vue3/mock'
+  },
+
+  // 实战搭建
+  {
+    title: '实战搭建',
+    collapsable: true,
+    sidebarDepth: 0,
+    children: [
+      {
+        title: '项目初始化',
+        path: '/skill/vue3/create/create'
+      },
+      {
+        title: '项目初始化1',
+        path: '/skill/vue3/create/create1'
+      }
+    ]
   }
 ]
 
