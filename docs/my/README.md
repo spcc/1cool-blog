@@ -9,6 +9,10 @@
 <input type="checkbox"> 收纳好自己的物品（统一管理起来，不要到处乱放）  
 <input type="checkbox"> 花费金额小于 1w
 
+学习
+
+- [vue use 插件]
+
 **HELLO，你好，我是 CC**
 
 一名在职前端程序员
