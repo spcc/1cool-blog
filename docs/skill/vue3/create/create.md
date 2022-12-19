@@ -66,13 +66,13 @@ Done.
 
 #### 1.22) 重构文件
 
-1. 在 `views` 文件夹下新建 `HomeView.vue` 文件：
+1. 在 `views` 文件夹下新建 `dashboard/analysis/index.vue` 文件：
 
 ::: details 点击查看代码
 
 ```vue
 <template>
-  <div>HomeView 页面</div>
+  <div>分析页</div>
 </template>
 ```
 
@@ -89,8 +89,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 const publicRoutes = [
   {
     path: '/',
-    name: 'HomeView',
-    component: () => import('@/views/home/HomeView.vue')
+    name: 'analysis',
+    component: () => import('@/views/dashboard/analysis/index.vue')
   }
 ]
 
@@ -140,7 +140,7 @@ test-vue3
 |  ├─App.vue             # 项目根组件
 |  ├─main.js             # 项目入口文件
 |  ├─views/              # 项目视图目录
-|  | └─Home/index.vue
+|  | └─dashboard/analysis/index.vue
 |  ├─stores/             # 统一状态管理目录-pinia
 |  ├─router/             # 项目路由目录
 |  | └─index.js
