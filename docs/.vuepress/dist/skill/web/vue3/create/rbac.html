@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>6.2 权限架构处理 - 分级分控权限管理 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/cc/js/MouseClickEffect.js"></script>
+    <meta name="description" content="我本可以容忍黑暗，如果我不曾见过太阳">
+    
+    <link rel="preload" href="/cc/assets/css/0.styles.f862f993.css" as="style"><link rel="preload" href="/cc/assets/js/app.8e784566.js" as="script"><link rel="preload" href="/cc/assets/js/2.e5636081.js" as="script"><link rel="preload" href="/cc/assets/js/123.ed56cf8e.js" as="script"><link rel="prefetch" href="/cc/assets/js/10.21d0ac1f.js"><link rel="prefetch" href="/cc/assets/js/100.6f8375cb.js"><link rel="prefetch" href="/cc/assets/js/101.da083ff4.js"><link rel="prefetch" href="/cc/assets/js/102.306f172a.js"><link rel="prefetch" href="/cc/assets/js/103.682f013b.js"><link rel="prefetch" href="/cc/assets/js/104.8176fe46.js"><link rel="prefetch" href="/cc/assets/js/105.1e6cc6b2.js"><link rel="prefetch" href="/cc/assets/js/106.e2e54972.js"><link rel="prefetch" href="/cc/assets/js/107.45f6532d.js"><link rel="prefetch" href="/cc/assets/js/108.1aecaa33.js"><link rel="prefetch" href="/cc/assets/js/109.6b0ce5dc.js"><link rel="prefetch" href="/cc/assets/js/11.4caff987.js"><link rel="prefetch" href="/cc/assets/js/110.bd4f6914.js"><link rel="prefetch" href="/cc/assets/js/111.a0093834.js"><link rel="prefetch" href="/cc/assets/js/112.24803fb0.js"><link rel="prefetch" href="/cc/assets/js/113.8800daa7.js"><link rel="prefetch" href="/cc/assets/js/114.1006c83b.js"><link rel="prefetch" href="/cc/assets/js/115.44614654.js"><link rel="prefetch" href="/cc/assets/js/116.ceb8b4ed.js"><link rel="prefetch" href="/cc/assets/js/117.70cdbc58.js"><link rel="prefetch" href="/cc/assets/js/118.a51ff46c.js"><link rel="prefetch" href="/cc/assets/js/119.2cf3bd01.js"><link rel="prefetch" href="/cc/assets/js/12.0f7036a6.js"><link rel="prefetch" href="/cc/assets/js/120.0feeb174.js"><link rel="prefetch" href="/cc/assets/js/121.ac530513.js"><link rel="prefetch" href="/cc/assets/js/122.2ec2c8cb.js"><link rel="prefetch" href="/cc/assets/js/124.1f138b8a.js"><link rel="prefetch" href="/cc/assets/js/125.6e624775.js"><link rel="prefetch" href="/cc/assets/js/126.87c5a06f.js"><link rel="prefetch" href="/cc/assets/js/127.38f5e1d9.js"><link rel="prefetch" href="/cc/assets/js/128.0d98c3bb.js"><link rel="prefetch" href="/cc/assets/js/129.cfab6ffc.js"><link rel="prefetch" href="/cc/assets/js/13.c2fad430.js"><link rel="prefetch" href="/cc/assets/js/130.69ebb548.js"><link rel="prefetch" href="/cc/assets/js/131.571cac04.js"><link rel="prefetch" href="/cc/assets/js/132.6e66a92f.js"><link rel="prefetch" href="/cc/assets/js/133.60914cc4.js"><link rel="prefetch" href="/cc/assets/js/14.8addf38e.js"><link rel="prefetch" href="/cc/assets/js/15.0b75b5a4.js"><link rel="prefetch" href="/cc/assets/js/16.3d7d2683.js"><link rel="prefetch" href="/cc/assets/js/17.feed4c37.js"><link rel="prefetch" href="/cc/assets/js/18.de30ad69.js"><link rel="prefetch" href="/cc/assets/js/19.0b6c3069.js"><link rel="prefetch" href="/cc/assets/js/20.a106a454.js"><link rel="prefetch" href="/cc/assets/js/21.196f5075.js"><link rel="prefetch" href="/cc/assets/js/22.13bf826a.js"><link rel="prefetch" href="/cc/assets/js/23.96186cd4.js"><link rel="prefetch" href="/cc/assets/js/24.ab9261c5.js"><link rel="prefetch" href="/cc/assets/js/25.4b367695.js"><link rel="prefetch" href="/cc/assets/js/26.ad5996cb.js"><link rel="prefetch" href="/cc/assets/js/27.8255c470.js"><link rel="prefetch" href="/cc/assets/js/28.de14f0a3.js"><link rel="prefetch" href="/cc/assets/js/29.28b7235e.js"><link rel="prefetch" href="/cc/assets/js/3.9665f364.js"><link rel="prefetch" href="/cc/assets/js/30.0e364dac.js"><link rel="prefetch" href="/cc/assets/js/31.b8b9bdfc.js"><link rel="prefetch" href="/cc/assets/js/32.b1bfc5f3.js"><link rel="prefetch" href="/cc/assets/js/33.6b8ad275.js"><link rel="prefetch" href="/cc/assets/js/34.1927afc0.js"><link rel="prefetch" href="/cc/assets/js/35.9a5d84ba.js"><link rel="prefetch" href="/cc/assets/js/36.37e44bf2.js"><link rel="prefetch" href="/cc/assets/js/37.ea34894a.js"><link rel="prefetch" href="/cc/assets/js/38.683d01a4.js"><link rel="prefetch" href="/cc/assets/js/39.016abe55.js"><link rel="prefetch" href="/cc/assets/js/4.a185d924.js"><link rel="prefetch" href="/cc/assets/js/40.87990494.js"><link rel="prefetch" href="/cc/assets/js/41.031bdba4.js"><link rel="prefetch" href="/cc/assets/js/42.b9aef462.js"><link rel="prefetch" href="/cc/assets/js/43.5990eac0.js"><link rel="prefetch" href="/cc/assets/js/44.1c8e6928.js"><link rel="prefetch" href="/cc/assets/js/45.82e21699.js"><link rel="prefetch" href="/cc/assets/js/46.f67e62f9.js"><link rel="prefetch" href="/cc/assets/js/47.9277f137.js"><link rel="prefetch" href="/cc/assets/js/48.6634b9c6.js"><link rel="prefetch" href="/cc/assets/js/49.5ad68f6e.js"><link rel="prefetch" href="/cc/assets/js/5.987e1949.js"><link rel="prefetch" href="/cc/assets/js/50.2e92efcc.js"><link rel="prefetch" href="/cc/assets/js/51.c7e4fc4e.js"><link rel="prefetch" href="/cc/assets/js/52.d39c88bd.js"><link rel="prefetch" href="/cc/assets/js/53.728b915a.js"><link rel="prefetch" href="/cc/assets/js/54.f29622d9.js"><link rel="prefetch" href="/cc/assets/js/55.1ce50bfb.js"><link rel="prefetch" href="/cc/assets/js/56.bf6d1cf2.js"><link rel="prefetch" href="/cc/assets/js/57.1105cda5.js"><link rel="prefetch" href="/cc/assets/js/58.322c5055.js"><link rel="prefetch" href="/cc/assets/js/59.f62d0c26.js"><link rel="prefetch" href="/cc/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/cc/assets/js/60.55c28da4.js"><link rel="prefetch" href="/cc/assets/js/61.7b3392b2.js"><link rel="prefetch" href="/cc/assets/js/62.105266fb.js"><link rel="prefetch" href="/cc/assets/js/63.3fd468e8.js"><link rel="prefetch" href="/cc/assets/js/64.23b7f202.js"><link rel="prefetch" href="/cc/assets/js/65.b0faf0ee.js"><link rel="prefetch" href="/cc/assets/js/66.ada77ec8.js"><link rel="prefetch" href="/cc/assets/js/67.36589366.js"><link rel="prefetch" href="/cc/assets/js/68.9b1ba419.js"><link rel="prefetch" href="/cc/assets/js/69.f81b9185.js"><link rel="prefetch" href="/cc/assets/js/7.175c0715.js"><link rel="prefetch" href="/cc/assets/js/70.04c7e330.js"><link rel="prefetch" href="/cc/assets/js/71.855b82eb.js"><link rel="prefetch" href="/cc/assets/js/72.b5f6e20d.js"><link rel="prefetch" href="/cc/assets/js/73.6b7349e3.js"><link rel="prefetch" href="/cc/assets/js/74.19800bab.js"><link rel="prefetch" href="/cc/assets/js/75.6606d3ef.js"><link rel="prefetch" href="/cc/assets/js/76.749861f8.js"><link rel="prefetch" href="/cc/assets/js/77.ef4b918b.js"><link rel="prefetch" href="/cc/assets/js/78.f47ec0ad.js"><link rel="prefetch" href="/cc/assets/js/79.18d02a78.js"><link rel="prefetch" href="/cc/assets/js/8.1e851244.js"><link rel="prefetch" href="/cc/assets/js/80.d15c5480.js"><link rel="prefetch" href="/cc/assets/js/81.717c14fb.js"><link rel="prefetch" href="/cc/assets/js/82.f9d9963a.js"><link rel="prefetch" href="/cc/assets/js/83.116b930c.js"><link rel="prefetch" href="/cc/assets/js/84.6f0bbf5b.js"><link rel="prefetch" href="/cc/assets/js/85.91c70830.js"><link rel="prefetch" href="/cc/assets/js/86.3e8ebd1a.js"><link rel="prefetch" href="/cc/assets/js/87.d4af6dc1.js"><link rel="prefetch" href="/cc/assets/js/88.424e06a2.js"><link rel="prefetch" href="/cc/assets/js/89.3e973887.js"><link rel="prefetch" href="/cc/assets/js/9.24860e18.js"><link rel="prefetch" href="/cc/assets/js/90.8dc44f92.js"><link rel="prefetch" href="/cc/assets/js/91.cae982e6.js"><link rel="prefetch" href="/cc/assets/js/92.d5e1463d.js"><link rel="prefetch" href="/cc/assets/js/93.8b3f7ade.js"><link rel="prefetch" href="/cc/assets/js/94.4d924d63.js"><link rel="prefetch" href="/cc/assets/js/95.7943b5de.js"><link rel="prefetch" href="/cc/assets/js/96.236e593f.js"><link rel="prefetch" href="/cc/assets/js/97.b9484bf7.js"><link rel="prefetch" href="/cc/assets/js/98.2887e006.js"><link rel="prefetch" href="/cc/assets/js/99.2ab5c15d.js">
+    <link rel="stylesheet" href="/cc/assets/css/0.styles.f862f993.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/cc/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>vue3</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>实战搭建</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/vue3/create/init.html" class="sidebar-link">项目规范</a></li><li><a href="/cc/skill/web/vue3/create/login.html" class="sidebar-link">登录架构</a></li><li><a href="/cc/skill/web/vue3/create/layout.html" class="sidebar-link">Layout 架构解决方案</a></li><li><a href="/cc/skill/web/vue3/create/component.html" class="sidebar-link">通用功能封装</a></li><li><a href="/cc/skill/web/vue3/create/profile.html" class="sidebar-link">个人中心模块</a></li><li><a href="/cc/skill/web/vue3/create/quanXian.html" class="sidebar-link">6.1 权限架构处理 - 用户权限处理</a></li><li><a href="/cc/skill/web/vue3/create/rbac.html" aria-current="page" class="active sidebar-link">6.2 权限架构处理 - 分级分控权限管理</a></li><li><a href="/cc/skill/web/vue3/create/table.html" class="sidebar-link">7. 动态表格渲染方案之文章排名业务实现</a></li><li><a href="/cc/skill/web/vue3/create/markdown.html" class="sidebar-link">8. 富文本与 markdown 综合处理之创建文章</a></li><li><a href="/cc/skill/web/vue3/create/publish.html" class="sidebar-link">第十一章：项目部署之通用方案</a></li><li><a href="/cc/skill/web/vue3/create/zongJie.html" class="sidebar-link">第十二章：课程总结</a></li><li><a href="/cc/skill/web/vue3/create/ss.html" class="sidebar-link">第十章：富文本与markdown综合处理之创建文章</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>初始化</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li><li><a href="/cc/skill/web/vue3/mock.html" class="sidebar-link">Mock</a></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#_8-02-权限理论-rbac-权限控制体系" class="anchor-item__link" style="margin-left:0;">
+        8-02：权限理论：RBAC 权限控制体系
+      </a></li><li class="anchor-item"><a href="#_1-角色列表展示" class="anchor-item__link" style="margin-left:0;">
+        1. 角色列表展示
+      </a></li><li class="anchor-item"><a href="#_1-1-角色列表展示" class="anchor-item__link" style="margin-left:20px;">
+        1.1 角色列表展示
+      </a></li><li class="anchor-item"><a href="#_1-2-权限列表展示" class="anchor-item__link" style="margin-left:20px;">
+        1.2 权限列表展示
+      </a></li><li class="anchor-item"><a href="#_1-3-为用户分配角色" class="anchor-item__link" style="margin-left:20px;">
+        1.3 为用户分配角色
+      </a></li><li class="anchor-item"><a href="#_1-4-为角色指定权限" class="anchor-item__link" style="margin-left:20px;">
+        1.4 为角色指定权限
+      </a></li><li class="anchor-item"><a href="#_2-基于-rbac-的权限控制体系原理与实现分析" class="anchor-item__link" style="margin-left:0;">
+        2. 基于 RBAC 的权限控制体系原理与实现分析
+      </a></li><li class="anchor-item"><a href="#_8-08-业务落地-定义页面权限控制动作-实现页面权限受控" class="anchor-item__link" style="margin-left:0;">
+        8-08：业务落地：定义页面权限控制动作，实现页面权限受控
+      </a></li><li class="anchor-item"><a href="#_8-09-业务落地-重置路由表数据" class="anchor-item__link" style="margin-left:0;">
+        8-09：业务落地：重置路由表数据
+      </a></li><li class="anchor-item"><a href="#_8-10-业务落地-创建功能受控指令" class="anchor-item__link" style="margin-left:0;">
+        8-10：业务落地：创建功能受控指令
+      </a></li><li class="anchor-item"><a href="#_8-11-总结" class="anchor-item__link" style="margin-left:0;">
+        8-11：总结
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="_6-2-权限架构处理-分级分控权限管理"><a href="#_6-2-权限架构处理-分级分控权限管理" class="header-anchor">#</a> 6.2 权限架构处理 - 分级分控权限管理</h1> <p>本章以权限控制为主，整个章节会分成三部分来去讲解：</p> <ol><li>权限理论：明确什么是 <code>RBAC</code> 权限控制体现</li> <li>辅助业务：完善 用户、角色、权限 三个页面功能</li> <li>核心功能：落地实现 <code>RBAC</code> 权限控制系统</li></ol> <h2 id="_8-02-权限理论-rbac-权限控制体系"><a href="#_8-02-权限理论-rbac-权限控制体系" class="header-anchor">#</a> 8-02：权限理论：RBAC 权限控制体系</h2> <p>制定了一个用户由：<strong>用户 -&gt; 角色 -&gt; 权限</strong> 的一个分配关系。</p> <p><strong>RBAC 权限控制体系</strong>，也就是 <strong>基于 角色的权限 控制 用户的访问</strong></p> <h2 id="_1-角色列表展示"><a href="#_1-角色列表展示" class="header-anchor">#</a> 1. 角色列表展示</h2> <p>那么明确好了 <code>RBAC</code> 的概念之后，接下来我们就可以来去实现我们的辅助业务了，所谓辅助业务具体指的就是：</p> <ol><li>员工管理（用户列表）
+<ol><li>为用户分配角色</li></ol></li> <li>角色列表
+<ol><li>角色列表展示</li> <li>为角色分配权限</li></ol></li> <li>权限列表
+<ol><li>权限列表展示</li></ol></li></ol> <h3 id="_1-1-角色列表展示"><a href="#_1-1-角色列表展示" class="header-anchor">#</a> 1.1 角色列表展示</h3> <ol><li>创建 <code>api/role.js</code> 接口文件：</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> request <span class="token keyword">from</span> <span class="token string">'@/utils/request'</span>
+
+<span class="token comment">/**
+ * 获取所有角色
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">roleList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/role/list'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="2"><li>在 <code>views/role-list/index.vue</code> 中获取数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> roleList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/role'</span>
+
+<span class="token keyword">const</span> allRoles <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getRoleList</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  allRoles<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">roleList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">getRoleList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-card</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table</span> <span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>allRoles<span class="token punctuation">&quot;</span></span> <span class="token attr-name">border</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%</span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>role.index<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>120<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>role.name<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>title<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>role.desc<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>describe<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>role.action<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>action<span class="token punctuation">&quot;</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>260<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>mini<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            {{ $t('role.assignPermissions') }}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-card</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <h3 id="_1-2-权限列表展示"><a href="#_1-2-权限列表展示" class="header-anchor">#</a> 1.2 权限列表展示</h3> <ol><li>创建 <code>api/permission.js</code> 文件</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> request <span class="token keyword">from</span> <span class="token string">'@/utils/request'</span>
+
+<span class="token comment">/**
+ * 获取所有权限
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">permissionList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/permission/list'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="2"><li>在 <code>views/permission-list/index.vue</code> 获取数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> permissionList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/permission'</span>
+<span class="token comment">/**
+ * 权限分级：
+ * 1. 一级权限为页面权限
+ *  permissionMark 对应 路由名称
+ * 2. 二级权限为功能权限
+ *  permissionMark 对应 功能权限表
+ */</span>
+<span class="token comment">// 所有权限</span>
+<span class="token keyword">const</span> allPermission <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getPermissionList</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  allPermission<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">permissionList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">getPermissionList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-card</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table</span>
+        <span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>allPermission<span class="token punctuation">&quot;</span></span>
+        <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span> <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 20px</span><span class="token punctuation">&quot;</span></span></span>
+        <span class="token attr-name">row-key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>id<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">border</span>
+        <span class="token attr-name">default-expand-all</span>
+        <span class="token attr-name">:tree-props</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>{ children: <span class="token punctuation">'</span>children<span class="token punctuation">'</span>, hasChildren: <span class="token punctuation">'</span>hasChildren<span class="token punctuation">'</span> }<span class="token punctuation">&quot;</span></span>
+      <span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span>
+          <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>permissionName<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>permission.name<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>180<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span>
+          <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>permissionMark<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>permission.mark<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>180<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>permissionDesc<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>permission.desc<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-card</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <h3 id="_1-3-为用户分配角色"><a href="#_1-3-为用户分配角色" class="header-anchor">#</a> 1.3 为用户分配角色</h3> <ol><li>创建为用户分配角色弹出层 <code>views/user-manage/components/roles.vue</code></li></ol> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-dialog</span>
+    <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>excel.roleDialogTitle<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">:model-value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>modelValue<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">@close</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>closed<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>
+    内容
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#footer</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dialog-footer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>closed<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ $t('universal.cancel') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>onConfirm<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{
+          $t('universal.confirm')
+        }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-dialog</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> defineProps<span class="token punctuation">,</span> defineEmits <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">modelValue</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'update:modelValue'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">/**
+ 确定按钮点击事件
+*/</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * 关闭
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">closed</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'update:modelValue'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><ol start="2"><li>在 <code>user-manage/index.vue</code> 中点击查看，展示弹出层</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>roles-dialog</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>roleDialogVisible<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>roles-dialog</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> RolesDialog <span class="token keyword">from</span> <span class="token string">'./components/roles.vue'</span>
+
+<span class="token comment">/* 查看角色的点击事件 */</span>
+<span class="token keyword">const</span> roleDialogVisible <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onShowRoleClick</span> <span class="token operator">=</span> <span class="token parameter">row</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  roleDialogVisible<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <ol start="3"><li><p>在弹出层中我们需要利用 <a href="https://element-plus.org/zh-CN/component/checkbox.html" target="_blank" rel="noopener noreferrer">el-checkbox<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 进行数据展示，此时数据分为两种：</p> <ol><li>所有角色（已存在）</li> <li>用户当前角色</li></ol></li> <li><p>在 <code>api/user-manage.js</code> 中定义获取用户当前角色接口</p></li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * 获取指定用户角色
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">userRoles</span> <span class="token operator">=</span> <span class="token parameter">id</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/user-manage/role/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="5"><li>在 <code>roles.vue</code> 组件中获取所有角色数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> roleList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/role'</span>
+<span class="token operator">...</span>
+
+<span class="token comment">// 所有角色</span>
+<span class="token keyword">const</span> allRoleList <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">// 获取所有角色数据的方法</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getListData</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  allRoleList<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">roleList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">getListData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 当前用户角色</span>
+<span class="token keyword">const</span> userRoleTitleList <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-checkbox-group</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>userRoleTitleList<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 利用 [el-checkbox](https://element-plus.org/zh-CN/component/checkbox.html)
+    渲染所有角色 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-checkbox</span>
+      <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item in allRoleList<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.id<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.title<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-checkbox</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-checkbox-group</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <ol start="6"><li>接下来我们可以根据 <code>userId</code> 获取数据，但是这里大家要注意：<strong>因为该 <code>userId</code> 需要在 <code>user-manage</code> 用户点击之后获取当前点击行的 <code>id</code>。所以在 <code>roles</code> 组件的初始状态下，获取到的 <code>userId</code> 为 <code>null</code> 。</strong> 因此我们想要根据 <code>userId</code> 获取用户当前角色数据，我们需要 <code>watch userId</code> 在 <code>userId</code> 有值的前提下，获取数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 调用 `userRoles` 接口需要 **当前用户 ID**，所以我们需要定义对应的 `props`</span>
+<span class="token keyword">const</span> props <span class="token operator">=</span> <span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span> userId<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 当前用户角色</span>
+<span class="token keyword">const</span> userRoleTitleList <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">// 获取当前用户角色</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getUserRoles</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">userRoles</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>userId<span class="token punctuation">)</span>
+  userRoleTitleList<span class="token punctuation">.</span>value <span class="token operator">=</span> res<span class="token punctuation">.</span>role<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> item<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">watch</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> props<span class="token punctuation">.</span>userId<span class="token punctuation">,</span>
+  <span class="token parameter">val</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token function">getUserRoles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div></details> <ol start="7"><li>在 <code>user-manage.vue</code> 中传递数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>roles-dialog</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>roleDialogVisible<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:userId</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>selectUserId<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">const</span> selectUserId <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onShowRoleClick</span> <span class="token operator">=</span> <span class="token parameter">row</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  selectUserId<span class="token punctuation">.</span>value <span class="token operator">=</span> row<span class="token punctuation">.</span>id
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <ol start="8"><li>在 <code>dialog</code> 关闭时重置 <code>selectUserId</code></li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 保证每次打开重新获取用户角色数据</span>
+<span class="token function">watch</span><span class="token punctuation">(</span>roleDialogVisible<span class="token punctuation">,</span> <span class="token parameter">val</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>val<span class="token punctuation">)</span> selectUserId<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></details> <ol start="9"><li>在 <code>api/user-manage</code> 中定义分配角色接口</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * 分用户分配角色
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">updateRole</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">id<span class="token punctuation">,</span> roles</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/user-manage/update-role/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      roles
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="10"><li>点击确定调用接口</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+  确定按钮点击事件
+  */</span>
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 处理数据结构</span>
+  <span class="token keyword">const</span> roles <span class="token operator">=</span> userRoleTitleList<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">title</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> allRoleList<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token parameter">role</span> <span class="token operator">=&gt;</span> role<span class="token punctuation">.</span>title <span class="token operator">===</span> title<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">await</span> <span class="token function">updateRole</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>userId<span class="token punctuation">,</span> roles<span class="token punctuation">)</span>
+
+  ElMessage<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'role.updateRoleSuccess'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="11"><li>修改成功后，发送事件</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'update:modelValue'</span><span class="token punctuation">,</span> <span class="token string">'updateRole'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  <span class="token comment">// 角色更新成功</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'updateRole'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <ol start="12"><li>在 <code>user-manage</code> 中监听角色更新成功事件，重新获取数据</li></ol> <details class="custom-block details"><summary>点击查看代码</summary> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>roles-dialog</span>
+  <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>roleDialogVisible<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">:userId</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>selectUserId<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">@updateRole</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>getListData<span class="token punctuation">&quot;</span></span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>roles-dialog</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <h3 id="_1-4-为角色指定权限"><a href="#_1-4-为角色指定权限" class="header-anchor">#</a> 1.4 为角色指定权限</h3> <p>为角色指定权限通过 <strong>弹出层中的 <a href="https://element-plus.org/zh-CN/component/tree.html" target="_blank" rel="noopener noreferrer">树形控件<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 处理</strong>，整体的流程与上一小节相差无几。</p> <ol><li><p>创建 为角色指定权限弹出层</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-dialog</span>
+    <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>excel.roleDialogTitle<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">:model-value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>modelValue<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">@close</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>closed<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>
+    内容
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#footer</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dialog-footer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>closed<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ $t('universal.cancel') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>onConfirm<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{
+          $t('universal.confirm')
+        }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-dialog</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span>
+import { defineProps, defineEmits } from 'vue'
+defineProps({
+  modelValue: {
+    type: Boolean,
+    required: true
+  }
+})
+const emits = defineEmits(['update:modelValue'])
+
+/**
+  确定按钮点击事件
+ */
+const onConfirm = async () =&gt; {
+  closed()
+}
+
+/**
+ * 关闭
+ */
+const closed = () =&gt; {
+  emits('update:modelValue', false)
+}
+&lt;/&gt;
+</code></pre></div></li> <li><p>在 <code>roles-list</code> 中点击查看，展示弹出层</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-card</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table</span> <span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>allRoles<span class="token punctuation">&quot;</span></span> <span class="token attr-name">border</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%</span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>
+        ...
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-table-column</span> <span class="token attr-name">...</span> <span class="token attr-name">#default</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>{ row }<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span>
+            <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>mini<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>onDistributePermissionClick(row)<span class="token punctuation">&quot;</span></span>
+          <span class="token punctuation">&gt;</span></span>
+            {{ $t('role.assignPermissions') }}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table-column</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-table</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-card</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>distribute-permission</span>
+      <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>distributePermissionVisible<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>distribute-permission</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token keyword">import</span> DistributePermission <span class="token keyword">from</span> <span class="token string">'./components/DistributePermission.vue'</span>
+
+<span class="token operator">...</span>
+
+<span class="token comment">/**
+ * 分配权限
+ */</span>
+<span class="token keyword">const</span> distributePermissionVisible <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onDistributePermissionClick</span> <span class="token operator">=</span> <span class="token parameter">row</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  distributePermissionVisible<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></li> <li><p>在弹出层中我们需要利用 <a href="https://element-plus.org/zh-CN/component/tree.html" target="_blank" rel="noopener noreferrer">el-tree<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 进行数据展示，此时数据分为两种：</p> <ol><li>所有权限（已存在）</li> <li>角色对应的权限</li></ol></li> <li><p>所以我们需要先获取对应数据</p></li> <li><p>在 <code>api/role</code> 中定义获取角色当前权限</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * 获取指定角色的权限
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">rolePermission</span> <span class="token operator">=</span> <span class="token parameter">roleId</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/role/permission/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>roleId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>在 <code>DistributePermission</code> 组件中获取所有权限数据</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> defineProps<span class="token punctuation">,</span> defineEmits<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> permissionList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/permission'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> watchSwitchLang <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/i18n'</span>
+<span class="token operator">...</span>
+
+<span class="token comment">// 所有权限</span>
+<span class="token keyword">const</span> allPermission <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getPermissionList</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  allPermission<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">permissionList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">getPermissionList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">watchSwitchLang</span><span class="token punctuation">(</span>getPermissionList<span class="token punctuation">)</span>
+
+<span class="token operator">...</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></li> <li><p>使用 <a href="https://element-plus.org/zh-CN/component/tree.html" target="_blank" rel="noopener noreferrer">el-tree<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 渲染权限数据</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  ...
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-tree</span>
+    <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>treeRef<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>allPermission<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">show-checkbox</span>
+    <span class="token attr-name">check-strictly</span>
+    <span class="token attr-name">node-key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>id<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">default-expand-all</span>
+    <span class="token attr-name">:props</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>defaultProps<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-tree</span><span class="token punctuation">&gt;</span></span>
+  ...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token comment">// 属性结构配置</span>
+<span class="token keyword">const</span> defaultProps <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token string">'children'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'permissionName'</span>
+<span class="token punctuation">}</span>
+<span class="token operator">...</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></li> <li><p>接下来渲染选中项，即：角色当前权限</p></li> <li><p>调用 <code>rolePermission</code> 接口需要 <strong>当前角色 ID</strong>，所以我们需要定义对应的 <code>props</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> props <span class="token operator">=</span> <span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">modelValue</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">roleId</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></li> <li><p>在 <code>role-list</code> 中传递角色 ID</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>distribute-permission</span>
+  <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>distributePermissionVisible<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">:roleId</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>selectRoleId<span class="token punctuation">&quot;</span></span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>distribute-permission</span><span class="token punctuation">&gt;</span></span>
+
+/** * 分配权限 */ const selectRoleId = ref('') const
+onDistributePermissionClick = row =&gt; { selectRoleId.value = row.id }
+</code></pre></div></li> <li><p>调用 <code>rolePermission</code> 接口获取数据</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> rolePermission <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/role'</span>
+
+<span class="token comment">// 获取当前用户角色的权限</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getRolePermission</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> checkedKeys <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">rolePermission</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>roleId<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>checkedKeys<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">watch</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> props<span class="token punctuation">.</span>roleId<span class="token punctuation">,</span>
+  <span class="token parameter">val</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token function">getRolePermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div></li> <li><p>根据获取到的数据渲染选中的 <code>tree</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// tree 节点</span>
+<span class="token keyword">const</span> treeRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 获取当前用户角色的权限</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getRolePermission</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> checkedKeys <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">rolePermission</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>roleId<span class="token punctuation">)</span>
+  treeRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">setCheckedKeys</span><span class="token punctuation">(</span>checkedKeys<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>在 <code>api/role</code> 中定义分配权限接口</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * 为角色修改权限
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">distributePermission</span> <span class="token operator">=</span> <span class="token parameter">data</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/role/distribute-permission'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+    data
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>点击确定调用接口</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> rolePermission<span class="token punctuation">,</span> distributePermission <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/role'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ElMessage <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span>
+
+<span class="token comment">/**
+  确定按钮点击事件
+ */</span>
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">await</span> <span class="token function">distributePermission</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">roleId</span><span class="token operator">:</span> props<span class="token punctuation">.</span>roleId<span class="token punctuation">,</span>
+    <span class="token literal-property property">permissions</span><span class="token operator">:</span> treeRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">getCheckedKeys</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  ElMessage<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'role.updateRoleSuccess'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li></ol> <h2 id="_2-基于-rbac-的权限控制体系原理与实现分析"><a href="#_2-基于-rbac-的权限控制体系原理与实现分析" class="header-anchor">#</a> 2. 基于 RBAC 的权限控制体系原理与实现分析</h2> <p>那么接下来就进入我们本章中的核心内容 <strong>基于 RBAC 的权限控制</strong> ，在之前我们的 <strong>权限理论</strong> 这一小节的时候说过 <code>RBAC</code> 是基于 <strong>用户 -&gt; 角色 -&gt; 权限</strong> 的 <strong>基于 角色的权限 控制 用户的访问</strong> 的体系。</p> <p>在这套体系中，最基层的就是 <strong>权限部分</strong> 。那么这个权限部分在我们的项目中具体的呈现是什么呢？那么下面我们就来看一下：</p> <ol><li>我们可以先为 <strong>员工角色</strong> 指定 <strong>空权限</strong></li> <li>然后为我们的 <strong>测试用户</strong> 指定指定 <strong>员工角色</strong></li> <li>此时我们重新登录 <strong>测试用户</strong></li> <li>可以发现左侧菜单中仅存在 <strong>个人中心</strong> 页面</li> <li>然后我们重新登录 <strong>超级管理员</strong> 账号</li> <li>为 <strong>员工角色</strong> 指定 <strong>员工管理 &amp;&amp; 分配角色</strong> 权限</li> <li>然后为我们的 <strong>测试用户</strong> 指定指定 <strong>员工角色</strong></li> <li>此时我们重新登录 <strong>测试用户</strong></li> <li>可以发现左侧菜单中多出 <strong>员工管理</strong> 页面，并且页面中仅存在指定的 <strong>分配角色</strong> 功能</li></ol> <p>以上就是我们权限系统中的具体呈现。</p> <p>那么由此呈现我们可以看出，整个权限系统其实分成了两部分：</p> <ol><li>页面权限：比如 员工管理</li> <li>功能权限：比如 分配角色</li></ol> <p>其中 <strong>页面权限</strong> 表示：当前用户可以访问的页面</p> <p><strong>功能权限</strong> 表示：当前用户可以访问的权限功能（PS：并非所有功能有需要权限）</p> <p>那么明确好了以上内容之后，接下来我们来看下，以上功能如何进行实现呢？</p> <p>首先我们先来看 <strong>页面权限：</strong></p> <p>所谓页面权限包含两部分内容：</p> <ol><li>用户可看到的：左侧 <code>menu</code> 菜单的 <code>item</code> 展示</li> <li>用户看不到的：路由表配置</li></ol> <p>我们知道 <strong>左侧 <code>menu</code> 菜单是根据路由表自动生成的。</strong> 所以以上第一部分的内容其实就是由第二部分引起的。</p> <p>那么我们就可以来看一下 <strong>路由表配置了</strong>。</p> <p>不知道大家还记不记得，之前我们设置路由表的时候，把路由表分成了两部分：</p> <ol><li>私有路由表 <code>privateRoutes</code>：依据权限进行动态配置的</li> <li>公开路由表 <code>publicRoutes</code>：无权限要求的</li></ol> <p>那么想要实现我们的 <strong>页面权限</strong> 核心的点就是在我们的 <strong>私有路由表 <code>privateRoutes</code></strong></p> <p>那么在 <strong>私有路由表 <code>privateRoutes</code></strong> 这里我们能做什么呢？</p> <p>时刻记住我们最终的目的，我们期望的是：<strong>不同的权限进入系统可以看到不同的路由</strong> 。那么换句话而言是不是就是：<strong>根据不同的权限数据，生成不同的私有路由表？</strong></p> <p>对于 <code>vue-router 4</code> 而言，提供了 <a href="https://next.router.vuejs.org/zh/api/#addroute" target="_blank" rel="noopener noreferrer">addRoute API<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> ，可以 <strong>动态添加路由到路由表中</strong>，那么我们就可以利用这个 <code>API</code> 生成不同的路由表数据。</p> <p>那么现在我们来总结一下以上所说的内容：</p> <ol><li>页面权限实现的核心在于 <strong>路由表配置</strong></li> <li>路由表配置的核心在于 <strong>私有路由表 <code>privateRoutes</code></strong></li> <li>私有路由表 <code>privateRoutes</code> 的核心在于 <strong><a href="https://next.router.vuejs.org/zh/api/#addroute" target="_blank" rel="noopener noreferrer">addRoute API<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></strong></li></ol> <p>那么简单一句话总结，我们只需要：**根据不同的权限数据，利用 <a href="https://next.router.vuejs.org/zh/api/#addroute" target="_blank" rel="noopener noreferrer">addRoute API<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 生成不同的私有路由表 ** 即可实现 <strong>页面权限</strong> 功能</p> <p>那么接下来我们来明确 <strong>功能权限：</strong></p> <p><strong>功能权限</strong> 的难度低于页面权限，所谓功能权限指的只有一点：</p> <ol><li>根据不同的 <strong>权限数据</strong>，展示不同的 <strong>功能按钮</strong></li></ol> <p>那么看这一条，依据我们刚才所说的 <strong>页面权限</strong> 经验，估计大家就应该比较好理解了。</p> <p>对于 <strong>功能权限</strong> 而言，我们只需要：<strong>根据权限数据，隐藏功能按钮</strong> 即可</p> <p>那么到这里我们已经分析完了 <strong>页面权限</strong> 与 <strong>功能权限</strong></p> <p>那么接下来我们就可以分别来看一下两者的实现方案了。</p> <p>首先我们来看 <strong>页面权限：</strong></p> <p>整个 <strong>页面权限</strong> 实现分为以下几步：</p> <ol><li>获取 <strong>权限数据</strong></li> <li><strong>私有路由表</strong> 不再被直接加入到 <code>routes</code> 中</li> <li>利用 <a href="https://next.router.vuejs.org/zh/api/#addroute" target="_blank" rel="noopener noreferrer">addRoute API<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 动态添加路由到 <strong>路由表</strong> 中</li></ol> <p>接下来是 <strong>功能权限：</strong></p> <p>整个 <strong>功能权限</strong> 实现分为以下几步：</p> <ol><li>获取 <strong>权限数据</strong></li> <li>定义 <strong>隐藏按钮方式</strong>（通过指令）</li> <li>依据数据隐藏按钮</li></ol> <h2 id="_8-08-业务落地-定义页面权限控制动作-实现页面权限受控"><a href="#_8-08-业务落地-定义页面权限控制动作-实现页面权限受控" class="header-anchor">#</a> 8-08：业务落地：定义页面权限控制动作，实现页面权限受控</h2> <p>那么这一小节我们来实现 <strong>页面权限</strong></p> <p>首先我们先来明确前两步的内容：</p> <ol><li><p>页面权限数据在 <strong><code>userInfo -&gt; permission -&gt; menus</code> 之中</strong></p></li> <li><p><strong>私有路由表</strong> 不再被直接加入到 <code>routes</code> 中</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> privateRoutes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> publicRoutes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">history</span><span class="token operator">:</span> <span class="token function">createWebHashHistory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> publicRoutes
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></li></ol> <p>最后我们来实现第三步：利用 <a href="https://next.router.vuejs.org/zh/api/#addroute" target="_blank" rel="noopener noreferrer">addRoute API<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 动态添加路由到 <strong>路由表</strong> 中</p> <ol><li><p>定义添加的动作，该动作我们通过一个新的 <code>vuex</code> 模块进行</p></li> <li><p>创建 <code>store/modules/permission</code> 模块</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 专门处理权限路由的模块</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> publicRoutes<span class="token punctuation">,</span> privateRoutes <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/router'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 路由表：初始拥有静态路由权限</span>
+    <span class="token literal-property property">routes</span><span class="token operator">:</span> publicRoutes
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * 增加路由
+     */</span>
+    <span class="token function">setRoutes</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> newRoutes</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 永远在静态路由的基础上增加新路由</span>
+      state<span class="token punctuation">.</span>routes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>publicRoutes<span class="token punctuation">,</span> <span class="token operator">...</span>newRoutes<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * 根据权限筛选路由
+     */</span>
+    <span class="token function">filterRoutes</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> menus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>那么 <code>filterRoutes</code> 这个动作我们怎么制作呢？</p></li> <li><p>我们可以为每个权限路由指定一个 <code>name</code>，每个 <code>name</code> 对应一个 <strong>页面权限</strong></p></li> <li><p>通过 <code>name</code> 与 <strong>页面权限</strong> 匹配的方式筛选出对应的权限路由</p></li> <li><p>所以我们需要对现有的私有路由表进行重制</p></li> <li><p>创建 <code>router/modules</code> 文件夹</p></li> <li><p>写入 5 个页面权限路由</p></li> <li><p><code>UserManage.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> layout <span class="token keyword">from</span> <span class="token string">'@/layout'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">component</span><span class="token operator">:</span> layout<span class="token punctuation">,</span>
+  <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/user/manage'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'userManage'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'user'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'personnel'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/manage'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/user-manage/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'userManage'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'personnel-manage'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/info/:id'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'userInfo'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/user-info/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'userInfo'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/import'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'import'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/import/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'excelImport'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><code>RoleList.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> layout <span class="token keyword">from</span> <span class="token string">'@/layout'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">component</span><span class="token operator">:</span> layout<span class="token punctuation">,</span>
+  <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/user/manage'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'roleList'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'user'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'personnel'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/role'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/role-list/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'roleList'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'role'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><code>PermissionList.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> layout <span class="token keyword">from</span> <span class="token string">'@/layout'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">component</span><span class="token operator">:</span> layout<span class="token punctuation">,</span>
+  <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/user/manage'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'roleList'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'user'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'personnel'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/permission'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/permission-list/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'permissionList'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'permission'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><code>Article.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> layout <span class="token keyword">from</span> <span class="token string">'@/layout'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">component</span><span class="token operator">:</span> layout<span class="token punctuation">,</span>
+  <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/article/ranking'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'articleRanking'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'article'</span><span class="token punctuation">,</span> <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'article'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article/ranking'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/article-ranking/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'articleRanking'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'article-ranking'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article/:id'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/article-detail/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'articleDetail'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><code>ArticleCreate.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> layout <span class="token keyword">from</span> <span class="token string">'@/layout'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">component</span><span class="token operator">:</span> layout<span class="token punctuation">,</span>
+  <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/article/ranking'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'articleCreate'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'article'</span><span class="token punctuation">,</span> <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'article'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article/create'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/article-create/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'articleCreate'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">icon</span><span class="token operator">:</span> <span class="token string">'article-create'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article/editor/:id'</span><span class="token punctuation">,</span>
+      <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/views/article-create/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">'articleEditor'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>以上内容存放于 <strong>课程资料 -&gt; 动态路由表</strong> 中</p></li> <li><p>在 <code>router/index</code> 中合并这些路由到 <code>privateRoutes</code> 中</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> ArticleCreaterRouter <span class="token keyword">from</span> <span class="token string">'./modules/ArticleCreate'</span>
+<span class="token keyword">import</span> ArticleRouter <span class="token keyword">from</span> <span class="token string">'./modules/Article'</span>
+<span class="token keyword">import</span> PermissionListRouter <span class="token keyword">from</span> <span class="token string">'./modules/PermissionList'</span>
+<span class="token keyword">import</span> RoleListRouter <span class="token keyword">from</span> <span class="token string">'./modules/RoleList'</span>
+<span class="token keyword">import</span> UserManageRouter <span class="token keyword">from</span> <span class="token string">'./modules/UserManage'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> asyncRoutes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  RoleListRouter<span class="token punctuation">,</span>
+  UserManageRouter<span class="token punctuation">,</span>
+  PermissionListRouter<span class="token punctuation">,</span>
+  ArticleCreaterRouter<span class="token punctuation">,</span>
+  ArticleRouter
+<span class="token punctuation">]</span>
+</code></pre></div></li> <li><p>此时所有的 <strong>权限页面</strong> 都拥有一个名字，这个名字与 <strong>权限数据</strong> 匹配</p></li> <li><p>所以我们就可以据此生成 <strong>权限路由表数据</strong></p> <div class="language-js extra-class"><pre class="language-js"><code>    <span class="token comment">/**
+     * 根据权限筛选路由
+     */</span>
+    <span class="token function">filterRoutes</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> menus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+      <span class="token comment">// 路由权限匹配</span>
+      menus<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 权限名 与 路由的 name 匹配</span>
+        routes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>privateRoutes<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> item<span class="token punctuation">.</span>name <span class="token operator">===</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token comment">// 最后添加 不匹配路由进入 404</span>
+      routes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/:catchAll(.*)'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/404'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setRoutes'</span><span class="token punctuation">,</span> routes<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> routes
+    <span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>在 <code>store/index</code> 中设置该 <code>modules</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">...</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  getters<span class="token punctuation">,</span>
+  <span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+    permission
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre></div></li> <li><p>在 <code>src/permission</code> 中，获取用户数据之后调用该动作</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 判断用户资料是否获取</span>
+<span class="token comment">// 若不存在用户信息，则需要获取用户信息</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>hasUserInfo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 触发获取用户信息的 action，并获取用户当前权限</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> permission <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/getUserInfo'</span><span class="token punctuation">)</span>
+  <span class="token comment">// 处理用户权限，筛选出需要添加的权限</span>
+  <span class="token keyword">const</span> filterRoutes <span class="token operator">=</span> <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span>
+    <span class="token string">'permission/filterRoutes'</span><span class="token punctuation">,</span>
+    permission<span class="token punctuation">.</span>menus
+  <span class="token punctuation">)</span>
+  <span class="token comment">// 利用 addRoute 循环添加</span>
+  filterRoutes<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    router<span class="token punctuation">.</span><span class="token function">addRoute</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// 添加完动态路由之后，需要在进行一次主动跳转</span>
+  <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div></li> <li><p>因为我们主动获取了 <code>getUserInfo</code> 动作的返回值，所以不要忘记在 <code>getUserInfo</code> 中 <code>return res</code></p></li></ol> <p>那么到这里，当我们更换用户之后，刷新页面，路由表即可动态生成。</p> <p>但是此时大家应该可以发现，如果不刷新页面得话，左侧菜单是不会自动改变的？那么这是怎么回事呢？大家可以先思考一下这个问题，然后我们下一节再来处理。</p> <h2 id="_8-09-业务落地-重置路由表数据"><a href="#_8-09-业务落地-重置路由表数据" class="header-anchor">#</a> 8-09：业务落地：重置路由表数据</h2> <p>在上一小节中我们遇到了一个问题：重新登录权限账户，不刷新页面，左侧菜单不会自动改变。</p> <p>那么出现这个问题的原因其实非常简单：<strong>退出登录时，添加的路由表并未被删除</strong></p> <p>所以想要解决这个问题，我们只需要在退出登录时，删除动态添加的路由表即可。</p> <p>那么删除动态添加的路由可以使用 <a href="https://next.router.vuejs.org/zh/api/#removeroute" target="_blank" rel="noopener noreferrer">removeRoute<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 方法进行。</p> <ol><li><p>在 <code>router/index</code> 中定义 <code>resetRouter</code> 方法</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/**
+ * 初始化路由表
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo <span class="token operator">&amp;&amp;</span>
+    store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>permission <span class="token operator">&amp;&amp;</span>
+    store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>menus
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> menus <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>menus
+    menus<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">menu</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      router<span class="token punctuation">.</span><span class="token function">removeRoute</span><span class="token punctuation">(</span>menu<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>在退出登录的动作下，触发该方法</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> router<span class="token punctuation">,</span> <span class="token punctuation">{</span> resetRouter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/router'</span>
+
+<span class="token function">logout</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+</code></pre></div></li></ol> <h2 id="_8-10-业务落地-创建功能受控指令"><a href="#_8-10-业务落地-创建功能受控指令" class="header-anchor">#</a> 8-10：业务落地：创建功能受控指令</h2> <p>在前面分析 <strong>功能权限</strong> 时，我们说过，实现功能权限的核心在于 <strong>根据数据隐藏功能按钮</strong>，那么隐藏的方式我们可以通过指令进行。</p> <p>所以首先我们先去创建这样一个指令（<a href="https://v3.cn.vuejs.org/guide/custom-directive.html#%E7%AE%80%E4%BB%8B" target="_blank" rel="noopener noreferrer">vue3 自定义指令<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）</p> <ol><li><p>我们期望最终可以通过这样格式的指令进行功能受控 <code>v-permission=&quot;['importUser']&quot;</code></p></li> <li><p>以此创建对应的自定义指令 <code>directives/permission</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
+
+<span class="token keyword">function</span> <span class="token function">checkPermission</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> binding</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 获取绑定的值，此处为权限</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> value <span class="token punctuation">}</span> <span class="token operator">=</span> binding
+  <span class="token comment">// 获取所有的功能指令</span>
+  <span class="token keyword">const</span> points <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>points
+  <span class="token comment">// 当传入的指令集为数组时</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&amp;&amp;</span> value <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 匹配对应的指令</span>
+    <span class="token keyword">const</span> hasPermission <span class="token operator">=</span> points<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span><span class="token parameter">point</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> value<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>point<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">// 如果无法匹配，则表示当前用户无该指令，那么删除对应的功能按钮</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>hasPermission<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      el<span class="token punctuation">.</span>parentNode <span class="token operator">&amp;&amp;</span> el<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// eslint-disabled-next-line</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'v-permission value is [&quot;admin&quot;,&quot;editor&quot;]'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 在绑定元素的父组件被挂载后调用</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> binding</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkPermission</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// 在包含组件的 VNode 及其子组件的 VNode 更新后调用</span>
+  <span class="token function">update</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> binding</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkPermission</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>在 <code>directives/index</code> 中绑定该指令</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">...</span>
+<span class="token keyword">import</span> permission <span class="token keyword">from</span> <span class="token string">'./permission'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  app<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span><span class="token string">'permission'</span><span class="token punctuation">,</span> permission<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li><p>在所有功能中，添加该指令</p></li> <li><p><code>views/role-list/index</code></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">...</span> <span class="token attr-name">v-permission</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>[<span class="token punctuation">'</span>distributePermission<span class="token punctuation">'</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  {{ $t('role.assignPermissions') }}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></li> <li><p><code>views/user-manage/index</code></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">...</span> <span class="token attr-name">v-permission</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>[<span class="token punctuation">'</span>importUser<span class="token punctuation">'</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  {{ $t('excel.importExcel') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span>
+<span class="token punctuation">&gt;</span></span>
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">...</span> <span class="token attr-name">v-permission</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>[<span class="token punctuation">'</span>distributeRole<span class="token punctuation">'</span>]<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>{{ $t('excel.showRole') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span>
+<span class="token punctuation">&gt;</span></span>
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">...</span> <span class="token attr-name">v-permission</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>[<span class="token punctuation">'</span>removeUser<span class="token punctuation">'</span>]<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>{{ $t('excel.remove') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span>
+<span class="token punctuation">&gt;</span></span>
+</code></pre></div></li></ol> <h2 id="_8-11-总结"><a href="#_8-11-总结" class="header-anchor">#</a> 8-11：总结</h2> <p>那么到这里我们整个权限受控的章节就算是全部完成了。</p> <p>整个这一大章中，核心就是 <strong><code>RBAC</code>的权限受控体系</strong> 。围绕着 <strong>用户-&gt;角色-&gt;权限</strong> 的体系是现在在包含权限控制的系统中使用率最广的一种方式。</p> <p>那么怎么针对于权限控制的方案而言，除了课程中提到的这种方案之外，其实还有很多其他的方案，大家可以在我们的话题讨论中踊跃发言，多多讨论。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">12/14/2022, 10:35:51 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cc/skill/web/vue3/create/quanXian.html" class="prev">
+        6.1 权限架构处理 - 用户权限处理
+      </a></span> <span class="next"><a href="/cc/skill/web/vue3/create/table.html">
+        7. 动态表格渲染方案之文章排名业务实现
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/cc/assets/js/app.8e784566.js" defer></script><script src="/cc/assets/js/2.e5636081.js" defer></script><script src="/cc/assets/js/123.ed56cf8e.js" defer></script>
+  </body>
+</html>

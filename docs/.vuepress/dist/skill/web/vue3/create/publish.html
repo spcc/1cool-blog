@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第十一章：项目部署之通用方案 | 1cool</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/cc/js/MouseClickEffect.js"></script>
+    <meta name="description" content="我本可以容忍黑暗，如果我不曾见过太阳">
+    
+    <link rel="preload" href="/cc/assets/css/0.styles.f862f993.css" as="style"><link rel="preload" href="/cc/assets/js/app.8e784566.js" as="script"><link rel="preload" href="/cc/assets/js/2.e5636081.js" as="script"><link rel="preload" href="/cc/assets/js/121.ac530513.js" as="script"><link rel="prefetch" href="/cc/assets/js/10.21d0ac1f.js"><link rel="prefetch" href="/cc/assets/js/100.6f8375cb.js"><link rel="prefetch" href="/cc/assets/js/101.da083ff4.js"><link rel="prefetch" href="/cc/assets/js/102.306f172a.js"><link rel="prefetch" href="/cc/assets/js/103.682f013b.js"><link rel="prefetch" href="/cc/assets/js/104.8176fe46.js"><link rel="prefetch" href="/cc/assets/js/105.1e6cc6b2.js"><link rel="prefetch" href="/cc/assets/js/106.e2e54972.js"><link rel="prefetch" href="/cc/assets/js/107.45f6532d.js"><link rel="prefetch" href="/cc/assets/js/108.1aecaa33.js"><link rel="prefetch" href="/cc/assets/js/109.6b0ce5dc.js"><link rel="prefetch" href="/cc/assets/js/11.4caff987.js"><link rel="prefetch" href="/cc/assets/js/110.bd4f6914.js"><link rel="prefetch" href="/cc/assets/js/111.a0093834.js"><link rel="prefetch" href="/cc/assets/js/112.24803fb0.js"><link rel="prefetch" href="/cc/assets/js/113.8800daa7.js"><link rel="prefetch" href="/cc/assets/js/114.1006c83b.js"><link rel="prefetch" href="/cc/assets/js/115.44614654.js"><link rel="prefetch" href="/cc/assets/js/116.ceb8b4ed.js"><link rel="prefetch" href="/cc/assets/js/117.70cdbc58.js"><link rel="prefetch" href="/cc/assets/js/118.a51ff46c.js"><link rel="prefetch" href="/cc/assets/js/119.2cf3bd01.js"><link rel="prefetch" href="/cc/assets/js/12.0f7036a6.js"><link rel="prefetch" href="/cc/assets/js/120.0feeb174.js"><link rel="prefetch" href="/cc/assets/js/122.2ec2c8cb.js"><link rel="prefetch" href="/cc/assets/js/123.ed56cf8e.js"><link rel="prefetch" href="/cc/assets/js/124.1f138b8a.js"><link rel="prefetch" href="/cc/assets/js/125.6e624775.js"><link rel="prefetch" href="/cc/assets/js/126.87c5a06f.js"><link rel="prefetch" href="/cc/assets/js/127.38f5e1d9.js"><link rel="prefetch" href="/cc/assets/js/128.0d98c3bb.js"><link rel="prefetch" href="/cc/assets/js/129.cfab6ffc.js"><link rel="prefetch" href="/cc/assets/js/13.c2fad430.js"><link rel="prefetch" href="/cc/assets/js/130.69ebb548.js"><link rel="prefetch" href="/cc/assets/js/131.571cac04.js"><link rel="prefetch" href="/cc/assets/js/132.6e66a92f.js"><link rel="prefetch" href="/cc/assets/js/133.60914cc4.js"><link rel="prefetch" href="/cc/assets/js/14.8addf38e.js"><link rel="prefetch" href="/cc/assets/js/15.0b75b5a4.js"><link rel="prefetch" href="/cc/assets/js/16.3d7d2683.js"><link rel="prefetch" href="/cc/assets/js/17.feed4c37.js"><link rel="prefetch" href="/cc/assets/js/18.de30ad69.js"><link rel="prefetch" href="/cc/assets/js/19.0b6c3069.js"><link rel="prefetch" href="/cc/assets/js/20.a106a454.js"><link rel="prefetch" href="/cc/assets/js/21.196f5075.js"><link rel="prefetch" href="/cc/assets/js/22.13bf826a.js"><link rel="prefetch" href="/cc/assets/js/23.96186cd4.js"><link rel="prefetch" href="/cc/assets/js/24.ab9261c5.js"><link rel="prefetch" href="/cc/assets/js/25.4b367695.js"><link rel="prefetch" href="/cc/assets/js/26.ad5996cb.js"><link rel="prefetch" href="/cc/assets/js/27.8255c470.js"><link rel="prefetch" href="/cc/assets/js/28.de14f0a3.js"><link rel="prefetch" href="/cc/assets/js/29.28b7235e.js"><link rel="prefetch" href="/cc/assets/js/3.9665f364.js"><link rel="prefetch" href="/cc/assets/js/30.0e364dac.js"><link rel="prefetch" href="/cc/assets/js/31.b8b9bdfc.js"><link rel="prefetch" href="/cc/assets/js/32.b1bfc5f3.js"><link rel="prefetch" href="/cc/assets/js/33.6b8ad275.js"><link rel="prefetch" href="/cc/assets/js/34.1927afc0.js"><link rel="prefetch" href="/cc/assets/js/35.9a5d84ba.js"><link rel="prefetch" href="/cc/assets/js/36.37e44bf2.js"><link rel="prefetch" href="/cc/assets/js/37.ea34894a.js"><link rel="prefetch" href="/cc/assets/js/38.683d01a4.js"><link rel="prefetch" href="/cc/assets/js/39.016abe55.js"><link rel="prefetch" href="/cc/assets/js/4.a185d924.js"><link rel="prefetch" href="/cc/assets/js/40.87990494.js"><link rel="prefetch" href="/cc/assets/js/41.031bdba4.js"><link rel="prefetch" href="/cc/assets/js/42.b9aef462.js"><link rel="prefetch" href="/cc/assets/js/43.5990eac0.js"><link rel="prefetch" href="/cc/assets/js/44.1c8e6928.js"><link rel="prefetch" href="/cc/assets/js/45.82e21699.js"><link rel="prefetch" href="/cc/assets/js/46.f67e62f9.js"><link rel="prefetch" href="/cc/assets/js/47.9277f137.js"><link rel="prefetch" href="/cc/assets/js/48.6634b9c6.js"><link rel="prefetch" href="/cc/assets/js/49.5ad68f6e.js"><link rel="prefetch" href="/cc/assets/js/5.987e1949.js"><link rel="prefetch" href="/cc/assets/js/50.2e92efcc.js"><link rel="prefetch" href="/cc/assets/js/51.c7e4fc4e.js"><link rel="prefetch" href="/cc/assets/js/52.d39c88bd.js"><link rel="prefetch" href="/cc/assets/js/53.728b915a.js"><link rel="prefetch" href="/cc/assets/js/54.f29622d9.js"><link rel="prefetch" href="/cc/assets/js/55.1ce50bfb.js"><link rel="prefetch" href="/cc/assets/js/56.bf6d1cf2.js"><link rel="prefetch" href="/cc/assets/js/57.1105cda5.js"><link rel="prefetch" href="/cc/assets/js/58.322c5055.js"><link rel="prefetch" href="/cc/assets/js/59.f62d0c26.js"><link rel="prefetch" href="/cc/assets/js/6.bb6fb7dd.js"><link rel="prefetch" href="/cc/assets/js/60.55c28da4.js"><link rel="prefetch" href="/cc/assets/js/61.7b3392b2.js"><link rel="prefetch" href="/cc/assets/js/62.105266fb.js"><link rel="prefetch" href="/cc/assets/js/63.3fd468e8.js"><link rel="prefetch" href="/cc/assets/js/64.23b7f202.js"><link rel="prefetch" href="/cc/assets/js/65.b0faf0ee.js"><link rel="prefetch" href="/cc/assets/js/66.ada77ec8.js"><link rel="prefetch" href="/cc/assets/js/67.36589366.js"><link rel="prefetch" href="/cc/assets/js/68.9b1ba419.js"><link rel="prefetch" href="/cc/assets/js/69.f81b9185.js"><link rel="prefetch" href="/cc/assets/js/7.175c0715.js"><link rel="prefetch" href="/cc/assets/js/70.04c7e330.js"><link rel="prefetch" href="/cc/assets/js/71.855b82eb.js"><link rel="prefetch" href="/cc/assets/js/72.b5f6e20d.js"><link rel="prefetch" href="/cc/assets/js/73.6b7349e3.js"><link rel="prefetch" href="/cc/assets/js/74.19800bab.js"><link rel="prefetch" href="/cc/assets/js/75.6606d3ef.js"><link rel="prefetch" href="/cc/assets/js/76.749861f8.js"><link rel="prefetch" href="/cc/assets/js/77.ef4b918b.js"><link rel="prefetch" href="/cc/assets/js/78.f47ec0ad.js"><link rel="prefetch" href="/cc/assets/js/79.18d02a78.js"><link rel="prefetch" href="/cc/assets/js/8.1e851244.js"><link rel="prefetch" href="/cc/assets/js/80.d15c5480.js"><link rel="prefetch" href="/cc/assets/js/81.717c14fb.js"><link rel="prefetch" href="/cc/assets/js/82.f9d9963a.js"><link rel="prefetch" href="/cc/assets/js/83.116b930c.js"><link rel="prefetch" href="/cc/assets/js/84.6f0bbf5b.js"><link rel="prefetch" href="/cc/assets/js/85.91c70830.js"><link rel="prefetch" href="/cc/assets/js/86.3e8ebd1a.js"><link rel="prefetch" href="/cc/assets/js/87.d4af6dc1.js"><link rel="prefetch" href="/cc/assets/js/88.424e06a2.js"><link rel="prefetch" href="/cc/assets/js/89.3e973887.js"><link rel="prefetch" href="/cc/assets/js/9.24860e18.js"><link rel="prefetch" href="/cc/assets/js/90.8dc44f92.js"><link rel="prefetch" href="/cc/assets/js/91.cae982e6.js"><link rel="prefetch" href="/cc/assets/js/92.d5e1463d.js"><link rel="prefetch" href="/cc/assets/js/93.8b3f7ade.js"><link rel="prefetch" href="/cc/assets/js/94.4d924d63.js"><link rel="prefetch" href="/cc/assets/js/95.7943b5de.js"><link rel="prefetch" href="/cc/assets/js/96.236e593f.js"><link rel="prefetch" href="/cc/assets/js/97.b9484bf7.js"><link rel="prefetch" href="/cc/assets/js/98.2887e006.js"><link rel="prefetch" href="/cc/assets/js/99.2ab5c15d.js">
+    <link rel="stylesheet" href="/cc/assets/css/0.styles.f862f993.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/cc/" class="home-link router-link-active"><!----> <span class="site-name">1cool</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/cc/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/cc/fuTong.html" class="nav-link">
+  富通天下
+</a></div><div class="nav-item"><a href="/cc/link.html" class="nav-link">
+  常用链接
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="知识点" class="dropdown-title"><span class="title">知识点</span> <span class="arrow down"></span></button> <button type="button" aria-label="知识点" class="mobile-dropdown-title"><span class="title">知识点</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          技术
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/web/js/array.html" class="nav-link">
+  JS
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue2/router/base.html" class="nav-link">
+  Vue2
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/vue3/common.html" class="nav-link">
+  Vue3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/css3/bem.html" class="nav-link">
+  Css3
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/web/other/git/common.html" class="nav-link">
+  其他
+</a></li></ul></li><li class="dropdown-item"><h4>
+          工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/cc/skill/tool/vscode/fun.html" class="nav-link">
+  VsCode
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/warehouse/base.html" class="nav-link">
+  Github/Gitee
+</a></li><li class="dropdown-subitem"><a href="/cc/skill/tool/windows/base.html" class="nav-link">
+  装机必备
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/cc/problem/Vue2/base.html" class="nav-link">
+  疑难杂症
+</a></div><div class="nav-item"><a href="/cc/book/es6/intro.html" class="nav-link">
+  书籍
+</a></div><div class="nav-item"><a href="/cc/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="关于我" class="dropdown-title"><span class="title">关于我</span> <span class="arrow down"></span></button> <button type="button" aria-label="关于我" class="mobile-dropdown-title"><span class="title">关于我</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/cc/my/" class="nav-link">
+  关于我
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>vue3</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>实战搭建</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cc/skill/web/vue3/create/init.html" class="sidebar-link">项目规范</a></li><li><a href="/cc/skill/web/vue3/create/login.html" class="sidebar-link">登录架构</a></li><li><a href="/cc/skill/web/vue3/create/layout.html" class="sidebar-link">Layout 架构解决方案</a></li><li><a href="/cc/skill/web/vue3/create/component.html" class="sidebar-link">通用功能封装</a></li><li><a href="/cc/skill/web/vue3/create/profile.html" class="sidebar-link">个人中心模块</a></li><li><a href="/cc/skill/web/vue3/create/quanXian.html" class="sidebar-link">6.1 权限架构处理 - 用户权限处理</a></li><li><a href="/cc/skill/web/vue3/create/rbac.html" class="sidebar-link">6.2 权限架构处理 - 分级分控权限管理</a></li><li><a href="/cc/skill/web/vue3/create/table.html" class="sidebar-link">7. 动态表格渲染方案之文章排名业务实现</a></li><li><a href="/cc/skill/web/vue3/create/markdown.html" class="sidebar-link">8. 富文本与 markdown 综合处理之创建文章</a></li><li><a href="/cc/skill/web/vue3/create/publish.html" aria-current="page" class="active sidebar-link">第十一章：项目部署之通用方案</a></li><li><a href="/cc/skill/web/vue3/create/zongJie.html" class="sidebar-link">第十二章：课程总结</a></li><li><a href="/cc/skill/web/vue3/create/ss.html" class="sidebar-link">第十章：富文本与markdown综合处理之创建文章</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>初始化</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li><li><a href="/cc/skill/web/vue3/mock.html" class="sidebar-link">Mock</a></li></ul> </aside> <main class="page"><div class="side-toc"><ul class="anchor"><li class="anchor-item"><a href="#_11-1-开篇" class="anchor-item__link" style="margin-left:0;">
+        11-1：开篇
+      </a></li><li class="anchor-item"><a href="#_11-2-项目构建过程分析与实现" class="anchor-item__link" style="margin-left:0;">
+        11-2：项目构建过程分析与实现
+      </a></li><li class="anchor-item"><a href="#_11-3-域名、dns、公网-ip、服务器、nginx-之间的关系" class="anchor-item__link" style="margin-left:0;">
+        11-3：域名、DNS、公网 IP、服务器、Nginx 之间的关系
+      </a></li><li class="anchor-item"><a href="#_11-4-阿里云服务器购买指南" class="anchor-item__link" style="margin-left:0;">
+        11-4：阿里云服务器购买指南
+      </a></li><li class="anchor-item"><a href="#_11-5-服务器连接方式" class="anchor-item__link" style="margin-left:0;">
+        11-5：服务器连接方式
+      </a></li><li class="anchor-item"><a href="#_11-6-nginx-环境处理" class="anchor-item__link" style="margin-left:0;">
+        11-6：Nginx 环境处理
+      </a></li><li class="anchor-item"><a href="#_11-7-项目发布" class="anchor-item__link" style="margin-left:0;">
+        11-7：项目发布
+      </a></li><li class="anchor-item"><a href="#_11-8-总结" class="anchor-item__link" style="margin-left:0;">
+        11-8：总结
+      </a></li></ul></div> <div class="theme-default-content content__default"><h1 id="第十一章-项目部署之通用方案"><a href="#第十一章-项目部署之通用方案" class="header-anchor">#</a> 第十一章：项目部署之通用方案</h1> <h2 id="_11-1-开篇"><a href="#_11-1-开篇" class="header-anchor">#</a> 11-1：开篇</h2> <p>那么到这里我们的整个课程就已经接近尾声了。</p> <p>最后我们就需要来看一下项目的打包和发布功能，这两个功能也就是我们本章节的主要功能。</p> <h2 id="_11-2-项目构建过程分析与实现"><a href="#_11-2-项目构建过程分析与实现" class="header-anchor">#</a> 11-2：项目构建过程分析与实现</h2> <p>本小节我们主要围绕着三个问题来去讲：</p> <ol><li>为什么需要打包项目？</li> <li>打包之后项目可以通过浏览器直接访问吗？</li> <li>为什么需要有服务？</li></ol> <p><strong>为什么需要打包项目：</strong></p> <p>浏览器只能识别并运行 <strong><code>html、css、js</code> 文件</strong> 。</p> <p>那么换句话而言，项目中的 <code>.vue</code> 文件，浏览器是不认识的。</p> <p>而打包的过程就是把 <code>.vue</code> 的 <strong>单文件组件</strong> 打包成 <code>html、css、js</code> 的文件，让浏览器进行识别，并展示我们的项目</p> <p><strong>打包之后项目可以通过浏览器直接访问吗？</strong></p> <p>我们可以测试一下。</p> <p>通过 <code>npm run build</code> 打包项目之后，打包的文件会被放入到 <code>dist</code> 文件夹中，其实我们可以直接双击 <code>index.html</code> 文件，可以发现，浏览器是 <strong>无法</strong> 显示项目的。</p> <p>打开 <code>F12</code> 可以发现，终端中抛出了很多的错误。</p> <p>那么根据这些错误可以知道，无法显示的原因是因为 <strong>一些文件找不到了</strong>。</p> <p>那么为什么找不到呢？</p> <p>查看我们的 <code>url</code> 可以发现，其实我们的 <code>url</code> 是一个 <code>file</code> 协议。那么对应的文件路径就会编程 <code>盘符下的 xxx</code> ，在我们当前的盘符下没有对应的文件，那么自然是无法找到的。</p> <p>而想要解决这个问题的话，就需要把我们的项目运行到一个 <strong>服务</strong> 中，就像我们开发时的 <a href="https://webpack.docschina.org/configuration/dev-server/" target="_blank" rel="noopener noreferrer">devServer<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 一样。</p> <p><strong>为什么需要有服务？</strong></p> <p>明确了上面的问题之后，为什么要有服务就比较好理解了。</p> <p>我们需要通过一个 <strong>服务</strong> 托管我们的项目，从而避免出现模块无法被找到等问题。</p> <hr> <p>那么明确好了，以上问题之后，接下来我们就可以打包我们的项目，并且把项目部署到服务器之中。</p> <p>我们可以通过 <code>npm run build</code> 打包项目，打包好项目之后，接下来我们再来看如何到服务器中部署我们的服务。</p> <h2 id="_11-3-域名、dns、公网-ip、服务器、nginx-之间的关系"><a href="#_11-3-域名、dns、公网-ip、服务器、nginx-之间的关系" class="header-anchor">#</a> 11-3：域名、DNS、公网 IP、服务器、Nginx 之间的关系</h2> <p>在处理我们的服务之前，我们明确一些基本的概念，这些概念有：</p> <ol><li>域名：<code>https://imooc-admin.lgdsunday.club</code></li> <li>DNS：域名解析服务器</li> <li>公网 IP：服务器在网络中的唯一地址</li> <li>服务器：服务部署的电脑</li> <li>Nginx：网页服务</li></ol> <p><img src="%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B9%8B%E9%80%9A%E7%94%A8%E6%96%B9%E6%A1%88.assets/image-20211011202658109.png" alt="image-20211011202658109"></p> <h2 id="_11-4-阿里云服务器购买指南"><a href="#_11-4-阿里云服务器购买指南" class="header-anchor">#</a> 11-4：阿里云服务器购买指南</h2> <p><a href="https://ecs-buy.aliyun.com/wizard/#/prepay/cn-beijing?fromDomain=true" target="_blank" rel="noopener noreferrer">云服务器 ECS 自定义购买<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h2 id="_11-5-服务器连接方式"><a href="#_11-5-服务器连接方式" class="header-anchor">#</a> 11-5：服务器连接方式</h2> <p>常见的连接服务器的方式有三种：</p> <ol><li>阿里云控制台中进行远程链接</li> <li><strong>通过 <code>SSH</code> 工具</strong>（<a href="https://www.netsarang.com/en/xshell/" target="_blank" rel="noopener noreferrer">XShell<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）</li> <li><code>SSH</code> 指令远程登录</li></ol> <p>那么我们这里使用第二种 <strong>通过 <code>SSH</code> 工具</strong>（<a href="https://www.netsarang.com/en/xshell/" target="_blank" rel="noopener noreferrer">XShell<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）进行连接。</p> <ol><li>新建会话
+<img src="第十一章：项目部署之通用方案.assets/image-20211011203212635.png" alt="image-20211011203212635" style="zoom:50%;"></li> <li>确定会话信息，协议为 <code>SSH</code>、主机为服务器 IP、端口号为 22
+<img src="第十一章：项目部署之通用方案.assets/image-20211011203403394.png" alt="image-20211011203403394" style="zoom:67%;"></li> <li>双击会话进行连接
+<img src="%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B9%8B%E9%80%9A%E7%94%A8%E6%96%B9%E6%A1%88.assets/image-20211011203436662.png" alt="image-20211011203436662"></li> <li>输入你的用户名（默认为 <code>root</code>）
+<img src="%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B9%8B%E9%80%9A%E7%94%A8%E6%96%B9%E6%A1%88.assets/image-20211011203504688.png" alt="image-20211011203504688"></li> <li>输入你的密码
+<img src="第十一章：项目部署之通用方案.assets/image-20211011203533726.png" alt="image-20211011203533726" style="zoom:67%;"></li> <li>出现此信息，表示连接成功
+<img src="第十一章：项目部署之通用方案.assets/image-20211011203631626.png" alt="image-20211011203631626" style="zoom:50%;"></li></ol> <h2 id="_11-6-nginx-环境处理"><a href="#_11-6-nginx-环境处理" class="header-anchor">#</a> 11-6：Nginx 环境处理</h2> <ol><li><p><code>nginx</code> 编译时依赖 <code>gcc</code> 环境</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install gcc gcc-c++
+</code></pre></div></li> <li><p>安装 <code>prce</code>，让 <code>nginx</code> 支持重写功能</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install pcre*
+</code></pre></div></li> <li><p>安装 <code>zlib</code>，<code>nginx</code> 使用 <code>zlib</code> 对 <code>http</code> 包内容进行 <code>gzip</code> 压缩</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install zlib zlib-devel
+</code></pre></div></li> <li><p>安装 <code>openssl</code>，用于通讯加密</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install openssl openssl-devel
+</code></pre></div></li> <li><p>进行 <code>nginx</code> 安装</p></li> <li><p>创建 <code>nginx</code> 文件夹</p></li> <li><p>下载 <code>nginx</code> 压缩包</p> <div class="language- extra-class"><pre class="language-text"><code>wget https://nginx.org/download/nginx-1.11.5.tar.gz
+</code></pre></div></li> <li><p>解压 <code>nginx</code></p> <div class="language- extra-class"><pre class="language-text"><code>tar -zxvf  nginx-1.11.5.tar.gz
+</code></pre></div></li> <li><p>进入 <code>nginx-1.11.5</code> 目录</p> <div class="language- extra-class"><pre class="language-text"><code>cd nginx-1.11.5
+</code></pre></div></li> <li><p>检查平台安装环境</p> <div class="language- extra-class"><pre class="language-text"><code>./configure --prefix=/usr/local/nginx
+</code></pre></div></li> <li><p>进行源码编译</p> <div class="language- extra-class"><pre class="language-text"><code>make
+</code></pre></div></li> <li><p>安装 <code>nginx</code></p> <div class="language- extra-class"><pre class="language-text"><code>make install
+</code></pre></div></li> <li><p>查看 <code>nginx</code> 配置</p> <div class="language- extra-class"><pre class="language-text"><code>/usr/local/nginx/sbin/nginx -t
+</code></pre></div></li> <li><p>制作 <code>nginx</code> 软连接</p></li> <li><p>进入 <code>usr/bin</code> 目录</p> <div class="language- extra-class"><pre class="language-text"><code>cd /usr/bin
+</code></pre></div></li> <li><p>制作软连接</p> <div class="language- extra-class"><pre class="language-text"><code>ln -s /usr/local/nginx/sbin/nginx nginx
+</code></pre></div></li> <li><p>接下来制作配置文件</p></li> <li><p>首先进入到 <code>nginx</code> 的默认配置文件中</p> <div class="language- extra-class"><pre class="language-text"><code>vim /usr/local/nginx/conf/nginx.conf
+</code></pre></div></li> <li><p>在最底部增加配置项（按下 <code>i</code> 进入 输入模式）</p> <div class="language- extra-class"><pre class="language-text"><code>include /nginx/*.conf;
+</code></pre></div></li> <li><p>按下 <code>esc</code> 键，通过 <code>:wq!</code> 保存并退出</p></li> <li><p>创建新的配置文件</p> <div class="language- extra-class"><pre class="language-text"><code>touch /nginx/nginx.conf
+</code></pre></div></li> <li><p>进入到 <code>/root/nginx/nginx.conf</code> 文件</p> <div class="language- extra-class"><pre class="language-text"><code>vim /nginx/nginx.conf
+</code></pre></div></li> <li><p>写入如下配置</p> <div class="language-js extra-class"><pre class="language-js"><code># imooc<span class="token operator">-</span>admin
+server <span class="token punctuation">{</span>
+    # 端口
+    listen       <span class="token number">80</span><span class="token punctuation">;</span>
+    # 域名
+    server_name  localhost<span class="token punctuation">;</span>
+    # 资源地址
+    root   <span class="token operator">/</span>nginx<span class="token operator">/</span>dist<span class="token operator">/</span><span class="token punctuation">;</span>
+    # 目录浏览
+    autoindex on<span class="token punctuation">;</span>
+    # 缓存处理
+    add_header Cache<span class="token operator">-</span>Control <span class="token string">&quot;no-cache, must-revalidate&quot;</span><span class="token punctuation">;</span>
+    # 请求配置
+    location <span class="token operator">/</span> <span class="token punctuation">{</span>
+        # 跨域
+        add_header Access<span class="token operator">-</span>Control<span class="token operator">-</span>Allow<span class="token operator">-</span>Origin <span class="token operator">*</span><span class="token punctuation">;</span>
+        # 返回 index<span class="token punctuation">.</span>html
+        try_files $uri $uri<span class="token operator">/</span> <span class="token operator">/</span>index<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p>通过 <code>:wq!</code> 保存退出</p></li> <li><p>在 <code>root/nginx</code> 中创建 <code>dist</code> 文件夹</p> <div class="language- extra-class"><pre class="language-text"><code>mkdir /nginx/dist
+</code></pre></div></li> <li><p>在 <code>nginx/dist</code> 中写入 <code>index.html</code> 进行测试</p></li> <li><p>通过 <code>nginx -s reload</code> 重启服务</p></li> <li><p>在 浏览器中通过，<code>IP</code> 测试访问</p></li></ol> <h2 id="_11-7-项目发布"><a href="#_11-7-项目发布" class="header-anchor">#</a> 11-7：项目发布</h2> <p>可以通过 <a href="https://www.netsarang.com/en/xftp/" target="_blank" rel="noopener noreferrer">XFTP<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 进行数据传输</p> <h2 id="_11-8-总结"><a href="#_11-8-总结" class="header-anchor">#</a> 11-8：总结</h2> <p>本章节主要讲解了一些基础的 <strong>部署</strong> 相关的知识，这些内容并不复杂，属于通用性内容。</p> <p>那么现在我们的项目就已经可以部署到我们的服务器中了，大家就可以根据自己的域名进行对应的访问了</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">12/14/2022, 6:09:44 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cc/skill/web/vue3/create/markdown.html" class="prev">
+        8. 富文本与 markdown 综合处理之创建文章
+      </a></span> <span class="next"><a href="/cc/skill/web/vue3/create/zongJie.html">
+        第十二章：课程总结
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----><div></div></div></div>
+    <script src="/cc/assets/js/app.8e784566.js" defer></script><script src="/cc/assets/js/2.e5636081.js" defer></script><script src="/cc/assets/js/121.ac530513.js" defer></script>
+  </body>
+</html>

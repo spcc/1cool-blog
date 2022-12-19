@@ -1,5 +1,25 @@
 # 常用方法
 
+## 获取随机数
+
+:::details 点击查看代码
+
+```js
+// 获取 0 - x 的随机数
+var num = Math.floor(Math.random() * 10) + 1
+
+// 获取 1 - x 的随机数
+var num = Math.floor(Math.random() * 10) + 1
+
+// 获取两个数之间的随机整数
+function getRandomNumberByRange(start, end) {
+  return Math.floor(Math.random() * (end - start) + start)
+}
+getRandomNumberByRange(0, 100)
+```
+
+:::
+
 ## 等待函数
 
 ::: details 点击查看代码
