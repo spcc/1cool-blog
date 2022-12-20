@@ -349,16 +349,92 @@ npm install sass -D
 |  ├─ └─ el-xxx.scss
 |  ├─ variables.scss     # 变量
 |  ├─ transition.scss    # 动效
-|  ├─ reset.scss         # 重置
-|  ├─ normalize.scss     # 初始化
-|  ├─ sidebar.scss       # 侧边栏
 |  ├─ mixin.scss         # mixin
+|  ├─ normalize.scss     # html元素样式重置
+|  ├─ reset.scss         # normalize不支持的样式重置
+|  ├─ sidebar.scss       # 侧边栏
 |  ├─ index.scss         # 样式统一导出接口
 ```
 
-## 3. Vite 内部配置
+1. 样式重置
 
-### 3.1 自动引入（组件 和 API）
+`HTML` 标签是有默认样式的，一般在写项目时都会直接清除掉这个默认样式，也就是做个重置。
+
+那相较于 [Eric Merer](https://meyerweb.com/eric/tools/css/reset/) 原版的清除样式文件，`Normalize.css` 它在默认的 `HTML` 元素样式上提供了跨浏览器的高度一致性，是一种现代的、为 `HTML5` 准备的优质替代方案，所以我们直接使用它就好了。
+
+下载 [Normalize.css](https://necolas.github.io/normalize.css/latest/normalize.css) 到 `styles` 文件夹下，当然你也可以直接 `npm` 安装它，不过我比较喜欢直接下载下来这个文件。
+
+2. normalize 不支持的样式重置
+
+也需要一份[Normalize.css](https://necolas.github.io/normalize.css/latest/normalize.css)不支持的一部分样式重置，放到`style/reset.scss`
+
+:::details 点击查看代码
+
+```scss
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+  font-size: 14px;
+}
+```
+
+:::
+
+3. index.scss 中统一引入
+
+:::details 点击查看代码
+
+```scss
+// 重置
+@import './normalize.scss';
+@import './reset.scss';
+
+@import './variables.scss';
+@import './transition.scss';
+@import './mixin.scss';
+@import './sidebar.scss';
+```
+
+:::
+
+4. main.js 引入
+
+```js
+import '@/styles/index.scss'
+```
+
+### 3.2 Utils、Hooks、API 管理
+
+```sh
+├─ src/
+|  ├─ api                # 公共请求相关
+|  ├─ utils              # 公共方法文件
+|  ├─ hooks              # 公共hooks
+```
+
+## 4. Vite 内部配置
+
+### 4.1 自动引入（组件 和 API）
 
 使用 `vue`过程中，每个 `script` 或者 `js` 都会引入（很麻烦）
 
@@ -366,7 +442,7 @@ npm install sass -D
 - `VueRouter`、`Pinia` 等都要引入一些 API
 - 自己写的组件也都需要我们手动去引入使用
 
-#### 3.11) 安装插件
+#### 4.11) 安装插件
 
 :::details 点击查看代码
 
@@ -380,7 +456,7 @@ npm install -D unplugin-vue-components unplugin-auto-import
 
 :::
 
-#### 3.12) 在 `vite.config.js` 文件中新增以下内容
+#### 4.12) 在 `vite.config.js` 文件中新增以下内容
 
 :::details 点击查看代码
 
@@ -485,13 +561,283 @@ const handleClickSmall = () => {
 
 上面创建的 `HelloWorld` 组件中使用了 `Vue` 的 `ref API`，并没有引入它，而后在 `HomeView` 页面中使用该组件也没有引入，后面使用 `Vue`、`VueRouter`、`Pinia`， 包括自建组件等等都不需要手动引入了，当然，后续你的项目中有用到其他地方你依然可以在插件中去配置！
 
-## 4. 第三方插件安装
+### 4.2 环境变量配置
 
-### 4.1 Element Plus
+- [Vite env 配置文档](https://cn.vitejs.dev/guide/env-and-mode.html#env-files)
+
+#### 4.21) 新建以下目录
+
+```sh
+├─ .env                  # 所有模式都会加载
+├─ .env.development      # 只在开发模式下加载
+├─ .env.production       # 只在生产模式下加载
+```
+
+#### 4.22) 设置内容
+
+:::warning 注意
+
+在 **Vite** 中配置的环境变量默认只有以 `VITE_` 开头的配置，才会暴露给客户端，才能在项目中获取到。
+:::
+
+1. **.env** 文件在所有模式下都会加载，所以这里可以写一些所有环境都通用的环境变量，如下：
+
+:::details 点击查看代码
+
+```sh
+# 端口
+VITE_PORT = 3100
+
+# 项目标题
+VITE_TITLE = QDesign Admin
+
+# 项目简称
+VITE_SHORT_NAME = qdesign_admin
+```
+
+:::
+
+2. **.env.development** 开发模式配置
+
+:::details 点击查看代码
+
+```sh
+# 环境标识
+VITE_ENV = development
+
+# 是否开启 mock
+VITE_USE_MOCK = true
+
+# 公共基础路径
+VITE_BASE = /
+
+# 代理URL路径
+VITE_BASE_URL = /api
+
+
+# 跨域代理，可以配置多个
+# 注意：不能存在空格!!!
+# VITE_PROXY = [["/basic-api","http://localhost:3000"],["/upload","http://localhost:3300/upload"]]
+# VITE_PROXY= [["/api","https://vvbin.cn/test"]]
+```
+
+:::
+
+3. **.env.production** 生产模式配置
+
+生产环境除了环境标识 `VITE_ENV` 和开发模式标识不同，其他配置项应尽量保持一致，只是配置项的内容不同而已，不一一的展示了。
+
+:::details 点击查看代码
+
+```sh
+# 环境标识
+VITE_ENV = production
+
+# 是否开启 mock
+VITE_USE_MOCK = true
+
+# 公共基础路径
+VITE_BASE = /
+
+# 代理URL路径
+VITE_BASE_URL = /basic-api
+```
+
+:::
+
+#### 4.24) 配置 package.json 启动模式
+
+:::details 点击查看代码
+
+```json
+{
+  "scripts": {
+    "dev": "vite --mode development",
+    "build": "vite build --mode production",
+    "preview": "vite preview --port 8081"
+  }
+}
+```
+
+:::
+
+- 在 **dev** 脚本命令配置中，传入 **mode**，其实这个 **mode** 就是对应的环境文件 **.env.[mode]**
+- 开发环境默认 **mode** 就是 **development**，生产环境默认 **mode** 就是 **development**
+  - 所以脚本命令这里不传 **mode** 也可以
+  - 如果把开发环境文件由 **.env.development** 改成 **.env.dev**，那脚本中 **mode** 就得传 **—-mode dev**，**build** 时也是一样的道理。
+  - 如果有其他环境，那脚本命令传入对应的 **mode** 就可以了。
+
+---
+
+如果想要在 **vite.config.js** 文件中获取对应运行 **mode** 环境变量的配置，可以使用 **vite** 的 [loadEnv API](https://cn.vitejs.dev/guide/api-javascript.html#loadenv)。
+
+**Vite** 的 **defineConfig** 方法可以接收一个返回配置对象的回调函数，回调函数的参数里可以拿到运行脚本命令时传入的 **mode** 值，从而使用 **loadEnv** 方法去在 **Vite** 配置文件中获取对应 **mode** 下的环境变量，如下：
+
+:::details 点击查看代码
+
+```js
+// export default defineConfig({}) 修改
+
+export default defineConfig(({ mode }) => {
+  return {}
+})
+```
+
+:::
+
+那其他一些基础配置就不一一说明了，查看 [Vite 官方文档](https://cn.vitejs.dev/)
+
+#### 4.25 使用
+
+:::details 点击查看代码
+
+```js
+const service = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL
+})
+```
+
+:::
+
+### 4.3 环境变量动态配置
+
+::: danger 警告
+未作整理，请谨慎粘贴复制
+:::
+
+::: details 点击查看代码
+上面说了，环境变量默认以 `VITE_` 开头的配置，才会暴露给客户端，我们也写了几个` VITE_` 开头的配置，所以在项目运行时，我们可以直接 `import.meta.env.VITE_XXX` 去查看配置，但是这样太麻烦了，所以我们写一个统一的配置文件去获取环境变量，包括项目后期的一些全局配置也可以写里面
+
+项目 `src` 目录下新建 `config/config.js` 文件，写入下面文件：
+
+```js
+/*
+ * @LastEditors: isboyjc
+ * @Description: 全局config配置文件
+ * @Date: 2022-09-17 14:35:02
+ * @LastEditTime: 2022-09-17 14:35:02
+ * @Author: isboyjc
+ */
+
+// 获取环境变量
+const ENV = import.meta.env
+// 配置文件
+let config = {}
+// 默认配置文件
+const configSource = {
+  appCode: ENV.VITE_APP_CODE,
+  // 项目标识代码
+  projectCode: `${ENV.VITE_APP_CODE}_${ENV.VITE_APP_ENV}`,
+  // 项目名
+  projectName: ENV.VITE_APP_NAME,
+  // 项目描述
+  projectDesc: ENV.VITE_APP_DESCRIPTION,
+  // 资源base地址
+  base: ENV.VITE_BASE,
+  // 接口代理URL路径
+  baseUrl: ENV.VITE_BASE_URL,
+  // 模拟数据接口路径
+  mockBaseUrl: ENV.VITE_BASE_MOCK_URL,
+  // 服务端接口路径
+  serverUrl: ENV.VITE_BASE_SERVER_URL
+}
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 设置全局配置
+ * @param {Object} cfg 配置项
+ * @return {Object} 新的全局配置 config
+ */
+const setConfig = cfg => {
+  config = Object.assign(config, cfg)
+  return config
+}
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 重置全局配置
+ * @param {*}
+ * @return {Object} 全局默认配置 configSource
+ */
+const resetConfig = () => {
+  config = { ...configSource }
+  return config
+}
+resetConfig()
+
+/**
+ * @Author isboyjc
+ * @Date 2022-09-17 14:35:02
+ * @description 获取全局配置
+ * @param {String} key 配置项，支持 'a.b.c' 的方式获取
+ * @return {Object} 新的全局配置 config
+ */
+const getConfig = key => {
+  if (typeof key === 'string') {
+    const arr = key.split('.')
+    if (arr && arr.length) {
+      let data = config
+      arr.forEach(v => {
+        if (data && typeof data[v] !== 'undefined') {
+          data = data[v]
+        } else {
+          data = null
+        }
+      })
+      return data
+    }
+  }
+  if (Array.isArray(key)) {
+    const data = config
+    if (key && key.length > 1) {
+      let res = {}
+      key.forEach(v => {
+        if (data && typeof data[v] !== 'undefined') {
+          res[v] = data[v]
+        } else {
+          res[v] = null
+        }
+      })
+      return res
+    }
+    return data[key]
+  }
+  return { ...config }
+}
+
+export { getConfig, setConfig, resetConfig }
+```
+
+上面代码不复杂，所以不过多解释了，介绍下为什么用这种方式，而不是直接写一个对象导出，其实是因为有次写项目有用到了动态修改全局配置的需求，所以就把全局配置项获取写成动态的了。
+
+我们写入配置时，只需要在 `configSource` 对象中写入就可以了，项目中使用起来的话如下：
+
+```js
+import { getConfig, setConfig, resetConfig } from "@/config/config.js"
+
+// 获取配置
+getConfig("a")
+getConfig("a.b")
+getConfig("a.b.c")
+
+// 动态设置
+setConfig({ ... })
+
+// 重置配置
+resetConfig()
+```
+
+:::
+
+## 5. 第三方插件安装
+
+### 5.1 Element Plus
 
 - [官方网址](https://element-plus.org/zh-CN/#/zh-CN)
 
-#### 4.11) [安装](https://element-plus.org/zh-CN/guide/installation.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8)
+#### 5.11) [安装](https://element-plus.org/zh-CN/guide/installation.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8)
 
 使用包管理器
 
@@ -512,7 +858,7 @@ $ pnpm install element-plus
 
 :::
 
-#### 4.12) 使用
+#### 5.12) 使用
 
 1. [完整引入](https://element-plus.org/zh-CN/guide/quickstart.html#%E5%AE%8C%E6%95%B4%E5%BC%95%E5%85%A5)
 
@@ -572,11 +918,11 @@ export default defineConfig({
 
 :::
 
-### 4.2 VueUse
+### 5.2 VueUse
 
 [VueUse](https://vueuse.org/) 没用过的话可以先把它理解为一个基于 Vue 的工具库，Vue2、Vue3 都可以用，有很多实用的方法、组件包括指令，超级方便，后续我们会用到其中的一些方法，所以先装上
 
-#### 4.21) 安装
+#### 5.21) 安装
 
 :::details 点击查看代码
 
@@ -590,7 +936,7 @@ pnpm add @vueuse/core
 
 :::
 
-#### 4.22) 配置自动引入
+#### 5.22) 配置自动引入
 
 `VueUse` 不止有方法，还有组件和指令，所以我们还是需要上面两个自动引入的插件去处理，那由于作者是一个人，解析器都内置在自动引入插件中了，所以我们直接导出用就可以了。
 
