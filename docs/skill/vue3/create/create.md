@@ -323,6 +323,29 @@ module.exports = {
 
 `Prettier` 配置比较简单，按照文档和喜好在 `.prettierrc.json` 文件中配置即可，注意配置的时候一定要和 `ESLint` 的 `rules` 比较一下，这里是会发生冲突的地方，检测和格式化规则一定要一致。
 
+### 2.3 VsCode 扩展
+
+为了开发人员保持同一个环境，保证代码风格一模一样，避免差异性
+
+1. 推荐扩展安装
+2. 常用配置同步
+
+---
+
+根目录的 **.vscode/extensions.json** 文件如下：
+
+:::details 点击查看代码
+
+```sh
+{
+  "recommendations": [
+    "vue.volar",
+  ]
+}
+```
+
+:::
+
 ## 3. 架构配置
 
 ### 3.1 公共样式管理、初始化样式
@@ -833,11 +856,23 @@ resetConfig()
 
 ## 5. 第三方插件安装
 
-### 5.1 Element Plus
+### 5.1 Sass
+
+:::details 点击查看代码
+
+示例安装版本：1.57.0
+
+```sh
+npm install sass -D
+```
+
+:::
+
+### 5.2 Element Plus
 
 - [官方网址](https://element-plus.org/zh-CN/#/zh-CN)
 
-#### 5.11) [安装](https://element-plus.org/zh-CN/guide/installation.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8)
+#### 5.21) [安装](https://element-plus.org/zh-CN/guide/installation.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8)
 
 使用包管理器
 
@@ -858,7 +893,7 @@ $ pnpm install element-plus
 
 :::
 
-#### 5.12) 使用
+#### 5.22) 使用
 
 1. [完整引入](https://element-plus.org/zh-CN/guide/quickstart.html#%E5%AE%8C%E6%95%B4%E5%BC%95%E5%85%A5)
 
@@ -918,11 +953,11 @@ export default defineConfig({
 
 :::
 
-### 5.2 VueUse
+### 5.3 VueUse
 
 [VueUse](https://vueuse.org/) 没用过的话可以先把它理解为一个基于 Vue 的工具库，Vue2、Vue3 都可以用，有很多实用的方法、组件包括指令，超级方便，后续我们会用到其中的一些方法，所以先装上
 
-#### 5.21) 安装
+#### 5.31) 安装
 
 :::details 点击查看代码
 
@@ -936,7 +971,7 @@ pnpm add @vueuse/core
 
 :::
 
-#### 5.22) 配置自动引入
+#### 5.32) 配置自动引入
 
 `VueUse` 不止有方法，还有组件和指令，所以我们还是需要上面两个自动引入的插件去处理，那由于作者是一个人，解析器都内置在自动引入插件中了，所以我们直接导出用就可以了。
 
