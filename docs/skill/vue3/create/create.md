@@ -64,7 +64,7 @@ Done.
 3. 删除 `components` 下所有文件
 4. 删除 `assets` 下所有文件
 
-#### 1.22) 重构文件
+#### 1.22) 重构内容
 
 1. 在 `views` 文件夹下新建 `dashboard/analysis/index.vue` 文件：
 
@@ -322,6 +322,39 @@ module.exports = {
 - tabWidth 使用 n 个空格缩进
 
 `Prettier` 配置比较简单，按照文档和喜好在 `.prettierrc.json` 文件中配置即可，注意配置的时候一定要和 `ESLint` 的 `rules` 比较一下，这里是会发生冲突的地方，检测和格式化规则一定要一致。
+
+## 3. 架构配置
+
+### 3.1 公共样式管理、初始化样式
+
+#### 3.11 安装 sass
+
+:::details 点击查看代码
+
+示例安装版本：1.57.0
+
+```sh
+npm install sass -D
+```
+
+:::
+
+#### 3.12 公共样式处理
+
+根据下面创建文件，存放公共样式
+
+```sh
+├─ styles/               # 样式
+|  ├─ element-plus       # 重置element样式
+|  ├─ └─ el-xxx.scss
+|  ├─ variables.scss     # 变量
+|  ├─ transition.scss    # 动效
+|  ├─ reset.scss         # 重置
+|  ├─ normalize.scss     # 初始化
+|  ├─ sidebar.scss       # 侧边栏
+|  ├─ mixin.scss         # mixin
+|  ├─ index.scss         # 样式统一导出接口
+```
 
 ## 3. Vite 内部配置
 
