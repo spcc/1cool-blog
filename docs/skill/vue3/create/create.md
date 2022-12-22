@@ -1023,3 +1023,170 @@ plugins: [
 :::
 
 这样我们就可以在项目中随时随地的使用 `VueUse` 了！建议大家有时间可以去看看 `VueUse` 的源码实现，也并不复杂，它有很多最佳实践，可以给我们使用 `Vue3` 提供很大的帮助！
+
+### 5.4 Mock
+
+项目开发阶段通常会使用 **mock** 数据。插件 [vite-plugin-mock](https://www.npmjs.com/package/vite-plugin-mock) 同时提供了开发环境和生产环境下的数据 mock 服务，简单好用。
+
+#### 5.41) 安装
+
+插件依赖于 **mockjs**，需要一并安装：
+
+:::details 点击查看代码
+
+示例安装版本:  
+mockjs: 1.1.0  
+vite-plugin-mock: 2.9.6
+
+```sh
+npm add -D vite-plugin-mock mockjs
+```
+
+:::
+
+#### 5.42) 配置
+
+根据情况任选一种即可
+
+- 根据 env 配置是否开启 mock
+- 根据环境（开发环境/生产环境）配置是否开启 mock
+
+##### 5.421 根据 env 文件配置是否开启 mock
+
+在 **vite.config.js** 配置文件启用插件。
+
+:::details 点击查看代码
+
+```js
+import { defineConfig, loadEnv } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock'
+
+// https://vitejs.dev/config/
+export default defineConfig(mode => {
+  return {
+    plugins: [
+      viteMockServe({
+        // 只在开发阶段开启 mock 服务
+        localEnabled: loadEnv(mode, process.cwd()).VITE_USE_MOCK
+      })
+    ]
+  }
+})
+```
+
+:::
+
+解决 `eslint 报错`: 'process' is not defined.
+
+在 `eslintrc.cjs`
+
+:::details 点击查看代码
+
+```js
+module.exports = {
+  globals: {
+    process: true
+  }
+}
+```
+
+:::
+
+##### 5.422 根据开发环境和生产环境 配置是否开启 mock
+
+在 **vite.config.js** 配置文件启用插件。
+
+**Mock 服务通常只用于开发阶段**，因此我们需要在配置文件中判断当前所处环境。
+
+在 webpack 中通常会配置一个 `NODE_ENV` 的环境变量。而在 Vite 中，不用开发者进行设置，它提供了一种方便的判断开发环境和生产环境的方式，如下：
+
+:::details 点击查看代码
+
+```js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { viteMockServe } from 'vite-plugin-mock'
+​
+export default defineConfig((config) => {
+  const { command } = config
+  return {
+    plugins: [
+      vue(),
+      viteMockServe({
+        // 只在开发阶段开启 mock 服务
+        localEnabled: command === 'serve'
+      })
+    ]
+  }
+})
+```
+
+:::
+
+上面，配置文件导出一个立即执行的 `defineConfig` 函数。它又接收一个函数作为参数，该函数接收一个 `config` 参数，它包含一个 `command 属性`。当在命令行中执行 `vite` （开发）命令时， `command` 的值为 `serve`，当执行 `vite build` （构建）命令时，对应的值为 `build`。据此，可以识别所处环境。
+
+插件 `vite-plugin-mock` 有一个配置项 `localEnabled`，可以决定是否开启 `mock` 服务。默认即为开启状态。结合 `command` 属性，就可以动态的切换 `mock` 服务的状态了。
+
+#### 5.43) 编写 mock server
+
+该插件开箱即用。默认它会读取项目根目录下 `mock` 文件下的内容，作为 mock server。
+
+在根目录新建一个模拟用户接口的服务，它导出一个数组，数组里每一项用来模拟一个接口：
+
+:::details 点击查看代码
+
+```js
+// /mock/user.js
+​
+export default [
+  // 用户登录
+  {
+    // 请求地址
+    url: "/api/user/login",
+    // 请求方法
+    method: "post",
+    // 响应数据
+    response: () => {
+      return {
+        code: 0,
+        message: 'success',
+        data: {
+          token: "Token",
+          username: "昆吾kw"
+        }
+      }
+    }
+  }
+]
+```
+
+:::
+
+插件内部使用了 [Connect](https://github.com/senchalabs/connect) 来提供接口服务，它是一个比 `Express` 更悠久的 Node HTTP 框架。上面的写法就相当于创建了一个这样的接口服务：
+
+:::details 点击查看代码
+
+```js
+app.post('/api/user/login', (req, res) => {
+  res.send({
+    code: 0,
+    message: 'success',
+    data: {
+      token: 'Token',
+      username: '昆吾kw'
+    }
+  })
+})
+```
+
+:::
+
+由于开启了 `mock` 服务，当前端在发出 `ajax` 请求时，会被拦截到，交由 `mock` 服务处理。没有做数据校验，前端传任何数据来都返回上面的结果。
+
+:::details 点击查看代码
+
+```js
+const result = await axios.post('/api/user/login', userData)
+```
+
+:::
