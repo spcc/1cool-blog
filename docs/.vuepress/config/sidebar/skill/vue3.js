@@ -106,8 +106,8 @@ const vue3 = [
         path: '/skill/vue3/create/create'
       },
       {
-        title: '项目初始化1',
-        path: '/skill/vue3/create/create1'
+        title: '登录架构',
+        path: '/skill/vue3/create/login'
       }
     ]
   }
