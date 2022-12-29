@@ -1,10 +1,12 @@
 const vue3 = require('./sidebar/skill/vue3')
+const money = require('./sidebar/my/money')
 
 const sidebar = {
   // 知识点 -> vue3
   // skill/web/vue3
   '/skill/web/vue3': vue3,
   '/skill/vue3': vue3,
+  '/my/money': money,
 
   /**
    * js
@@ -240,6 +242,22 @@ const sidebar = {
   ],
 
   '/book/': [
+    {
+      title: 'JavaScript 高级程序设计（第4版）',
+      collapsable: true,
+      sidebarDepth: 0,
+      path: '/book/js4/',
+      children: [
+        {
+          title: '第 1 章 什么是 JavaScript',
+          path: '/book/js4/base'
+        },
+        {
+          title: '第 2 章 HTML 中的 JavaScript',
+          path: '/book/js4/html'
+        }
+      ]
+    },
     {
       title: 'ES6 标准入门',
       collapsable: true,
