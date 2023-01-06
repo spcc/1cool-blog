@@ -255,6 +255,10 @@ const sidebar = {
         {
           title: '第 2 章 HTML 中的 JavaScript',
           path: '/book/js4/html'
+        },
+        {
+          title: '第 3 章 语言基础',
+          path: '/book/js4/basic'
         }
       ]
     },
