@@ -259,6 +259,10 @@ const sidebar = {
         {
           title: '第 3 章 语言基础',
           path: '/book/js4/basic'
+        },
+        {
+          title: '第 4 章 变量、作用域与内存',
+          path: '/book/js4/var'
         }
       ]
     },
