@@ -1,0 +1,1003 @@
+# 第 5 章 基本引用类型
+
+引用值（或者对象）是某个特定**引用类型**的实例。在 ECMAScript 中，引用类型是把数据和功能组织到一起的结构，经常被人错误地称作“类”。虽然从技术上讲 JavaScript 是一门面向对象语言，但 ECMAScript 缺少传统的面向对象编程语言所具备的某些基本结构，包括类和接口。引用类型有时候也被称为对象定义，因为它们描述了自己的对象应有的属性和方法。
+
+对象被认为是某个特定引用类型的**实例**。新对象通过使用 new 操作符后跟一个**构造函数**（constructor）
+来创建。构造函数就是用来创建新对象的函数，比如下面这行代码：
+
+```js
+let now = new Date()
+```
+
+这行代码创建了引用类型 Date 的一个新实例，并将它保存在变量 now 中。Date()在这里就是构造函数，它负责创建一个只有默认属性和方法的简单对象。ECMAScript 提供了很多像 Date 这样的原生引用类型，帮助开发者实现常见的任务。
+
+:::warning 注意
+函数也是一种引用类型
+:::
+
+## 5.1 Date
+
+**一、GMT**
+
+- 什么是 GMT
+  - GMT（Greenwich Mean Time）， 格林威治平时（也称格林威治时间）。它规定太阳每天经过位于英国伦敦郊区的皇家格林威治天文台的时间为中午 12 点。
+- GMT 的历史
+
+  - 格林威治皇家天文台为了海上霸权的扩张计划，在十七世纪就开始进行天体观测。为了天文观测，选择了穿过英国伦敦格林威治天文台子午仪中心的一条经线作为零度参考线，这条线，简称格林威治子午线。
+
+  - 1884 年 10 月在美国华盛顿召开了一个国际子午线会议，该会议将格林威治子午线设定为本初子午线，并将格林威治平时 (GMT, Greenwich Mean Time) 作为世界时间标准（UT, Universal Time）。由此也确定了全球 24 小时自然时区的划分，所有时区都以和 GMT 之间的偏移量做为参考。
+
+  - 1972 年之前，格林威治时间（GMT）一直是世界时间的标准。1972 年之后，GMT 不再是一个时间标准了。
+
+**二、UTC**
+
+- 什么是 UTC
+
+  - UTC（Coodinated Universal Time），协调世界时，又称世界统一时间、世界标准时间、国际协调时间。由于英文（CUT）和法文（TUC）的缩写不同，作为妥协，简称 UTC。
+  - UTC 是现在全球通用的时间标准，全球各地都同意将各自的时间进行同步协调。UTC 时间是经过平均太阳时（以格林威治时间 GMT 为准）、地轴运动修正后的新时标以及以秒为单位的国际原子时所综合精算而成。
+  - 在军事中，协调世界时会使用“Z”来表示。又由于 Z 在无线电联络中使用“Zulu”作代称，协调世界时也会被称为"Zulu time"。
+
+- UTC 由两部分构成：
+  - 原子时间（TAI, International Atomic Time）: 结合了全球 400 个所有的原子钟而得到的时间，它决定了我们每个人的钟表中，时间流动的速度。
+  - 世界时间（UT, Universal Time）: 也称天文时间，或太阳时，他的依据是地球的自转，我们用它来确定多少原子时，对应于一个地球日的时间长度。
+- UTC 的历史
+  - 1960 年，国际无线电咨询委员会规范统一了 UTC 的概念，并在次年投入实际使用。
+  - “Coordinated Universal Time”这个名字则在 1967 年才被正式采纳。
+  - 1967 年以前， UTC 被数次调整过，原因是要使用闰秒（leap second）来将 UTC 与地球自转时间进行统一。
+
+**三、GMT vs UTC**
+
+1. GMT 是前世界标准时，UTC 是现世界标准时。
+2. UTC 比 GMT 更精准，以原子时计时，适应现代社会的精确计时。
+3. 但在不需要精确到秒的情况下，二者可以视为等同。
+4. 每年格林尼治天文台会发调时信息，基于 UTC。
+
+**四、时区**
+
+随着火车铁路与其他交通和通讯工具的发展，以及全球化贸易的推动，各地使用各自的当地太阳时间带来了时间不统一的问题，在 19 世纪催生了统一时间标准的需求，时区由此诞生。
+
+- 时区是如何定义的
+  - 从格林威治本初子午线起，经度每向东或者向西间隔 15°，就划分一个时区，在这个区域内，大家使用同样的标准时间。
+  - 但实际上，为了照顾到行政上的方便，常将 1 个国家或 1 个省份划在一起。所以时区并不严格按南北直线来划分，而是按自然条件来划分。另外：由于目前，国际上并没有一个批准各国更改时区的机构。一些国家会由于特定原因改变自己的时区。
+  - 全球共分为 24 个标准时区，相邻时区的时间相差一个小时。
+  - 在不同地区，同一个时区往往会有很多个不同的时区名称，因为名称中通常会包含该国该地区的地理信息。在夏令时期间，当地的时区名称及字母缩写会有所变化（通常会包含“daylight”或“summer”字样）。
+  - 例如美国东部标准时间叫：EST，Estern Standard Time；而东部夏令时间叫：EDT，Estern Daylight Time。
+
+**五、夏令时**
+
+- 什么是夏令时
+  - DST（Daylight Saving Time），夏令时又称夏季时间，或者夏时制。
+  - 它是为节约能源而人为规定地方时间的制度。一般在天亮早的夏季人为将时间提前一小时，可以使人早起早睡，减少照明量，以充分利用光照资源，从而节约照明用电。
+  - 全球约 40%的国家在夏季使用夏令时，其他国家则全年只使用标准时间。标准时间在有的国家也因此被相应地称为冬季时间。
+  - 在施行夏令时的国家，一年里面有一天只有 23 小时（夏令时开始那一天），有一天有 25 小时（夏令时结束那一天），其他时间每天都是 24 小时。
+  - 绿色部分为 2019 年统计的在全球施行冬夏令时的国家和地区。
+- 夏令时的历史
+  - 1784 年，美国驻法国大使本杰明·富兰克林（Benjamin Franklin）提出“日光节约时间制”。1908 年，英国建筑师威廉·维莱特（William Willett）再次提出，但当时该提案并未被采纳。
+  - 1916 年，处于一战时期的德国政府下令将时钟推至一个小时后，通过获得额外一小时的日光来节省战争所需的煤炭，成为第一个实行夏时制的国家。随后，英法俄美四个一战参战国纷纷效仿。
+  - 美国在一战结束后于 1919 年取消夏时制，但在 1942 年二战时，美国重新启动夏令时制，1966 年正式立法确定永久使用。1973 至 1975 年石油危机爆发期间，美国连续两年延长夏令时制，以节省石油。
+  - 欧洲大部分国家则是从 1976 年——第四次中东战争导致首次石油危机（1973 年）的 3 年后才开始施行夏令时制。
+  - 1986 年 4 月，中国国务院办公厅发出《在全国范围内实行夏时制的通知》，要求全民早睡早起节约能源：每年 4 月中旬的第一个星期日 2 时，将时钟拨快一小时；10 月中旬第一个星期日的 2 时，再将时钟拨慢一小时。但此夏令时只实行了 6 年，在 1992 年停止施行，主因是中国东西地域广阔却只奉行一个北京时间，实时夏令时制带来很多不切实际的反效果。
+- 夏令时的争议
+  - 从过去的 100 多年来看，夏令时往往是在国家发生严重危机（如战争和能源短缺）的情况下才会受到青睐。而在相对和平的近 10 年里，这种时间制度则变得越来越不受欢迎。
+  - 它会使得人们的生物钟被扰乱，常常陷入睡眠不足的情况，不仅对人体健康有害、导致车祸，还会对旅游、航空领域造成极大的混乱。
+  - 另外，冬、夏令时究竟能否起到节能的作用，也仍有待商榷。美国一项截至 2014 年 3 月的研究表明，这种时间转换制度最多能在 3、4 月帮助美国减少 1%的用电量，而美国国家标准局则认为，夏令时对用电量没有丝毫影响。
+  - 在俄罗斯，此前的一份报告也显示，夏令时帮助俄罗斯每年节约的电量，仅相当于两三个火力发电厂的发电量，十分的“鸡肋”。
+  - 去年（2019 年）3 月 26 日，作为全世界第一个提出并实行夏令时的国家，德国，在欧洲议会上以 410 比 192 的赞成票通过了取消冬、夏令时转换制提案，拟定于 2021 年 4 月起，所有欧盟国家不再实行冬、夏令时转换。待各成员国形成最终法案后，将选择永久使用夏令时时间或是冬令时时间。
+
+**六、本地时间**
+
+在日常生活中所使用的时间我们通常称之为本地时间。这个时间等于我们所在（或者所使用）时区内的当地时间，它由与世界标准时间（UTC）之间的偏移量来定义。这个偏移量可以表示为 UTC- 或 UTC+，后面接上偏移的小时和分钟数。
+
+**七、JavaScript 中的 Date**
+
+- 得到本地时间，在不同时区打印 new Date() ，输出的结果将会不一样：
+
+```js
+new Date()
+```
+
+## 5.2 RegExp
+
+ECMAScript 通过 RegExp 类型支持正则表达式。正则表达式使用类似 Perl 的简洁语法来创建：
+
+```js
+let expression = /pattern/flags;
+```
+
+这个正则表达式的 pattern（模式）可以是任何简单或复杂的正则表达式，包括字符类、限定符、分组、向前查找和反向引用。每个正则表达式可以带零个或多个 flags（标记），用于控制正则表达式的行为。下面给出了表示匹配模式的标记。
+
+- g：全局模式，表示查找字符串的全部内容，而不是找到第一个匹配的内容就结束。
+- i：不区分大小写，表示在查找匹配时忽略 pattern 和字符串的大小写。
+- m：多行模式，表示查找到一行文本末尾时会继续查找。
+- y：粘附模式，表示只查找从 lastIndex 开始及之后的字符串。
+- u：Unicode 模式，启用 Unicode 匹配。
+- s：dotAll 模式，表示元字符.匹配任何字符（包括\n 或\r）。
+
+使用不同模式和标记可以创建出各种正则表达式，比如：
+
+```js
+// 匹配字符串中的所有"at"
+let pattern1 = /at/g
+
+// 匹配第一个"bat"或"cat"，忽略大小写
+let pattern2 = /[bc]at/i
+
+// 匹配所有以"at"结尾的三字符组合，忽略大小写
+let pattern3 = /.at/gi
+```
+
+与其他语言中的正则表达式类似，所有元字符在模式中也必须转义，包括：
+( [ { \ ^ $ | ) ] } ? \* + .
+
+元字符在正则表达式中都有一种或多种特殊功能，所以要匹配上面这些字符本身，就必须使用反斜
+杠来转义。下面是几个例子：
+
+```js
+// 匹配第一个"bat"或"cat"，忽略大小写
+let pattern1 = /[bc]at/i
+
+// 匹配第一个"[bc]at"，忽略大小写
+let pattern2 = /\[bc\]at/i
+
+// 匹配所有以"at"结尾的三字符组合，忽略大小写
+let pattern3 = /.at/gi
+
+// 匹配所有".at"，忽略大小写
+let pattern4 = /\.at/gi
+```
+
+这里的 pattern1 匹配"bat"或"cat"，不区分大小写。要直接匹配"[bc]at"，左右中括号都必须像 pattern2 中那样使用反斜杠转义。在 pattern3 中，点号表示"at"前面的任意字符都可以配。如果想匹配".at"，那么要像 pattern4 中那样对点号进行转义。
+
+前面例子中的正则表达式都是使用字面量形式定义的。正则表达式也可以使用 RegExp 构造函数来
+创建，它接收两个参数：模式字符串和（可选的）标记字符串。任何使用字面量定义的正则表达式也可
+以通过构造函数来创建，比如：
+
+```js
+// 匹配第一个"bat"或"cat"，忽略大小写
+let pattern1 = /[bc]at/i
+
+// 跟 pattern1 一样，只不过是用构造函数创建的
+let pattern2 = new RegExp('[bc]at', 'i')
+```
+
+这里的 pattern1 和 pattern2 是等效的正则表达式。注意，RegExp 构造函数的两个参数都是字符串。因为 RegExp 的模式参数是字符串，所以在某些情况下需要二次转义。所有元字符都必须二次转义，包括转义字符序列，如\n（\转义后的字符串是\\，在正则表达式字符串中则要写成\\\\）。下表展示了几个正则表达式的字面量形式，以及使用 RegExp 构造函数创建时对应的模式字符串。
+
+| 字面量模式       | 对应的字符串          |
+| :--------------- | :-------------------- |
+| /\[bc\]at/       | "\\[bc\\]at"          |
+| /\.at/           | "\\.at"               |
+| /name\/age/      | "name\\/age"          |
+| /\d.\d{1,2}/     | "\\d.\\d{1,2}"        |
+| /\w\\hello\\123/ | "\\w\\\\hello\\\\123" |
+
+此外，使用 RegExp 也可以基于已有的正则表达式实例，并可选择性地修改它们的标记：
+
+```js
+const re1 = /cat/g
+console.log(re1) // "/cat/g"
+
+const re2 = new RegExp(re1)
+console.log(re2) // "/cat/g"
+
+const re3 = new RegExp(re1, 'i')
+console.log(re3) // "/cat/i"
+```
+
+### 5.2.1 RegExp 实例属性
+
+实际开发中用得并不多，因为模式声明中包含这些信息。
+
+### 5.2.2 RegExp 实例方法
+
+RegExp 实例的主要方法是 exec()，主要用于配合捕获组使用。这个方法只接收一个参数，即要应用模式的字符串。如果找到了匹配项，则返回包含第一个匹配信息的数组；如果没找到匹配项，则返回
+null。返回的数组虽然是 Array 的实例，但包含两个额外的属性：index 和 input。index 是字符串中匹配模式的起始位置，input 是要查找的字符串。这个数组的第一个元素是匹配整个模式的字符串，其他元素是与表达式中的捕获组匹配的字符串。如果模式中没有捕获组，则数组只包含一个元素。来看下面的例子：
+
+```js
+let text = 'mom and dad and baby'
+let pattern = /mom( and dad( and baby)?)?/gi
+let matches = pattern.exec(text)
+console.log(matches.index) // 0
+console.log(matches.input) // "mom and dad and baby"
+console.log(matches[0]) // "mom and dad and baby"
+console.log(matches[1]) // " and dad and baby"
+console.log(matches[2]) // " and baby"
+```
+
+在这个例子中，模式包含两个捕获组：最内部的匹配项" and baby"，以及外部的匹配项" and dad"或" and dad and baby"。调用 exec()后找到了一个匹配项。因为整个字符串匹配模式，所以 matchs 数组的 index 属性就是 0。数组的第一个元素是匹配的整个字符串，第二个元素是匹配第一个捕获组的字符串，第三个元素是匹配第二个捕获组的字符串。
+
+在这个模式上设置了 g 标记，则每次调用 exec()都会在字符串中向前搜索下一个匹配项，如下面的例子所示：
+
+```js
+let text = 'cat, bat, sat, fat'
+let pattern = /.at/g
+let matches = pattern.exec(text)
+console.log(matches.index) // 0
+console.log(matches[0]) // cat
+console.log(pattern.lastIndex) // 3
+
+matches = pattern.exec(text)
+console.log(matches.index) // 5
+console.log(matches[0]) // bat
+console.log(pattern.lastIndex) // 8
+
+matches = pattern.exec(text)
+console.log(matches.index) // 10
+console.log(matches[0]) // sat
+console.log(pattern.lastIndex) // 13
+```
+
+这次模式设置了全局标记，因此每次调用 exec()都会返回字符串中的下一个匹配项，直到搜索到字符串末尾。注意模式的 lastIndex 属性每次都会变化。在全局匹配模式下，每次调用 exec()都会更新 lastIndex 值，以反映上次匹配的最后一个字符的索引
+
+如果模式设置了粘附标记 y，则每次调用 exec()就只会在 lastIndex 的位置上寻找匹配项。粘附
+标记覆盖全局标记。
+
+```js
+let text = 'cat, bat, sat, fat'
+let pattern = /.at/y
+let matches = pattern.exec(text)
+console.log(matches.index) // 0
+console.log(matches[0]) // cat
+console.log(pattern.lastIndex) // 3
+// 以索引 3 对应的字符开头找不到匹配项，因此 exec()返回 null
+// exec()没找到匹配项，于是将 lastIndex 设置为 0
+matches = pattern.exec(text)
+console.log(matches) // null
+console.log(pattern.lastIndex) // 0
+// 向前设置 lastIndex 可以让粘附的模式通过 exec()找到下一个匹配项：
+pattern.lastIndex = 5
+matches = pattern.exec(text)
+console.log(matches.index) // 5
+console.log(matches[0]) // bat
+console.log(pattern.lastIndex) // 8
+```
+
+正则表达式的另一个方法是 test()，接收一个字符串参数。如果输入的文本与模式匹配，则参数返回 true，否则返回 false。这个方法适用于只想测试模式是否匹配，而不需要实际匹配内容的情况。test()经常用在 if 语句中：
+
+```js
+let text = '000-00-0000'
+let pattern = /\d{3}-\d{2}-\d{4}/
+if (pattern.test(text)) {
+  console.log('The pattern was matched.')
+}
+```
+
+在这个例子中，正则表达式用于测试特定的数值序列。如果输入的文本与模式匹配，则显示匹配成功的消息。这个用法常用于验证用户输入，此时我们只在乎输入是否有效，不关心为什么无效。
+
+### 5.2.3 RegExp 构造函数属性
+
+:::warning 注意
+RegExp 构造函数的所有属性都没有任何 Web 标准出处，因此不要在生产环境中使用它们。
+:::
+
+## 5.3 原始值包装类型
+
+为了方便操作原始值，ECMAScript 提供了 3 种特殊的引用类型：Boolean、Number 和 String。
+
+引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过 new 实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则只存在于访问它的那行代码执行期间。这意味着不能在运行时给原始值添加属性和方法。比如下面的例子：
+
+```js
+let s1 = 'some text'
+s1.color = 'red'
+console.log(s1.color) // undefined
+```
+
+Object 构造函数作为一个工厂方法，能够根据传入值的类型返回相应原始值包装类型的实例。比如：
+
+```js
+let obj = new Object('some text')
+console.log(obj instanceof String) // true
+```
+
+如果传给 Object 的是字符串，则会创建一个 String 的实例。如果是数值，则会创建 Number 的
+实例。布尔值则会得到 Boolean 的实例。
+
+---
+
+注意，使用 new 调用原始值包装类型的构造函数，与调用同名的转型函数并不一样。例如：
+
+```js
+let value = '25'
+
+let number = Number(value) // 转型函数
+console.log(typeof number) // "number"
+
+let obj = new Number(value) // 构造函数
+console.log(typeof obj) // "object"
+```
+
+在这个例子中，变量 number 中保存的是一个值为 25 的原始数值，而变量 obj 中保存的是一个 Number 的实例。
+
+虽然不推荐显式创建原始值包装类型的实例，但它们对于操作原始值的功能是很重要的。每个原始值包装类型都有相应的一套方法来方便数据操作。
+
+### 5.3.1 Boolean
+
+建议永远不要使用
+
+Boolean 是对应布尔值的引用类型。要创建一个 Boolean 对象，就使用 Boolean 构造函数并传入 true 或 false，如下例所示：
+
+```js
+let booleanObject = new Boolean(true)
+```
+
+---
+
+Boolean 的实例会重写 valueOf()方法，返回一个原始值 true 或 false。toString()方法被调
+用时也会被覆盖，返回字符串"true"或"false"。不过，Boolean 对象在 ECMAScript 中用得很少。
+不仅如此，它们还容易引起误会，尤其是在布尔表达式中使用 Boolean 对象时，比如：
+
+```js
+let falseObject = new Boolean(false)
+let result = falseObject && true // falseObject 是对象，所以返回 true
+console.log(result) // true
+
+let falseValue = false
+result = falseValue && true
+console.log(result) // false
+```
+
+原始值和引用值（Boolean 对象）还有几个区别：
+
+1. typeof 操作符对原始值返回 "boolean"，但对引用值返回"object"
+2. Boolean 对象是 Boolean 类型的实例，在使用 instaceof 操作符时返回 true，但对原始值则返回 false
+
+```js
+console.log(typeof falseObject) // object
+console.log(typeof falseValue) // boolean
+console.log(falseObject instanceof Boolean) // true
+console.log(falseValue instanceof Boolean) // false
+```
+
+理解原始布尔值和 Boolean 对象之间的区别非常重要，强烈建议永远不要使用后者。
+
+### 5.3.2 Number
+
+Number 是对应数值的引用类型。要创建一个 Number 对象，就使用 Number 构造函数并传入一个
+数值，如下例所示：
+
+```js
+let numberObject = new Number(10)
+```
+
+Number 类型还提供了几个用于将数值格式化为字符串的方法
+
+toFixed()方法可以表示有 0~20 个小数位的数值。某些浏览器可能支持更大的范围，但这是通常被支持的范围。
+
+```js
+let num = 10
+console.log(num.toFixed(2)) // "10.00"
+
+// 如果数值本身的小数位超过了参数指定的位数，则四舍五入到最接近的小数位
+let num = 10.005
+console.log(num.toFixed(2)) // "10.01"
+
+// 不过要注意的是，多个浮点数值的数学计算不一定得到精确的结果
+0.1 + 0.2 = 0.30000000000000004
+```
+
+---
+
+原始值和引用值（Number 对象）还有几个区别：
+
+1. typeof 操作符对原始值返回 "number"，但对引用值返回"object"
+2. Number 对象是 Number 类型的实例，在使用 instaceof 操作符时返回 true，但对原始值则返回 false
+
+```js
+let numberObject = new Number(10)
+let numberValue = 10
+console.log(typeof numberObject) // "object"
+console.log(typeof numberValue) // "number"
+console.log(numberObject instanceof Number) // true
+console.log(numberValue instanceof Number) // false
+```
+
+---
+
+isInteger()方法与安全整数
+
+ES6 新增了 Number.isInteger()方法，用于辨别一个数值是否保存为整数。有时候，小数位的 0
+可能会让人误以为数值是一个浮点值：
+
+```js
+console.log(Number.isInteger(1)) // true
+console.log(Number.isInteger(1.0)) // true
+console.log(Number.isInteger(1.01)) // false
+```
+
+### 5.3.3 String
+
+String 是对应字符串的引用类型。要创建一个 String 对象，使用 String 构造函数并传入一个
+数值，如下例所示：
+
+```js
+let stringObject = new String('hello world')
+```
+
+---
+
+#### 1. JavaScript 字符
+
+charAt()方法返回给定索引位置的字符
+
+```js
+let message = 'abcde'
+console.log(message.charAt(2)) // "c"
+```
+
+#### 3. 字符串操作方法
+
+- concat() 用于将一个或多个字符串拼接成一个新字符串。（多数情况下，对于拼接多个字符串来说，使用加号更方便）
+
+```js
+let stringValue = 'hello '
+let result = stringValue.concat('world')
+console.log(result) // "hello world"
+console.log(stringValue) // "hello"
+
+// 拼接多个字符串
+let stringValue = 'hello '
+let result = stringValue.concat('world', '!')
+console.log(result) // "hello world!"
+console.log(stringValue) // "hello"
+```
+
+---
+
+3 个从字符串中提取子字符串的方法：
+
+- slice()
+  - 第一个参数表示子字符串开始的位置，第二个参数表示子字符串结束的位置（即该位置之前的字符会被提取出来）
+  - 负值时，将所有负值参数都当成字符串长度加上负参数值
+- substr()
+  - 第一个参数表示子字符串开始的位置，第二个参数表示返回的子字符串数量
+  - 负值时,将第一个负参数值当成字符串长度加上该值，将第二个负参数值转换为 0
+- substring()
+  - 第一个参数表示子字符串开始的位置，第二个参数表示子字符串结束的位置（即该位置之前的字符会被提取出来）
+  - 负值时, 会将所有负参数值都转换为 0
+
+省略第二个参数都意味着提取到字符串末尾
+
+```js
+// 正值案例
+let stringValue = 'hello world'
+console.log(stringValue.slice(3)) // "lo world"
+console.log(stringValue.substring(3)) // "lo world"
+console.log(stringValue.substr(3)) // "lo world"
+console.log(stringValue.slice(3, 7)) // "lo w"
+console.log(stringValue.substring(3, 7)) // "lo w"
+console.log(stringValue.substr(3, 7)) // "lo worl"
+
+// 负值案例
+let stringValue = 'hello world'
+console.log(stringValue.slice(-3)) // "rld"
+console.log(stringValue.substring(-3)) // "hello world"
+console.log(stringValue.substr(-3)) // "rld"
+console.log(stringValue.slice(3, -4)) // "lo w"
+console.log(stringValue.substring(3, -4)) // "hel"
+console.log(stringValue.substr(3, -4)) // "" (empty string)
+```
+
+#### 4. 字符串位置方法
+
+有两个方法用于在字符串中定位子字符串：  
+从字符串中搜索传入的字符串，并返回位置（如果没找到，则返回-1）。
+
+- indexOf()
+  - 可以接收可选的第二个参数，表示开始搜索的位置。会从这个参数指定的位置开始向字符串末尾搜索，忽略该位置之前的字符；
+- lastIndexOf()
+  - 可以接收可选的第二个参数，表示开始搜索的位置。会从这个参数指定的位置开始向字符串开头搜索，忽略该位置之后直到字符串末尾的字符。
+
+```js
+let stringValue = 'hello world'
+console.log(stringValue.indexOf('o')) // 4
+console.log(stringValue.lastIndexOf('o')) // 7
+
+// 包含第二个参数
+let stringValue = 'hello world'
+console.log(stringValue.indexOf('o', 6)) // 7
+console.log(stringValue.lastIndexOf('o', 6)) // 4
+
+// 在字符串中找到所有的目标子字符串
+let stringValue = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit'
+let positions = new Array()
+let pos = stringValue.indexOf('e')
+while (pos > -1) {
+  positions.push(pos)
+  pos = stringValue.indexOf('e', pos + 1)
+}
+console.log(positions) // [3,24,32,35,52]
+// 这个例子逐步增大开始搜索的位置，通过 indexOf()遍历了整个字符串。首先取得第一个"e"的位置，然后进入循环，将上一次的位置加 1 再传给 indexOf()，确保搜索到最后一个子字符串实例之后。每个位置都保存在 positions 数组中，可供以后使用。
+```
+
+### 5. 字符串包含方法
+
+ECMAScript 6 增加了 3 个用于判断字符串中是否包含另一个字符串的方法：
+
+startsWith()和 includes()方法接收可选的第二个参数，表示开始搜索的位置。  
+endsWith()方法接收可选的第二个参数，表示应该当作字符串末尾的位置。如果不提供这个参数，那么默认就是字符串长度。如果提供这个参数，那么就好像字符串只有那么多字符一样
+
+- startsWith()
+  - 检查开始于索引 0 的匹配项
+- endsWith()
+  - 检查开始于索引(string.length - substring.length)的匹配项
+- includes()
+  - 检查整个字符串
+
+```js
+// 基本使用例子
+let message = 'foobarbaz'
+
+console.log(message.startsWith('foo')) // true
+console.log(message.startsWith('bar')) // false
+
+console.log(message.endsWith('baz')) // true
+console.log(message.endsWith('bar')) // false
+
+console.log(message.includes('bar')) // true
+console.log(message.includes('qux')) // false
+
+// 包含第二个参数例子
+let message = 'foobarbaz'
+console.log(message.startsWith('foo')) // true
+console.log(message.startsWith('foo', 1)) // false
+console.log(message.includes('bar')) // true
+console.log(message.includes('bar', 4)) // false
+
+// endsWith()
+let message = 'foobarbaz'
+console.log(message.endsWith('bar')) // false
+console.log(message.endsWith('bar', 6)) // true
+```
+
+#### 6. trim()方法
+
+trimLeft()和 trimRight()方法分别用于从字符串开始和末尾清理空格符。  
+会创建字符串的一个副本，删除前、后所有空格符，再返回结果。(**不会改变原字符串**)比如：
+
+```js
+let stringValue = ' hello world '
+let trimmedStringValue = stringValue.trim()
+
+console.log(stringValue) // " hello world "
+console.log(trimmedStringValue) // "hello world"
+```
+
+#### 7. repeat()方法
+
+接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果。
+
+```js
+let stringValue = 'na '
+console.log(stringValue.repeat(16) + 'batman')
+// na na na na na na na na na na na na na na na na batman
+```
+
+#### 8. padStart()和 padEnd()方法
+
+复制字符串，如果小于指定长度，则在相应一边填充字符，直至满足长度条件。  
+第一个参数是长度，第二个参数是可选的填充字符串，默认为空格。
+
+```js
+let stringValue = 'foo'
+console.log(stringValue.padStart(6)) // " foo"
+console.log(stringValue.padStart(9, '.')) // "......foo"
+console.log(stringValue.padEnd(6)) // "foo "
+console.log(stringValue.padEnd(9, '.')) // "foo......"
+
+// 多个字符的字符串，则会将其拼接并截断以匹配指定长度
+let stringValue = 'foo'
+console.log(stringValue.padStart(8, 'bar')) // "barbafoo"
+console.log(stringValue.padStart(2)) // "foo"
+
+// 长度小于或等于字符串长度，则会返回原始字符串
+console.log(stringValue.padEnd(8, 'bar')) // "foobarba"
+console.log(stringValue.padEnd(2)) // "foo"
+```
+
+#### 9. 字符串迭代与解构
+
+字符串的原型上暴露了一个@@iterator 方法，表示可以迭代字符串的每个字符。可以像下面这样手动使用迭代器：
+
+```js
+let message = 'abc'
+let stringIterator = message[Symbol.iterator]()
+console.log(stringIterator.next()) // {value: "a", done: false}
+console.log(stringIterator.next()) // {value: "b", done: false}
+console.log(stringIterator.next()) // {value: "c", done: false}
+console.log(stringIterator.next()) // {value: undefined, done: true}
+```
+
+在 for-of 循环中可以通过这个迭代器按序访问每个字符：
+
+```js
+for (const c of 'abcde') {
+  console.log(c)
+}
+
+// a
+// b
+// c
+// d
+// e
+```
+
+有了这个迭代器之后，字符串就可以通过解构操作符来解构了。比如，可以更方便地把字符串分割
+为字符数组：
+
+```js
+let message = 'abcde'
+console.log([...message]) // ["a", "b", "c", "d", "e"]
+```
+
+#### 10. 字符串大小写转换
+
+**如果不知道代码涉及什么语言，则最好使用地区特定的转换方法。**
+
+toLocaleLowerCase()和 toLocaleUpperCase()方法旨在基于特定地区实现。在很多地区，地区特定的方法与通用的方法是一样的。但在少数语言中（如土耳其语），Unicode 大小写转换需应用特殊规则，要使用地区特定的方法才能实现正确转换。
+
+- toLowerCase()
+- toLocaleLowerCase()
+- toUpperCase()
+- toLocaleUpperCase()
+
+```js
+let stringValue = 'hello world'
+console.log(stringValue.toLocaleUpperCase()) // "HELLO WORLD"
+console.log(stringValue.toUpperCase()) // "HELLO WORLD"
+console.log(stringValue.toLocaleLowerCase()) // "hello world"
+console.log(stringValue.toLowerCase()) // "hello world"
+```
+
+#### 11. 字符串模式匹配方法
+
+String 类型专门为在字符串中实现模式匹配设计了几个方法。
+
+---
+
+第一个就是 match()方法，这个方法本质上跟 RegExp 对象的 exec()方法相同。match()方法接收一个参数，可以是一个正则表达式字符串，也可以是一个 RegExp 对象。来看下面的例子：
+
+```js
+let text = 'cat, bat, sat, fat'
+let pattern = /.at/
+
+// 等价于 pattern.exec(text)
+let matches = text.match(pattern)
+console.log(matches.index) // 0
+console.log(matches[0]) // "cat"
+console.log(pattern.lastIndex) // 0
+```
+
+match()方法返回的数组与 RegExp 对象的 exec()方法返回的数组是一样的：第一个元素是与整个模式匹配的字符串，其余元素则是与表达式中的捕获组匹配的字符串（如果有的话）。
+
+---
+
+另一个查找模式的字符串方法是 search()。这个方法唯一的参数与 match()方法一样：正则表达式字符串或 RegExp 对象。这个方法返回模式第一个匹配的位置索引，如果没找到则返回 -1。search()始终从字符串开头向后匹配模式。看下面的例子：
+
+```js
+let text = 'cat, bat, sat, fat'
+
+let pos = text.search(/at/)
+console.log(pos) // 1
+```
+
+这里，search(/at/)返回 1，即"at"的第一个字符在字符串中的位置。
+
+---
+
+为简化子字符串替换操作，ECMAScript 提供了 replace()方法。
+
+这个方法接收两个参数
+
+- 第一个参数可以是一个 RegExp 对象或一个字符串（这个字符串不会转换为正则表达式）
+- 第二个参数可以是一个字符串或一个函数。
+
+要想替换所有子字符串，第一个参数必须为正则表达式并且带全局标记，如下面的例子所示：
+
+```js
+let text = 'cat, bat, sat, fat'
+let result = text.replace('at', 'ond')
+console.log(result) // "cond, bat, sat, fat"
+
+result = text.replace(/at/g, 'ond')
+console.log(result) // "cond, bond, sond, fond"
+```
+
+replace()的第二个参数可以是一个函数。在只有一个匹配项时，这个函数会收到 3 个参数：
+
+- 与整个模式匹配的字符串
+- 匹配项在字符串中的开始位置
+- 以及整个字符串
+
+在有多个捕获组的情况下，每个匹配捕获组的字符串也会作为参数传给这个函数，但最后两个参数还是与整个模式匹配的开始位置和原始字符串。这个函数应该返回一个字符串，表示应该把匹配项替换成什么。使用函数作为第二个参数可以更细致地控制替换过程，如下所示：
+
+```js
+function htmlEscape(text) {
+  return text.replace(/[<>"&]/g, function (match, pos, originalText) {
+    switch (match) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case '"':
+        return '&quot;'
+    }
+  })
+}
+
+console.log(htmlEscape('<p class="greeting">Hello world!</p>'))
+// "&lt;p class=&quot;greeting&quot;&gt;Hello world!</p>"
+
+// 这里，函数 htmlEscape()用于将一段 HTML 中的 4 个字符替换成对应的实体：小于号、大于号、和号，还有双引号（都必须经过转义）。实现这个任务最简单的办法就是用一个正则表达式查找这些字符，然后定义一个函数，根据匹配的每个字符分别返回特定的 HTML 实体。
+```
+
+---
+
+split(),会根据传入的分隔符将字符串拆分成数组。作为分隔符的参数可以是字符串，也可以是 RegExp 对象。（字符串分隔符不会被这个方法当成正则表达式。）还可以传入第二个参数，即数组大小，确保返回的数组不会超过指定大小。来看下面的例子：
+
+```js
+let colorText = 'red,blue,green,yellow'
+let colors1 = colorText.split(',') // ["red", "blue", "green", "yellow"]
+let colors2 = colorText.split(',', 2) // ["red", "blue"]
+let colors3 = colorText.split(/[^,]+/) // ["", ",", ",", ",", ""]
+// 使用正则表达式可以得到一个包含逗号的数组。注意在最后一次调用 split()时，返回的数组前后包含两个空字符串。这是因为正则表达式指定的分隔符出现在了字符串开头（"red"）和末尾（"yellow"）
+```
+
+#### 12. localeCompare()方法 - 比较冷门
+
+这个方法比较两个字符串，返回如下 3 个值中的一个。
+
+- 如果按照字母表顺序，字符串应该排在字符串参数前头，则返回负值。（通常是-1，具体还要看与实际值相关的实现。）
+- 如果字符串与字符串参数相等，则返回 0。
+- 如果按照字母表顺序，字符串应该排在字符串参数后头，则返回正值。（通常是 1，具体还要看与实际值相关的实现。）
+
+下面是一个例子：
+
+```js
+let stringValue = 'yellow'
+console.log(stringValue.localeCompare('brick')) // 1
+console.log(stringValue.localeCompare('yellow')) // 0
+console.log(stringValue.localeCompare('zoo')) // -1
+```
+
+在这里，字符串"yellow"与 3 个不同的值进行了比较："brick"、"yellow"和"zoo"。"brick"按字母表顺序应该排在"yellow"前头，因此 localeCompare()返回 1。"yellow"等于"yellow"，因此"localeCompare()"返回 0。最后，"zoo"在"yellow"后面，因此 localeCompare()返回-1。强调一下，因为返回的具体值可能因具体实现而异，所以最好像下面的示例中一样使用 localeCompare()：
+
+```js
+function determineOrder(value) {
+  let result = stringValue.localeCompare(value)
+  if (result < 0) {
+    console.log(`The string 'yellow' comes before the string '${value}'.`)
+  } else if (result > 0) {
+    console.log(`The string 'yellow' comes after the string '${value}'.`)
+  } else {
+    console.log(`The string 'yellow' is equal to the string '${value}'.`)
+  }
+}
+determineOrder('brick')
+determineOrder('yellow')
+determineOrder('zoo')
+
+// 这样一来，就可以保证在所有实现中都能正确判断字符串的顺序了。
+// localeCompare()的独特之处在于，实现所在的地区（国家和语言）决定了这个方法如何比较字符串。在美国，英语是 ECMAScript 实现的标准语言，localeCompare()区分大小写，大写字母排在小写字母前面。但其他地区未必是这种情况。
+```
+
+#### 13. HTML 方法
+
+早期的浏览器开发商认为使用 JavaScript 动态生成 HTML 标签是一个需求。因此，早期浏览器扩展了规范，增加了辅助生成 HTML 标签的方法。下表总结了这些 HTML 方法。不过，这些方法基本上已经没有人使用了，因为结果通常不是语义化的标记。
+
+| 方 法            | 输 出                                   |
+| :--------------- | :-------------------------------------- |
+| anchor(name)     | &lt;a name="name">string&lt;/a>         |
+| big()            | &lt;big>string&lt;/big>                 |
+| bold()           | &lt;b>string&lt;/b>                     |
+| fixed()          | &lt;tt>string&lt;/tt>                   |
+| fontcolor(color) | &lt;font color="color">string&lt;/font> |
+| fontsize(size)   | &lt;font size="size">string&lt;/font>   |
+| italics()        | &lt;i>string&lt;/i>                     |
+| link(url)        | &lt;a href="url">string&lt;/a>          |
+| small()          | &lt;small>string&lt;/small>             |
+| strike()         | &lt;strike>string&lt;/strike>           |
+| sub()            | &lt;sub>string&lt;/sub>                 |
+| sup()            | &lt;sup>string&lt;/sup>                 |
+
+### 5.4 单例内置对象
+
+ECMA-262 对内置对象的定义是“任何由 ECMAScript 实现提供、与宿主环境无关，并在 ECMAScript 程序开始执行时就存在的对象”。这就意味着，开发者不用显式地实例化内置对象，因为它们已经实例化好了。前面我们已经接触了大部分内置对象，包括 Object、Array 和 String。本节介绍 ECMA-262 定义的另外两个单例内置对象：Global 和 Math
+
+### 5.4.1 Global
+
+- 是 ECMAScript 中最特别的对象，因为代码不会显式地访问它
+- 不存在全局变量或全局函数这种东西。在全局作用域中定义的变量和函数都会变成 Global 对象的属性
+- isNaN()、isFinite()、parseInt()和 parseFloat()，实际上都是 Global 对象的方法
+
+Global 对象上还有另外一些方法。
+
+#### 1. URL 编码方法
+
+encodeURI() 和 encodeURIComponent()) 方法用于编码统一资源标识符（URI），以便传给浏览器。
+有效的 URI 不能包含某些字符，比如空格。使用 URI 编码方法来编码 URI 可以让浏览器能够理解它们，同时又以特殊的 UTF-8 编码替换掉所有无效字符。
+
+```js
+let uri = 'http://www.wrox.com/illegal value.js#start'
+
+// "http://www.wrox.com/illegal%20value.js#start"
+console.log(encodeURI(uri))
+// "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start"
+console.log(encodeURIComponent(uri))
+```
+
+::: warning 注意
+一般来说，使用 encodeURIComponent()应该比使用 encodeURI()的频率更高，这是因为编码查询字符串参数比编码基准 URI 的次数更多。
+:::
+
+与 encodeURI()和 encodeURIComponent()相对的是 decodeURI()和 decodeURIComponent()。decodeURI()只对使用 encodeURI()编码过的字符解码。
+
+```js
+let uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start'
+// http%3A%2F%2Fwww.wrox.com%2Fillegal value.js%23start
+console.log(decodeURI(uri))
+// http:// www.wrox.com/illegal value.js#start
+console.log(decodeURIComponent(uri))
+
+// 这里，uri 变量中包含一个使用 encodeURIComponent()编码过的字符串。首先输出的是使用decodeURI()解码的结果，可以看到只用空格替换了%20。然后是使用 decodeURIComponent()解码的结果，其中替换了所有特殊字符，并输出了没有包含任何转义的字符串。（这个字符串不是有效的 URL。）
+```
+
+:::warning 注意
+URI 方法 encodeURI()、encodeURIComponent()、decodeURI()和 decodeURIComponent()取代了 escape()和 unescape()方法，后者在 ECMA-262 第 3 版中就已经废弃了。URI 方法始终是首选方法，因为它们对所有 Unicode 字符进行编码，而原来的方法只能正确编码 ASCII 字符。不要在生产环境中使用 escape()和 unescape()。
+:::
+
+#### 2. eval()方法
+
+可能是整个 ECMAScript 语言中最强大的了  
+这个方法就是一个完整的 ECMAScript 解释器，它接收一个参数，即一个要执行的 ECMAScript（JavaScript）字符串。
+
+```js
+eval("console.log('hi')")
+
+//上面这行代码的功能与下一行等价：
+console.log('hi')
+```
+
+:::warning 注意
+解释代码字符串的能力是非常强大的，但也非常危险。在使用 eval()的时候必须极为慎重，特别是在解释用户输入的内容时。因为这个方法会对 XSS 利用暴露出很大的攻击面。恶意用户可能插入会导致你网站或应用崩溃的代码。
+:::
+
+#### 3. Global 对象属性
+
+Global 对象有很多属性，其中一些前面已经提到过了。像 undefined、NaN 和 Infinity 等特殊值都是 Global 对象的属性。此外，所有原生引用类型构造函数，比如 Object 和 Function，也都是 Global 对象的属性。下表列出了所有这些属性。
+
+| 属 性          | 说 明                     |
+| :------------- | :------------------------ |
+| undefined      | 特殊值 undefined          |
+| NaN            | 特殊值 NaN                |
+| Infinity       | 特殊值 Infinity           |
+| Object         | Object 的构造函数         |
+| Array          | Array 的构造函数          |
+| Function       | Function 的构造函数       |
+| Boolean        | Boolean 的构造函数        |
+| String         | String 的构造函数         |
+| Number         | Number 的构造函数         |
+| Date           | Date 的构造函数           |
+| RegExp         | RegExp 的构造函数         |
+| Symbol         | Symbol 的伪构造函数       |
+| Error          | Error 的构造函数          |
+| EvalError      | EvalError 的构造函数      |
+| RangeError     | RangeError 的构造函数     |
+| ReferenceError | ReferenceError 的构造函数 |
+| SyntaxError    | SyntaxError 的构造函数    |
+| TypeError      | TypeError 的构造函数      |
+| URIError       | URIError 的构造函数       |
+
+#### 4. window 对象
+
+虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global
+对象的代理。因此，所有全局作用域中声明的变量和函数都变成了 window 的属性。来看下面的例子：
+
+```js
+var color = 'red'
+function sayColor() {
+  console.log(window.color)
+}
+window.sayColor() // "red"
+```
+
+另一种获取 Global 对象的方式是使用如下的代码：
+
+```js
+let global = (function () {
+  return this
+})()
+```
+
+这段代码创建一个立即调用的函数表达式，返回了 this 的值。如前所述，当一个函数在没有明确（通过成为某个对象的方法，或者通过 call()/apply()）指定 this 值的情况下执行时，this 值等于 Global 对象。因此，调用一个简单返回 this 的函数是在任何执行上下文中获取 Global 对象的通用方式。
+
+### 5.4.2 Math
+
+:::warning 注意
+Math 对象上提供的计算要比直接在 JavaScript 实现的快得多，因为 Math 对象上的计算使用了 JavaScript 引擎中更高效的实现和处理器指令。但使用 Math 计算的问题是精度会因浏览器、操作系统、指令集和硬件而异。
+:::
+
+#### 2. min()和 max()方法
+
+用于确定一组数值中的最小值和最大值
+
+```js
+let max = Math.max(3, 54, 32, 16)
+console.log(max) // 54
+
+let min = Math.min(3, 54, 32, 16)
+console.log(min) // 3
+
+// 数组中的最大值和最小值，可以像下面这样使用扩展操作符
+let values = [1, 2, 3, 4, 5, 6, 7, 8]
+let max = Math.max(...val)
+```
+
+#### 3. 舍入方法
+
+用于把小数值舍入为整数的 4 个方法:
+
+- Math.ceil() 向上取整
+- Math.floor() 向下取整
+- Math.round() 四舍五入
+- Math.fround() 返回数值最接近的单精度（32 位）浮点值表示
+
+```js
+console.log(Math.ceil(25.9)) // 26
+console.log(Math.ceil(25.5)) // 26
+console.log(Math.ceil(25.1)) // 26
+
+console.log(Math.floor(25.9)) // 25
+console.log(Math.floor(25.5)) // 25
+console.log(Math.floor(25.1)) // 25
+
+console.log(Math.round(25.9)) // 26
+console.log(Math.round(25.5)) // 26
+console.log(Math.round(25.1)) // 25
+
+console.log(Math.fround(0.4)) // 0.4000000059604645
+console.log(Math.fround(0.5)) // 0.5
+console.log(Math.fround(25.9)) // 25.899999618530273
+```
+
+#### 4. random()方法
+
+返回一个 0~1 范围内的随机数，其中包含 0 但不包含 1。
+
+```js
+// 1~10 范围内随机选择一个数
+let num = Math.floor(Math.random() * 10 + 1)
+
+// 2~10 只有 9 个数，所以可选总数是 9
+let num = Math.floor(Math.random() * 9 + 2)
+
+// 推荐：函数来算出可选总数和最小可能的值可能更方便
+// 参数：应该返回的最小值和最大值
+function selectFrom(lowerValue, upperValue) {
+  let choices = upperValue - lowerValue + 1
+  return Math.floor(Math.random() * choices + lowerValue)
+}
+let num = selectFrom(2, 10)
+
+// 从一个数组中随机选择一个元素
+let colors = ['red', 'green', 'blue', 'yellow', 'black', 'purple', 'brown']
+let color = colors[selectFrom(0, colors.length - 1)]
+```
+
+## 5.5 小结
+
+JavaScript 中的对象称为引用值，几种内置的引用类型可用于创建特定类型的对象。
+
+- 引用值与传统面向对象编程语言中的类相似，但实现不同。
+- Date 类型提供关于日期和时间的信息，包括当前日期、时间及相关计算。
+- RegExp 类型是 ECMAScript 支持正则表达式的接口，提供了大多数基础的和部分高级的正则表达式功能。
+
+JavaScript 比较独特的一点是，函数实际上是 Function 类型的实例，也就是说函数也是对象。因为函数也是对象，所以函数也有方法，可以用于增强其能力。、
+
+由于原始值包装类型的存在，JavaScript 中的原始值可以被当成对象来使用。有 3 种原始值包装类型：Boolean、Number 和 String。它们都具备如下特点。
+
+- 每种包装类型都映射到同名的原始类型。
+- 以读模式访问原始值时，后台会实例化一个原始值包装类型的对象，借助这个对象可以操作相应的数据。
+- 涉及原始值的语句执行完毕后，包装对象就会被销毁。
+
+当代码开始执行时，全局上下文中会存在两个内置对象：Global 和 Math。其中，Global 对象在大多数 ECMAScript 实现中无法直接访问。不过，浏览器将其实现为 window 对象。所有全局变量和函数都是 Global 对象的属性。Math 对象包含辅助完成复杂计算的属性和方法。

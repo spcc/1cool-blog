@@ -11,3 +11,9 @@
 ## 想去的地方
 
 <input type="radio" /> 去一次迪士尼
+
+## 电影
+
+<input type="radio" /> 奇迹笨小孩
+<input type="radio" /> 人生大事
+<input type="radio" /> 逃学威龙

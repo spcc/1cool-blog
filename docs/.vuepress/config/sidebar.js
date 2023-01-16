@@ -263,6 +263,14 @@ const sidebar = {
         {
           title: '第 4 章 变量、作用域与内存',
           path: '/book/js4/var'
+        },
+        {
+          title: '第 5 章 基本引用类型',
+          path: '/book/js4/referenceType'
+        },
+        {
+          title: '第 6 章 集合引用类型',
+          path: '/book/js4/collectionType'
         }
       ]
     },
