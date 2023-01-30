@@ -1248,4 +1248,194 @@ const ws1 = new WeakSet([val1, val2, val3])
 alert(ws1.has(val1)) // true
 alert(ws1.has(val2)) // true
 alert(ws1.has(val3)) // true
+
+// 初始化是全有或全无的操作
+// 只要有一个值无效就会抛出错误，导致整个初始化失败
+const ws2 = new WeakSet([val1, 'BADVAL', val3])
+// TypeError: Invalid value used in WeakSet
+typeof ws2
+// ReferenceError: ws2 is not defined
+
+// 原始值可以先包装成对象再用作值
+const stringVal = new String('val1')
+const ws3 = new WeakSet([stringVal])
+alert(ws3.has(stringVal)) // true
 ```
+
+初始化之后可以使用 add()再添加新值，可以使用 has()查询，还可以使用 delete()删除：
+
+```js
+const ws = new WeakSet()
+const val1 = { id: 1 },
+  val2 = { id: 2 }
+
+alert(ws.has(val1)) // false
+ws.add(val1).add(val2)
+alert(ws.has(val1)) // true
+alert(ws.has(val2)) // true
+ws.delete(val1) // 只删除这一个值
+alert(ws.has(val1)) // false
+alert(ws.has(val2)) // true
+```
+
+### 6.7.3 不可迭代值
+
+因为 WeakSet 中的值任何时候都可能被销毁，所以没必要提供迭代其值的能力。
+
+像 clear()这样一次性销毁所有值的方法。WeakSet 确实没有这个方法。
+
+### 6.7.4 使用弱集合
+
+相比于 WeakMap 实例，WeakSet 实例的用处没有那么大。不过，弱集合在给对象打标签时还是有价值的。
+
+来看下面的例子，这里使用了一个普通 Set：
+
+```js
+const disabledElements = new Set()
+const loginButton = document.querySelector('#login')
+// 通过加入对应集合，给这个节点打上“禁用”标签
+disabledElements.add(loginButton)
+```
+
+这样，通过查询元素在不在 disabledElements 中，就可以知道它是不是被禁用了。不过，假如元素从 DOM 树中被删除了，它的引用却仍然保存在 Set 中，因此垃圾回收程序也不能回收它。  
+为了让垃圾回收程序回收元素的内存，可以在这里使用 WeakSet：  
+这样，只要 WeakSet 中任何元素从 DOM 树中被删除，垃圾回收程序就可以忽略其存在，而立即释放其内存（假设没有其他地方引用这个对象）。
+
+```js
+const disabledElements = new WeakSet()
+const loginButton = document.querySelector('#login')
+// 通过加入对应集合，给这个节点打上“禁用”标签
+disabledElements.add(loginButton)
+```
+
+## 6.8 迭代与扩展操作
+
+ECMAScript 6 新增的迭代器和扩展操作符对集合引用类型特别有用。这些新特性让集合类型之间相互操作、复制和修改变得异常方便。
+
+有 4 种原生集合类型定义了默认迭代器：
+
+- Array
+- 所有定型数组
+- Map
+- Set
+
+这意味着上述所有类型都支持顺序迭代，都可以传入 for-of 循环：
+
+```js
+let iterableThings = [
+  Array.of(1, 2),
+  (typedArr = Int16Array.of(3, 4)),
+  new Map([
+    [5, 6],
+    [7, 8]
+  ]),
+  new Set([9, 10])
+]
+
+for (const iterableThing of iterableThings) {
+  for (const x of iterableThing) {
+    console.log(x)
+  }
+}
+
+// 1
+// 2
+// 3
+// 4
+// [5, 6]
+// [7, 8]
+// 9
+// 10
+```
+
+这也意味着所有这些类型都兼容扩展操作符。扩展操作符在对可迭代对象执行浅复制时特别有用，只需简单的语法就可以复制整个对象：
+
+```js
+let arr1 = [1, 2, 3]
+let arr2 = [...arr1]
+console.log(arr1) // [1, 2, 3]
+console.log(arr2) // [1, 2, 3]
+console.log(arr1 === arr2) // false
+```
+
+对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制：
+
+```js
+let map1 = new Map([
+  [1, 2],
+  [3, 4]
+])
+let map2 = new Map(map1)
+
+console.log(map1) // Map {1 => 2, 3 => 4}
+console.log(map2) // Map {1 => 2, 3 => 4}
+```
+
+当然，也可以构建数组的部分元素：
+
+```js
+let arr1 = [1, 2, 3]
+let arr2 = [0, ...arr1, 4, 5]
+console.log(arr2) // [0, 1, 2, 3, 4, 5]
+```
+
+浅复制意味着只会复制对象引用：
+
+```js
+let arr1 = [{}]
+let arr2 = [...arr1]
+
+arr1[0].foo = 'bar'
+console.log(arr2[0]) // { foo: 'bar' }
+```
+
+上面的这些类型都支持多种构建方法，比如 Array.of()和 Array.from()静态方法。在与扩展操作符一起使用时，可以非常方便地实现互操作：
+
+```js
+let arr1 = [1, 2, 3]
+
+// 把数组复制到定型数组
+let typedArr1 = Int16Array.of(...arr1)
+let typedArr2 = Int16Array.from(arr1)
+console.log(typedArr1) // Int16Array [1, 2, 3]
+console.log(typedArr2) // Int16Array [1, 2, 3]
+
+// 把数组复制到映射
+let map = new Map(arr1.map(x => [x, 'val' + x]))
+console.log(map) // Map {1 => 'val 1', 2 => 'val 2', 3 => 'val 3'}
+
+// 把数组复制到集合
+let set = new Set(typedArr2)
+console.log(set) // Set {1, 2, 3}
+
+// 把集合复制回数组
+let arr2 = [...set]
+console.log(arr2) // [1, 2, 3]
+```
+
+## 6.9 小结
+
+JavaScript 中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象。
+
+- 引用类型与传统面向对象编程语言中的类相似，但实现不同。
+- Object 类型是一个基础类型，所有引用类型都从它继承了基本的行为。
+- Array 类型表示一组有序的值，并提供了操作和转换值的能力。
+- 定型数组包含一套不同的引用类型，用于管理数值在内存中的类型。
+- Date 类型提供了关于日期和时间的信息，包括当前日期和时间以及计算。
+- RegExp 类型是 ECMAScript 支持的正则表达式的接口，提供了大多数基本正则表达式以及一些
+  高级正则表达式的能力。
+
+JavaScript 比较独特的一点是，函数其实是 Function 类型的实例，这意味着函数也是对象。由于函数是对象，因此也就具有能够增强自身行为的方法。  
+因为原始值包装类型的存在，所以 JavaScript 中的原始值可以拥有类似对象的行为。有 3 种原始值
+包装类型：Boolean、Number 和 String。它们都具有如下特点。
+
+- 每种包装类型都映射到同名的原始类型。
+- 在以读模式访问原始值时，后台会实例化一个原始值包装对象，通过这个对象可以操作数据。
+- 涉及原始值的语句只要一执行完毕，包装对象就会立即销毁。
+
+JavaScript 还有两个在一开始执行代码时就存在的内置对象：Global 和 Math。其中，Global 对
+象在大多数 ECMAScript 实现中无法直接访问。不过浏览器将 Global 实现为 window 对象。所有全局
+
+变量和函数都是 Global 对象的属性。Math 对象包含辅助完成复杂数学计算的属性和方法。
+ECMAScript 6 新增了一批引用类型：Map、WeakMap、Set 和 WeakSet。这些类型为组织应用程序
+数据和简化内存管理提供了新能力。

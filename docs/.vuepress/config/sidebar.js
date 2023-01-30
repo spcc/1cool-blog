@@ -271,6 +271,10 @@ const sidebar = {
         {
           title: '第 6 章 集合引用类型',
           path: '/book/js4/collectionType'
+        },
+        {
+          title: '第 7 章 迭代器与生成器',
+          path: '/book/js4/iteratorsAndGenerators'
         }
       ]
     },
