@@ -33,13 +33,7 @@ const nav = [
   { text: '面试', link: '/interview/' },
   {
     text: '关于我',
-    items: [
-      {
-        text: '关于我',
-        link: '/my/'
-      }
-      // { text: "时间痕迹", link: "/life/" },
-    ]
+    link: '/my/money/'
   }
   // { text: "External", link: "https://google.com" },
 ]

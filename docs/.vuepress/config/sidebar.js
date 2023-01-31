@@ -275,6 +275,10 @@ const sidebar = {
         {
           title: '第 7 章 迭代器与生成器',
           path: '/book/js4/iteratorsAndGenerators'
+        },
+        {
+          title: '第 8 章 对象、类与面向对象编程',
+          path: '/book/js4/object'
         }
       ]
     },
