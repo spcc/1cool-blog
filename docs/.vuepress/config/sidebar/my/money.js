@@ -15,6 +15,12 @@ const vue3 = [
         collapsable: false,
         sidebarDepth: 0,
         path: '/my/money/2023-1'
+      },
+      {
+        title: '2月',
+        collapsable: false,
+        sidebarDepth: 0,
+        path: '/my/money/2023-2'
       }
     ]
   }
